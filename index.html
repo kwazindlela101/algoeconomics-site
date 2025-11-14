@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,115 +6,6 @@
     <title>AlgoEconomics | Global Markets. UK & African Relevance. AI-Powered Insight.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-  :root {
-    /* your existing styles */
-  }
-
-  /* SLA Comparison Section */
-  .sla-section {
-    background-color: #0a1f44;
-    color: white;
-    padding: 60px 20px;
-    text-align: center;
-  }
-
-  .sla-section h2 {
-    font-size: 2em;
-    margin-bottom: 10px;
-  }
-
-  .sla-section p {
-    font-size: 1.1em;
-    margin-bottom: 40px;
-  }
-
-  .sla-table {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-  }
-
-  .sla-column {
-    background-color: #1c2e5a;
-    padding: 30px;
-    border-radius: 8px;
-    width: 300px;
-    text-align: left;
-  }
-
-  .sla-column.enterprise {
-    border: 2px solid gold;
-  }
-
-  .sla-column h3 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-  }
-
-  .sla-column ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .sla-column li {
-    margin-bottom: 15px;
-    font-size: 1em;
-  }
-</style>
-    /* SLA Comparison Section */
-.sla-section {
-  background-color: #0a1f44;
-  color: white;
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.sla-section h2 {
-  font-size: 2em;
-  margin-bottom: 10px;
-}
-
-.sla-section p {
-  font-size: 1.1em;
-  margin-bottom: 40px;
-}
-
-.sla-table {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-}
-
-.sla-column {
-  background-color: #1c2e5a;
-  padding: 30px;
-  border-radius: 8px;
-  width: 300px;
-  text-align: left;
-}
-
-.sla-column.enterprise {
-  border: 2px solid gold;
-}
-
-.sla-column h3 {
-  font-size: 1.5em;
-  margin-bottom: 20px;
-}
-
-.sla-column ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sla-column li {
-  margin-bottom: 15px;
-  font-size: 1em;
-}
-
-
         :root {
             --primary: #1a365d;
             --secondary: #2d3748;
@@ -386,6 +276,106 @@
         .btn-outline:hover {
             background: var(--gold);
             color: var(--primary);
+        }
+
+        /* SLA Comparison Section - FIXED AND INTEGRATED */
+        .sla-section {
+            background-color: #0a1f44;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .sla-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .sla-section > p {
+            font-size: 1.2em;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .sla-table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sla-column {
+            background-color: #1c2e5a;
+            padding: 40px 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .sla-column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .sla-column.enterprise {
+            border: 2px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sla-column.enterprise::before {
+            content: 'PREMIUM';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--gold);
+            color: var(--primary);
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .sla-column h3 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        .sla-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sla-column li {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            line-height: 1.5;
+            padding-left: 10px;
+            border-left: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .sla-column li:hover {
+            border-left: 2px solid var(--gold);
+            padding-left: 15px;
+        }
+
+        .sla-column strong {
+            color: var(--gold);
         }
 
         /* African Markets Section */
@@ -1000,6 +990,7 @@
             gap: 3rem;
             margin-bottom: 3rem;
         }
+    
 
         .footer-column h3 {
             font-size: 1.3rem;
@@ -1151,6 +1142,17 @@
                 font-size: 0.75rem;
                 padding: 0.15rem 0.4rem;
             }
+            
+            /* SLA Section Mobile */
+            .sla-table {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .sla-column {
+                width: 100%;
+                max-width: 100%;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1200,6 +1202,7 @@
                 <ul class="nav-links">
                     <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#african-markets">African Markets</a></li>
+                    <li><a href="#sla-comparison">SLA</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#newsletter">Newsletter</a></li>
                     <li><a href="#about">About</a></li>
@@ -1365,38 +1368,40 @@
             </div>
         </div>
     </section>
-    <!-- SLA Comparison Section -->
-<section id="sla-comparison" class="sla-section">
-  <h2>SLA Comparison</h2>
-  <p>See how our service level agreement scales across our Professional and Enterprise offerings.</p>
-  <div class="sla-table">
-    <div class="sla-column">
-      <h3>Professional SLA</h3>
-      <ul>
-        <li><strong>Availability:</strong> 99% uptime (excluding planned maintenance)</li>
-        <li><strong>Insight Delivery:</strong> Daily curated updates by 08:00 GMT</li>
-        <li><strong>Performance Indicators:</strong> Refreshed at least every 24 hours</li>
-        <li><strong>Support Response:</strong> Email support within 24 hours</li>
-        <li><strong>Security & Compliance:</strong> SSL/TLS encryption, GDPR-compliant</li>
-        <li><strong>Escalation:</strong> Escalation to support team, no service credits</li>
-        <li><strong>Documentation:</strong> SLA summary (confidence statement)</li>
-      </ul>
-    </div>
-    <div class="sla-column enterprise">
-      <h3>Enterprise SLA</h3>
-      <ul>
-        <li><strong>Availability:</strong> 99.9% uptime with redundancy and failover guarantees</li>
-        <li><strong>Insight Delivery:</strong> Real-time feeds with latency under 2 seconds</li>
-        <li><strong>Performance Indicators:</strong> Continuous refresh with guaranteed update intervals</li>
-        <li><strong>Support Response:</strong> Priority support within 4 hours, dedicated account manager</li>
-        <li><strong>Security & Compliance:</strong> Advanced compliance (UK/EU data residency, audit logs)</li>
-        <li><strong>Escalation:</strong> Formal escalation path, service credits if SLA breached</li>
-        <li><strong>Documentation:</strong> Full SLA contract with legal enforceability</li>
-      </ul>
-    </div>
-  </div>
-</section>
 
+    <!-- SLA Comparison Section - FIXED AND INTEGRATED -->
+    <section id="sla-comparison" class="sla-section">
+        <div class="container">
+            <h2>SLA Comparison</h2>
+            <p>See how our service level agreement scales across our Professional and Enterprise offerings.</p>
+            <div class="sla-table">
+                <div class="sla-column">
+                    <h3>Professional SLA</h3>
+                    <ul>
+                        <li><strong>Availability:</strong> 99% uptime (excluding planned maintenance)</li>
+                        <li><strong>Insight Delivery:</strong> Daily curated updates by 08:00 GMT</li>
+                        <li><strong>Performance Indicators:</strong> Refreshed at least every 24 hours</li>
+                        <li><strong>Support Response:</strong> Email support within 24 hours</li>
+                        <li><strong>Security & Compliance:</strong> SSL/TLS encryption, GDPR-compliant</li>
+                        <li><strong>Escalation:</strong> Escalation to support team, no service credits</li>
+                        <li><strong>Documentation:</strong> SLA summary (confidence statement)</li>
+                    </ul>
+                </div>
+                <div class="sla-column enterprise">
+                    <h3>Enterprise SLA</h3>
+                    <ul>
+                        <li><strong>Availability:</strong> 99.9% uptime with redundancy and failover guarantees</li>
+                        <li><strong>Insight Delivery:</strong> Real-time feeds with latency under 2 seconds</li>
+                        <li><strong>Performance Indicators:</strong> Continuous refresh with guaranteed update intervals</li>
+                        <li><strong>Support Response:</strong> Priority support within 4 hours, dedicated account manager</li>
+                        <li><strong>Security & Compliance:</strong> Advanced compliance (UK/EU data residency, audit logs)</li>
+                        <li><strong>Escalation:</strong> Formal escalation path, service credits if SLA breached</li>
+                        <li><strong>Documentation:</strong> Full SLA contract with legal enforceability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Financial Icons Section -->
     <div class="container">
@@ -1692,6 +1697,7 @@
                     <ul class="footer-links">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#african-markets">African Markets</a></li>
+                        <li><a href="#sla-comparison">SLA</a></li>
                         <li><a href="#features">Features</a></li>
                         <li><a href="#newsletter">Newsletter</a></li>
                         <li><a href="#about">About</a></li>
@@ -1751,7 +1757,3 @@
     </script>
 </body>
 </html>
-
-
-
-
