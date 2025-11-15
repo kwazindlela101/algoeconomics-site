@@ -187,17 +187,18 @@
             cursor: pointer;
         }
 
-        /* Hero Section with Financial Background - FIXED ALIGNMENT */
+        /* Hero Section with Financial Background - IMPROVED ALIGNMENT */
         .hero {
             background: 
-                linear-gradient(135deg, rgba(26, 54, 93, 0.9) 0%, rgba(15, 31, 56, 0.9) 100%),
+                linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(15, 31, 56, 0.95) 100%),
                 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%231a365d" width="1200" height="800"/><path fill="%23d4af37" fill-opacity="0.1" d="M0,400 Q300,350 600,400 T1200,400 L1200,800 L0,800 Z"/></svg>');
             color: white;
-            padding: 150px 0 100px;
+            padding: 160px 0 100px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            margin-top: 60px; /* Added to account for fixed header */
+            margin-top: 60px;
+            border-bottom: 3px solid var(--gold);
         }
 
         .hero::before {
@@ -208,8 +209,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(49, 130, 206, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(49, 130, 206, 0.15) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -283,14 +284,15 @@
             color: var(--primary);
         }
 
-        /* Today's Brief CTA Section */
+        /* Today's Brief CTA Section - UPDATED COLORS */
         .brief-cta {
-            background: linear-gradient(135deg, var(--success) 0%, #2d7a51 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
             color: white;
             padding: 3rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 2px solid var(--gold);
         }
 
         .brief-cta::before {
@@ -301,8 +303,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(49, 130, 206, 0.1) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -314,6 +316,7 @@
         .brief-cta h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            color: var(--gold);
         }
 
         .brief-cta p {
@@ -324,8 +327,8 @@
         }
 
         .brief-btn {
-            background: white;
-            color: var(--success);
+            background: var(--gold);
+            color: var(--primary);
             padding: 1rem 2.5rem;
             border: none;
             border-radius: 5px;
@@ -333,18 +336,20 @@
             font-weight: bold;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
 
         .brief-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+            background: #f7ef8a;
         }
 
         /* Live AI Demo Box */
         .live-demo {
             padding: 4rem 0;
             background: var(--light);
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .demo-container {
@@ -457,6 +462,7 @@
             color: white;
             padding: 80px 20px;
             text-align: center;
+            border-bottom: 2px solid var(--gold);
         }
 
         .sla-section h2 {
@@ -555,6 +561,7 @@
         .african-markets {
             padding: 80px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-bottom: 1px solid #d1d9e6;
         }
 
         .african-header {
@@ -648,6 +655,7 @@
         .features {
             padding: 100px 0;
             background: white;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .section-title {
@@ -734,6 +742,7 @@
         .dashboard-section {
             padding: 80px 0;
             background: var(--light);
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .dashboard-container {
@@ -969,6 +978,7 @@
             color: white;
             text-align: center;
             position: relative;
+            border-bottom: 2px solid var(--gold);
         }
 
         .newsletter::before {
@@ -1017,6 +1027,7 @@
         .about {
             padding: 100px 0;
             background: white;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .about-content {
@@ -1400,7 +1411,7 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - IMPROVED ALIGNMENT -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
@@ -1414,7 +1425,7 @@
         </div>
     </section>
 
-    <!-- Today's Brief CTA -->
+    <!-- Today's Brief CTA - UPDATED COLORS -->
     <section class="brief-cta">
         <div class="container">
             <div class="brief-content">
