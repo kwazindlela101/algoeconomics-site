@@ -416,6 +416,80 @@
             font-size: 0.9rem;
         }
 
+        /* AI Demo Coming Soon Section */
+        .ai-demo-coming-soon {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .demo-placeholder {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px dashed var(--gold);
+        }
+
+        .placeholder-icon {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-section {
+            margin: 2rem 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--gold), var(--accent));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .feature-preview {
+            text-align: left;
+            max-width: 400px;
+            margin: 2rem auto;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .feature-item i {
+            color: var(--success);
+        }
+
+        .feature-item i.fa-spinner {
+            color: var(--gold);
+        }
+
+        .waitlist-cta {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
         /* Section Title */
         .section-title {
             text-align: center;
@@ -507,117 +581,6 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
             background: #f7ef8a;
-        }
-
-        /* Live AI Demo Box */
-        .live-demo {
-            padding: 4rem 0;
-            background: var(--light);
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .demo-container {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            border: 1px solid #e2e8f0;
-            border-top: 4px solid var(--accent);
-        }
-
-        .demo-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-        }
-
-        .demo-title {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .live-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--danger);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .live-indicator .pulse {
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
-        }
-
-        .demo-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .demo-input {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .demo-input textarea {
-            width: 100%;
-            height: 150px;
-            padding: 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 5px;
-            font-family: inherit;
-            resize: vertical;
-        }
-
-        .demo-input button {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .demo-input button:hover {
-            background: #2c5aa0;
-        }
-
-        .demo-output {
-            background: #f7fafc;
-            border-radius: 5px;
-            padding: 1rem;
-            border: 1px solid #e2e8f0;
-            min-height: 200px;
-        }
-
-        .demo-output h4 {
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        .demo-output p {
-            color: var(--secondary);
         }
 
         /* SLA Comparison Section */
@@ -1233,24 +1196,13 @@
                 padding: 0.15rem 0.4rem;
             }
             
-            /* Demo Mobile Fix */
-            .demo-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            /* AI Demo Mobile Fix */
+            .demo-placeholder {
+                padding: 2rem 1.5rem;
             }
             
-            .demo-container {
-                padding: 1.5rem;
-            }
-            
-            .demo-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            
-            .demo-title {
-                font-size: 1.3rem;
+            .placeholder-icon {
+                font-size: 3rem;
             }
             
             /* SLA Mobile Fix */
@@ -1310,17 +1262,6 @@
                 transform: scale(1);
             }
             
-            /* About Mobile Fix */
-            .about-content {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .about-image {
-                height: 300px;
-                order: -1;
-            }
-            
             /* Newsletter Mobile Fix */
             .newsletter-form {
                 flex-direction: column;
@@ -1378,10 +1319,6 @@
             
             .logo {
                 font-size: 1.5rem;
-            }
-            
-            .demo-title {
-                font-size: 1.2rem;
             }
             
             .sla-section h2 {
@@ -1454,10 +1391,10 @@
                 <ul class="nav-links">
                     <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#value-proposition">Why Choose Us</a></li>
+                    <li><a href="#ai-demo">AI Demo</a></li>
                     <li><a href="#african-markets">African Markets</a></li>
                     <li><a href="#features">Platform</a></li>
                     <li><a href="#sla-comparison">SLA</a></li>
-                    <li><a href="#bloomberg-comparison">vs Bloomberg</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                 </ul>
                 <button class="mobile-menu">
@@ -1574,6 +1511,56 @@
         </div>
     </section>
 
+    <!-- AI Demo Coming Soon Section -->
+    <section id="ai-demo" class="ai-demo-coming-soon">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-robot"></i> Live AI Demo - Coming Soon</h2>
+                <p>Experience our AI analyzing markets in real-time</p>
+            </div>
+            
+            <div class="demo-placeholder">
+                <div class="placeholder-content">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Market Analyst in Development</h3>
+                    <p>We're currently training our AI models on millions of data points to deliver accurate, real-time market insights.</p>
+                    
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span>Development Progress</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-preview">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Real-time sentiment analysis</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Cross-market correlation detection</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-spinner"></i>
+                            <span>Interactive Q&A (Coming Soon)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="waitlist-cta">
+                        <p>Be the first to experience our AI when it launches</p>
+                        <a href="#newsletter" class="btn">Join AI Waitlist</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Today's Brief CTA -->
     <section class="brief-cta">
         <div class="container">
@@ -1581,32 +1568,6 @@
                 <h2>Get Today's Brief – Free</h2>
                 <p>Receive a comprehensive market analysis brief tailored to your interests, absolutely free. No commitment required.</p>
                 <button class="brief-btn">Get Your Free Brief Now</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Live AI Demo Box -->
-    <section id="live-demo" class="live-demo">
-        <div class="container">
-            <div class="demo-container">
-                <div class="demo-header">
-                    <h3 class="demo-title"><i class="fas fa-robot"></i> Live AI Demo</h3>
-                    <div class="live-indicator">
-                        <div class="pulse"></div>
-                        <span>LIVE</span>
-                    </div>
-                </div>
-                <div class="demo-content">
-                    <div class="demo-input">
-                        <h4>Ask our AI about market trends:</h4>
-                        <textarea placeholder="E.g., What's the outlook for African tech stocks in Q4?"></textarea>
-                        <button>Analyze with AI</button>
-                    </div>
-                    <div class="demo-output">
-                        <h4>AI Analysis:</h4>
-                        <p>Our AI is ready to analyze your query about market trends, economic indicators, or investment opportunities. Enter your question to receive instant insights powered by our proprietary algorithms.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -1891,10 +1852,10 @@
                     <ul class="footer-links">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#value-proposition">Why Choose Us</a></li>
+                        <li><a href="#ai-demo">AI Demo</a></li>
                         <li><a href="#african-markets">African Markets</a></li>
                         <li><a href="#features">Platform</a></li>
                         <li><a href="#sla-comparison">SLA</a></li>
-                        <li><a href="#bloomberg-comparison">vs Bloomberg</a></li>
                         <li><a href="#pricing">Pricing</a></li>
                     </ul>
                 </div>
@@ -1949,11 +1910,13 @@
             // Create sparkline charts
             createSparklineCharts();
             
-            // Live Demo functionality
-            setupLiveDemo();
-            
-            // Track user interactions
-            setupAnalytics();
+            // Today's Brief CTA functionality
+            const briefButton = document.querySelector('.brief-btn');
+            if (briefButton) {
+                briefButton.addEventListener('click', function() {
+                    alert("Thank you for your interest! We're preparing your free market brief and will email it to you shortly.");
+                });
+            }
         });
 
         function createSparklineCharts() {
@@ -2003,63 +1966,6 @@
                         }
                     });
                 }
-            });
-        }
-
-        function setupLiveDemo() {
-            const demoButton = document.querySelector('.demo-input button');
-            const demoTextarea = document.querySelector('.demo-input textarea');
-            const demoOutput = document.querySelector('.demo-output p');
-            
-            if (demoButton && demoTextarea && demoOutput) {
-                demoButton.addEventListener('click', function() {
-                    const query = demoTextarea.value.trim();
-                    if (query) {
-                        // Simulate AI analysis
-                        demoOutput.innerHTML = "Analyzing your query: <strong>" + query + "</strong><br><br>";
-                        demoOutput.innerHTML += "Our AI is processing this request. In a real implementation, this would connect to our backend AI service to generate specific market insights based on your question.";
-                        
-                        // Add a loading effect
-                        demoOutput.style.fontStyle = 'italic';
-                        demoOutput.style.color = '#4a5568';
-                        
-                        // Simulate delay for realism
-                        setTimeout(() => {
-                            demoOutput.innerHTML = "Based on our analysis of <strong>" + query + "</strong>, we're detecting positive momentum in related sectors. Our algorithms suggest a cautiously optimistic outlook with potential growth opportunities in the medium term. For detailed, personalized insights, consider our premium subscription.";
-                            demoOutput.style.fontStyle = 'normal';
-                        }, 1500);
-                    } else {
-                        demoOutput.innerHTML = "Please enter a question about market trends, economic indicators, or investment opportunities to receive AI-powered insights.";
-                        demoOutput.style.fontStyle = 'italic';
-                        demoOutput.style.color = '#4a5568';
-                    }
-                });
-            }
-            
-            // Today's Brief CTA functionality
-            const briefButton = document.querySelector('.brief-btn');
-            if (briefButton) {
-                briefButton.addEventListener('click', function() {
-                    alert("Thank you for your interest! We're preparing your free market brief and will email it to you shortly.");
-                });
-            }
-        }
-
-        function setupAnalytics() {
-            // Track button clicks
-            document.querySelectorAll('.btn, .brief-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    // In a real implementation, send this data to analytics
-                    console.log('CTA clicked:', this.textContent.trim());
-                });
-            });
-            
-            // Track form submissions
-            document.querySelectorAll('form').forEach(form => {
-                form.addEventListener('submit', function(e) {
-                    // In a real implementation, send this data to analytics
-                    console.log('Form submitted:', this.id || 'unknown form');
-                });
             });
         }
     </script>
