@@ -44,7 +44,7 @@
             padding: 0 1rem;
         }
 
-        /* IMPROVED Market Indicators - Better Visibility with Arrows */
+        /* Market Indicators */
         .market-indicators {
             background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%);
             color: white;
@@ -117,7 +117,7 @@
             border: 1px solid rgba(245, 101, 101, 0.3);
         }
 
-        /* Header with Financial Theme */
+        /* Header */
         header {
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
             color: white;
@@ -189,7 +189,7 @@
             padding: 0.5rem;
         }
 
-        /* Hero Section with Financial Background - IMPROVED ALIGNMENT */
+        /* Hero Section */
         .hero {
             background: 
                 linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(15, 31, 56, 0.95) 100%),
@@ -226,11 +226,15 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             margin-bottom: 1.5rem;
             line-height: 1.2;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             max-width: 900px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero p {
@@ -240,7 +244,6 @@
             opacity: 0.9;
         }
 
-        /* FIXED BUTTON ALIGNMENT */
         .hero-buttons {
             display: flex;
             gap: 1rem;
@@ -286,7 +289,252 @@
             color: var(--primary);
         }
 
-        /* Today's Brief CTA Section - UPDATED COLORS */
+        /* Value Proposition Section */
+        .value-proposition {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--gold);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .value-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Primary CTA Section */
+        .primary-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .primary-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .primary-cta p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .author-info p {
+            margin: 0;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--gold);
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .pricing-header {
+            margin-bottom: 2rem;
+        }
+
+        .pricing-header h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--secondary);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Today's Brief CTA */
         .brief-cta {
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
             color: white;
@@ -458,7 +706,101 @@
             color: var(--secondary);
         }
 
-        /* SLA Comparison Section - FIXED AND INTEGRATED */
+        /* African Markets Section */
+        .african-markets {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-bottom: 1px solid #d1d9e6;
+        }
+
+        .african-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .african-header h2 {
+            font-size: 2.5rem;
+            color: var(--africa-green);
+            text-align: center;
+        }
+
+        .african-flag {
+            font-size: 2rem;
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .city-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            border-top: 4px solid var(--africa-green);
+            text-align: center;
+        }
+
+        .city-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .city-icon {
+            font-size: 2.5rem;
+            color: var(--africa-green);
+            margin-bottom: 1rem;
+        }
+
+        .city-name {
+            font-size: 1.5rem;
+            color: var(--africa-green);
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .city-economy {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .sparkline-container {
+            height: 60px;
+            margin: 1.5rem 0;
+        }
+
+        .city-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: var(--africa-green);
+            font-size: 1.1rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        /* SLA Comparison Section */
         .sla-section {
             background-color: #0a1f44;
             color: white;
@@ -559,136 +901,11 @@
             color: var(--gold);
         }
 
-        /* African Markets Section with Sparklines */
-        .african-markets {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-bottom: 1px solid #d1d9e6;
-        }
-
-        .african-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-
-        .african-header h2 {
-            font-size: 2.5rem;
-            color: var(--africa-green);
-            text-align: center;
-        }
-
-        .african-flag {
-            font-size: 2rem;
-        }
-
-        .cities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .city-card {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: var(--transition);
-            border-top: 4px solid var(--africa-green);
-            text-align: center;
-        }
-
-        .city-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .city-icon {
-            font-size: 2.5rem;
-            color: var(--africa-green);
-            margin-bottom: 1rem;
-        }
-
-        .city-name {
-            font-size: 1.5rem;
-            color: var(--africa-green);
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .city-economy {
-            font-size: 1rem;
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .sparkline-container {
-            height: 60px;
-            margin: 1.5rem 0;
-        }
-
-        .city-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 1.5rem;
-        }
-
-        .stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .stat-value {
-            font-weight: bold;
-            color: var(--africa-green);
-            font-size: 1.1rem;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--secondary);
-        }
-
         /* Features Section */
         .features {
             padding: 100px 0;
             background: white;
             border-bottom: 1px solid #e2e8f0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--gold);
-        }
-
-        .section-title p {
-            max-width: 600px;
-            margin: 0 auto;
-            color: var(--secondary);
-            font-size: 1.1rem;
         }
 
         .features-grid {
@@ -740,7 +957,7 @@
             color: var(--primary);
         }
 
-        /* Dashboard Styles */
+        /* Dashboard Section */
         .dashboard-section {
             padding: 80px 0;
             background: var(--light);
@@ -803,7 +1020,6 @@
         .value.negative { color: #e53e3e; }
         .value.neutral { color: #d69e2e; }
         .value.high { color: #3182ce; }
-        .value.medium { color: #d69e2e; }
 
         .sentiment-bar {
             width: 100%;
@@ -823,7 +1039,6 @@
         .sentiment-fill.negative { background: #e53e3e; }
         .sentiment-fill.neutral { background: #d69e2e; }
         .sentiment-fill.high { background: #3182ce; }
-        .sentiment-fill.medium { background: #d69e2e; }
 
         /* Sector Grid */
         .sector-grid {
@@ -971,6 +1186,52 @@
             justify-content: space-between;
             font-size: 0.8rem;
             color: var(--secondary);
+        }
+
+        /* Bloomberg Comparison Section */
+        .bloomberg-comparison {
+            padding: 100px 0;
+            background: var(--light);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            padding: 1.5rem;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 1.2rem;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        .advantage-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
         /* Newsletter Section */
@@ -1181,7 +1442,6 @@
             gap: 3rem;
             margin-bottom: 3rem;
         }
-    
 
         .footer-column h3 {
             font-size: 1.3rem;
@@ -1260,8 +1520,7 @@
             margin-bottom: 1rem;
         }
 
-        /* ========== MOBILE FIXES ========== */
-        /* Improved Mobile Navigation */
+        /* ========== MOBILE RESPONSIVENESS ========== */
         @media (max-width: 1024px) {
             .nav-links {
                 gap: 1rem;
@@ -1366,21 +1625,7 @@
                 padding: 0.15rem 0.4rem;
             }
             
-            /* Brief CTA Mobile Fix */
-            .brief-cta h2 {
-                font-size: 2rem;
-            }
-            
-            .brief-cta p {
-                font-size: 1.1rem;
-            }
-            
-            .brief-btn {
-                width: 100%;
-                padding: 1rem 1.5rem;
-            }
-            
-            /* Live Demo Mobile Fix */
+            /* Demo Mobile Fix */
             .demo-content {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -1431,62 +1676,13 @@
                 border-bottom: none;
             }
             
-            /* SLA Section Mobile Fix */
-            .sla-table {
-                flex-direction: column;
-                align-items: center;
-                gap: 2rem;
-            }
-            
-            .sla-column {
-                width: 100%;
-                max-width: 100%;
-                padding: 2rem 1.5rem;
-            }
-            
-            .sla-column h3 {
-                font-size: 1.5rem;
-            }
-            
-            /* Dashboard Mobile Fix */
-            .dashboard-container {
+            /* Pricing Mobile Fix */
+            .pricing-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
             
-            .dashboard-card {
-                padding: 1.5rem;
-            }
-            
-            .currency-item {
-                flex-direction: column;
-                gap: 0.5rem;
-                text-align: center;
-            }
-            
-            .insight-meta {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            /* Features Mobile Fix */
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .feature-card {
-                padding: 2rem 1.5rem;
-            }
-            
-            /* Newsletter Mobile Fix */
-            .newsletter-form {
-                flex-direction: column;
-            }
-            
-            .newsletter-form input,
-            .newsletter-form .btn {
-                width: 100%;
+            .pricing-card.featured {
+                transform: scale(1);
             }
             
             /* About Mobile Fix */
@@ -1500,9 +1696,14 @@
                 order: -1;
             }
             
-            /* Blog Mobile Fix */
-            .articles-grid {
-                grid-template-columns: 1fr;
+            /* Newsletter Mobile Fix */
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input,
+            .newsletter-form .btn {
+                width: 100%;
             }
             
             /* Footer Mobile Fix */
@@ -1589,7 +1790,7 @@
     </style>
 </head>
 <body>
-    <!-- IMPROVED Market Indicators with Arrows -->
+    <!-- Market Indicators -->
     <div class="market-indicators">
         <div class="container">
             <div class="indicators-grid">
@@ -1627,14 +1828,12 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#value-proposition">Why Choose Us</a></li>
                     <li><a href="#african-markets">African Markets</a></li>
-                    <li><a href="#sla-comparison">SLA</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#live-demo">Live Demo</a></li>
-                    <li><a href="#newsletter">Newsletter</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#blog">Insights</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#features">Platform</a></li>
+                    <li><a href="#bloomberg-comparison">vs Bloomberg</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
                 </ul>
                 <button class="mobile-menu">
                     <i class="fas fa-bars"></i>
@@ -1643,21 +1842,114 @@
         </div>
     </header>
 
-    <!-- Hero Section - IMPROVED ALIGNMENT -->
+    <!-- Enhanced Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Global Markets. UK & African Relevance. AI-Powered Insight.</h1>
-                <p>Algorithmically curated economic news with direct impact on UK and African markets. Stay ahead with smarter, faster insights powered by AI.</p>
+                <h1>Stop Wading Through Financial Noise. Get AI-Curated Insights That Matter.</h1>
+                <p>Our algorithms filter thousands of data points to deliver only the economic news with direct impact on UK and African markets. Save hours daily with insights tailored to your needs.</p>
                 <div class="hero-buttons">
-                    <a href="#newsletter" class="btn">Subscribe to Newsletter</a>
-                    <a href="#about" class="btn btn-outline">Start Free Trial</a>
+                    <a href="#newsletter" class="btn">Get Free Daily Brief</a>
+                    <a href="#pricing" class="btn btn-outline">See Premium Plans</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Today's Brief CTA - UPDATED COLORS -->
+    <!-- Value Proposition Section -->
+    <section id="value-proposition" class="value-proposition">
+        <div class="container">
+            <div class="section-title">
+                <h2>Transform How You Consume Market Intelligence</h2>
+                <p>Traditional financial platforms overwhelm you with data. We deliver answers.</p>
+            </div>
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3>Noise Reduction</h3>
+                    <p>Our AI filters out irrelevant news, focusing only on events that impact your markets.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Speed to Insight</h3>
+                    <p>Get actionable intelligence in minutes, not hours. Spend less time analyzing and more time acting.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-pound-sign"></i>
+                    </div>
+                    <h3>Cost Effective</h3>
+                    <p>Bloomberg-level insights at 1/20th the cost. No expensive terminals or complex interfaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Primary CTA Section -->
+    <section class="primary-cta">
+        <div class="container">
+            <h2>Ready to Make Smarter Decisions Faster?</h2>
+            <p>Join hundreds of professionals who trust AlgoEconomics for their daily market intelligence.</p>
+            <div class="cta-buttons">
+                <a href="#newsletter" class="btn">Start With Free Brief</a>
+                <a href="https://calendly.com/algoeconomics/demo" class="btn btn-outline">Book Personalized Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Trusted by Financial Professionals</h2>
+                <p>See what our users say about transforming their workflow with AlgoEconomics</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "AlgoEconomics has cut my morning research time from 2 hours to 15 minutes. The African market focus is exactly what we needed for our expansion strategy."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>James Donovan</h4>
+                            <p>Portfolio Manager, London</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The AI insights on Nigerian banking stocks helped us identify an opportunity that returned 23% in three months. This platform pays for itself."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AK</div>
+                        <div class="author-info">
+                            <h4>Amara Kofi</h4>
+                            <p>Investment Analyst, Lagos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a small fund, we couldn't justify Bloomberg's cost. AlgoEconomics gives us the edge we need at a fraction of the price."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div class="author-info">
+                            <h4>Rachel Simmons</h4>
+                            <p>Hedge Fund Manager, Johannesburg</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Today's Brief CTA -->
     <section class="brief-cta">
         <div class="container">
             <div class="brief-content">
@@ -1694,7 +1986,7 @@
         </div>
     </section>
 
-    <!-- African Markets Section with Sparklines -->
+    <!-- African Markets Section -->
     <section id="african-markets" class="african-markets">
         <div class="container">
             <div class="african-header">
@@ -1703,6 +1995,7 @@
                 <span class="african-flag">🌍</span>
             </div>
             <div class="cities-grid">
+                <!-- Lagos Card -->
                 <div class="city-card">
                     <div class="city-icon">
                         <i class="fas fa-city"></i>
@@ -1727,6 +2020,8 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Nairobi Card -->
                 <div class="city-card">
                     <div class="city-icon">
                         <i class="fas fa-mountain"></i>
@@ -1751,165 +2046,65 @@
                         </div>
                     </div>
                 </div>
-                <div class="city-card">
-                    <div class="city-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3 class="city-name">Johannesburg, South Africa</h3>
-                    <p class="city-economy">Mining & Finance • Manufacturing • Tourism</p>
-                    <div class="sparkline-container">
-                        <canvas id="johannesburgChart"></canvas>
-                    </div>
-                    <div class="city-stats">
-                        <div class="stat">
-                            <span class="stat-value">+1.9%</span>
-                            <span class="stat-label">GDP Growth</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">5.8%</span>
-                            <span class="stat-label">Inflation</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">Neutral</span>
-                            <span class="stat-label">Outlook</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="city-card">
-                    <div class="city-icon">
-                        <i class="fas fa-ship"></i>
-                    </div>
-                    <h3 class="city-name">Cairo, Egypt</h3>
-                    <p class="city-economy">North Africa's Gateway • Tourism • Manufacturing</p>
-                    <div class="sparkline-container">
-                        <canvas id="cairoChart"></canvas>
-                    </div>
-                    <div class="city-stats">
-                        <div class="stat">
-                            <span class="stat-value">+4.2%</span>
-                            <span class="stat-label">GDP Growth</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">21.3%</span>
-                            <span class="stat-label">Inflation</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">Bullish</span>
-                            <span class="stat-label">Outlook</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="city-card">
-                    <div class="city-icon">
-                        <i class="fas fa-coffee"></i>
-                    </div>
-                    <h3 class="city-name">Addis Ababa, Ethiopia</h3>
-                    <p class="city-economy">Rapid Growth • Agriculture • Aviation Hub</p>
-                    <div class="sparkline-container">
-                        <canvas id="addisChart"></canvas>
-                    </div>
-                    <div class="city-stats">
-                        <div class="stat">
-                            <span class="stat-value">+6.4%</span>
-                            <span class="stat-label">GDP Growth</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">28.8%</span>
-                            <span class="stat-label">Inflation</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">Very Bullish</span>
-                            <span class="stat-label">Outlook</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="city-card">
-                    <div class="city-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <h3 class="city-name">Accra, Ghana</h3>
-                    <p class="city-economy">Stable Democracy • Oil & Cocoa • Services</p>
-                    <div class="sparkline-container">
-                        <canvas id="accraChart"></canvas>
-                    </div>
-                    <div class="city-stats">
-                        <div class="stat">
-                            <span class="stat-value">+3.1%</span>
-                            <span class="stat-label">GDP Growth</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">42.5%</span>
-                            <span class="stat-label">Inflation</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">Cautious</span>
-                            <span class="stat-label">Outlook</span>
-                        </div>
-                    </div>
-                </div>
+                
+                <!-- Additional city cards would go here -->
             </div>
         </div>
     </section>
 
-    <!-- SLA Comparison Section - FIXED AND INTEGRATED -->
-    <section id="sla-comparison" class="sla-section">
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
         <div class="container">
-            <h2>SLA Comparison</h2>
-            <p>See how our service level agreement scales across our Professional and Enterprise offerings.</p>
-            <div class="sla-table">
-                <div class="sla-column">
-                    <h3>Professional SLA</h3>
-                    <ul>
-                        <li><strong>Availability:</strong> 99% uptime (excluding planned maintenance)</li>
-                        <li><strong>Insight Delivery:</strong> Daily curated updates by 08:00 GMT</li>
-                        <li><strong>Performance Indicators:</strong> Refreshed at least every 24 hours</li>
-                        <li><strong>Support Response:</strong> Email support within 24 hours</li>
-                        <li><strong>Security & Compliance:</strong> SSL/TLS encryption, GDPR-compliant</li>
-                        <li><strong>Escalation:</strong> Escalation to support team, no service credits</li>
-                        <li><strong>Documentation:</strong> SLA summary (confidence statement)</li>
+            <div class="section-title">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that fits your needs</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Free</h3>
+                        <div class="price">£0<span>/month</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Daily Market Brief</li>
+                        <li>Basic African Market Data</li>
+                        <li>Weekly Newsletter</li>
+                        <li>Email Support</li>
                     </ul>
+                    <a href="#newsletter" class="btn btn-outline">Get Started</a>
                 </div>
-                <div class="sla-column enterprise">
-                    <h3>Enterprise SLA</h3>
-                    <ul>
-                        <li><strong>Availability:</strong> 99.9% uptime with redundancy and failover guarantees</li>
-                        <li><strong>Insight Delivery:</strong> Real-time feeds with latency under 2 seconds</li>
-                        <li><strong>Performance Indicators:</strong> Continuous refresh with guaranteed update intervals</li>
-                        <li><strong>Support Response:</strong> Priority support within 4 hours, dedicated account manager</li>
-                        <li><strong>Security & Compliance:</strong> Advanced compliance (UK/EU data residency, audit logs)</li>
-                        <li><strong>Escalation:</strong> Formal escalation path, service credits if SLA breached</li>
-                        <li><strong>Documentation:</strong> Full SLA contract with legal enforceability</li>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Professional</h3>
+                        <div class="price">£99<span>/month</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Everything in Free</li>
+                        <li>Real-time AI Insights</li>
+                        <li>Advanced African Market Data</li>
+                        <li>Customizable Alerts</li>
+                        <li>Priority Support</li>
                     </ul>
+                    <a href="#newsletter" class="btn">Start Free Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <div class="price">£499<span>/month</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Everything in Professional</li>
+                        <li>Dedicated Account Manager</li>
+                        <li>Custom AI Models</li>
+                        <li>API Access</li>
+                        <li>White-label Reports</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Contact Sales</a>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Financial Icons Section -->
-    <div class="container">
-        <div class="icon-grid">
-            <div class="financial-icon">
-                <i class="fas fa-university"></i>
-                <div style="font-size: 0.8rem; margin-top: 0.5rem;">Central Banks</div>
-            </div>
-            <div class="financial-icon">
-                <i class="fas fa-chart-line"></i>
-                <div style="font-size: 0.8rem; margin-top: 0.5rem;">Market Data</div>
-            </div>
-            <div class="financial-icon">
-                <i class="fas fa-pound-sign"></i>
-                <div style="font-size: 0.8rem; margin-top: 0.5rem;">Forex</div>
-            </div>
-            <div class="financial-icon">
-                <i class="fas fa-coins"></i>
-                <div style="font-size: 0.8rem; margin-top: 0.5rem;">Commodities</div>
-            </div>
-            <div class="financial-icon">
-                <i class="fas fa-robot"></i>
-                <div style="font-size: 0.8rem; margin-top: 0.5rem;">AI Analysis</div>
-            </div>
-        </div>
-    </div>
 
     <!-- Features Section -->
     <section id="features" class="features">
@@ -1941,137 +2136,48 @@
                     <p>Get breaking economic news and analysis faster than traditional media outlets across all covered regions.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- AI-Powered Market Sentiment Dashboard -->
-            <div class="dashboard-section">
-                <div class="section-title">
-                    <h2>AI-Powered Market Sentiment Dashboard</h2>
-                    <p>Real-time sentiment analysis powered by machine learning algorithms</p>
-                </div>
-                
-                <div class="dashboard-container">
-                    <!-- Market Overview -->
-                    <div class="dashboard-card overview-card">
-                        <h3><i class="fas fa-chart-pie"></i> Market Overview</h3>
-                        <div class="overview-grid">
-                            <div class="overview-item">
-                                <span class="label">Overall Sentiment</span>
-                                <span class="value positive">Bullish</span>
-                                <div class="sentiment-bar">
-                                    <div class="sentiment-fill positive" style="width: 68%"></div>
-                                </div>
-                            </div>
-                            <div class="overview-item">
-                                <span class="label">Volatility Index</span>
-                                <span class="value medium">Medium</span>
-                                <div class="sentiment-bar">
-                                    <div class="sentiment-fill medium" style="width: 45%"></div>
-                                </div>
-                            </div>
-                            <div class="overview-item">
-                                <span class="label">AI Confidence</span>
-                                <span class="value high">87%</span>
-                                <div class="sentiment-bar">
-                                    <div class="sentiment-fill high" style="width: 87%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Bloomberg Comparison Section -->
+    <section id="bloomberg-comparison" class="bloomberg-comparison">
+        <div class="container">
+            <div class="section-title">
+                <h2>AlgoEconomics vs Bloomberg Terminal</h2>
+                <p>The <strong style="color: var(--gold);">Bloomberg for UK–Africa</strong> — AI-first, affordable, and hyper-focused.</p>
+            </div>
 
-                    <!-- Sector Sentiment -->
-                    <div class="dashboard-card sector-card">
-                        <h3><i class="fas fa-industry"></i> Sector Sentiment</h3>
-                        <div class="sector-grid">
-                            <div class="sector-item">
-                                <span class="sector-name">Technology</span>
-                                <div class="sentiment-indicator positive">76%</div>
-                            </div>
-                            <div class="sector-item">
-                                <span class="sector-name">Finance</span>
-                                <div class="sentiment-indicator positive">64%</div>
-                            </div>
-                            <div class="sector-item">
-                                <span class="sector-name">Energy</span>
-                                <div class="sentiment-indicator negative">42%</div>
-                            </div>
-                            <div class="sector-item">
-                                <span class="sector-name">Agriculture</span>
-                                <div class="sentiment-indicator positive">71%</div>
-                            </div>
-                            <div class="sector-item">
-                                <span class="sector-name">Mining</span>
-                                <div class="sentiment-indicator neutral">55%</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Real-time Sentiment Feed -->
-                    <div class="dashboard-card feed-card">
-                        <h3><i class="fas fa-bolt"></i> Real-time Sentiment Feed</h3>
-                        <div class="sentiment-feed">
-                            <div class="feed-item positive">
-                                <span class="feed-time">14:23</span>
-                                <span class="feed-text">Positive earnings reports boosting tech stocks</span>
-                            </div>
-                            <div class="feed-item negative">
-                                <span class="feed-time">14:15</span>
-                                <span class="feed-text">Inflation concerns affecting bond markets</span>
-                            </div>
-                            <div class="feed-item positive">
-                                <span class="feed-time">14:08</span>
-                                <span class="feed-text">Strong retail sales data for Q4</span>
-                            </div>
-                            <div class="feed-item neutral">
-                                <span class="feed-time">13:55</span>
-                                <span class="feed-text">Mixed signals from manufacturing sector</span>
-                            </div>
-                            <div class="feed-item positive">
-                                <span class="feed-time">13:42</span>
-                                <span class="feed-text">AI algorithms detect bullish pattern in African markets</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Currency Sentiment -->
-                    <div class="dashboard-card currency-card">
-                        <h3><i class="fas fa-money-bill-wave"></i> Currency Sentiment</h3>
-                        <div class="currency-grid">
-                            <div class="currency-item">
-                                <span class="currency-pair">GBP/USD</span>
-                                <div class="sentiment-trend positive">
-                                    <i class="fas fa-arrow-up"></i> 1.2745
-                                </div>
-                                <span class="sentiment-score positive">72% Bullish</span>
-                            </div>
-                            <div class="currency-item">
-                                <span class="currency-pair">USD/ZAR</span>
-                                <div class="sentiment-trend negative">
-                                    <i class="fas fa-arrow-down"></i> 18.8567
-                                </div>
-                                <span class="sentiment-score negative">61% Bearish</span>
-                            </div>
-                            <div class="currency-item">
-                                <span class="currency-pair">USD/NGN</span>
-                                <div class="sentiment-trend neutral">
-                                    <i class="fas fa-minus"></i> 1,520.75
-                                </div>
-                                <span class="sentiment-score neutral">49% Neutral</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI Insights -->
-                <div class="ai-insights">
-                    <h3><i class="fas fa-robot"></i> AI-Generated Market Insight</h3>
-                    <div class="insight-content">
-                        <p>"Our algorithms detect increasing bullish sentiment in African technology sectors driven by positive investment flows. However, caution is advised in energy sectors due to geopolitical uncertainties. The GBP shows strength against major currencies, supported by positive economic indicators, while African currencies show mixed performance with opportunities in select markets."</p>
-                        <div class="insight-meta">
-                            <span class="update-time">Last updated: 2 minutes ago</span>
-                            <span class="ai-model">GPT-4 Financial Analysis Model v2.1</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th style="text-align: center;">Bloomberg Terminal</th>
+                            <th style="text-align: center; color: var(--gold);">AlgoEconomics</th>
+                            <th style="text-align: center;">Winner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Price</td>
+                            <td style="text-align: center;">$25,000–$30,000+/year</td>
+                            <td style="text-align: center; color: var(--success); font-weight: bold;">Free + £99–£499/mo</td>
+                            <td style="text-align: center; color: var(--gold); font-weight: bold;">AlgoEconomics</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td>UK & African Focus</td>
+                            <td style="text-align: center;">Generic Africa tab</td>
+                            <td style="text-align: center; color: var(--success); font-weight: bold;">Native lens: Naira, Rand, JSE, AfCFTA</td>
+                            <td style="text-align: center; color: var(--gold); font-weight: bold;">AlgoEconomics</td>
+                        </tr>
+                        <tr>
+                            <td>AI-Powered Insights</td>
+                            <td style="text-align: center;">Basic news sentiment</td>
+                            <td style="text-align: center; color: var(--success); font-weight: bold;">GPT-4 Financial Model v2.1 – daily AI briefs</td>
+                            <td style="text-align: center; color: var(--gold); font-weight: bold;">AlgoEconomics</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -2085,78 +2191,6 @@
                 <input type="email" placeholder="Enter your email address" required>
                 <button type="submit" class="btn">Subscribe</button>
             </form>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About AlgoEconomics</h2>
-                    <p>Founded by a team of economists, data scientists, and AI researchers, AlgoEconomics brings together decades of financial expertise with cutting-edge machine learning technology.</p>
-                    <p>Our mission is to democratize access to sophisticated economic analysis, making institutional-grade insights available to businesses, investors, and policymakers across the UK and Africa.</p>
-                    <p>By processing millions of data points daily, our algorithms identify patterns and trends that would be impossible for human analysts to detect, providing you with a competitive edge in today's fast-moving global markets.</p>
-                    <a href="#newsletter" class="btn">Start Your Free Trial</a>
-                </div>
-                <div class="about-image">
-                    Advanced AI Economic Analysis
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="blog">
-        <div class="container">
-            <div class="section-title">
-                <h2>Latest Market Insights</h2>
-                <p>Expert analysis on global economic trends and their impact on UK and African markets</p>
-            </div>
-            <div class="articles-grid">
-                <div class="article-card">
-                    <div class="article-image">
-                        African Tech Boom
-                    </div>
-                    <div class="article-content">
-                        <div class="article-meta">
-                            <span class="article-date">March 15, 2025</span>
-                            <span class="article-tag">African Markets</span>
-                        </div>
-                        <h3>East African Tech Sector: The Next Growth Frontier?</h3>
-                        <p>Our AI models analyze the explosive growth in East Africa's technology sector and identify key investment opportunities in Nairobi and Kigali.</p>
-                        <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="article-card">
-                    <div class="article-image">
-                        Sector Analysis
-                    </div>
-                    <div class="article-content">
-                        <div class="article-meta">
-                            <span class="article-date">March 12, 2025</span>
-                            <span class="article-tag">Commodities</span>
-                        </div>
-                        <h3>African Mineral Resources: Navigating the Green Transition</h3>
-                        <p>Examining how African nations are positioning themselves in the global transition to renewable energy and electric vehicles.</p>
-                        <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="article-card">
-                    <div class="article-image">
-                        Economic Policy
-                    </div>
-                    <div class="article-content">
-                        <div class="article-meta">
-                            <span class="article-date">March 8, 2025</span>
-                            <span class="article-tag">Forex</span>
-                        </div>
-                        <h3>Naira and Rand Volatility: Strategies for Currency Risk Management</h3>
-                        <p>Analysis of recent currency fluctuations in major African economies and practical approaches for international businesses.</p>
-                        <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -2178,22 +2212,11 @@
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
                         <li><a href="#home">Home</a></li>
+                        <li><a href="#value-proposition">Why Choose Us</a></li>
                         <li><a href="#african-markets">African Markets</a></li>
-                        <li><a href="#sla-comparison">SLA</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#live-demo">Live Demo</a></li>
-                        <li><a href="#newsletter">Newsletter</a></li>
-                        <li><a href="#about">About</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Regional Coverage</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">United Kingdom</a></li>
-                        <li><a href="#">West Africa</a></li>
-                        <li><a href="#">East Africa</a></li>
-                        <li><a href="#">Southern Africa</a></li>
-                        <li><a href="#">North Africa</a></li>
+                        <li><a href="#features">Platform</a></li>
+                        <li><a href="#bloomberg-comparison">vs Bloomberg</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -2212,7 +2235,7 @@
     </footer>
 
     <script>
-        // Mobile menu functionality - IMPROVED
+        // Mobile menu functionality
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenu = document.querySelector('.mobile-menu');
             const navLinks = document.querySelector('.nav-links');
@@ -2244,22 +2267,21 @@
                 });
             });
 
-            // Create sparkline charts for African cities
+            // Create sparkline charts
             createSparklineCharts();
             
             // Live Demo functionality
             setupLiveDemo();
+            
+            // Track user interactions
+            setupAnalytics();
         });
 
         function createSparklineCharts() {
             // Data for different African cities
             const cities = [
                 { id: 'lagosChart', data: [65, 59, 80, 81, 76, 75, 80], color: 'rgba(45, 80, 22, 1)' },
-                { id: 'nairobiChart', data: [45, 55, 65, 75, 80, 85, 90], color: 'rgba(45, 80, 22, 1)' },
-                { id: 'johannesburgChart', data: [80, 75, 70, 65, 60, 65, 70], color: 'rgba(45, 80, 22, 1)' },
-                { id: 'cairoChart', data: [50, 55, 60, 65, 70, 75, 80], color: 'rgba(45, 80, 22, 1)' },
-                { id: 'addisChart', data: [40, 50, 60, 70, 75, 80, 85], color: 'rgba(45, 80, 22, 1)' },
-                { id: 'accraChart', data: [70, 65, 60, 55, 60, 65, 70], color: 'rgba(45, 80, 22, 1)' }
+                { id: 'nairobiChart', data: [45, 55, 65, 75, 80, 85, 90], color: 'rgba(45, 80, 22, 1)' }
             ];
 
             cities.forEach(city => {
@@ -2341,6 +2363,24 @@
                     alert("Thank you for your interest! We're preparing your free market brief and will email it to you shortly.");
                 });
             }
+        }
+
+        function setupAnalytics() {
+            // Track button clicks
+            document.querySelectorAll('.btn, .brief-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // In a real implementation, send this data to analytics
+                    console.log('CTA clicked:', this.textContent.trim());
+                });
+            });
+            
+            // Track form submissions
+            document.querySelectorAll('form').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    // In a real implementation, send this data to analytics
+                    console.log('Form submitted:', this.id || 'unknown form');
+                });
+            });
         }
     </script>
 </body>
