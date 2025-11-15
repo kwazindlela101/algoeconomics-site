@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlgoEconomics | Global Markets. UK & African Relevance. AI-Powered Insight.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary: #1a365d;
@@ -15,6 +16,7 @@
             --light: #f8f9fa;
             --dark: #1a202c;
             --success: #38a169;
+            --danger: #e53e3e;
             --africa-green: #2d5016;
             --africa-gold: #ffd700;
             --transition: all 0.3s ease;
@@ -42,7 +44,7 @@
             padding: 0 2rem;
         }
 
-        /* IMPROVED Market Indicators - Better Visibility */
+        /* IMPROVED Market Indicators - Better Visibility with Arrows */
         .market-indicators {
             background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%);
             color: white;
@@ -98,6 +100,9 @@
             padding: 0.2rem 0.6rem;
             border-radius: 12px;
             background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
 
         .indicator-change.positive {
@@ -278,6 +283,174 @@
             color: var(--primary);
         }
 
+        /* Today's Brief CTA Section */
+        .brief-cta {
+            background: linear-gradient(135deg, var(--success) 0%, #2d7a51 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brief-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .brief-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .brief-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .brief-cta p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .brief-btn {
+            background: white;
+            color: var(--success);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .brief-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Live AI Demo Box */
+        .live-demo {
+            padding: 4rem 0;
+            background: var(--light);
+        }
+
+        .demo-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid var(--accent);
+        }
+
+        .demo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--danger);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .live-indicator .pulse {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .demo-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .demo-input {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .demo-input textarea {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .demo-input button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .demo-input button:hover {
+            background: #2c5aa0;
+        }
+
+        .demo-output {
+            background: #f7fafc;
+            border-radius: 5px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            min-height: 200px;
+        }
+
+        .demo-output h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .demo-output p {
+            color: var(--secondary);
+        }
+
         /* SLA Comparison Section - FIXED AND INTEGRATED */
         .sla-section {
             background-color: #0a1f44;
@@ -378,7 +551,7 @@
             color: var(--gold);
         }
 
-        /* African Markets Section */
+        /* African Markets Section with Sparklines */
         .african-markets {
             padding: 80px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -441,6 +614,11 @@
             font-size: 1rem;
             color: var(--secondary);
             margin-bottom: 1.5rem;
+        }
+
+        .sparkline-container {
+            height: 60px;
+            margin: 1.5rem 0;
         }
 
         .city-stats {
@@ -1153,6 +1331,11 @@
                 width: 100%;
                 max-width: 100%;
             }
+            
+            /* Demo Section Mobile */
+            .demo-content {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1163,29 +1346,29 @@
     </style>
 </head>
 <body>
-    <!-- IMPROVED Market Indicators -->
+    <!-- IMPROVED Market Indicators with Arrows -->
     <div class="market-indicators">
         <div class="container">
             <div class="indicators-grid">
                 <div class="indicator">
                     <span class="indicator-label">FTSE 100</span>
                     <span class="indicator-value">7,542.30</span>
-                    <span class="indicator-change positive">+1.2%</span>
+                    <span class="indicator-change positive"><i class="fas fa-arrow-up"></i> +1.2%</span>
                 </div>
                 <div class="indicator">
                     <span class="indicator-label">GBP/USD</span>
                     <span class="indicator-value">1.2745</span>
-                    <span class="indicator-change positive">+0.3%</span>
+                    <span class="indicator-change positive"><i class="fas fa-arrow-up"></i> +0.3%</span>
                 </div>
                 <div class="indicator">
                     <span class="indicator-label">JSE All Share</span>
                     <span class="indicator-value">73,845.20</span>
-                    <span class="indicator-change positive">+0.8%</span>
+                    <span class="indicator-change positive"><i class="fas fa-arrow-up"></i> +0.8%</span>
                 </div>
                 <div class="indicator">
                     <span class="indicator-label">NGN/USD</span>
                     <span class="indicator-value">1,520.75</span>
-                    <span class="indicator-change negative">-0.4%</span>
+                    <span class="indicator-change negative"><i class="fas fa-arrow-down"></i> -0.4%</span>
                 </div>
             </div>
         </div>
@@ -1204,6 +1387,7 @@
                     <li><a href="#african-markets">African Markets</a></li>
                     <li><a href="#sla-comparison">SLA</a></li>
                     <li><a href="#features">Features</a></li>
+                    <li><a href="#live-demo">Live Demo</a></li>
                     <li><a href="#newsletter">Newsletter</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#blog">Insights</a></li>
@@ -1230,7 +1414,44 @@
         </div>
     </section>
 
-    <!-- African Markets Section -->
+    <!-- Today's Brief CTA -->
+    <section class="brief-cta">
+        <div class="container">
+            <div class="brief-content">
+                <h2>Get Today's Brief – Free</h2>
+                <p>Receive a comprehensive market analysis brief tailored to your interests, absolutely free. No commitment required.</p>
+                <button class="brief-btn">Get Your Free Brief Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live AI Demo Box -->
+    <section id="live-demo" class="live-demo">
+        <div class="container">
+            <div class="demo-container">
+                <div class="demo-header">
+                    <h3 class="demo-title"><i class="fas fa-robot"></i> Live AI Demo</h3>
+                    <div class="live-indicator">
+                        <div class="pulse"></div>
+                        <span>LIVE</span>
+                    </div>
+                </div>
+                <div class="demo-content">
+                    <div class="demo-input">
+                        <h4>Ask our AI about market trends:</h4>
+                        <textarea placeholder="E.g., What's the outlook for African tech stocks in Q4?"></textarea>
+                        <button>Analyze with AI</button>
+                    </div>
+                    <div class="demo-output">
+                        <h4>AI Analysis:</h4>
+                        <p>Our AI is ready to analyze your query about market trends, economic indicators, or investment opportunities. Enter your question to receive instant insights powered by our proprietary algorithms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- African Markets Section with Sparklines -->
     <section id="african-markets" class="african-markets">
         <div class="container">
             <div class="african-header">
@@ -1245,6 +1466,9 @@
                     </div>
                     <h3 class="city-name">Lagos, Nigeria</h3>
                     <p class="city-economy">Financial hub of West Africa • Oil & Gas • Technology</p>
+                    <div class="sparkline-container">
+                        <canvas id="lagosChart"></canvas>
+                    </div>
                     <div class="city-stats">
                         <div class="stat">
                             <span class="stat-value">+3.2%</span>
@@ -1266,6 +1490,9 @@
                     </div>
                     <h3 class="city-name">Nairobi, Kenya</h3>
                     <p class="city-economy">East Africa's Tech Hub • Finance • Agriculture</p>
+                    <div class="sparkline-container">
+                        <canvas id="nairobiChart"></canvas>
+                    </div>
                     <div class="city-stats">
                         <div class="stat">
                             <span class="stat-value">+5.1%</span>
@@ -1287,6 +1514,9 @@
                     </div>
                     <h3 class="city-name">Johannesburg, South Africa</h3>
                     <p class="city-economy">Mining & Finance • Manufacturing • Tourism</p>
+                    <div class="sparkline-container">
+                        <canvas id="johannesburgChart"></canvas>
+                    </div>
                     <div class="city-stats">
                         <div class="stat">
                             <span class="stat-value">+1.9%</span>
@@ -1308,6 +1538,9 @@
                     </div>
                     <h3 class="city-name">Cairo, Egypt</h3>
                     <p class="city-economy">North Africa's Gateway • Tourism • Manufacturing</p>
+                    <div class="sparkline-container">
+                        <canvas id="cairoChart"></canvas>
+                    </div>
                     <div class="city-stats">
                         <div class="stat">
                             <span class="stat-value">+4.2%</span>
@@ -1329,6 +1562,9 @@
                     </div>
                     <h3 class="city-name">Addis Ababa, Ethiopia</h3>
                     <p class="city-economy">Rapid Growth • Agriculture • Aviation Hub</p>
+                    <div class="sparkline-container">
+                        <canvas id="addisChart"></canvas>
+                    </div>
                     <div class="city-stats">
                         <div class="stat">
                             <span class="stat-value">+6.4%</span>
@@ -1350,6 +1586,9 @@
                     </div>
                     <h3 class="city-name">Accra, Ghana</h3>
                     <p class="city-economy">Stable Democracy • Oil & Cocoa • Services</p>
+                    <div class="sparkline-container">
+                        <canvas id="accraChart"></canvas>
+                    </div>
                     <div class="city-stats">
                         <div class="stat">
                             <span class="stat-value">+3.1%</span>
@@ -1699,6 +1938,7 @@
                         <li><a href="#african-markets">African Markets</a></li>
                         <li><a href="#sla-comparison">SLA</a></li>
                         <li><a href="#features">Features</a></li>
+                        <li><a href="#live-demo">Live Demo</a></li>
                         <li><a href="#newsletter">Newsletter</a></li>
                         <li><a href="#about">About</a></li>
                     </ul>
@@ -1753,7 +1993,103 @@
                     }
                 });
             });
+
+            // Create sparkline charts for African cities
+            createSparklineCharts();
+            
+            // Live Demo functionality
+            setupLiveDemo();
         });
+
+        function createSparklineCharts() {
+            // Data for different African cities
+            const cities = [
+                { id: 'lagosChart', data: [65, 59, 80, 81, 76, 75, 80], color: 'rgba(45, 80, 22, 1)' },
+                { id: 'nairobiChart', data: [45, 55, 65, 75, 80, 85, 90], color: 'rgba(45, 80, 22, 1)' },
+                { id: 'johannesburgChart', data: [80, 75, 70, 65, 60, 65, 70], color: 'rgba(45, 80, 22, 1)' },
+                { id: 'cairoChart', data: [50, 55, 60, 65, 70, 75, 80], color: 'rgba(45, 80, 22, 1)' },
+                { id: 'addisChart', data: [40, 50, 60, 70, 75, 80, 85], color: 'rgba(45, 80, 22, 1)' },
+                { id: 'accraChart', data: [70, 65, 60, 55, 60, 65, 70], color: 'rgba(45, 80, 22, 1)' }
+            ];
+
+            cities.forEach(city => {
+                const ctx = document.getElementById(city.id).getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                        datasets: [{
+                            data: city.data,
+                            borderColor: city.color,
+                            backgroundColor: 'rgba(45, 80, 22, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        function setupLiveDemo() {
+            const demoButton = document.querySelector('.demo-input button');
+            const demoTextarea = document.querySelector('.demo-input textarea');
+            const demoOutput = document.querySelector('.demo-output p');
+            
+            if (demoButton && demoTextarea && demoOutput) {
+                demoButton.addEventListener('click', function() {
+                    const query = demoTextarea.value.trim();
+                    if (query) {
+                        // Simulate AI analysis
+                        demoOutput.innerHTML = "Analyzing your query: <strong>" + query + "</strong><br><br>";
+                        demoOutput.innerHTML += "Our AI is processing this request. In a real implementation, this would connect to our backend AI service to generate specific market insights based on your question.";
+                        
+                        // Add a loading effect
+                        demoOutput.style.fontStyle = 'italic';
+                        demoOutput.style.color = '#4a5568';
+                        
+                        // Simulate delay for realism
+                        setTimeout(() => {
+                            demoOutput.innerHTML = "Based on our analysis of <strong>" + query + "</strong>, we're detecting positive momentum in related sectors. Our algorithms suggest a cautiously optimistic outlook with potential growth opportunities in the medium term. For detailed, personalized insights, consider our premium subscription.";
+                            demoOutput.style.fontStyle = 'normal';
+                        }, 1500);
+                    } else {
+                        demoOutput.innerHTML = "Please enter a question about market trends, economic indicators, or investment opportunities to receive AI-powered insights.";
+                        demoOutput.style.fontStyle = 'italic';
+                        demoOutput.style.color = '#4a5568';
+                    }
+                });
+            }
+            
+            // Today's Brief CTA functionality
+            const briefButton = document.querySelector('.brief-btn');
+            if (briefButton) {
+                briefButton.addEventListener('click', function() {
+                    alert("Thank you for your interest! We're preparing your free market brief and will email it to you shortly.");
+                });
+            }
+        }
     </script>
 </body>
 </html>
