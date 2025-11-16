@@ -44,6 +44,56 @@
             padding: 0 1rem;
         }
 
+        /* Speakers Section */
+        .speakers {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .speaker {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+
+        .speaker:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .speaker img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .speaker-content {
+            padding: 1.5rem;
+        }
+
+        .speaker h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .speaker p {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
         /* AI Corruption Index Section */
         #corruption-index {
           background: #f9f9f9;
@@ -1321,6 +1371,15 @@
                 transform: scale(1);
             }
             
+            /* Speakers Mobile Fix */
+            .speaker-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .speaker img {
+                height: 200px;
+            }
+            
             /* Newsletter Mobile Fix */
             .newsletter-form {
                 flex-direction: column;
@@ -1452,6 +1511,7 @@
                     <li><a href="#value-proposition">Why Choose Us</a></li>
                     <li><a href="#ai-demo">AI Demo</a></li>
                     <li><a href="#corruption-index">Corruption Index</a></li>
+                    <li><a href="#speakers">Speakers</a></li>
                     <li><a href="#african-markets">African Markets</a></li>
                     <li><a href="#features">Platform</a></li>
                     <li><a href="#sla-comparison">SLA</a></li>
@@ -1565,6 +1625,46 @@
                             <h4>Rachel Simmons</h4>
                             <p>Hedge Fund Manager, Johannesburg</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers" class="speakers">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Speakers</h2>
+                <p>Learn from leading economic experts and thought leaders in UK-Africa markets</p>
+            </div>
+            <div class="speaker-grid">
+                <div class="speaker">
+                    <img src="images/daniel-ndlela.jpg" alt="Daniel B. Ndlela">
+                    <div class="speaker-content">
+                        <h3>Daniel B. Ndlela</h3>
+                        <p>Zimbabwean economist, Director of Zimconsult since 1991. Former lecturer at the University of Zimbabwe and senior regional advisor at the UN Economic Commission for Africa.</p>
+                    </div>
+                </div>
+                <div class="speaker">
+                    <img src="images/david-ndii.jpg" alt="David Ndii">
+                    <div class="speaker-content">
+                        <h3>David Ndii</h3>
+                        <p>Prominent economist, policy advisor to Kenyan and Rwandan governments, public finance expert, and co-founder of the Institute of Economic Affairs. Holds a doctorate from Oxford and is a Rhodes Scholar.</p>
+                    </div>
+                </div>
+                <div class="speaker">
+                    <img src="images/speaker1.jpg" alt="Dr. Jane Doe">
+                    <div class="speaker-content">
+                        <h3>Dr. Jane Doe</h3>
+                        <p>Expert in African economic policy with over 15 years of experience advising governments and multinational corporations on market entry strategies and economic development.</p>
+                    </div>
+                </div>
+                <div class="speaker">
+                    <img src="images/speaker2.jpg" alt="Mr. John Smith">
+                    <div class="speaker-content">
+                        <h3>Mr. John Smith</h3>
+                        <p>Specialist in UK–Africa trade relations with extensive experience in cross-border investments and economic partnerships between European and African markets.</p>
                     </div>
                 </div>
             </div>
@@ -1938,6 +2038,7 @@
                         <li><a href="#value-proposition">Why Choose Us</a></li>
                         <li><a href="#ai-demo">AI Demo</a></li>
                         <li><a href="#corruption-index">Corruption Index</a></li>
+                        <li><a href="#speakers">Speakers</a></li>
                         <li><a href="#african-markets">African Markets</a></li>
                         <li><a href="#features">Platform</a></li>
                         <li><a href="#sla-comparison">SLA</a></li>
@@ -1953,14 +2054,14 @@
                     </ul>
                 </div>
             </div>
-           <div class="footer-bottom">
-    <p>&copy; 2025 AlgoEconomics. All rights reserved. | 
-       <a href="/terms" style="color: var(--gold);">Terms</a> | 
-       <a href="/privacy" style="color: var(--gold);">Privacy</a> | 
-       <a href="/ip" style="color: var(--gold);">IP Protection</a>
-    </p>
-    <p>UK & African Market Intelligence</p>
-</div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AlgoEconomics. All rights reserved. | 
+                   <a href="/terms" style="color: var(--gold);">Terms</a> | 
+                   <a href="/privacy" style="color: var(--gold);">Privacy</a> | 
+                   <a href="/ip" style="color: var(--gold);">IP Protection</a>
+                </p>
+                <p>UK & African Market Intelligence</p>
+            </div>
         </div>
     </footer>
 
@@ -2061,4 +2162,3 @@
     </script>
 </body>
 </html>
-
