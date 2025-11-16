@@ -352,6 +352,91 @@ nav {
     font-size: 1.1rem;
 }
 
+/* Why Choose Us Section */
+#why-us {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+}
+
+#why-us .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+#why-us .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#why-us .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+#why-us .section-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#why-us .intro-text {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#why-us .intro-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+#why-us .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+#why-us .feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid var(--gold);
+}
+
+#why-us .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+#why-us .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+#why-us .feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+#why-us .feature-card p {
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
 /* Value Proposition Section */
 .value-proposition {
     padding: 80px 0;
@@ -1515,6 +1600,28 @@ footer {
         padding: 0.15rem 0.4rem;
     }
     
+    /* Why Choose Us Mobile Fix */
+    #why-us {
+        padding: 60px 0;
+    }
+    
+    #why-us .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    #why-us .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    #why-us .feature-card {
+        padding: 30px 20px;
+    }
+    
+    #why-us .intro-text {
+        margin-bottom: 40px;
+    }
+    
     /* AI Demo Mobile Fix */
     .demo-placeholder {
         padding: 2rem 1.5rem;
@@ -1687,6 +1794,15 @@ footer {
         font-size: 2rem;
     }
     
+    /* Why Choose Us Mobile Fix */
+    #why-us .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    #why-us .feature-card {
+        padding: 25px 15px;
+    }
+    
     /* New Sections Mobile Fix */
     .trust-grid {
         grid-template-columns: 1fr;
@@ -1724,5 +1840,14 @@ footer {
     
     .feature-card h3 {
         font-size: 1.3rem;
+    }
+    
+    /* Why Choose Us Extra Small Fix */
+    #why-us .feature-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    #why-us .feature-icon {
+        font-size: 2.5rem;
     }
 }
