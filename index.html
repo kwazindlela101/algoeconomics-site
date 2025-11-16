@@ -1597,6 +1597,69 @@
                 font-size: 2.5rem;
             }
         }
+        <head>
+  ...
+  <style>
+    :root {
+      --primary: #1a365d;
+      --secondary: #243748;
+      --accent: #3182ce;
+      --gold: #f4c430;
+      --silver: #c0c0c0;
+      --light: #f0f9fa;
+      --dark: #1a202c;
+      --success: #38a169;
+      --danger: #e53e3e;
+      --africa-green: #256d1b;
+      --africa-gold: #f6d700;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      ...
+    }
+
+    /* 🔽 Add Trusted By strip styles here */
+    .trusted-strip {
+      background: var(--light);
+      padding: 3rem 1rem;
+      text-align: center;
+      border-top: 2px solid var(--gold);
+    }
+
+    .trusted-strip h4 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .logo-row img {
+      max-height: 60px;
+      opacity: 0.8;
+      transition: var(--transition);
+    }
+
+    .logo-row img:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
     </style>
 </head>
 <body>
@@ -2177,6 +2240,17 @@
             </form>
         </div>
     </section>
+<section id="trusted-by" class="trusted-strip">
+  <div class="container">
+    <h4>Trusted by forward-thinking teams</h4>
+    <div class="logo-row">
+      <img src="https://via.placeholder.com/120x60?text=Partner+1" alt="Partner 1">
+      <img src="https://via.placeholder.com/120x60?text=Partner+2" alt="Partner 2">
+      <img src="https://via.placeholder.com/120x60?text=Partner+3" alt="Partner 3">
+      <img src="https://via.placeholder.com/120x60?text=Partner+4" alt="Partner 4">
+    </div>
+  </div>
+</section>
 
     <!-- Footer -->
     <footer id="contact">
@@ -2345,4 +2419,5 @@
 </script>
 </body>
 </html>
+
 
