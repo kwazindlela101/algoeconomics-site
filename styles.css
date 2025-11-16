@@ -1863,3 +1863,50 @@ section {
   font-weight: bold;
   border-bottom: 2px solid var(--gold);
 }
+/* ========== PREMIUM MICRO-INTERACTIONS ========== */
+/* Add this at the very end of your CSS file */
+
+/* Enhanced hover effects for all cards */
+.feature-card, .value-card, .pricing-card, .speaker, .city-card, .testimonial-card, .advantage-card {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.feature-card:hover, .value-card:hover, .pricing-card:hover, 
+.speaker:hover, .city-card:hover, .testimonial-card:hover, .advantage-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15) !important;
+}
+
+/* Button enhancements */
+.btn {
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.4s ease !important;
+}
+
+.btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 25px rgba(212, 175, 55, 0.3) !important;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::after {
+    left: 100%;
+}
+
+/* Enhanced hero shadow */
+.hero {
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.2) !important;
+}
