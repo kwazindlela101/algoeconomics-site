@@ -2320,6 +2320,29 @@
                 }
             });
         }
-    </script>
+        <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    function activateLink() {
+      let index = sections.length;
+
+      while (--index >= 0) {
+        const sectionTop = sections[index].getBoundingClientRect().top;
+        if (sectionTop <= 100) {
+          navLinks.forEach(link => link.classList.remove("active"));
+          const activeLink = document.querySelector(`.nav-links a[href="#${sections[index].id}"]`);
+          if (activeLink) activeLink.classList.add("active");
+          break;
+        }
+      }
+    }
+
+    window.addEventListener("scroll", activateLink);
+    activateLink(); // Run on load
+  });
+</script>
 </body>
 </html>
+
