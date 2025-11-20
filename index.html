@@ -20,6 +20,7 @@
             --africa-green: #2d5016;
             --africa-gold: #ffd700;
             --transition: all 0.3s ease;
+            /* Sectors We Cover Variables */
             --sectors-bg: #0b0d12;
             --sectors-card: #121522;
             --sectors-text: #e6e8ef;
@@ -56,80 +57,14 @@
             padding: 0 1rem;
         }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
-            color: white;
-            padding: 0.8rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            border-bottom: 3px solid var(--gold);
-        }
-
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.6rem;
-            font-weight: bold;
-            gap: 0.5rem;
-            line-height: 1;
-            white-space: nowrap;
-            background: linear-gradient(135deg, var(--gold), #f7ef8a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: white;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 0.4rem 0.6rem;
-            border-radius: 5px;
-            border: 1px solid transparent;
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--gold);
-        }
-
-        /* Market Indicators */
+        /* FIXED Market Indicators - Clean and Clear */
         .market-indicators {
             background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%);
             color: white;
             padding: 12px 0;
             border-bottom: 2px solid var(--gold);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-top: 60px;
+            margin-top: 60px; /* Accounts for fixed header */
         }
 
         .indicators {
@@ -171,7 +106,218 @@
             border: 1px solid #a93226;
         }
 
-        /* Hero Section */
+        .indicator i {
+            font-size: 0.9rem;
+        }
+
+        /* Your Original CSS for Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--secondary);
+            line-height: 1.5; 
+        }
+
+        /* Speakers Section */
+        .speakers {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .speaker {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+
+        .speaker:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .speaker img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .speaker-content {
+            padding: 1.5rem;
+        }
+
+        .speaker h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .speaker p {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* AI Corruption Index Section */
+        #corruption-index {
+          background: #f9f9f9;
+          padding: 60px 20px;
+          text-align: center;
+        }
+
+        #corruption-index .section-title {
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 10px;
+        }
+
+        #corruption-index .section-subtitle {
+          font-size: 1.25rem;
+          color: #555;
+          margin-bottom: 20px;
+        }
+
+        #corruption-index .section-body {
+          max-width: 800px;
+          margin: 0 auto 30px;
+          font-size: 1rem;
+          line-height: 1.6;
+          color: #333;
+        }
+
+        #corruption-index .section-list {
+          text-align: left;
+          max-width: 800px;
+          margin: 0 auto 30px;
+          padding-left: 20px;
+        }
+
+        #corruption-index .cta-button {
+          display: inline-block;
+          padding: 12px 24px;
+          background: #004aad;
+          color: #fff;
+          font-weight: 600;
+          border-radius: 4px;
+          text-decoration: none;
+          transition: background 0.3s ease;
+        }
+
+        #corruption-index .cta-button:hover {
+          background: #00337a;
+        }
+
+        /* Header - FIXED NAVIGATION */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
+            color: white;
+            padding: 0.8rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0.8rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            gap: 0.5rem;
+            line-height: 1;
+            white-space: nowrap;
+            background: linear-gradient(135deg, var(--gold), #f7ef8a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+            background: none;
+            border: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.4rem 0.6rem;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+        }
+
+        .nav-links a.active {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        /* Hero Section - Adjusted for fixed header + indicators */
         .hero {
             background: 
                 linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(15, 31, 56, 0.95) 100%),
@@ -270,96 +416,17 @@
             color: var(--primary);
         }
 
-        /* Section Styling */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--gold);
-        }
-
-        .section-header p {
-            max-width: 600px;
-            margin: 0 auto;
-            color: var(--secondary);
-            font-size: 1.1rem;
-        }
-
-        /* Why Choose Us Section */
-        #why-us {
-            background: white;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, var(--gold), var(--accent));
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .feature-card h3 {
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .feature-card p {
-            font-size: 0.95rem;
-            color: var(--secondary);
-            line-height: 1.5;
-        }
-
-        /* Sectors We Cover Section */
+        /* Sectors We Cover Section - NEW */
         .sectors {
             background: var(--sectors-bg);
+            padding: 80px 0;
             color: var(--sectors-text);
+        }
+
+        .sectors .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .sectors h2 {
@@ -380,6 +447,7 @@
             text-align: center;
         }
 
+        /* Grid */
         .sectors .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -438,6 +506,7 @@
             flex-grow: 1;
         }
 
+        /* Cross-cutting layers */
         .sectors .layers {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -465,7 +534,7 @@
             line-height: 1.6;
         }
 
-        /* Yellow Banner CTA */
+        /* Yellow Banner CTA - NEW */
         .yellow-banner {
             background: #ffe600;
             padding: 60px 20px;
@@ -513,8 +582,59 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
+        /* Why Choose Us Section - Enhanced */
+        #why-us {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        #why-us .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        #why-us .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #why-us .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        #why-us .section-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #why-us .intro-text {
+            text-align: center;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #why-us .intro-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        #why-us .intro-text strong {
+            color: var(--gold);
+        }
+
         /* Value Proposition Section */
         .value-proposition {
+            padding: 80px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
@@ -586,6 +706,7 @@
 
         /* Testimonials Section */
         .testimonials {
+            padding: 80px 0;
             background: white;
         }
 
@@ -638,57 +759,9 @@
             font-size: 0.9rem;
         }
 
-        /* Speakers Section */
-        .speakers {
-            background: white;
-        }
-
-        .speaker-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .speaker {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: var(--transition);
-            border: 1px solid #e2e8f0;
-        }
-
-        .speaker:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .speaker img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-bottom: 3px solid var(--gold);
-        }
-
-        .speaker-content {
-            padding: 1.5rem;
-        }
-
-        .speaker h3 {
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .speaker p {
-            color: var(--secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
         /* AI Demo Coming Soon Section */
         .ai-demo-coming-soon {
+            padding: 80px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
@@ -758,6 +831,38 @@
             margin-top: 2rem;
             padding-top: 2rem;
             border-top: 1px solid #e2e8f0;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--secondary);
+            font-size: 1.1rem;
         }
 
         /* Today's Brief CTA */
@@ -924,6 +1029,7 @@
 
         /* African Markets Section */
         .african-markets {
+            padding: 80px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-bottom: 1px solid #d1d9e6;
         }
@@ -1017,6 +1123,7 @@
 
         /* Pricing Section */
         .pricing {
+            padding: 80px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
@@ -1100,57 +1207,65 @@
             margin-right: 0.5rem;
         }
 
-        /* AI Corruption Index Section */
-        #corruption-index {
-            background: #f9f9f9;
-            padding: 60px 20px;
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
             text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
         }
 
-        #corruption-index .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--gold), var(--accent));
         }
 
-        #corruption-index .section-subtitle {
-            font-size: 1.25rem;
-            color: #555;
-            margin-bottom: 20px;
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        #corruption-index .section-body {
-            max-width: 800px;
-            margin: 0 auto 30px;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #333;
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        #corruption-index .section-list {
-            text-align: left;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            padding-left: 20px;
-        }
-
-        #corruption-index .cta-button {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #004aad;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-
-        #corruption-index .cta-button:hover {
-            background: #00337a;
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
         }
 
         /* Bloomberg Comparison Section */
         .bloomberg-comparison {
+            padding: 100px 0;
             background: var(--light);
             border-bottom: 1px solid #e2e8f0;
         }
@@ -1196,6 +1311,7 @@
 
         /* Newsletter Section */
         .newsletter {
+            padding: 100px 0;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             text-align: center;
@@ -1318,7 +1434,7 @@
             color: #a0aec0;
         }
 
-        /* Responsive Design */
+        /* ========== MOBILE RESPONSIVENESS ========== */
         @media (max-width: 1024px) {
             .nav-links {
                 gap: 0.6rem;
@@ -1385,12 +1501,13 @@
             }
             
             .hero {
-                padding: 120px 0 80px;
+                padding: 120px 0 60px;
             }
             
             .hero h1 {
-                font-size: 2.3rem;
+                font-size: 2rem;
                 margin-bottom: 1.2rem;
+                line-height: 1.3;
             }
             
             .hero p {
@@ -1408,21 +1525,47 @@
                 width: 100%;
                 min-width: auto;
                 padding: 1rem 1.5rem;
+                font-size: 1rem;
             }
             
             /* Market Indicators Mobile Fix */
             .market-indicators {
                 padding: 10px 0;
+                margin-top: 50px;
             }
             
             .indicators {
-                gap: 10px;
+                gap: 8px;
+                justify-content: space-around;
             }
             
             .indicator {
                 padding: 8px 12px;
                 font-size: 0.9rem;
                 min-width: 90px;
+                flex: 1;
+            }
+            
+            /* Why Choose Us Mobile Fix */
+            #why-us {
+                padding: 60px 0;
+            }
+            
+            #why-us .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            #why-us .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            #why-us .feature-card {
+                padding: 30px 20px;
+            }
+            
+            #why-us .intro-text {
+                margin-bottom: 40px;
             }
             
             /* Sectors We Cover Mobile Fix */
@@ -1560,6 +1703,36 @@
             .social-links {
                 justify-content: center;
             }
+            
+            /* Section Title Fix */
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            /* Brief CTA Fix */
+            .brief-cta h2 {
+                font-size: 2rem;
+            }
+            
+            /* Primary CTA Fix */
+            .primary-cta h2 {
+                font-size: 2rem;
+            }
+            
+            /* Features Section Fix */
+            .features {
+                padding: 60px 0;
+            }
+            
+            /* Testimonials Fix */
+            .testimonials {
+                padding: 60px 0;
+            }
+            
+            /* Value Proposition Fix */
+            .value-proposition {
+                padding: 60px 0;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1568,11 +1741,11 @@
             }
             
             .hero {
-                padding: 100px 0 60px;
+                padding: 100px 0 40px;
             }
             
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .hero p {
@@ -1580,7 +1753,7 @@
             }
             
             .indicators {
-                gap: 6px;
+                gap: 5px;
             }
             
             .indicator {
@@ -1589,8 +1762,8 @@
                 min-width: 75px;
             }
             
-            .section-header h2 {
-                font-size: 2rem;
+            .section-title h2 {
+                font-size: 1.8rem;
             }
             
             .brief-cta h2 {
@@ -1609,16 +1782,42 @@
                 font-size: 2rem;
             }
             
+            /* Why Choose Us Mobile Fix */
+            #why-us .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            #why-us .feature-card {
+                padding: 25px 15px;
+            }
+            
             /* Sectors We Cover Mobile Fix */
             .sectors h2 {
                 font-size: 1.8rem;
+            }
+            
+            /* Market Indicators Extra Small Fix */
+            .market-indicators {
+                margin-top: 45px;
+            }
+            
+            .indicator {
+                font-size: 0.75rem;
+                padding: 5px 6px;
+                min-width: 65px;
+            }
+            
+            /* Hero Button Fix */
+            .btn {
+                padding: 0.9rem 1.2rem;
+                font-size: 0.9rem;
             }
         }
 
         /* Extra small devices */
         @media (max-width: 360px) {
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
             .hero p {
@@ -1626,7 +1825,7 @@
             }
             
             .btn {
-                padding: 0.9rem 1.2rem;
+                padding: 0.8rem 1rem;
                 font-size: 0.9rem;
             }
             
@@ -1636,6 +1835,15 @@
             
             .feature-card h3 {
                 font-size: 1.3rem;
+            }
+            
+            /* Why Choose Us Extra Small Fix */
+            #why-us .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            #why-us .feature-icon {
+                font-size: 2.5rem;
             }
             
             /* Sectors We Cover Extra Small Fix */
@@ -1648,10 +1856,56 @@
             }
             
             .indicator {
-                padding: 5px 6px;
-                font-size: 0.75rem;
-                min-width: 65px;
+                padding: 4px 5px;
+                font-size: 0.7rem;
+                min-width: 60px;
             }
+        }
+
+        /* ========== PREMIUM MICRO-INTERACTIONS ========== */
+        /* Enhanced hover effects for all cards */
+        .feature-card, .value-card, .pricing-card, .speaker, .city-card, .testimonial-card, .advantage-card, .sectors .card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        }
+
+        .feature-card:hover, .value-card:hover, .pricing-card:hover, 
+        .speaker:hover, .city-card:hover, .testimonial-card:hover, .advantage-card:hover, .sectors .card:hover {
+            transform: translateY(-8px) scale(1.02) !important;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Button enhancements */
+        .btn, .yellow-banner .cta-button {
+            position: relative !important;
+            overflow: hidden !important;
+            transition: all 0.4s ease !important;
+        }
+
+        .btn:hover, .yellow-banner .cta-button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.3) !important;
+        }
+
+        .btn::after, .yellow-banner .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::after, .yellow-banner .cta-button:hover::after {
+            left: 100%;
+        }
+
+        /* Enhanced hero shadow */
+        .hero {
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.2) !important;
         }
     </style>
 </head>
@@ -1666,9 +1920,9 @@
                 </div>
 
                 <!-- Mobile Menu Toggle -->
-                <div class="menu-toggle" id="menu-toggle">
+                <button class="menu-toggle" id="menu-toggle">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
 
                 <!-- Navigation -->
                 <nav id="nav-menu">
@@ -1746,8 +2000,8 @@
         </div>
     </section>
 
-    <!-- Sectors We Cover Section -->
-    <section id="sectors" class="sectors section" aria-labelledby="sectors-title">
+    <!-- Sectors We Cover Section - NEW -->
+    <section id="sectors" class="sectors" aria-labelledby="sectors-title">
         <div class="container">
             <h2 id="sectors-title">Sectors we cover</h2>
             <p class="intro">
@@ -1814,7 +2068,7 @@
         </div>
     </section>
 
-    <!-- Yellow Banner CTA -->
+    <!-- Yellow Banner CTA - NEW -->
     <section class="yellow-banner">
         <div class="container">
             <p class="headline">
@@ -1828,9 +2082,9 @@
     </section>
 
     <!-- Value Proposition Section -->
-    <section id="value-proposition" class="value-proposition section">
+    <section id="value-proposition" class="value-proposition">
         <div class="container">
-            <div class="section-header">
+            <div class="section-title">
                 <h2>Transform How You Consume Market Intelligence</h2>
                 <p>Traditional financial platforms overwhelm you with data. We deliver answers.</p>
             </div>
@@ -1861,7 +2115,7 @@
     </section>
 
     <!-- Primary CTA Section -->
-    <section class="primary-cta section">
+    <section class="primary-cta">
         <div class="container">
             <h2>Ready to Make Smarter Decisions Faster?</h2>
             <p>Join hundreds of professionals who trust AlgoEconomics for their daily market intelligence.</p>
@@ -1873,9 +2127,9 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
+    <section id="testimonials" class="testimonials">
         <div class="container">
-            <div class="section-header">
+            <div class="section-title">
                 <h2>Trusted by Financial Professionals</h2>
                 <p>See what our users say about transforming their workflow with AlgoEconomics</p>
             </div>
@@ -1921,9 +2175,9 @@
     </section>
 
     <!-- Speakers Section -->
-    <section id="speakers" class="speakers section">
+    <section id="speakers" class="speakers">
         <div class="container">
-            <div class="section-header">
+            <div class="section-title">
                 <h2>Featured Speakers</h2>
                 <p>Learn from leading economic experts and thought leaders in UK-Africa markets</p>
             </div>
@@ -1961,9 +2215,9 @@
     </section>
 
     <!-- AI Demo Coming Soon Section -->
-    <section id="ai-demo" class="ai-demo-coming-soon section">
+    <section id="ai-demo" class="ai-demo-coming-soon">
         <div class="container">
-            <div class="section-header">
+            <div class="section-title">
                 <h2><i class="fas fa-robot"></i> Live AI Demo - Coming Soon</h2>
                 <p>Experience our AI analyzing markets in real-time</p>
             </div>
@@ -2012,30 +2266,30 @@
 
     <!-- AI Corruption Index Section -->
     <section id="corruption-index" class="section">
-        <div class="container">
-            <h2 class="section-title">AI Corruption Index</h2>
-            <p class="section-subtitle">
-                Quantifying Governance Risk in Real Time
-            </p>
-            <p class="section-body">
-                AlgoEconomics introduces the world's first dynamic AI Corruption Index—
-                transforming opaque governance challenges into measurable, actionable insights.
-                Updated in real time, the Index empowers investors, policymakers, and enterprises
-                to benchmark integrity, reduce uncertainty, and unlock opportunity across Africa
-                and beyond.
-            </p>
-            <ul class="section-list">
-                <li><strong>Precision Measurement:</strong> AI-driven analysis of economic, political, and institutional signals.</li>
-                <li><strong>Real-Time Updates:</strong> Dynamic intelligence that evolves with governance and market shifts.</li>
-                <li><strong>Comparative Benchmarking:</strong> Country, regional, and sector-level scoring.</li>
-                <li><strong>Strategic Advantage:</strong> Premium tool for risk management and opportunity discovery.</li>
-            </ul>
-            <a href="/corruption-index" class="cta-button">Explore the Index →</a>
-        </div>
+      <div class="container">
+        <h2 class="section-title">AI Corruption Index</h2>
+        <p class="section-subtitle">
+          Quantifying Governance Risk in Real Time
+        </p>
+        <p class="section-body">
+          AlgoEconomics introduces the world's first dynamic AI Corruption Index—
+          transforming opaque governance challenges into measurable, actionable insights.
+          Updated in real time, the Index empowers investors, policymakers, and enterprises
+          to benchmark integrity, reduce uncertainty, and unlock opportunity across Africa
+          and beyond.
+        </p>
+        <ul class="section-list">
+          <li><strong>Precision Measurement:</strong> AI-driven analysis of economic, political, and institutional signals.</li>
+          <li><strong>Real-Time Updates:</strong> Dynamic intelligence that evolves with governance and market shifts.</li>
+          <li><strong>Comparative Benchmarking:</strong> Country, regional, and sector-level scoring.</li>
+          <li><strong>Strategic Advantage:</strong> Premium tool for risk management and opportunity discovery.</li>
+        </ul>
+        <a href="/corruption-index" class="cta-button">Explore the Index →</a>
+      </div>
     </section>
 
     <!-- Today's Brief CTA -->
-    <section class="brief-cta section">
+    <section class="brief-cta">
         <div class="container">
             <div class="brief-content">
                 <h2>Get Today's Brief – Free</h2>
@@ -2046,7 +2300,7 @@
     </section>
 
     <!-- SLA Comparison Section -->
-    <section id="sla-comparison" class="sla-section section">
+    <section id="sla-comparison" class="sla-section">
         <div class="container">
             <h2>SLA Comparison</h2>
             <p>See how our service level agreement scales across our Professional and Enterprise offerings.</p>
@@ -2080,7 +2334,7 @@
     </section>
 
     <!-- African Markets Section -->
-    <section id="african-markets" class="african-markets section">
+    <section id="african-markets" class="african-markets">
         <div class="container">
             <div class="african-header">
                 <span class="african-flag">🌍</span>
@@ -2165,9 +2419,9 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="pricing section">
+    <section id="pricing" class="pricing">
         <div class="container">
-            <div class="section-header">
+            <div class="section-title">
                 <h2>Simple, Transparent Pricing</h2>
                 <p>Choose the plan that fits your needs</p>
             </div>
@@ -2219,9 +2473,9 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features section">
+    <section id="features" class="features">
         <div class="container">
-            <div class="section-header">
+            <div class="section-title">
                 <h2>Why AlgoEconomics?</h2>
                 <p>We combine cutting-edge AI technology with deep economic expertise to deliver unparalleled market insights across UK and African markets.</p>
             </div>
@@ -2252,9 +2506,9 @@
     </section>
 
     <!-- Bloomberg Comparison Section -->
-    <section id="bloomberg-comparison" class="bloomberg-comparison section">
+    <section id="bloomberg-comparison" class="bloomberg-comparison">
         <div class="container">
-            <div class="section-header">
+            <div class="section-title">
                 <h2>AlgoEconomics vs Bloomberg Terminal</h2>
                 <p>The <strong style="color: var(--gold);">Bloomberg for UK–Africa</strong> — AI-first, affordable, and hyper-focused.</p>
             </div>
@@ -2295,7 +2549,7 @@
     </section>
 
     <!-- Newsletter Section -->
-    <section id="newsletter" class="newsletter section">
+    <section id="newsletter" class="newsletter">
         <div class="container">
             <h2>Stay Ahead of Market Trends</h2>
             <p>Subscribe to our daily newsletter for AI-powered economic insights delivered to your inbox, covering both UK and African markets.</p>
