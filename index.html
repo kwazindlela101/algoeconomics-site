@@ -1,4 +1,4 @@
-lo<!DOCTYPE html>                               
+<!DOCTYPE html>                               
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1876,35 +1876,104 @@ lo<!DOCTYPE html>
                 0 20px 60px rgba(0,0,0,0.15),
                 inset 0 1px 0 rgba(255,255,255,0.2) !important;
         }
+<head>
+  ...
+  <style>
+    /* your existing CSS here */
+
+    /* Add these new rules at the bottom */
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      gap: 0.5rem;
+      line-height: 1;
+      white-space: nowrap;
+      background: linear-gradient(135deg, var(--gold), #f7ef8a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.4rem 0.6rem;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--gold);
+    }
+
+    .nav-links a.active {
+      background: var(--gold);
+      color: var(--primary);
+    }
+  </style>
+</head>
+
+
+        
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <i class="fas fa-landmark"></i>
-                    <span>AlgoEconomics</span>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#why-us">Why Choose Us</a></li>
-                    <li><a href="#sectors">Sectors We Cover</a></li>
-                    <li><a href="#ai-demo">AI Demo</a></li>
-                    <li><a href="#corruption-index">Corruption Index</a></li>
-                    <li><a href="#speakers">Speakers</a></li>
-                    <li><a href="#african-markets">African Markets</a></li>
-                    <li><a href="#features">Platform</a></li>
-                    <li><a href="#sla-comparison">SLA</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                </ul>
-                <button class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
-        </div>
-    </header>
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo">
+        <i class="fas fa-landmark"></i>
+        <span>AlgoEconomics</span>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <!-- Navigation -->
+      <nav id="nav-menu">
+        <ul class="nav-links">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#why-us">Why Choose Us?</a></li>
+          <li><a href="#sectors">Sectors We Cover</a></li>
+          <li><a href="#ai-demo">AI Demo</a></li>
+          <li><a href="#corruption-index">Corruption Index</a></li>
+          <li><a href="#speakers">Speakers</a></li>
+          <li><a href="#african-markets">African Markets</a></li>
+          <li><a href="#platform">Platform</a></li>
+          <li><a href="#sla">SLA</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+  
 
     <!-- FIXED Market Indicators - Clean and Clear -->
     <div class="market-indicators">
@@ -2688,6 +2757,7 @@ lo<!DOCTYPE html>
     </script>
 </body>
 </html>
+
 
 
 
