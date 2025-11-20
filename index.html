@@ -1876,6 +1876,87 @@
                 0 20px 60px rgba(0,0,0,0.15),
                 inset 0 1px 0 rgba(255,255,255,0.2) !important;
         }
+
+        .header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0.8rem 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  gap: 0.5rem;
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(135deg, var(--gold), #f7ef8a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  padding: 0.4rem 0.6rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--gold);
+}
+
+.nav-links a.active {
+  background: var(--gold);
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: var(--primary);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+
 <head>
   ...
   <style>
@@ -2757,6 +2838,7 @@
     </script>
 </body>
 </html>
+
 
 
 
