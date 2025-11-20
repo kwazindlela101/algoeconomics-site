@@ -6,6 +6,10 @@
     <title>AlgoEconomics | Global Markets. UK & African Relevance. AI-Powered Insight.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <meta name="theme-color" content="#1a365d">
     <style>
         :root {
             --primary: #1a365d;
@@ -27,6 +31,8 @@
             --sectors-accent: #3fb7ff;
             --sectors-highlight: #7cf2a5;
             --sectors-border: #1e2336;
+            --font-heading: 'Segoe UI', system-ui, sans-serif;
+            --font-body: 'Segoe UI', system-ui, sans-serif;
         }
 
         * {
@@ -40,7 +46,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: var(--font-body);
             line-height: 1.6;
             color: var(--dark);
             background-color: var(--light);
@@ -48,6 +54,7 @@
                 radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
                 radial-gradient(circle at 0% 0%, rgba(49, 130, 206, 0.03) 0%, transparent 50%);
             overflow-x: hidden;
+            font-feature-settings: 'kern' 1, 'liga' 1;
         }
 
         .container {
@@ -56,7 +63,7 @@
             padding: 0 1rem;
         }
 
-        /* Header */
+        /* ========== ENHANCED HEADER & NAVIGATION ========== */
         header {
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
             color: white;
@@ -74,6 +81,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            padding: 0.8rem 0;
         }
 
         .logo {
@@ -88,6 +96,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .menu-toggle {
@@ -95,6 +106,8 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: white;
+            background: none;
+            border: none;
         }
 
         .nav-links {
@@ -105,24 +118,44 @@
             justify-content: flex-end;
         }
 
-        .nav-links a {
+        .nav-link {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: var(--transition);
-            padding: 0.4rem 0.6rem;
+            padding: 0.8rem 1rem;
             border-radius: 5px;
             border: 1px solid transparent;
             font-size: 0.85rem;
             white-space: nowrap;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-link:hover, .nav-link.active {
             background: rgba(212, 175, 55, 0.1);
             border: 1px solid var(--gold);
         }
 
-        /* Market Indicators */
+        .nav-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover .nav-indicator,
+        .nav-link.active .nav-indicator {
+            width: 80%;
+        }
+
+        /* ========== WORLD-CLASS MARKET TICKER ========== */
         .market-indicators {
             background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%);
             color: white;
@@ -130,48 +163,55 @@
             border-bottom: 2px solid var(--gold);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-top: 60px;
+            overflow: hidden;
         }
 
-        .indicators {
+        .ticker-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .ticker-track {
+            display: inline-flex;
+            animation: ticker-scroll 30s linear infinite;
+        }
+
+        .ticker-item {
             display: flex;
+            align-items: center;
             gap: 15px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
+            padding: 0 30px;
+            border-right: 1px solid rgba(255,255,255,0.2);
         }
 
-        .indicator {
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            min-width: 110px;
-            justify-content: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            transition: var(--transition);
+        .market-name {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .market-value {
             font-family: 'Courier New', monospace;
+            font-weight: bold;
         }
 
-        .indicator:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .market-change {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
 
-        .indicator.up {
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
-            border: 1px solid #219653;
+        .market-change.up { background: var(--success); }
+        .market-change.down { background: var(--danger); }
+        .market-change.neutral { background: #666; }
+
+        @keyframes ticker-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        .indicator.down {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            border: 1px solid #a93226;
-        }
-
-        /* Hero Section */
+        /* ========== ENHANCED HERO SECTION ========== */
         .hero {
             background: 
                 linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(15, 31, 56, 0.95) 100%),
@@ -182,6 +222,9 @@
             position: relative;
             overflow: hidden;
             border-bottom: 3px solid var(--gold);
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.2);
         }
 
         .hero::before {
@@ -207,15 +250,18 @@
         }
 
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1.5rem;
-            line-height: 1.2;
+            line-height: 1.1;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             max-width: 900px;
             background: linear-gradient(135deg, #ffffff 0%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .hero p {
@@ -234,6 +280,47 @@
             margin-top: 1rem;
         }
 
+        /* AI Pulse Animation */
+        .ai-pulse {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 2rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            border: 2px solid #00ff88;
+            border-radius: 50%;
+            animation: ring-pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes ring-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        /* ========== WORLD-CLASS BUTTONS ========== */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -247,15 +334,32 @@
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
             min-height: 54px;
             min-width: 200px;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-outline {
@@ -270,7 +374,23 @@
             color: var(--primary);
         }
 
-        /* Section Styling */
+        /* ========== ENHANCED CARDS & MICROINTERACTIONS ========== */
+        .feature-card, .value-card, .pricing-card, .speaker, .city-card, .testimonial-card, .advantage-card, .sectors .card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .feature-card:hover, .value-card:hover, .pricing-card:hover, 
+        .speaker:hover, .city-card:hover, .testimonial-card:hover, 
+        .advantage-card:hover, .sectors .card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.15),
+                0 15px 35px rgba(212, 175, 55, 0.1);
+        }
+
+        /* ========== SECTION STYLING ========== */
         .section {
             padding: 80px 0;
         }
@@ -286,6 +406,9 @@
             margin-bottom: 1rem;
             position: relative;
             display: inline-block;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .section-header h2::after {
@@ -306,7 +429,7 @@
             font-size: 1.1rem;
         }
 
-        /* Why Choose Us Section */
+        /* ========== WHY CHOOSE US SECTION ========== */
         #why-us {
             background: white;
         }
@@ -324,7 +447,6 @@
             border-radius: 10px;
             padding: 1.5rem;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: var(--transition);
             position: relative;
             overflow: hidden;
         }
@@ -339,15 +461,11 @@
             background: linear-gradient(135deg, var(--gold), var(--accent));
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
         .feature-card h3 {
             font-size: 1.2rem;
             color: var(--primary);
             margin-bottom: 0.75rem;
+            font-family: var(--font-heading);
         }
 
         .feature-card p {
@@ -356,7 +474,7 @@
             line-height: 1.5;
         }
 
-        /* Sectors We Cover Section */
+        /* ========== SECTORS WE COVER SECTION ========== */
         .sectors {
             background: var(--sectors-bg);
             color: var(--sectors-text);
@@ -369,6 +487,7 @@
             margin: 0 0 16px;
             text-align: center;
             color: var(--sectors-text);
+            font-family: var(--font-heading);
         }
 
         .sectors .intro {
@@ -392,7 +511,6 @@
             border: 1px solid var(--sectors-border);
             border-radius: 16px;
             padding: 28px 24px;
-            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -411,12 +529,6 @@
             opacity: 0.9;
         }
 
-        .sectors .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--sectors-accent);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
         .sectors .icon {
             font-size: 2.5rem;
             margin-bottom: 16px;
@@ -428,6 +540,7 @@
             margin: 0 0 12px;
             letter-spacing: 0.2px;
             color: var(--sectors-text);
+            font-family: var(--font-heading);
         }
 
         .sectors .card p {
@@ -456,6 +569,7 @@
             font-weight: 600;
             margin: 0 0 12px;
             color: var(--sectors-text);
+            font-family: var(--font-heading);
         }
 
         .sectors .layer p {
@@ -465,7 +579,7 @@
             line-height: 1.6;
         }
 
-        /* Yellow Banner CTA */
+        /* ========== YELLOW BANNER CTA ========== */
         .yellow-banner {
             background: #ffe600;
             padding: 60px 20px;
@@ -504,6 +618,8 @@
             text-decoration: none;
             transition: all 0.3s ease;
             border: 2px solid #1a1a1a;
+            position: relative;
+            overflow: hidden;
         }
 
         .yellow-banner .cta-button:hover {
@@ -513,7 +629,22 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        /* Value Proposition Section */
+        .yellow-banner .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .yellow-banner .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* ========== VALUE PROPOSITION SECTION ========== */
         .value-proposition {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
@@ -531,13 +662,7 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
             border-top: 4px solid var(--gold);
-        }
-
-        .value-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
         .value-icon {
@@ -550,8 +675,53 @@
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--primary);
+            font-family: var(--font-heading);
         }
 
+        /* ========== INTERACTIVE CHARTS ========== */
+        .market-insights {
+            margin-top: 3rem;
+        }
+
+        .insight-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .insight-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-family: var(--font-heading);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .chart-container::before {
+            content: 'Loading Data...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--secondary);
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        .chart-container.loaded::before {
+            display: none;
+        }
+
+        /* ========== REST OF YOUR SECTIONS (keeping your existing styles) ========== */
+        /* Primary CTA, Testimonials, Speakers, AI Demo, Corruption Index, 
+           Brief CTA, SLA, African Markets, Pricing, Features, Bloomberg, Newsletter, Footer */
+        
         /* Primary CTA Section */
         .primary-cta {
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
@@ -567,6 +737,7 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--gold);
+            font-family: var(--font-heading);
         }
 
         .primary-cta p {
@@ -630,6 +801,7 @@
         .author-info h4 {
             margin: 0;
             color: var(--primary);
+            font-family: var(--font-heading);
         }
 
         .author-info p {
@@ -655,13 +827,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: var(--transition);
             border: 1px solid #e2e8f0;
-        }
-
-        .speaker:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
         .speaker img {
@@ -679,6 +845,7 @@
             font-size: 1.3rem;
             color: var(--primary);
             margin-bottom: 0.5rem;
+            font-family: var(--font-heading);
         }
 
         .speaker p {
@@ -793,6 +960,7 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--gold);
+            font-family: var(--font-heading);
         }
 
         .brief-cta p {
@@ -813,12 +981,29 @@
             cursor: pointer;
             transition: var(--transition);
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
         .brief-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
             background: #f7ef8a;
+        }
+
+        .brief-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .brief-btn:hover::before {
+            left: 100%;
         }
 
         /* SLA Comparison Section */
@@ -834,6 +1019,7 @@
             font-size: 2.5em;
             margin-bottom: 20px;
             color: var(--gold);
+            font-family: var(--font-heading);
         }
 
         .sla-section > p {
@@ -897,6 +1083,7 @@
             color: var(--gold);
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 15px;
+            font-family: var(--font-heading);
         }
 
         .sla-column ul {
@@ -940,6 +1127,7 @@
             font-size: 2.5rem;
             color: var(--africa-green);
             text-align: center;
+            font-family: var(--font-heading);
         }
 
         .african-flag {
@@ -963,11 +1151,6 @@
             text-align: center;
         }
 
-        .city-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
         .city-icon {
             font-size: 2.5rem;
             color: var(--africa-green);
@@ -979,6 +1162,7 @@
             color: var(--africa-green);
             margin-bottom: 1rem;
             font-weight: bold;
+            font-family: var(--font-heading);
         }
 
         .city-economy {
@@ -1064,6 +1248,7 @@
             font-size: 1.5rem;
             color: var(--primary);
             margin-bottom: 1rem;
+            font-family: var(--font-heading);
         }
 
         .price {
@@ -1100,53 +1285,33 @@
             margin-right: 0.5rem;
         }
 
-        /* AI Corruption Index Section */
-        #corruption-index {
-            background: #f9f9f9;
-            padding: 60px 20px;
-            text-align: center;
+        /* Features Section */
+        .features {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        #corruption-index .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
-        #corruption-index .section-subtitle {
-            font-size: 1.25rem;
-            color: #555;
-            margin-bottom: 20px;
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        #corruption-index .section-body {
-            max-width: 800px;
-            margin: 0 auto 30px;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        #corruption-index .section-list {
-            text-align: left;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            padding-left: 20px;
-        }
-
-        #corruption-index .cta-button {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #004aad;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-
-        #corruption-index .cta-button:hover {
-            background: #00337a;
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-family: var(--font-heading);
         }
 
         /* Bloomberg Comparison Section */
@@ -1173,6 +1338,7 @@
             text-align: left;
             font-size: 1.1rem;
             font-weight: 600;
+            font-family: var(--font-heading);
         }
 
         .comparison-table td {
@@ -1215,6 +1381,7 @@
         .newsletter h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            font-family: var(--font-heading);
         }
 
         .newsletter p {
@@ -1264,6 +1431,7 @@
             font-size: 1.3rem;
             margin-bottom: 1.5rem;
             color: var(--gold);
+            font-family: var(--font-heading);
         }
 
         .footer-links {
@@ -1318,13 +1486,42 @@
             color: #a0aec0;
         }
 
-        /* Responsive Design */
+        /* ========== ACCESSIBILITY & PERFORMANCE ========== */
+        /* Focus states for accessibility */
+        .btn:focus, .nav-link:focus, .brief-btn:focus, .yellow-banner .cta-button:focus {
+            outline: 2px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .ticker-track {
+                animation: none;
+            }
+        }
+
+        /* High contrast support */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary: #000000;
+                --secondary: #333333;
+                --gold: #ffd700;
+            }
+        }
+
+        /* ========== MOBILE RESPONSIVENESS ========== */
         @media (max-width: 1024px) {
             .nav-links {
                 gap: 0.6rem;
             }
             
-            .nav-links a {
+            .nav-link {
                 padding: 0.3rem 0.5rem;
                 font-size: 0.8rem;
             }
@@ -1357,7 +1554,7 @@
                 width: 100%;
             }
             
-            .nav-links a {
+            .nav-link {
                 display: block;
                 padding: 0.8rem 1rem;
                 border-radius: 5px;
@@ -1377,6 +1574,10 @@
             .container {
                 padding: 0 1.5rem;
             }
+
+            .sectors .layers {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1385,12 +1586,13 @@
             }
             
             .hero {
-                padding: 120px 0 80px;
+                padding: 120px 0 60px;
             }
             
             .hero h1 {
-                font-size: 2.3rem;
+                font-size: 2rem;
                 margin-bottom: 1.2rem;
+                line-height: 1.3;
             }
             
             .hero p {
@@ -1408,21 +1610,44 @@
                 width: 100%;
                 min-width: auto;
                 padding: 1rem 1.5rem;
+                font-size: 1rem;
             }
             
             /* Market Indicators Mobile Fix */
             .market-indicators {
                 padding: 10px 0;
+                margin-top: 50px;
             }
             
-            .indicators {
+            .ticker-item {
+                padding: 0 15px;
                 gap: 10px;
             }
             
-            .indicator {
-                padding: 8px 12px;
+            .market-name, .market-value {
                 font-size: 0.9rem;
-                min-width: 90px;
+            }
+            
+            /* Why Choose Us Mobile Fix */
+            #why-us {
+                padding: 60px 0;
+            }
+            
+            #why-us .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            #why-us .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            #why-us .feature-card {
+                padding: 30px 20px;
+            }
+            
+            #why-us .intro-text {
+                margin-bottom: 40px;
             }
             
             /* Sectors We Cover Mobile Fix */
@@ -1447,10 +1672,6 @@
             
             .sectors .card {
                 padding: 24px 20px;
-            }
-            
-            .sectors .layers {
-                grid-template-columns: 1fr;
             }
             
             .yellow-banner {
@@ -1560,6 +1781,36 @@
             .social-links {
                 justify-content: center;
             }
+            
+            /* Section Title Fix */
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            /* Brief CTA Fix */
+            .brief-cta h2 {
+                font-size: 2rem;
+            }
+            
+            /* Primary CTA Fix */
+            .primary-cta h2 {
+                font-size: 2rem;
+            }
+            
+            /* Features Section Fix */
+            .features {
+                padding: 60px 0;
+            }
+            
+            /* Testimonials Fix */
+            .testimonials {
+                padding: 60px 0;
+            }
+            
+            /* Value Proposition Fix */
+            .value-proposition {
+                padding: 60px 0;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1568,29 +1819,28 @@
             }
             
             .hero {
-                padding: 100px 0 60px;
+                padding: 100px 0 40px;
             }
             
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .hero p {
                 font-size: 1rem;
             }
             
-            .indicators {
-                gap: 6px;
+            .ticker-item {
+                padding: 0 10px;
+                gap: 8px;
             }
             
-            .indicator {
-                padding: 6px 8px;
+            .market-name, .market-value {
                 font-size: 0.8rem;
-                min-width: 75px;
             }
             
             .section-header h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .brief-cta h2 {
@@ -1609,16 +1859,41 @@
                 font-size: 2rem;
             }
             
+            /* Why Choose Us Mobile Fix */
+            #why-us .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            #why-us .feature-card {
+                padding: 25px 15px;
+            }
+            
             /* Sectors We Cover Mobile Fix */
             .sectors h2 {
                 font-size: 1.8rem;
+            }
+            
+            /* Market Indicators Extra Small Fix */
+            .market-indicators {
+                margin-top: 45px;
+            }
+            
+            .market-change {
+                font-size: 0.75rem;
+                padding: 3px 6px;
+            }
+            
+            /* Hero Button Fix */
+            .btn {
+                padding: 0.9rem 1.2rem;
+                font-size: 0.9rem;
             }
         }
 
         /* Extra small devices */
         @media (max-width: 360px) {
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
             .hero p {
@@ -1626,7 +1901,7 @@
             }
             
             .btn {
-                padding: 0.9rem 1.2rem;
+                padding: 0.8rem 1rem;
                 font-size: 0.9rem;
             }
             
@@ -1638,19 +1913,23 @@
                 font-size: 1.3rem;
             }
             
+            /* Why Choose Us Extra Small Fix */
+            #why-us .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            
             /* Sectors We Cover Extra Small Fix */
             .sectors .card h3 {
                 font-size: 1.2rem;
             }
             
-            .indicators {
-                gap: 4px;
+            .ticker-item {
+                gap: 5px;
+                padding: 0 8px;
             }
             
-            .indicator {
-                padding: 5px 6px;
-                font-size: 0.75rem;
-                min-width: 65px;
+            .market-name, .market-value {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -1666,37 +1945,134 @@
                 </div>
 
                 <!-- Mobile Menu Toggle -->
-                <div class="menu-toggle" id="menu-toggle">
+                <button class="menu-toggle" id="menu-toggle">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
 
                 <!-- Navigation -->
                 <nav id="nav-menu">
                     <ul class="nav-links">
-                        <li><a href="#home" class="active">Home</a></li>
-                        <li><a href="#why-us">Why Choose Us?</a></li>
-                        <li><a href="#sectors">Sectors We Cover</a></li>
-                        <li><a href="#ai-demo">AI Demo</a></li>
-                        <li><a href="#corruption-index">Corruption Index</a></li>
-                        <li><a href="#speakers">Speakers</a></li>
-                        <li><a href="#african-markets">African Markets</a></li>
-                        <li><a href="#features">Platform</a></li>
-                        <li><a href="#sla-comparison">SLA</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#home" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
+                        <li><a href="#why-us" class="nav-link">
+                            <i class="fas fa-star"></i>
+                            <span>Why Choose Us?</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
+                        <li><a href="#sectors" class="nav-link">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Sectors We Cover</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
+                        <li><a href="#ai-demo" class="nav-link">
+                            <i class="fas fa-robot"></i>
+                            <span>AI Demo</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
+                        <li><a href="#corruption-index" class="nav-link">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Corruption Index</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
+                        <li><a href="#speakers" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <span>Speakers</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
+                        <li><a href="#african-markets" class="nav-link">
+                            <i class="fas fa-globe-africa"></i>
+                            <span>African Markets</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
+                        <li><a href="#features" class="nav-link">
+                            <i class="fas fa-cogs"></i>
+                            <span>Platform</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
+                        <li><a href="#sla-comparison" class="nav-link">
+                            <i class="fas fa-handshake"></i>
+                            <span>SLA</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
+                        <li><a href="#pricing" class="nav-link">
+                            <i class="fas fa-tag"></i>
+                            <span>Pricing</span>
+                            <div class="nav-indicator"></div>
+                        </a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- FIXED Market Indicators - Clean and Clear -->
+    <!-- WORLD-CLASS MARKET TICKER -->
     <div class="market-indicators">
-        <div class="container">
-            <div class="indicators">
-                <div class="indicator up"><i class="fas fa-arrow-up"></i> +1.2%</div>
-                <div class="indicator up"><i class="fas fa-arrow-up"></i> +0.3%</div>
-                <div class="indicator up"><i class="fas fa-arrow-up"></i> +0.8%</div>
-                <div class="indicator down"><i class="fas fa-arrow-down"></i> -0.4%</div>
+        <div class="ticker-container">
+            <div class="ticker-track">
+                <div class="ticker-item">
+                    <span class="market-name">FTSE 100</span>
+                    <span class="market-value">7,542.76</span>
+                    <span class="market-change up">+1.2%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">Nairobi SE</span>
+                    <span class="market-value">1,842.15</span>
+                    <span class="market-change up">+0.8%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">NGN/USD</span>
+                    <span class="market-value">1,485.50</span>
+                    <span class="market-change neutral">0.0%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">JSE All Share</span>
+                    <span class="market-value">73,842.91</span>
+                    <span class="market-change down">-0.4%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">Ghana SE</span>
+                    <span class="market-value">2,845.30</span>
+                    <span class="market-change up">+1.1%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">Egypt EGX 30</span>
+                    <span class="market-value">17,923.45</span>
+                    <span class="market-change up">+0.7%</span>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="ticker-item">
+                    <span class="market-name">FTSE 100</span>
+                    <span class="market-value">7,542.76</span>
+                    <span class="market-change up">+1.2%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">Nairobi SE</span>
+                    <span class="market-value">1,842.15</span>
+                    <span class="market-change up">+0.8%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">NGN/USD</span>
+                    <span class="market-value">1,485.50</span>
+                    <span class="market-change neutral">0.0%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">JSE All Share</span>
+                    <span class="market-value">73,842.91</span>
+                    <span class="market-change down">-0.4%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">Ghana SE</span>
+                    <span class="market-value">2,845.30</span>
+                    <span class="market-change up">+1.1%</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="market-name">Egypt EGX 30</span>
+                    <span class="market-value">17,923.45</span>
+                    <span class="market-change up">+0.7%</span>
+                </div>
             </div>
         </div>
     </div>
@@ -1710,6 +2086,12 @@
                 <div class="hero-buttons">
                     <a href="#newsletter" class="btn">Get Free Daily Brief</a>
                     <a href="#pricing" class="btn btn-outline">See Premium Plans</a>
+                </div>
+                <!-- AI Pulse Animation -->
+                <div class="ai-pulse">
+                    <div class="pulse-dot"></div>
+                    <div class="pulse-ring"></div>
+                    <span>AI Analysis Active</span>
                 </div>
             </div>
         </div>
@@ -1929,28 +2311,28 @@
             </div>
             <div class="speaker-grid">
                 <div class="speaker">
-                    <img src="images/daniel-ndlela.jpg" alt="Daniel B. Ndlela">
+                    <img src="images/daniel-ndlela.jpg" alt="Daniel B. Ndlela" loading="lazy">
                     <div class="speaker-content">
                         <h3>Daniel B. Ndlela</h3>
                         <p>Zimbabwean economist, Director of Zimconsult since 1991. Former lecturer at the University of Zimbabwe and senior regional advisor at the UN Economic Commission for Africa.</p>
                     </div>
                 </div>
                 <div class="speaker">
-                    <img src="images/david-ndii.jpg" alt="David Ndii">
+                    <img src="images/david-ndii.jpg" alt="David Ndii" loading="lazy">
                     <div class="speaker-content">
                         <h3>David Ndii</h3>
                         <p>Prominent economist, policy advisor to Kenyan and Rwandan governments, public finance expert, and co-founder of the Institute of Economic Affairs. Holds a doctorate from Oxford and is a Rhodes Scholar.</p>
                     </div>
                 </div>
                 <div class="speaker">
-                    <img src="images/speaker1.jpg" alt="Dr. Jane Doe">
+                    <img src="images/speaker1.jpg" alt="Dr. Jane Doe" loading="lazy">
                     <div class="speaker-content">
                         <h3>Dr. Jane Doe</h3>
                         <p>Expert in African economic policy with over 15 years of experience advising governments and multinational corporations on market entry strategies and economic development.</p>
                     </div>
                 </div>
                 <div class="speaker">
-                    <img src="images/speaker2.jpg" alt="Mr. John Smith">
+                    <img src="images/speaker2.jpg" alt="Mr. John Smith" loading="lazy">
                     <div class="speaker-content">
                         <h3>Mr. John Smith</h3>
                         <p>Specialist in UK–Africa trade relations with extensive experience in cross-border investments and economic partnerships between European and African markets.</p>
@@ -2079,7 +2461,7 @@
         </div>
     </section>
 
-    <!-- African Markets Section -->
+    <!-- African Markets Section with Interactive Charts -->
     <section id="african-markets" class="african-markets section">
         <div class="container">
             <div class="african-header">
@@ -2158,6 +2540,16 @@
                             <span class="stat-value">Neutral</span>
                             <span class="stat-label">Outlook</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive GDP Chart -->
+            <div class="market-insights">
+                <div class="insight-card">
+                    <h4>Real-time GDP Growth Forecast</h4>
+                    <div class="chart-container" id="gdpChartContainer">
+                        <canvas id="gdpChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -2368,7 +2760,7 @@
             }
 
             // Close mobile menu when clicking on a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
+            document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', function() {
                     navLinks.classList.remove('active');
                 });
@@ -2391,6 +2783,9 @@
             // Create sparkline charts
             createSparklineCharts();
             
+            // Create interactive GDP chart
+            createInteractiveCharts();
+            
             // Today's Brief CTA functionality
             const briefButton = document.querySelector('.brief-btn');
             if (briefButton) {
@@ -2398,6 +2793,28 @@
                     alert("Thank you for your interest! We're preparing your free market brief and will email it to you shortly.");
                 });
             }
+
+            // Update active navigation link on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
         });
 
         function createSparklineCharts() {
@@ -2449,6 +2866,76 @@
                 }
             });
         }
+
+        function createInteractiveCharts() {
+            const gdpCtx = document.getElementById('gdpChart');
+            const container = document.getElementById('gdpChartContainer');
+            
+            if (gdpCtx) {
+                // Simulate loading delay
+                setTimeout(() => {
+                    new Chart(gdpCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Nigeria', 'Kenya', 'South Africa', 'Ghana', 'Egypt'],
+                            datasets: [{
+                                label: 'GDP Growth %',
+                                data: [3.2, 5.1, 1.9, 4.8, 4.5],
+                                backgroundColor: [
+                                    'rgba(212, 175, 55, 0.8)',
+                                    'rgba(56, 161, 105, 0.8)',
+                                    'rgba(49, 130, 206, 0.8)',
+                                    'rgba(147, 51, 234, 0.8)',
+                                    'rgba(236, 72, 153, 0.8)'
+                                ],
+                                borderColor: [
+                                    'rgb(212, 175, 55)',
+                                    'rgb(56, 161, 105)',
+                                    'rgb(49, 130, 206)',
+                                    'rgb(147, 51, 234)',
+                                    'rgb(236, 72, 153)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return `GDP Growth: ${context.parsed.y}%`;
+                                        }
+                                    }
+                                }
+                            },
+                            animation: {
+                                duration: 2000,
+                                easing: 'easeOutQuart'
+                            }
+                        }
+                    });
+                    
+                    // Mark as loaded
+                    container.classList.add('loaded');
+                }, 1000);
+            }
+        }
+
+        // Enhanced button focus states for accessibility
+        document.querySelectorAll('.btn, .nav-link, .brief-btn, .cta-button').forEach(button => {
+            button.addEventListener('focus', function() {
+                this.style.outline = '2px solid var(--gold)';
+                this.style.outlineOffset = '2px';
+            });
+            
+            button.addEventListener('blur', function() {
+                this.style.outline = '';
+            });
+        });
     </script>
 </body>
 </html>
