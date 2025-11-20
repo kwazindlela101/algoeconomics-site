@@ -1,4 +1,4 @@
-<!DOCTYPE html>                               
+lo<!DOCTYPE html>                               
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -75,6 +75,21 @@
             flex-wrap: wrap;
         }
 
+        @media (min-width: 1024px) {
+  .indicators {
+    justify-content: space-between;
+    padding: 0 48px;
+  }
+
+  .indicator {
+    font-size: 1.1rem;
+    padding: 14px 18px;
+    flex: 0 1 160px;
+    max-width: 160px;
+  }
+}
+
+
         .indicator {
             padding: 10px 18px;
             border-radius: 8px;
@@ -89,6 +104,7 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
             transition: var(--transition);
             font-family: 'Courier New', monospace;
+        
         }
 
         .indicator:hover {
@@ -141,7 +157,7 @@
         .feature-card p {
             font-size: 0.95rem;
             color: var(--secondary);
-            line-height: 1.5;
+            line-height: 1.5; 
         }
 
         /* Rest of your extensive CSS continues exactly as you provided */
@@ -2653,4 +2669,5 @@
     </script>
 </body>
 </html>
+
 
