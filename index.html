@@ -155,7 +155,7 @@
             width: 80%;
         }
 
-        /* ========== WORLD-CLASS MARKET TICKER ========== */
+        /* ========== FIXED WORLD-CLASS MARKET TICKER ========== */
         .market-indicators {
             background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%);
             color: white;
@@ -164,6 +164,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             margin-top: 60px;
             overflow: hidden;
+            position: relative;
         }
 
         .ticker-container {
@@ -174,7 +175,8 @@
 
         .ticker-track {
             display: inline-flex;
-            animation: ticker-scroll 30s linear infinite;
+            animation: ticker-scroll 40s linear infinite;
+            padding-left: 100%;
         }
 
         .ticker-item {
@@ -183,6 +185,7 @@
             gap: 15px;
             padding: 0 30px;
             border-right: 1px solid rgba(255,255,255,0.2);
+            flex-shrink: 0;
         }
 
         .market-name {
@@ -208,7 +211,12 @@
 
         @keyframes ticker-scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Pause animation on hover */
+        .ticker-track:hover {
+            animation-play-state: paused;
         }
 
         /* ========== ENHANCED HERO SECTION ========== */
@@ -280,7 +288,7 @@
             margin-top: 1rem;
         }
 
-        /* AI Pulse Animation */
+        /* ========== FIXED AI PULSE ANIMATION ========== */
         .ai-pulse {
             position: relative;
             display: inline-flex;
@@ -289,35 +297,54 @@
             margin-top: 2rem;
             color: var(--gold);
             font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .pulse-container {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .pulse-dot {
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             background: #00ff88;
             border-radius: 50%;
             animation: pulse 2s infinite;
+            z-index: 2;
+            position: relative;
         }
 
         .pulse-ring {
             position: absolute;
-            left: 0;
-            width: 12px;
-            height: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
             border: 2px solid #00ff88;
             border-radius: 50%;
             animation: ring-pulse 2s infinite;
+            z-index: 1;
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         @keyframes ring-pulse {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(2.5); opacity: 0; }
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+            70% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
         }
 
         /* ========== WORLD-CLASS BUTTONS ========== */
@@ -2008,7 +2035,7 @@
         </div>
     </header>
 
-    <!-- WORLD-CLASS MARKET TICKER -->
+    <!-- FIXED WORLD-CLASS MARKET TICKER -->
     <div class="market-indicators">
         <div class="ticker-container">
             <div class="ticker-track">
@@ -2077,7 +2104,7 @@
         </div>
     </div>
 
-    <!-- Enhanced Hero Section -->
+    <!-- Enhanced Hero Section with FIXED AI Pulse Animation -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
@@ -2087,10 +2114,12 @@
                     <a href="#newsletter" class="btn">Get Free Daily Brief</a>
                     <a href="#pricing" class="btn btn-outline">See Premium Plans</a>
                 </div>
-                <!-- AI Pulse Animation -->
+                <!-- FIXED AI Pulse Animation -->
                 <div class="ai-pulse">
-                    <div class="pulse-dot"></div>
-                    <div class="pulse-ring"></div>
+                    <div class="pulse-container">
+                        <div class="pulse-ring"></div>
+                        <div class="pulse-dot"></div>
+                    </div>
                     <span>AI Analysis Active</span>
                 </div>
             </div>
@@ -2939,4 +2968,3 @@
     </script>
 </body>
 </html>
-
