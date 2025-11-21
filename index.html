@@ -43,6 +43,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 140px;
         }
 
         body {
@@ -62,8 +63,6 @@
             margin: 0 auto;
             padding: 0 1rem;
         }
-
-<!-- Triggering clean deploy -->
 
         /* ========== ENHANCED HEADER & NAVIGATION ========== */
         header {
@@ -216,7 +215,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Pause animation on hover */
         .ticker-track:hover {
             animation-play-state: paused;
         }
@@ -403,25 +401,10 @@
             color: var(--primary);
         }
 
-        /* ========== ENHANCED CARDS & MICROINTERACTIONS ========== */
-        .feature-card, .value-card, .pricing-card, .speaker, .city-card, .testimonial-card, .advantage-card, .sectors .card {
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .feature-card:hover, .value-card:hover, .pricing-card:hover, 
-        .speaker:hover, .city-card:hover, .testimonial-card:hover, 
-        .advantage-card:hover, .sectors .card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 
-                0 25px 50px rgba(0,0,0,0.15),
-                0 15px 35px rgba(212, 175, 55, 0.1);
-        }
-
         /* ========== SECTION STYLING ========== */
         .section {
             padding: 80px 0;
+            scroll-margin-top: 140px;
         }
 
         .section-header {
@@ -461,6 +444,19 @@
         /* ========== WHY CHOOSE US SECTION ========== */
         #why-us {
             background: white;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--secondary);
+        }
+
+        .intro-text p {
+            margin-bottom: 1.5rem;
         }
 
         .features-grid {
@@ -707,51 +703,12 @@
             font-family: var(--font-heading);
         }
 
-        /* ========== INTERACTIVE CHARTS ========== */
-        .market-insights {
-            margin-top: 3rem;
-        }
-
-        .insight-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
-        }
-
-        .insight-card h4 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            font-family: var(--font-heading);
-        }
-
-        .chart-container {
-            position: relative;
-            height: 300px;
-        }
-
-        .chart-container::before {
-            content: 'Loading Data...';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .value-card p {
             color: var(--secondary);
-            font-weight: 500;
-            z-index: 1;
+            line-height: 1.6;
         }
 
-        .chart-container.loaded::before {
-            display: none;
-        }
-
-        /* ========== REST OF YOUR SECTIONS (keeping your existing styles) ========== */
-        /* Primary CTA, Testimonials, Speakers, AI Demo, Corruption Index, 
-           Brief CTA, SLA, African Markets, Pricing, Features, Bloomberg, Newsletter, Footer */
-        
-        /* Primary CTA Section */
+        /* ========== PRIMARY CTA SECTION ========== */
         .primary-cta {
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
             color: white;
@@ -784,7 +741,7 @@
             flex-wrap: wrap;
         }
 
-        /* Testimonials Section */
+        /* ========== TESTIMONIALS SECTION ========== */
         .testimonials {
             background: white;
         }
@@ -839,7 +796,7 @@
             font-size: 0.9rem;
         }
 
-        /* Speakers Section */
+        /* ========== SPEAKERS SECTION ========== */
         .speakers {
             background: white;
         }
@@ -883,7 +840,7 @@
             line-height: 1.5;
         }
 
-        /* AI Demo Coming Soon Section */
+        /* ========== AI DEMO COMING SOON SECTION ========== */
         .ai-demo-coming-soon {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
@@ -956,7 +913,65 @@
             border-top: 1px solid #e2e8f0;
         }
 
-        /* Today's Brief CTA */
+        /* ========== AI CORRUPTION INDEX SECTION ========== */
+        #corruption-index .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-family: var(--font-heading);
+        }
+
+        #corruption-index .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        #corruption-index .section-body {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-align: center;
+        }
+
+        #corruption-index .section-list {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            list-style: none;
+        }
+
+        #corruption-index .section-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--secondary);
+        }
+
+        #corruption-index .section-list li:last-child {
+            border-bottom: none;
+        }
+
+        #corruption-index .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        #corruption-index .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* ========== TODAY'S BRIEF CTA ========== */
         .brief-cta {
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
             color: white;
@@ -1035,7 +1050,7 @@
             left: 100%;
         }
 
-        /* SLA Comparison Section */
+        /* ========== SLA COMPARISON SECTION ========== */
         .sla-section {
             background-color: #0a1f44;
             color: white;
@@ -1138,7 +1153,7 @@
             color: var(--gold);
         }
 
-        /* African Markets Section */
+        /* ========== AFRICAN MARKETS SECTION ========== */
         .african-markets {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-bottom: 1px solid #d1d9e6;
@@ -1228,7 +1243,46 @@
             color: var(--secondary);
         }
 
-        /* Pricing Section */
+        .market-insights {
+            margin-top: 3rem;
+        }
+
+        .insight-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .insight-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-family: var(--font-heading);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .chart-container::before {
+            content: 'Loading Data...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--secondary);
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        .chart-container.loaded::before {
+            display: none;
+        }
+
+        /* ========== PRICING SECTION ========== */
         .pricing {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
@@ -1314,7 +1368,7 @@
             margin-right: 0.5rem;
         }
 
-        /* Features Section */
+        /* ========== FEATURES SECTION ========== */
         .features {
             background: white;
             border-bottom: 1px solid #e2e8f0;
@@ -1343,7 +1397,12 @@
             font-family: var(--font-heading);
         }
 
-        /* Bloomberg Comparison Section */
+        .feature-card p {
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* ========== BLOOMBERG COMPARISON SECTION ========== */
         .bloomberg-comparison {
             background: var(--light);
             border-bottom: 1px solid #e2e8f0;
@@ -1389,7 +1448,7 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        /* Newsletter Section */
+        /* ========== NEWSLETTER SECTION ========== */
         .newsletter {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
@@ -1441,7 +1500,7 @@
             border-color: var(--gold);
         }
 
-        /* Footer */
+        /* ========== FOOTER ========== */
         footer {
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
             color: white;
@@ -1516,13 +1575,11 @@
         }
 
         /* ========== ACCESSIBILITY & PERFORMANCE ========== */
-        /* Focus states for accessibility */
         .btn:focus, .nav-link:focus, .brief-btn:focus, .yellow-banner .cta-button:focus {
             outline: 2px solid var(--gold);
             outline-offset: 2px;
         }
 
-        /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -1535,13 +1592,19 @@
             }
         }
 
-        /* High contrast support */
         @media (prefers-contrast: high) {
             :root {
                 --primary: #000000;
                 --secondary: #333333;
                 --gold: #ffd700;
             }
+        }
+
+        /* ========== SCROLL MARGIN FOR ALL SECTIONS ========== */
+        #home, #why-us, #sectors, #ai-demo, #corruption-index, #speakers, 
+        #african-markets, #features, #sla-comparison, #pricing, 
+        #bloomberg-comparison, #newsletter, #testimonials, #value-proposition, #contact {
+            scroll-margin-top: 140px;
         }
 
         /* ========== MOBILE RESPONSIVENESS ========== */
@@ -1610,6 +1673,16 @@
         }
 
         @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 120px;
+            }
+            
+            #home, #why-us, #sectors, #ai-demo, #corruption-index, #speakers, 
+            #african-markets, #features, #sla-comparison, #pricing, 
+            #bloomberg-comparison, #newsletter, #testimonials, #value-proposition, #contact {
+                scroll-margin-top: 120px;
+            }
+            
             .container {
                 padding: 0 1rem;
             }
@@ -1642,7 +1715,6 @@
                 font-size: 1rem;
             }
             
-            /* Market Indicators Mobile Fix */
             .market-indicators {
                 padding: 10px 0;
                 margin-top: 50px;
@@ -1657,7 +1729,6 @@
                 font-size: 0.9rem;
             }
             
-            /* Why Choose Us Mobile Fix */
             #why-us {
                 padding: 60px 0;
             }
@@ -1675,11 +1746,10 @@
                 padding: 30px 20px;
             }
             
-            #why-us .intro-text {
+            .intro-text {
                 margin-bottom: 40px;
             }
             
-            /* Sectors We Cover Mobile Fix */
             .sectors {
                 padding: 60px 0;
             }
@@ -1715,7 +1785,6 @@
                 font-size: 1rem;
             }
             
-            /* AI Demo Mobile Fix */
             .demo-placeholder {
                 padding: 2rem 1.5rem;
             }
@@ -1724,7 +1793,6 @@
                 font-size: 3rem;
             }
             
-            /* SLA Mobile Fix */
             .sla-table {
                 flex-direction: column;
                 align-items: center;
@@ -1741,7 +1809,6 @@
                 font-size: 1.5rem;
             }
             
-            /* African Markets Mobile Fix */
             .african-header h2 {
                 font-size: 2rem;
             }
@@ -1772,7 +1839,6 @@
                 border-bottom: none;
             }
             
-            /* Pricing Mobile Fix */
             .pricing-grid {
                 grid-template-columns: 1fr;
             }
@@ -1781,7 +1847,6 @@
                 transform: scale(1);
             }
             
-            /* Speakers Mobile Fix */
             .speaker-grid {
                 grid-template-columns: 1fr;
             }
@@ -1790,7 +1855,6 @@
                 height: 200px;
             }
             
-            /* Newsletter Mobile Fix */
             .newsletter-form {
                 flex-direction: column;
             }
@@ -1800,7 +1864,6 @@
                 width: 100%;
             }
             
-            /* Footer Mobile Fix */
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -1811,32 +1874,26 @@
                 justify-content: center;
             }
             
-            /* Section Title Fix */
             .section-header h2 {
                 font-size: 2rem;
             }
             
-            /* Brief CTA Fix */
             .brief-cta h2 {
                 font-size: 2rem;
             }
             
-            /* Primary CTA Fix */
             .primary-cta h2 {
                 font-size: 2rem;
             }
             
-            /* Features Section Fix */
             .features {
                 padding: 60px 0;
             }
             
-            /* Testimonials Fix */
             .testimonials {
                 padding: 60px 0;
             }
             
-            /* Value Proposition Fix */
             .value-proposition {
                 padding: 60px 0;
             }
@@ -1888,7 +1945,6 @@
                 font-size: 2rem;
             }
             
-            /* Why Choose Us Mobile Fix */
             #why-us .section-header h2 {
                 font-size: 1.8rem;
             }
@@ -1897,12 +1953,10 @@
                 padding: 25px 15px;
             }
             
-            /* Sectors We Cover Mobile Fix */
             .sectors h2 {
                 font-size: 1.8rem;
             }
             
-            /* Market Indicators Extra Small Fix */
             .market-indicators {
                 margin-top: 45px;
             }
@@ -1912,14 +1966,12 @@
                 padding: 3px 6px;
             }
             
-            /* Hero Button Fix */
             .btn {
                 padding: 0.9rem 1.2rem;
                 font-size: 0.9rem;
             }
         }
 
-        /* Extra small devices */
         @media (max-width: 360px) {
             .hero h1 {
                 font-size: 1.6rem;
@@ -1942,12 +1994,10 @@
                 font-size: 1.3rem;
             }
             
-            /* Why Choose Us Extra Small Fix */
             #why-us .feature-card h3 {
                 font-size: 1.3rem;
             }
             
-            /* Sectors We Cover Extra Small Fix */
             .sectors .card h3 {
                 font-size: 1.2rem;
             }
@@ -2834,7 +2884,7 @@
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop - 100) {
+                    if (pageYOffset >= sectionTop - 150) {
                         current = section.getAttribute('id');
                     }
                 });
@@ -2970,6 +3020,3 @@
     </script>
 </body>
 </html>
-
-
-
