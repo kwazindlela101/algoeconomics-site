@@ -1,5 +1,5 @@
- <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en">                                                
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,11 +45,15 @@
         /* HEADER */
         header { background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%); color: white; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); border-bottom: 3px solid var(--gold); height: var(--header-height); display: flex; align-items: center; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .logo { display: flex; align-items: center; font-size: 1.6rem; font-weight: bold; gap: 0.5rem; background: linear-gradient(135deg, var(--gold), #f7ef8a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .logo { display: flex; align-items: center; height: 50px; background: rgba(255, 255, 255, 0.05); padding: 5px 15px; border-radius: 8px; }
+        .logo img { height: 100%; width: auto; object-fit: contain; display: block; }
         .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: white; background: none; border: none; }
         .nav-links { display: flex; list-style: none; gap: 0.8rem; }
         .nav-link { color: white; text-decoration: none; font-weight: 500; transition: var(--transition); padding: 0.8rem 1rem; border-radius: 5px; border: 1px solid transparent; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; }
         .nav-link:hover, .nav-link.active { background: rgba(212, 175, 55, 0.1); border: 1px solid var(--gold); }
+        .nav-link.logo-link { padding: 0.4rem 0.8rem; border: none; background: rgba(255, 255, 255, 0.05); border-radius: 8px; }
+        .nav-link.logo-link img { height: 40px; width: auto; display: block; }
+        .nav-link.logo-link:hover { background: rgba(212, 175, 55, 0.15); border-radius: 8px; }
 
         /* TICKER */
         .market-indicators { background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%); color: white; padding: 12px 0; border-bottom: 2px solid var(--gold); overflow: hidden; position: fixed; top: var(--header-height); left: 0; right: 0; width: 100%; z-index: 999; height: var(--ticker-height); }
@@ -241,8 +245,8 @@
         .footer-top { padding: 4rem 0 3rem; position: relative; z-index: 1; }
         .footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3rem; }
         .footer-brand { padding-right: 2rem; }
-        .footer-logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.8rem; font-weight: bold; margin-bottom: 1.25rem; background: linear-gradient(135deg, var(--gold), #f7ef8a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .footer-logo i { -webkit-text-fill-color: var(--gold); }
+        .footer-logo { display: flex; align-items: center; margin-bottom: 1.25rem; height: 65px; background: rgba(255, 255, 255, 0.03); padding: 8px 15px; border-radius: 8px; width: fit-content; }
+        .footer-logo img { height: 100%; width: auto; object-fit: contain; display: block; }
         .footer-tagline { color: #94a3b8; font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem; }
         .footer-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem; }
         .trust-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.2); padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.8rem; color: #cbd5e0; transition: all 0.3s ease; }
@@ -298,11 +302,13 @@
     <header>
         <div class="container">
             <div class="header-inner">
-                <div class="logo"><i class="fas fa-landmark"></i><span>AlgoEconomics</span></div>
+                <div class="logo">
+                    <img src="images/logo.png" alt="AlgoEconomics Logo">
+                </div>
                 <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
                 <nav id="nav-menu">
                     <ul class="nav-links">
-                        <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i><span>Home</span></a></li>
+                        <li><a href="#home" class="nav-link logo-link active"><img src="images/logo.png" alt="Home"></a></li>
                         <li><a href="#why-us" class="nav-link"><i class="fas fa-star"></i><span>Why Us</span></a></li>
                         <li><a href="#sectors" class="nav-link"><i class="fas fa-chart-pie"></i><span>Sectors</span></a></li>
                         <li><a href="#ai-demo" class="nav-link"><i class="fas fa-robot"></i><span>AI Demo</span></a></li>
@@ -518,7 +524,9 @@
             <div class="container">
                 <div class="footer-main">
                     <div class="footer-brand">
-                        <div class="footer-logo"><i class="fas fa-landmark"></i><span>AlgoEconomics</span></div>
+                        <div class="footer-logo">
+                            <img src="images/logo.png" alt="AlgoEconomics Logo">
+                        </div>
                         <p class="footer-tagline">AI-powered market intelligence delivering actionable insights for UK-Africa decision makers. Trusted by leading institutions worldwide.</p>
                         <div class="footer-badges">
                             <span class="trust-badge"><i class="fas fa-shield-alt"></i>GDPR Compliant</span>
