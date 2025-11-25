@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AfriData Analytics | African Economic Intelligence</title>
+    <title>AlgoEconomics | AI-Powered Economic Intelligence</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
@@ -16,6 +16,8 @@
             --cyan-light: #4DE8FF;
             --gold: #D4AF37;
             --gold-light: #E6C04C;
+            --success: #10b981;
+            --danger: #ef4444;
         }
         
         * {
@@ -55,13 +57,31 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
             text-decoration: none;
         }
         
-        .logo span {
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--cyan);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--navy);
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .logo-text span {
             color: var(--cyan);
         }
         
@@ -244,8 +264,8 @@
             background: rgba(255, 255, 255, 0.1);
         }
         
-        .market-change.up { color: #10b981; }
-        .market-change.down { color: #ef4444; }
+        .market-change.up { color: var(--success); }
+        .market-change.down { color: var(--danger); }
         
         @keyframes ticker-scroll {
             0% { transform: translateX(0); }
@@ -326,7 +346,7 @@
         
         .dashboard-change.positive { 
             background: rgba(16, 185, 129, 0.2); 
-            color: #10b981;
+            color: var(--success);
         }
         
         .dashboard-meta {
@@ -339,6 +359,46 @@
         .currency-dashboard {
             background: var(--navy-light);
             padding: 80px 0;
+        }
+        
+        .currency-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .currency-tab {
+            background: var(--navy-lighter);
+            border: 2px solid var(--cyan);
+            color: var(--cyan);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .currency-tab.active {
+            background: var(--cyan);
+            color: var(--navy);
+            transform: translateY(-2px);
+        }
+        
+        .currency-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .currency-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .currency-grid {
@@ -355,6 +415,11 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
             border-top: 3px solid var(--cyan);
+            transition: transform 0.3s ease;
+        }
+        
+        .currency-card:hover {
+            transform: translateY(-5px);
         }
         
         .currency-pair {
@@ -378,12 +443,12 @@
         
         .currency-change.positive {
             background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
+            color: var(--success);
         }
         
         .currency-change.negative {
             background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            color: var(--danger);
         }
         
         /* Regional Analysis */
@@ -420,11 +485,6 @@
         
         .regional-content.active {
             display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         .countries-grid {
@@ -596,13 +656,13 @@
             border-radius: 20px;
             display: inline-block;
             background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
+            color: var(--success);
             font-size: 0.9rem;
         }
         
         .result-change.negative {
             background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            color: var(--danger);
         }
         
         .result-description {
@@ -1408,7 +1468,10 @@
     <header>
         <div class="container">
             <div class="header-inner">
-                <a href="#" class="logo">Afri<span>Data</span></a>
+                <a href="#" class="logo">
+                    <div class="logo-icon">AE</div>
+                    <div class="logo-text">Algo<span>Economics</span></div>
+                </a>
                 <button class="menu-toggle" id="menu-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1451,8 +1514,8 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Premium Economic Intelligence for <span>African Markets</span></h1>
-                <p>AI-powered market insights at a fraction of traditional costs. Make data-driven decisions with confidence.</p>
+                <h1>Premium Economic Intelligence for <span>UK-Africa Decision Makers</span></h1>
+                <p>Our algorithms filter thousands of data points to deliver only the economic news with direct impact on UK and African markets.</p>
                 <div class="hero-buttons">
                     <a href="#newsletter" class="btn">Get Free Daily Brief</a>
                     <a href="#pricing" class="btn btn-outline">See Premium Plans</a>
@@ -1465,8 +1528,8 @@
     <section id="why-us" class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Why Choose Us</h2>
-                <p>At AfriData Analytics, we decode the signals that shape markets.</p>
+                <h2>Why Choose AlgoEconomics</h2>
+                <p>At AlgoEconomics, we decode the signals that shape markets.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
@@ -1481,7 +1544,7 @@
                         <i class="fas fa-bullseye"></i>
                     </div>
                     <h3>Specialized Focus</h3>
-                    <p>Extensive expertise in African markets, providing targeted analysis you won't find elsewhere.</p>
+                    <p>Extensive expertise in UK and African markets, providing targeted analysis you won't find elsewhere.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -1531,51 +1594,106 @@
     <section id="currency" class="currency-dashboard section">
         <div class="container">
             <div class="section-header">
-                <h2>Real-Time Currency Dashboard</h2>
-                <p>Live African currency exchange rates and trends</p>
+                <h2>Live Currency Exchange Rates</h2>
+                <p>Real-time African currency exchange rates in USD and GBP</p>
+            </div>
+
+            <div class="currency-tabs">
+                <button class="currency-tab active" data-currency="usd">USD Exchange Rates</button>
+                <button class="currency-tab" data-currency="gbp">GBP Exchange Rates</button>
             </div>
             
-            <div class="currency-grid">
-                <div class="currency-card">
-                    <div class="currency-pair">NGN / USD</div>
-                    <div class="currency-rate">₦1,485.50</div>
-                    <div class="currency-change">0.0%</div>
-                    <p>Nigerian Naira to US Dollar</p>
+            <!-- USD Content -->
+            <div class="currency-content active" id="usd-content">
+                <div class="currency-grid">
+                    <div class="currency-card">
+                        <div class="currency-pair">NGN / USD</div>
+                        <div class="currency-rate">₦1,485.50</div>
+                        <div class="currency-change">0.0%</div>
+                        <p>Nigerian Naira to US Dollar</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">GHS / USD</div>
+                        <div class="currency-rate">₡11.85</div>
+                        <div class="currency-change positive">+0.3%</div>
+                        <p>Ghanaian Cedi to US Dollar</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">KES / USD</div>
+                        <div class="currency-rate">KSh 132.45</div>
+                        <div class="currency-change positive">+0.7%</div>
+                        <p>Kenyan Shilling to US Dollar</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">ZAR / USD</div>
+                        <div class="currency-rate">R18.32</div>
+                        <div class="currency-change negative">-0.4%</div>
+                        <p>South African Rand to US Dollar</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">EGP / USD</div>
+                        <div class="currency-rate">E£30.85</div>
+                        <div class="currency-change positive">+1.2%</div>
+                        <p>Egyptian Pound to US Dollar</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">XOF / USD</div>
+                        <div class="currency-rate">CFA 605.75</div>
+                        <div class="currency-change">0.0%</div>
+                        <p>West African CFA to US Dollar</p>
+                    </div>
                 </div>
-                
-                <div class="currency-card">
-                    <div class="currency-pair">GHS / USD</div>
-                    <div class="currency-rate">₡11.85</div>
-                    <div class="currency-change positive">+0.3%</div>
-                    <p>Ghanaian Cedi to US Dollar</p>
-                </div>
-                
-                <div class="currency-card">
-                    <div class="currency-pair">KES / USD</div>
-                    <div class="currency-rate">KSh 132.45</div>
-                    <div class="currency-change positive">+0.7%</div>
-                    <p>Kenyan Shilling to US Dollar</p>
-                </div>
-                
-                <div class="currency-card">
-                    <div class="currency-pair">ZAR / USD</div>
-                    <div class="currency-rate">R18.32</div>
-                    <div class="currency-change negative">-0.4%</div>
-                    <p>South African Rand to US Dollar</p>
-                </div>
-                
-                <div class="currency-card">
-                    <div class="currency-pair">EGP / USD</div>
-                    <div class="currency-rate">E£30.85</div>
-                    <div class="currency-change positive">+1.2%</div>
-                    <p>Egyptian Pound to US Dollar</p>
-                </div>
-                
-                <div class="currency-card">
-                    <div class="currency-pair">XOF / USD</div>
-                    <div class="currency-rate">CFA 605.75</div>
-                    <div class="currency-change">0.0%</div>
-                    <p>West African CFA to US Dollar</p>
+            </div>
+
+            <!-- GBP Content -->
+            <div class="currency-content" id="gbp-content">
+                <div class="currency-grid">
+                    <div class="currency-card">
+                        <div class="currency-pair">NGN / GBP</div>
+                        <div class="currency-rate">₦1,850.25</div>
+                        <div class="currency-change">0.0%</div>
+                        <p>Nigerian Naira to British Pound</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">GHS / GBP</div>
+                        <div class="currency-rate">₡14.75</div>
+                        <div class="currency-change positive">+0.5%</div>
+                        <p>Ghanaian Cedi to British Pound</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">KES / GBP</div>
+                        <div class="currency-rate">KSh 165.20</div>
+                        <div class="currency-change positive">+0.9%</div>
+                        <p>Kenyan Shilling to British Pound</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">ZAR / GBP</div>
+                        <div class="currency-rate">R22.85</div>
+                        <div class="currency-change negative">-0.3%</div>
+                        <p>South African Rand to British Pound</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">EGP / GBP</div>
+                        <div class="currency-rate">E£38.45</div>
+                        <div class="currency-change positive">+1.5%</div>
+                        <p>Egyptian Pound to British Pound</p>
+                    </div>
+                    
+                    <div class="currency-card">
+                        <div class="currency-pair">XOF / GBP</div>
+                        <div class="currency-rate">CFA 755.30</div>
+                        <div class="currency-change">0.0%</div>
+                        <p>West African CFA to British Pound</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1991,7 +2109,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>Sectors We Cover</h2>
-                <p>AfriData Analytics maps Africa's growth across seven strategic pillars</p>
+                <p>AlgoEconomics maps Africa's growth across seven strategic pillars</p>
             </div>
             <div class="sectors-grid">
                 <div class="sector-card">
@@ -2231,26 +2349,6 @@
         </div>
     </section>
 
-    <!-- GDP Charts -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>GDP Growth Analysis</h2>
-                <p>Professional economic charts with confidence intervals</p>
-            </div>
-            
-            <div class="chart-container">
-                <h3 class="chart-title">African Regional GDP Growth Comparison</h3>
-                <div id="gdpChart" class="chart"></div>
-            </div>
-            
-            <div class="chart-container">
-                <h3 class="chart-title">GDP Growth Forecast with Confidence Intervals</h3>
-                <div id="forecastChart" class="chart"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Pricing -->
     <section id="pricing" class="section">
         <div class="container">
@@ -2314,7 +2412,7 @@
             </div>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"AfriData Analytics has transformed how we approach African market analysis. The AI-powered insights save our team hours every week."</p>
+                    <p class="testimonial-text">"AlgoEconomics has transformed how we approach African market analysis. The AI-powered insights save our team hours every week."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">JM</div>
                         <div class="author-info">
@@ -2334,7 +2432,7 @@
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"Finally, a service that understands the nuances of African markets. The daily briefs are essential reading for our team."</p>
+                    <p class="testimonial-text">"Finally, a service that understands the nuances of UK-Africa trade. The daily briefs are essential reading."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">RT</div>
                         <div class="author-info">
@@ -2371,8 +2469,11 @@
         <div class="container">
             <div class="footer-main">
                 <div class="footer-brand">
-                    <a href="#" class="logo">Afri<span>Data</span></a>
-                    <p>AI-powered market intelligence delivering actionable insights for African decision makers. Trusted by leading institutions worldwide.</p>
+                    <a href="#" class="logo">
+                        <div class="logo-icon">AE</div>
+                        <div class="logo-text">Algo<span>Economics</span></div>
+                    </a>
+                    <p>AI-powered market intelligence delivering actionable insights for UK-Africa decision makers. Trusted by leading institutions worldwide.</p>
                     <div class="social-links-footer">
                         <a href="#" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
                         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -2383,7 +2484,7 @@
                 <div class="footer-column">
                     <h4>Platform</h4>
                     <ul class="footer-links">
-                        <li><a href="#why-us">Why AfriData</a></li>
+                        <li><a href="#why-us">Why AlgoEconomics</a></li>
                         <li><a href="#sectors">Sectors</a></li>
                         <li><a href="#features">Features</a></li>
                         <li><a href="#pricing">Pricing</a></li>
@@ -2417,7 +2518,7 @@
                     <a href="#">Terms of Service</a>
                     <a href="#">Cookie Policy</a>
                 </div>
-                <div class="footer-copyright">© 2025 AfriData Analytics Ltd. All rights reserved.</div>
+                <div class="footer-copyright">© 2025 AlgoEconomics Ltd. All rights reserved.</div>
             </div>
         </div>
     </footer>
@@ -2448,6 +2549,24 @@
             
             backToTop.addEventListener('click', function() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Currency tabs functionality
+            const currencyTabs = document.querySelectorAll('.currency-tab');
+            const currencyContents = document.querySelectorAll('.currency-content');
+            
+            currencyTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const currency = this.getAttribute('data-currency');
+                    
+                    // Remove active class from all tabs and contents
+                    currencyTabs.forEach(t => t.classList.remove('active'));
+                    currencyContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current tab and content
+                    this.classList.add('active');
+                    document.getElementById(`${currency}-content`).classList.add('active');
+                });
             });
             
             // Regional tabs functionality
@@ -2519,6 +2638,23 @@
                 });
             });
             
+            // Update market data (simulated)
+            function updateMarketData() {
+                const changes = document.querySelectorAll('.market-change, .currency-change');
+                changes.forEach(change => {
+                    // Simulate live data updates occasionally
+                    if (Math.random() > 0.8) {
+                        change.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            change.style.transform = 'scale(1)';
+                        }, 300);
+                    }
+                });
+            }
+            
+            // Update every 15 seconds
+            setInterval(updateMarketData, 15000);
+            
             // Economic model functions
             function updateEconomicModel() {
                 // Simple calculation for demo purposes
@@ -2574,223 +2710,7 @@
             
             // Initialize economic model
             updateEconomicModel();
-            
-            // Initialize charts when D3 is available
-            if (typeof d3 !== 'undefined') {
-                createGDPChart();
-                createForecastChart();
-            }
         });
-        
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            if (typeof d3 !== 'undefined') {
-                createGDPChart();
-                createForecastChart();
-            }
-        });
-        
-        // Create GDP Chart with D3.js
-        function createGDPChart() {
-            const data = [
-                { region: "East Africa", gdp: 5.2, confidence: 0.8 },
-                { region: "West Africa", gdp: 3.8, confidence: 1.2 },
-                { region: "Southern Africa", gdp: 2.9, confidence: 0.9 },
-                { region: "North Africa", gdp: 4.1, confidence: 1.1 },
-                { region: "Central Africa", gdp: 3.2, confidence: 1.5 }
-            ];
-            
-            const margin = { top: 40, right: 30, bottom: 50, left: 60 };
-            const width = document.getElementById('gdpChart').clientWidth - margin.left - margin.right;
-            const height = 400 - margin.top - margin.bottom;
-            
-            // Clear any existing content
-            d3.select("#gdpChart").html("");
-            
-            const svg = d3.select("#gdpChart")
-                .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", `translate(${margin.left},${margin.top})`);
-            
-            // X scale
-            const x = d3.scaleBand()
-                .domain(data.map(d => d.region))
-                .range([0, width])
-                .padding(0.2);
-            
-            // Y scale
-            const y = d3.scaleLinear()
-                .domain([0, d3.max(data, d => d.gdp + d.confidence) * 1.1])
-                .range([height, 0]);
-            
-            // Add confidence intervals
-            svg.selectAll(".confidence")
-                .data(data)
-                .enter()
-                .append("rect")
-                .attr("class", "confidence")
-                .attr("x", d => x(d.region))
-                .attr("y", d => y(d.gdp + d.confidence))
-                .attr("width", x.bandwidth())
-                .attr("height", d => y(d.gdp - d.confidence) - y(d.gdp + d.confidence))
-                .attr("fill", "#00D4FF")
-                .attr("opacity", 0.2);
-            
-            // Add bars
-            svg.selectAll(".bar")
-                .data(data)
-                .enter()
-                .append("rect")
-                .attr("class", "bar")
-                .attr("x", d => x(d.region))
-                .attr("y", d => y(d.gdp))
-                .attr("width", x.bandwidth())
-                .attr("height", d => height - y(d.gdp))
-                .attr("fill", "#00D4FF");
-            
-            // Add value labels
-            svg.selectAll(".label")
-                .data(data)
-                .enter()
-                .append("text")
-                .attr("class", "label")
-                .attr("x", d => x(d.region) + x.bandwidth() / 2)
-                .attr("y", d => y(d.gdp) - 10)
-                .attr("text-anchor", "middle")
-                .text(d => `${d.gdp}%`)
-                .style("font-weight", "bold")
-                .style("fill", "#FFFFFF");
-            
-            // Add X axis
-            svg.append("g")
-                .attr("transform", `translate(0,${height})`)
-                .call(d3.axisBottom(x))
-                .selectAll("text")
-                .style("text-anchor", "middle")
-                .style("font-weight", "bold")
-                .style("fill", "#FFFFFF");
-            
-            // Add Y axis
-            svg.append("g")
-                .call(d3.axisLeft(y).tickFormat(d => `${d}%`))
-                .selectAll("text")
-                .style("fill", "#FFFFFF");
-            
-            // Add Y axis label
-            svg.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 0 - margin.left)
-                .attr("x", 0 - (height / 2))
-                .attr("dy", "1em")
-                .style("text-anchor", "middle")
-                .text("GDP Growth (%)")
-                .style("font-weight", "bold")
-                .style("fill", "#FFFFFF");
-        }
-        
-        // Create Forecast Chart with D3.js
-        function createForecastChart() {
-            const data = [
-                { year: 2020, gdp: 3.1, lower: 2.5, upper: 3.7 },
-                { year: 2021, gdp: 4.2, lower: 3.6, upper: 4.8 },
-                { year: 2022, gdp: 3.8, lower: 3.2, upper: 4.4 },
-                { year: 2023, gdp: 4.1, lower: 3.5, upper: 4.7 },
-                { year: 2024, gdp: 4.5, lower: 3.9, upper: 5.1 },
-                { year: 2025, gdp: 4.8, lower: 4.2, upper: 5.4 },
-                { year: 2026, gdp: 5.2, lower: 4.5, upper: 5.9 }
-            ];
-            
-            const margin = { top: 40, right: 30, bottom: 50, left: 60 };
-            const width = document.getElementById('forecastChart').clientWidth - margin.left - margin.right;
-            const height = 400 - margin.top - margin.bottom;
-            
-            // Clear any existing content
-            d3.select("#forecastChart").html("");
-            
-            const svg = d3.select("#forecastChart")
-                .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", `translate(${margin.left},${margin.top})`);
-            
-            // X scale
-            const x = d3.scaleLinear()
-                .domain(d3.extent(data, d => d.year))
-                .range([0, width]);
-            
-            // Y scale
-            const y = d3.scaleLinear()
-                .domain([0, d3.max(data, d => d.upper) * 1.1])
-                .range([height, 0]);
-            
-            // Line generator
-            const line = d3.line()
-                .x(d => x(d.year))
-                .y(d => y(d.gdp));
-            
-            // Area generator for confidence interval
-            const area = d3.area()
-                .x(d => x(d.year))
-                .y0(d => y(d.lower))
-                .y1(d => y(d.upper));
-            
-            // Add confidence interval area
-            svg.append("path")
-                .datum(data)
-                .attr("class", "confidence-area")
-                .attr("d", area)
-                .style("fill", "#00D4FF")
-                .style("opacity", 0.3);
-            
-            // Add line
-            svg.append("path")
-                .datum(data)
-                .attr("class", "line")
-                .attr("d", line)
-                .style("fill", "none")
-                .style("stroke", "#00D4FF")
-                .style("stroke-width", 3);
-            
-            // Add data points
-            svg.selectAll(".dot")
-                .data(data)
-                .enter()
-                .append("circle")
-                .attr("class", "dot")
-                .attr("cx", d => x(d.year))
-                .attr("cy", d => y(d.gdp))
-                .attr("r", 5)
-                .style("fill", "#00D4FF")
-                .style("stroke", "#0D1B2A")
-                .style("stroke-width", 2);
-            
-            // Add X axis
-            svg.append("g")
-                .attr("transform", `translate(0,${height})`)
-                .call(d3.axisBottom(x).tickFormat(d3.format("d")))
-                .selectAll("text")
-                .style("fill", "#FFFFFF");
-            
-            // Add Y axis
-            svg.append("g")
-                .call(d3.axisLeft(y).tickFormat(d => `${d}%`))
-                .selectAll("text")
-                .style("fill", "#FFFFFF");
-            
-            // Add Y axis label
-            svg.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 0 - margin.left)
-                .attr("x", 0 - (height / 2))
-                .attr("dy", "1em")
-                .style("text-anchor", "middle")
-                .text("GDP Growth (%)")
-                .style("font-weight", "bold")
-                .style("fill", "#FFFFFF");
-        }
     </script>
 </body>
 </html>
