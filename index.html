@@ -239,21 +239,49 @@
         .metric-label { color: var(--secondary); font-weight: 500; font-size: 0.95rem; }
         .metric-value { color: var(--primary); font-weight: 700; font-size: 1rem; }
 
-        /* SIGNALS SECTION - WITH CHART */
+        /* SIGNALS SECTION - MODERN 3D DATA CUBE */
         .signals-section { 
-            background: linear-gradient(135deg, #1a365d 0%, #0f1f38 100%); 
+            background: linear-gradient(135deg, #0a1628 0%, #1a365d 50%, #0f1f38 100%); 
             color: white; 
             padding: 100px 0; 
+            position: relative;
+            overflow: hidden;
         }
+        
+        /* Animated background grid */
+        .signals-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
         .signals-content { 
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
+        
         .signals-text {
             max-width: 100%;
         }
+        
         .signals-text h2 { 
             font-size: 2.8rem; 
             margin-bottom: 1.5rem; 
@@ -261,18 +289,21 @@
             color: white; 
             font-weight: 700;
         }
+        
         .signals-subtitle { 
             font-size: 1.1rem; 
             margin-bottom: 1.5rem; 
             opacity: 0.95; 
             line-height: 1.7; 
         }
+        
         .signals-description { 
             font-size: 1rem; 
             margin-bottom: 1rem; 
             line-height: 1.8; 
             opacity: 0.95;
         }
+        
         .signals-emphasis { 
             font-size: 1.1rem; 
             margin-bottom: 1.5rem; 
@@ -280,139 +311,364 @@
             color: var(--gold);
             opacity: 1;
         }
+        
         .signals-cta-text { 
             font-size: 1rem; 
             margin-bottom: 2rem; 
             line-height: 1.8; 
             opacity: 0.95;
         }
+        
         .signals-subscribe { 
             font-size: 1.05rem; 
             color: var(--gold);
             margin-top: 2.5rem;
         }
+        
         .signals-subscribe strong {
             color: var(--gold);
         }
+        
+        /* 3D Data Cube Scene */
         .signals-visual { 
-            position: relative; 
-        }
-        .chart-3d-container { 
-            position: relative; 
-            perspective: 1000px; 
-            height: 400px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-        }
-        .chart-3d { 
-            background: #f5f3ed; 
-            padding: 3rem 2rem; 
-            border-radius: 15px; 
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.3),
-                0 10px 30px rgba(0, 0, 0, 0.2);
-            transform: rotateX(5deg) rotateY(-5deg); 
-            animation: float 6s ease-in-out infinite; 
-            position: relative; 
-            z-index: 2;
-            border: 3px solid #d4af37;
-        }
-        .chart-shadow {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 30px;
-            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
-            filter: blur(10px);
-            animation: shadowPulse 6s ease-in-out infinite;
-        }
-        @keyframes float { 
-            0%, 100% { 
-                transform: rotateX(5deg) rotateY(-5deg) translateY(0px); 
-            } 
-            50% { 
-                transform: rotateX(5deg) rotateY(-5deg) translateY(-20px); 
-            } 
-        }
-        @keyframes shadowPulse {
-            0%, 100% { 
-                opacity: 0.3;
-                transform: translateX(-50%) scale(1);
-            }
-            50% { 
-                opacity: 0.5;
-                transform: translateX(-50%) scale(1.1);
-            }
-        }
-        .signal-chart { 
-            width: 100%; 
-            height: auto; 
-        }
-        .signal-line { 
-            stroke-dasharray: 350; 
-            stroke-dashoffset: 350; 
-            animation: drawLine 3s ease-in-out forwards, lineGlow 2s ease-in-out 3s infinite; 
-        }
-        @keyframes drawLine { 
-            to { 
-                stroke-dashoffset: 0; 
-            } 
-        }
-        @keyframes lineGlow {
-            0%, 100% {
-                filter: drop-shadow(0 0 0 rgba(45, 90, 140, 0));
-            }
-            50% {
-                filter: drop-shadow(0 0 8px rgba(45, 90, 140, 0.8));
-            }
-        }
-        .signal-arrow { 
-            opacity: 0; 
-            animation: fadeInArrow 0.5s ease-in-out 3s forwards, arrowPulse 2s ease-in-out 3.5s infinite; 
-        }
-        @keyframes fadeInArrow { 
-            to { 
-                opacity: 1; 
-            } 
-        }
-        @keyframes arrowPulse {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            50% {
-                transform: translate(5px, -5px) scale(1.1);
-            }
-        }
-        .data-point { 
-            opacity: 0; 
-            animation: fadeInPoint 0.5s ease-in-out forwards; 
-        }
-        .data-point:nth-child(8) { animation-delay: 0.3s; }
-        .data-point:nth-child(9) { animation-delay: 0.6s; }
-        .data-point:nth-child(10) { animation-delay: 0.9s; }
-        .data-point:nth-child(11) { animation-delay: 1.2s; }
-        .data-point:nth-child(12) { animation-delay: 1.5s; }
-        .data-point:nth-child(13) { animation-delay: 1.8s; }
-        .data-point:nth-child(14) { animation-delay: 2.1s; }
-        @keyframes fadeInPoint { 
-            to { 
-                opacity: 1; 
-            } 
-        }
-        .ae-logo-badge-bottom {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 2rem;
+            min-height: 500px;
         }
-        .logo-text-bottom {
-            color: white;
+        
+        .data-cube-scene {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            perspective: 1200px;
+            perspective-origin: 50% 50%;
+        }
+        
+        .data-cube {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            top: 50%;
+            left: 50%;
+            transform-style: preserve-3d;
+            transform: translate(-50%, -50%) rotateX(-20deg) rotateY(-30deg);
+            animation: cubeRotate 20s infinite linear;
+        }
+        
+        @keyframes cubeRotate {
+            0% { transform: translate(-50%, -50%) rotateX(-20deg) rotateY(-30deg); }
+            100% { transform: translate(-50%, -50%) rotateX(-20deg) rotateY(330deg); }
+        }
+        
+        .cube-face {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            background: rgba(10, 22, 40, 0.9);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 30px rgba(212, 175, 55, 0.2),
+                inset 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+        
+        .cube-face.front {
+            transform: translateZ(140px);
+        }
+        
+        .cube-face.top {
+            transform: rotateX(90deg) translateZ(140px);
+        }
+        
+        .cube-face.right {
+            transform: rotateY(90deg) translateZ(140px);
+        }
+        
+        /* Data Grid */
+        .data-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        
+        .grid-line {
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(212, 175, 55, 0.3) 10%, 
+                rgba(212, 175, 55, 0.3) 90%, 
+                transparent
+            );
+            animation: lineGlow 3s ease-in-out infinite;
+        }
+        
+        .grid-line:nth-child(2) { animation-delay: 0.3s; }
+        .grid-line:nth-child(3) { animation-delay: 0.6s; }
+        .grid-line:nth-child(4) { animation-delay: 0.9s; }
+        .grid-line:nth-child(5) { animation-delay: 1.2s; }
+        
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* Data Points */
+        .data-points {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.8),
+                0 0 40px rgba(212, 175, 55, 0.4);
+            animation: pointPulse 2s ease-in-out infinite;
+        }
+        
+        .point:nth-child(2) { animation-delay: 0.5s; }
+        .point:nth-child(3) { animation-delay: 1s; }
+        .point:nth-child(4) { animation-delay: 1.5s; }
+        
+        @keyframes pointPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.6; }
+        }
+        
+        /* Trend Line */
+        .trend-line {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .trend-line path {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: drawTrend 4s ease-in-out infinite;
+        }
+        
+        @keyframes drawTrend {
+            0% { stroke-dashoffset: 200; }
+            50%, 100% { stroke-dashoffset: 0; }
+        }
+        
+        /* Heatmap Cells */
+        .heatmap-cells {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            padding: 40px;
+        }
+        
+        .heat-cell {
+            background: linear-gradient(135deg, 
+                rgba(212, 175, 55, 0.1), 
+                rgba(212, 175, 55, 0.3)
+            );
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            animation: heatPulse 3s ease-in-out infinite;
+        }
+        
+        .heat-cell:nth-child(2) { animation-delay: 0.5s; }
+        .heat-cell:nth-child(3) { animation-delay: 1s; }
+        .heat-cell:nth-child(4) { animation-delay: 1.5s; }
+        
+        @keyframes heatPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* Data Bars */
+        .data-bars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 30px;
+            gap: 20px;
+        }
+        
+        .bar {
+            flex: 1;
+            background: linear-gradient(to top, 
+                rgba(212, 175, 55, 0.8), 
+                rgba(212, 175, 55, 0.3)
+            );
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            animation: barGrow 3s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+        
+        .bar:nth-child(2) { animation-delay: 0.3s; }
+        .bar:nth-child(3) { animation-delay: 0.6s; }
+        .bar:nth-child(4) { animation-delay: 0.9s; }
+        
+        @keyframes barGrow {
+            0%, 100% { transform: scaleY(0.8); opacity: 0.6; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+        
+        /* Floating Data Particles */
+        .data-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: rgba(212, 175, 55, 0.6);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+            animation: particleFloat 4s ease-in-out infinite;
+            animation-delay: var(--delay);
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+        
+        /* AI Pulse Rings */
+        .ai-rings {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        .pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            animation: ringExpand 4s ease-out infinite;
+        }
+        
+        .ring-1 {
+            width: 300px;
+            height: 300px;
+            animation-delay: 0s;
+        }
+        
+        .ring-2 {
+            width: 300px;
+            height: 300px;
+            animation-delay: 1.3s;
+        }
+        
+        .ring-3 {
+            width: 300px;
+            height: 300px;
+            animation-delay: 2.6s;
+        }
+        
+        @keyframes ringExpand {
+            0% {
+                transform: translate(-50%, -50%) scale(0.3);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Floating Economic Indicators */
+        .floating-indicators {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            animation: floatOrbit 8s ease-in-out infinite;
+            animation-delay: var(--delay);
+        }
+        
+        .indicator-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(212, 175, 55, 0.9);
+            font-size: 0.75rem;
             font-weight: 600;
-            font-size: 1.1rem;
-            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            text-shadow: 
+                0 0 10px rgba(212, 175, 55, 0.5),
+                0 0 20px rgba(212, 175, 55, 0.3);
+            padding: 6px 12px;
+            background: rgba(10, 22, 40, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        @keyframes floatOrbit {
+            0%, 100% {
+                transform: translate(-50%, -50%) 
+                    rotate(var(--angle)) 
+                    translateX(var(--distance)) 
+                    rotate(calc(-1 * var(--angle)))
+                    translateY(-10px);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-50%, -50%) 
+                    rotate(calc(var(--angle) + 10deg)) 
+                    translateX(calc(var(--distance) + 20px)) 
+                    rotate(calc(-1 * (var(--angle) + 10deg)))
+                    translateY(10px);
+                opacity: 1;
+            }
         }
 
         /* CORRUPTION INDEX */
@@ -641,15 +897,22 @@
             .back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; } 
             .footer-logo { height: 70px; padding: 5px 8px; }
             .signals-section { padding: 60px 0; }
-            .signals-content { grid-template-columns: 1fr; gap: 2rem; }
+            .signals-content { grid-template-columns: 1fr; gap: 3rem; }
             .signals-text h2 { font-size: 1.8rem; }
             .signals-subtitle { font-size: 1rem; }
             .signals-description { font-size: 0.95rem; }
             .signals-emphasis { font-size: 1rem; }
             .signals-cta-text { font-size: 0.95rem; }
             .signals-subscribe { font-size: 1rem; }
-            .chart-3d-container { height: 300px; }
-            .chart-3d { padding: 2rem 1.5rem; }
+            .data-cube-scene { width: 300px; height: 300px; }
+            .data-cube { width: 200px; height: 200px; }
+            .cube-face { width: 200px; height: 200px; }
+            .cube-face.front { transform: translateZ(100px); }
+            .cube-face.top { transform: rotateX(90deg) translateZ(100px); }
+            .cube-face.right { transform: rotateY(90deg) translateZ(100px); }
+            .ring-1, .ring-2, .ring-3 { width: 200px; height: 200px; }
+            .indicator-label { font-size: 0.6rem; padding: 4px 8px; }
+            .indicator { --distance: 160px !important; }
         }
         @media (max-width: 480px) { 
             .hero { 
@@ -1081,44 +1344,93 @@
                     <p class="signals-subscribe"><strong>Subscribe for weekly insights:</strong> algoeconomics.org</p>
                 </div>
                 <div class="signals-visual">
-                    <div class="chart-3d-container">
-                        <div class="chart-3d">
-                            <svg class="signal-chart" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet">
-                                <!-- Grid lines -->
-                                <line x1="40" y1="20" x2="40" y2="160" stroke="#2d5a8c" stroke-width="2"/>
-                                <line x1="40" y1="160" x2="280" y2="160" stroke="#2d5a8c" stroke-width="2"/>
-                                
-                                <!-- Grid horizontal lines -->
-                                <line x1="35" y1="40" x2="280" y2="40" stroke="#2d5a8c" stroke-width="0.5" opacity="0.3"/>
-                                <line x1="35" y1="70" x2="280" y2="70" stroke="#2d5a8c" stroke-width="0.5" opacity="0.3"/>
-                                <line x1="35" y1="100" x2="280" y2="100" stroke="#2d5a8c" stroke-width="0.5" opacity="0.3"/>
-                                <line x1="35" y1="130" x2="280" y2="130" stroke="#2d5a8c" stroke-width="0.5" opacity="0.3"/>
-                                
-                                <!-- Vertical grid lines -->
-                                <line x1="80" y1="160" x2="80" y2="20" stroke="#2d5a8c" stroke-width="0.5" opacity="0.3"/>
-                                <line x1="120" y1="160" x2="120" y2="20" stroke="#2d5a8c" stroke-width="0.5" opacity="0.3"/>
-                                <line x1="160" y1="160" x2="160" y2="20" stroke="#2d5a8c" stroke-width="0.5" opacity="0.3"/>
-                                <line x1="200" y1="160" x2="200" y2="20" stroke="#2d5a8c" stroke-width="0.5" opacity="0.3"/>
-                                <line x1="240" y1="160" x2="240" y2="20" stroke="#2d5a8c" stroke-width="0.5" opacity="0.3"/>
-                                
-                                <!-- Animated signal line -->
-                                <path class="signal-line" d="M 40,140 L 70,130 L 100,110 L 130,90 L 160,100 L 190,70 L 220,50 L 250,35 L 280,25" 
-                                      fill="none" stroke="#2d5a8c" stroke-width="3" stroke-linecap="round"/>
-                                
-                                <!-- Arrow at the end -->
-                                <path class="signal-arrow" d="M 270,20 L 280,25 L 275,32 Z" fill="#2d5a8c"/>
-                                
-                                <!-- Data points -->
-                                <circle class="data-point" cx="70" cy="130" r="4" fill="#2d5a8c"/>
-                                <circle class="data-point" cx="100" cy="110" r="4" fill="#2d5a8c"/>
-                                <circle class="data-point" cx="130" cy="90" r="4" fill="#2d5a8c"/>
-                                <circle class="data-point" cx="160" cy="100" r="4" fill="#2d5a8c"/>
-                                <circle class="data-point" cx="190" cy="70" r="4" fill="#2d5a8c"/>
-                                <circle class="data-point" cx="220" cy="50" r="4" fill="#2d5a8c"/>
-                                <circle class="data-point" cx="250" cy="35" r="4" fill="#2d5a8c"/>
-                            </svg>
+                    <div class="data-cube-scene">
+                        <div class="data-cube">
+                            <!-- Front Face -->
+                            <div class="cube-face front">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                                <div class="data-points">
+                                    <div class="point" style="left: 20%; top: 60%;"></div>
+                                    <div class="point" style="left: 40%; top: 45%;"></div>
+                                    <div class="point" style="left: 60%; top: 30%;"></div>
+                                    <div class="point" style="left: 80%; top: 20%;"></div>
+                                </div>
+                                <svg class="trend-line" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                    <path d="M 10,60 L 30,50 L 50,35 L 70,25 L 90,15" fill="none" stroke="rgba(212, 175, 55, 0.8)" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            
+                            <!-- Top Face -->
+                            <div class="cube-face top">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                                <div class="heatmap-cells">
+                                    <div class="heat-cell"></div>
+                                    <div class="heat-cell"></div>
+                                    <div class="heat-cell"></div>
+                                    <div class="heat-cell"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Face -->
+                            <div class="cube-face right">
+                                <div class="data-bars">
+                                    <div class="bar" style="height: 30%;"></div>
+                                    <div class="bar" style="height: 50%;"></div>
+                                    <div class="bar" style="height: 70%;"></div>
+                                    <div class="bar" style="height: 85%;"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="chart-shadow"></div>
+                        
+                        <!-- Floating data particles -->
+                        <div class="data-particles">
+                            <div class="particle" style="--delay: 0s; --x: -100px; --y: -80px;"></div>
+                            <div class="particle" style="--delay: 0.5s; --x: 120px; --y: -60px;"></div>
+                            <div class="particle" style="--delay: 1s; --x: -80px; --y: 100px;"></div>
+                            <div class="particle" style="--delay: 1.5s; --x: 100px; --y: 90px;"></div>
+                            <div class="particle" style="--delay: 2s; --x: 0px; --y: -120px;"></div>
+                            <div class="particle" style="--delay: 2.5s; --x: -120px; --y: 60px;"></div>
+                        </div>
+                        
+                        <!-- AI pulse rings -->
+                        <div class="ai-rings">
+                            <div class="pulse-ring ring-1"></div>
+                            <div class="pulse-ring ring-2"></div>
+                            <div class="pulse-ring ring-3"></div>
+                        </div>
+                        
+                        <!-- Floating economic indicators -->
+                        <div class="floating-indicators">
+                            <div class="indicator" style="--angle: 0deg; --distance: 220px; --delay: 0s;">
+                                <span class="indicator-label">GDP GROWTH</span>
+                            </div>
+                            <div class="indicator" style="--angle: 60deg; --distance: 230px; --delay: 0.5s;">
+                                <span class="indicator-label">INFLATION RATE</span>
+                            </div>
+                            <div class="indicator" style="--angle: 120deg; --distance: 220px; --delay: 1s;">
+                                <span class="indicator-label">UNEMPLOYMENT</span>
+                            </div>
+                            <div class="indicator" style="--angle: 180deg; --distance: 230px; --delay: 1.5s;">
+                                <span class="indicator-label">STOCK MARKET</span>
+                            </div>
+                            <div class="indicator" style="--angle: 240deg; --distance: 220px; --delay: 2s;">
+                                <span class="indicator-label">FX RATES</span>
+                            </div>
+                            <div class="indicator" style="--angle: 300deg; --distance: 230px; --delay: 2.5s;">
+                                <span class="indicator-label">CONSUMER CONFIDENCE</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
