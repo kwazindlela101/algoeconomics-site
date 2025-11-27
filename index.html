@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlgoEconomics | Global Markets. UK & African Relevance. AI-Powered Insight.</title>
+    <title>AlgoEconomics | AI-Powered Market Intelligence</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -18,28 +18,18 @@
             --success: #38a169;
             --danger: #e53e3e;
             --africa-green: #2d5016;
-            --africa-gold: #ffd700;
             --transition: all 0.3s ease;
-            --sectors-bg: #0b0d12;
-            --sectors-card: #121522;
-            --sectors-text: #e6e8ef;
-            --sectors-muted: #a9afc7;
-            --sectors-accent: #3fb7ff;
-            --sectors-highlight: #7cf2a5;
-            --sectors-border: #1e2336;
-            --font-heading: 'Segoe UI', system-ui, sans-serif;
-            --font-body: 'Segoe UI', system-ui, sans-serif;
             --header-height: 70px;
             --ticker-height: 40px;
             --total-fixed-height: 110px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: var(--total-fixed-height); overflow-x: hidden; }
-        body { font-family: var(--font-body); line-height: 1.6; color: var(--dark); background-color: var(--light); overflow-x: hidden; padding-top: var(--total-fixed-height); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; width: 100%; }
+        html { scroll-behavior: smooth; scroll-padding-top: var(--total-fixed-height); }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: var(--dark); background-color: var(--light); padding-top: var(--total-fixed-height); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
 
-        /* HEADER - FIXED */
+        /* HEADER */
         header { 
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%); 
             color: white; 
@@ -60,7 +50,6 @@
             justify-content: space-between;
             align-items: center; 
             width: 100%; 
-            position: relative;
         }
         
         .menu-toggle { 
@@ -119,8 +108,6 @@
             height: 40px;
             width: auto; 
         }
-        
-        .nav-link.logo-link:hover { background: linear-gradient(135deg, #f7ef8a, var(--gold)); }
 
         /* TICKER */
         .market-indicators { 
@@ -195,13 +182,13 @@
         .feature-card p { font-size: 0.9rem; color: var(--secondary); }
 
         /* SECTORS */
-        #sectors { background: var(--sectors-bg); color: var(--sectors-text); }
+        #sectors { background: #0b0d12; color: #e6e8ef; }
         .sectors-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-        .sector-card { background: var(--sectors-card); border: 1px solid var(--sectors-border); border-radius: 10px; padding: 1.5rem; position: relative; }
-        .sector-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--sectors-accent); }
-        .sector-icon { font-size: 2rem; margin-bottom: 1rem; color: var(--sectors-accent); }
-        .sector-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--sectors-text); }
-        .sector-card p { color: var(--sectors-muted); font-size: 0.9rem; }
+        .sector-card { background: #121522; border: 1px solid #1e2336; border-radius: 10px; padding: 1.5rem; position: relative; }
+        .sector-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #3fb7ff; }
+        .sector-icon { font-size: 2rem; margin-bottom: 1rem; color: #3fb7ff; }
+        .sector-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: #e6e8ef; }
+        .sector-card p { color: #a9afc7; font-size: 0.9rem; }
 
         /* REGIONAL ANALYSIS */
         #regional-analysis { background: white; }
@@ -283,29 +270,12 @@
             backdrop-filter: blur(10px);
         }
         
-        .cube-face.front {
-            transform: translateZ(75px);
-        }
-        
-        .cube-face.top {
-            transform: rotateX(90deg) translateZ(75px);
-        }
-        
-        .cube-face.right {
-            transform: rotateY(90deg) translateZ(75px);
-        }
-        
-        .cube-face.back {
-            transform: translateZ(-75px);
-        }
-        
-        .cube-face.bottom {
-            transform: rotateX(-90deg) translateZ(75px);
-        }
-        
-        .cube-face.left {
-            transform: rotateY(-90deg) translateZ(75px);
-        }
+        .cube-face.front { transform: translateZ(75px); }
+        .cube-face.back { transform: translateZ(-75px); }
+        .cube-face.top { transform: rotateX(90deg) translateZ(75px); }
+        .cube-face.bottom { transform: rotateX(-90deg) translateZ(75px); }
+        .cube-face.right { transform: rotateY(90deg) translateZ(75px); }
+        .cube-face.left { transform: rotateY(-90deg) translateZ(75px); }
 
         /* Data Grid */
         .data-grid {
@@ -493,7 +463,17 @@
         <div class="container">
             <div class="header-inner">
                 <a href="#home" class="nav-link logo-link">
-                    <img src="https://via.placeholder.com/150x50/1a365d/ffffff?text=AE" alt="AlgoEconomics Logo">
+                    <!-- AlgoEconomics Logo -->
+                    <svg width="150" height="40" viewBox="0 0 150 40" fill="none">
+                        <rect width="150" height="40" rx="8" fill="url(#logoGradient)"/>
+                        <text x="75" y="25" text-anchor="middle" fill="#1a365d" font-family="Arial, sans-serif" font-weight="bold" font-size="18">AlgoEconomics</text>
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#d4af37"/>
+                                <stop offset="100%" stop-color="#f7ef8a"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </a>
                 <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
@@ -531,8 +511,8 @@
                 <h1>AI-powered Insights for UK-Africa Economics</h1>
                 <p>Our algorithms filter thousands of data points to deliver only the economic news with direct impact on UK and African markets.</p>
                 <div class="hero-buttons">
-                    <a href="#newsletter" class="btn">Get Free Daily Brief</a>
-                    <a href="#sla" class="btn btn-outline">See Premium Plans</a>
+                    <button class="btn" id="getBrief">Get Free Daily Brief</button>
+                    <button class="btn btn-outline" id="seePlans">See Premium Plans</button>
                 </div>
                 <div class="ai-pulse">
                     <div class="pulse-container"><div class="pulse-ring"></div><div class="pulse-dot"></div></div>
@@ -732,24 +712,6 @@
                                     <div class="grid-line"></div>
                                 </div>
                             </div>
-                            <div class="cube-face top">
-                                <div class="data-grid">
-                                    <div class="grid-line"></div>
-                                    <div class="grid-line"></div>
-                                    <div class="grid-line"></div>
-                                    <div class="grid-line"></div>
-                                    <div class="grid-line"></div>
-                                </div>
-                            </div>
-                            <div class="cube-face right">
-                                <div class="data-grid">
-                                    <div class="grid-line"></div>
-                                    <div class="grid-line"></div>
-                                    <div class="grid-line"></div>
-                                    <div class="grid-line"></div>
-                                    <div class="grid-line"></div>
-                                </div>
-                            </div>
                             <div class="cube-face back">
                                 <div class="data-grid">
                                     <div class="grid-line"></div>
@@ -759,7 +721,25 @@
                                     <div class="grid-line"></div>
                                 </div>
                             </div>
+                            <div class="cube-face top">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                            </div>
                             <div class="cube-face bottom">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                            </div>
+                            <div class="cube-face right">
                                 <div class="data-grid">
                                     <div class="grid-line"></div>
                                     <div class="grid-line"></div>
@@ -901,7 +881,17 @@
                 <div class="footer-main">
                     <div class="footer-brand">
                         <div class="footer-logo">
-                            <img src="https://via.placeholder.com/150x50/1a365d/ffffff?text=AE" alt="AlgoEconomics Logo">
+                            <!-- AlgoEconomics Logo -->
+                            <svg width="150" height="40" viewBox="0 0 150 40" fill="none">
+                                <rect width="150" height="40" rx="8" fill="url(#logoGradient)"/>
+                                <text x="75" y="25" text-anchor="middle" fill="#1a365d" font-family="Arial, sans-serif" font-weight="bold" font-size="18">AlgoEconomics</text>
+                                <defs>
+                                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#d4af37"/>
+                                        <stop offset="100%" stop-color="#f7ef8a"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
                         </div>
                         <p class="footer-tagline">AI-powered market intelligence delivering actionable insights for UK-Africa decision makers. Trusted by leading institutions worldwide.</p>
                         <div class="footer-badges">
@@ -1078,6 +1068,14 @@
             });
             
             // Button functionality
+            document.getElementById('getBrief').addEventListener('click', function() {
+                alert('Thank you! You will receive your free daily brief starting tomorrow.');
+            });
+            
+            document.getElementById('seePlans').addEventListener('click', function() {
+                document.getElementById('sla').scrollIntoView({ behavior: 'smooth' });
+            });
+            
             document.getElementById('requestDemo').addEventListener('click', function() {
                 alert('Demo request received! Our team will contact you shortly.');
             });
