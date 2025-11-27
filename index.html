@@ -294,14 +294,58 @@
         .cube-face.right {
             transform: rotateY(90deg) translateZ(75px);
         }
+        
+        .cube-face.back {
+            transform: translateZ(-75px);
+        }
+        
+        .cube-face.bottom {
+            transform: rotateX(-90deg) translateZ(75px);
+        }
+        
+        .cube-face.left {
+            transform: rotateY(-90deg) translateZ(75px);
+        }
+
+        /* Data Grid */
+        .data-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        
+        .grid-line {
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(212, 175, 55, 0.3) 10%, 
+                rgba(212, 175, 55, 0.3) 90%, 
+                transparent
+            );
+            animation: lineGlow 3s ease-in-out infinite;
+        }
+        
+        .grid-line:nth-child(2) { animation-delay: 0.3s; }
+        .grid-line:nth-child(3) { animation-delay: 0.6s; }
+        .grid-line:nth-child(4) { animation-delay: 0.9s; }
+        .grid-line:nth-child(5) { animation-delay: 1.2s; }
+        
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
 
         /* SPEAKERS SECTION */
         #speakers { background: white; }
         .speakers-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         .speaker-card { background: white; border-radius: 10px; padding: 1.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.08); text-align: center; transition: transform 0.3s; }
         .speaker-card:hover { transform: translateY(-5px); }
-        .speaker-image { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem; border: 3px solid var(--gold); }
-        .speaker-image img { width: 100%; height: 100%; object-fit: cover; }
+        .speaker-image { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem; border: 3px solid var(--gold); background: #f0f0f0; display: flex; align-items: center; justify-content: center; }
+        .speaker-image i { font-size: 3rem; color: var(--gold); }
         .speaker-name { font-size: 1.3rem; color: var(--primary); font-weight: 700; margin-bottom: 0.5rem; }
         .speaker-title { font-size: 0.9rem; color: var(--gold); font-weight: 600; margin-bottom: 1rem; }
         .speaker-bio { font-size: 0.9rem; color: var(--secondary); }
@@ -473,7 +517,7 @@
             <div class="ticker-track">
                 <div class="ticker-item"><span class="market-name">FTSE 100</span><span class="market-value">7,542.76</span><span class="market-change up">+1.2%</span></div>
                 <div class="ticker-item"><span class="market-name">Nairobi SE</span><span class="market-value">1,842.15</span><span class="market-change up">+0.8%</span></div>
-                <div class="ticker-item"><span class="market-name">NGN/USD</span><span class="market-value">1,485.50</span><span class="market-change neutral">0.0%</span></div>
+                <div class="ticker-item"><span class="market-name">GBP/NGN</span><span class="market-value">1,485.50</span><span class="market-change neutral">0.0%</span></div>
                 <div class="ticker-item"><span class="market-name">JSE All Share</span><span class="market-value">73,842.91</span><span class="market-change down">-0.4%</span></div>
                 <div class="ticker-item"><span class="market-name">Ghana SE</span><span class="market-value">2,845.30</span><span class="market-change up">+1.1%</span></div>
                 <div class="ticker-item"><span class="market-name">Egypt EGX 30</span><span class="market-value">17,923.45</span><span class="market-change up">+0.7%</span></div>
@@ -488,7 +532,7 @@
                 <p>Our algorithms filter thousands of data points to deliver only the economic news with direct impact on UK and African markets.</p>
                 <div class="hero-buttons">
                     <a href="#newsletter" class="btn">Get Free Daily Brief</a>
-                    <a href="#pricing" class="btn btn-outline">See Premium Plans</a>
+                    <a href="#sla" class="btn btn-outline">See Premium Plans</a>
                 </div>
                 <div class="ai-pulse">
                     <div class="pulse-container"><div class="pulse-ring"></div><div class="pulse-dot"></div></div>
@@ -566,14 +610,14 @@
                         <div class="country-name">Nigeria</div>
                         <div class="metric-row"><span class="metric-label">GDP Growth</span><span class="metric-value">3.2%</span></div>
                         <div class="metric-row"><span class="metric-label">Inflation</span><span class="metric-value">18.5%</span></div>
-                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">-$2.1B</span></div>
+                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">-£1.6B</span></div>
                     </div>
                     <div class="country-card">
                         <div class="country-flag">🇬🇭</div>
                         <div class="country-name">Ghana</div>
                         <div class="metric-row"><span class="metric-label">GDP Growth</span><span class="metric-value">4.8%</span></div>
                         <div class="metric-row"><span class="metric-label">Inflation</span><span class="metric-value">10.3%</span></div>
-                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">-$0.8B</span></div>
+                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">-£0.6B</span></div>
                     </div>
                 </div>
             </div>
@@ -584,14 +628,14 @@
                         <div class="country-name">Kenya</div>
                         <div class="metric-row"><span class="metric-label">GDP Growth</span><span class="metric-value">5.1%</span></div>
                         <div class="metric-row"><span class="metric-label">Inflation</span><span class="metric-value">6.8%</span></div>
-                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">-$5.2B</span></div>
+                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">-£4.1B</span></div>
                     </div>
                     <div class="country-card">
                         <div class="country-flag">🇹🇿</div>
                         <div class="country-name">Tanzania</div>
                         <div class="metric-row"><span class="metric-label">GDP Growth</span><span class="metric-value">4.9%</span></div>
                         <div class="metric-row"><span class="metric-label">Inflation</span><span class="metric-value">4.5%</span></div>
-                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">-$2.3B</span></div>
+                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">-£1.8B</span></div>
                     </div>
                 </div>
             </div>
@@ -602,14 +646,14 @@
                         <div class="country-name">South Africa</div>
                         <div class="metric-row"><span class="metric-label">GDP Growth</span><span class="metric-value">1.9%</span></div>
                         <div class="metric-row"><span class="metric-label">Inflation</span><span class="metric-value">5.8%</span></div>
-                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">+$3.4B</span></div>
+                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">+£2.7B</span></div>
                     </div>
                     <div class="country-card">
                         <div class="country-flag">🇿🇲</div>
                         <div class="country-name">Zambia</div>
                         <div class="metric-row"><span class="metric-label">GDP Growth</span><span class="metric-value">3.5%</span></div>
                         <div class="metric-row"><span class="metric-label">Inflation</span><span class="metric-value">9.8%</span></div>
-                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">+$1.2B</span></div>
+                        <div class="metric-row"><span class="metric-label">Trade Balance</span><span class="metric-value">+£0.9B</span></div>
                     </div>
                 </div>
             </div>
@@ -632,7 +676,7 @@
                     </div>
                     <div class="city-stats">
                         <div class="stat"><span class="stat-value">21M</span><span class="stat-label">Population</span></div>
-                        <div class="stat"><span class="stat-value">$102B</span><span class="stat-label">GDP</span></div>
+                        <div class="stat"><span class="stat-value">£81B</span><span class="stat-label">GDP</span></div>
                     </div>
                 </div>
                 <div class="city-card">
@@ -644,7 +688,7 @@
                     </div>
                     <div class="city-stats">
                         <div class="stat"><span class="stat-value">4.4M</span><span class="stat-label">Population</span></div>
-                        <div class="stat"><span class="stat-value">$24B</span><span class="stat-label">GDP</span></div>
+                        <div class="stat"><span class="stat-value">£19B</span><span class="stat-label">GDP</span></div>
                     </div>
                 </div>
                 <div class="city-card">
@@ -656,7 +700,7 @@
                     </div>
                     <div class="city-stats">
                         <div class="stat"><span class="stat-value">5.6M</span><span class="stat-label">Population</span></div>
-                        <div class="stat"><span class="stat-value">$83B</span><span class="stat-label">GDP</span></div>
+                        <div class="stat"><span class="stat-value">£66B</span><span class="stat-label">GDP</span></div>
                     </div>
                 </div>
             </div>
@@ -672,16 +716,67 @@
                     <p class="demo-subtitle">Our proprietary AI models analyze thousands of data sources to identify patterns, risks, and opportunities in UK-Africa markets.</p>
                     <p class="demo-subtitle">From currency fluctuations to regulatory changes, our system flags the information that matters most to your business.</p>
                     <div class="hero-buttons">
-                        <a href="#" class="btn">Request Demo</a>
-                        <a href="#" class="btn btn-outline">View Sample Report</a>
+                        <button class="btn" id="requestDemo">Request Demo</button>
+                        <button class="btn btn-outline" id="viewSample">View Sample Report</button>
                     </div>
                 </div>
                 <div class="demo-visual">
                     <div class="data-cube-scene">
                         <div class="data-cube">
-                            <div class="cube-face front"></div>
-                            <div class="cube-face top"></div>
-                            <div class="cube-face right"></div>
+                            <div class="cube-face front">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                            </div>
+                            <div class="cube-face top">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                            </div>
+                            <div class="cube-face right">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                            </div>
+                            <div class="cube-face back">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                            </div>
+                            <div class="cube-face bottom">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                            </div>
+                            <div class="cube-face left">
+                                <div class="data-grid">
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                    <div class="grid-line"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -696,7 +791,7 @@
             <div class="speakers-grid">
                 <div class="speaker-card">
                     <div class="speaker-image">
-                        <img src="https://via.placeholder.com/300x300" alt="Dr. Sarah Johnson">
+                        <i class="fas fa-user-tie"></i>
                     </div>
                     <h3 class="speaker-name">Dr. Sarah Johnson</h3>
                     <p class="speaker-title">Chief Economist</p>
@@ -704,7 +799,7 @@
                 </div>
                 <div class="speaker-card">
                     <div class="speaker-image">
-                        <img src="https://via.placeholder.com/300x300" alt="Michael Adebayo">
+                        <i class="fas fa-chart-line"></i>
                     </div>
                     <h3 class="speaker-name">Michael Adebayo</h3>
                     <p class="speaker-title">Head of African Markets</p>
@@ -712,7 +807,7 @@
                 </div>
                 <div class="speaker-card">
                     <div class="speaker-image">
-                        <img src="https://via.placeholder.com/300x300" alt="Dr. James Wilson">
+                        <i class="fas fa-robot"></i>
                     </div>
                     <h3 class="speaker-name">Dr. James Wilson</h3>
                     <p class="speaker-title">AI Research Director</p>
@@ -769,7 +864,7 @@
                 <div class="sla-card">
                     <div class="sla-header">
                         <h3>Standard</h3>
-                        <div class="price">$99<span>/month</span></div>
+                        <div class="price">£79<span>/month</span></div>
                     </div>
                     <ul class="sla-features">
                         <li>Basic market insights and daily briefings</li>
@@ -778,13 +873,13 @@
                         <li>Up to 5 user accounts</li>
                         <li>Basic API access (1,000 calls/month)</li>
                     </ul>
-                    <a href="#" class="btn" style="width: 100%; text-align: center;">Get Started</a>
+                    <button class="btn" style="width: 100%; text-align: center;">Get Started</button>
                 </div>
                 <div class="sla-card featured">
                     <div class="sla-badge">Most Popular</div>
                     <div class="sla-header">
                         <h3>Enterprise</h3>
-                        <div class="price">$499<span>/month</span></div>
+                        <div class="price">£399<span>/month</span></div>
                     </div>
                     <ul class="sla-features">
                         <li>Advanced market insights and real-time alerts</li>
@@ -794,7 +889,7 @@
                         <li>Full API access (10,000 calls/month)</li>
                         <li>Custom data integration and white-label options</li>
                     </ul>
-                    <a href="#" class="btn" style="width: 100%; text-align: center;">Contact Sales</a>
+                    <button class="btn" style="width: 100%; text-align: center;">Contact Sales</button>
                 </div>
             </div>
         </div>
@@ -828,7 +923,7 @@
                             <li><a href="#sectors">Sectors</a></li>
                             <li><a href="#platform">Features</a></li>
                             <li><a href="#sla">Pricing</a></li>
-                            <li><a href="#corruption-index">AI Corruption Index</a></li>
+                            <li><a href="#ai-demo">AI Demo</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">
@@ -845,7 +940,7 @@
                         <div class="footer-newsletter">
                             <h4>Daily Intelligence Brief</h4>
                             <p>Join 10,000+ professionals. Get AI-curated market insights every morning.</p>
-                            <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');"><input type="email" placeholder="Your email address" required><button type="submit">Subscribe Free</button></form>
+                            <form class="footer-newsletter-form" id="newsletterForm"><input type="email" placeholder="Your email address" required><button type="submit">Subscribe Free</button></form>
                         </div>
                     </div>
                 </div>
@@ -980,6 +1075,34 @@
             });
             backToTopBtn.addEventListener('click', () => { 
                 window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            });
+            
+            // Button functionality
+            document.getElementById('requestDemo').addEventListener('click', function() {
+                alert('Demo request received! Our team will contact you shortly.');
+            });
+            
+            document.getElementById('viewSample').addEventListener('click', function() {
+                alert('Opening sample report in new tab...');
+                window.open('#', '_blank');
+            });
+            
+            // Newsletter form
+            document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for subscribing to our Daily Intelligence Brief!');
+                this.reset();
+            });
+            
+            // Make all buttons in SLA section functional
+            document.querySelectorAll('#sla .btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.textContent.includes('Contact Sales')) {
+                        alert('Redirecting to contact sales form...');
+                    } else {
+                        alert('Starting your Standard plan subscription...');
+                    }
+                });
             });
         });
 
