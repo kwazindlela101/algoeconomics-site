@@ -271,15 +271,15 @@
             color: var(--primary);
         }
 
-        /* ENHANCED HERO SECTION */
+        /* ENHANCED HERO SECTION - FIXED FOR MOBILE */
         .hero { 
             background: linear-gradient(rgba(10, 22, 40, 0.85), rgba(26, 54, 93, 0.9)), 
                         url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             color: white; 
-            padding: 0; 
-            min-height: 100vh;
+            padding: 2rem 1rem !important; 
+            min-height: 90vh;
             text-align: center; 
             border-bottom: 3px solid var(--gold); 
             position: relative; 
@@ -305,10 +305,11 @@
         .hero-content { 
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             position: relative;
             z-index: 2;
             animation: fadeInUp 1s ease-out;
+            width: 100%;
         }
         
         @keyframes fadeInUp {
@@ -323,9 +324,9 @@
         }
         
         .hero h1 { 
-            font-size: clamp(2.8rem, 5vw, 4.5rem); 
+            font-size: clamp(2rem, 5vw, 3.5rem) !important; 
             margin-bottom: 1.5rem; 
-            max-width: 900px; 
+            max-width: 100%; 
             margin-left: auto;
             margin-right: auto;
             background: linear-gradient(135deg, #ffffff 0%, var(--gold) 100%); 
@@ -334,46 +335,51 @@
             background-clip: text;
             line-height: 1.2;
             text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            word-wrap: break-word;
         }
         
         .hero p { 
-            font-size: 1.3rem; 
-            max-width: 700px; 
-            margin: 0 auto 3rem; 
+            font-size: clamp(1rem, 3vw, 1.3rem) !important; 
+            max-width: 100%; 
+            margin: 0 auto 2rem; 
             opacity: 0.95;
             line-height: 1.6;
+            padding: 0 0.5rem;
         }
         
         .hero-buttons { 
             display: flex; 
-            gap: 1.5rem; 
+            gap: 1rem; 
             justify-content: center; 
             flex-wrap: wrap; 
-            margin-top: 2rem;
+            margin-top: 1.5rem;
+            width: 100%;
         }
         
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 3rem;
-            margin-top: 3rem;
+            gap: 1.5rem;
+            margin-top: 2rem;
             flex-wrap: wrap;
+            width: 100%;
         }
         
         .hero-stat {
             text-align: center;
+            min-width: 120px;
         }
         
         .hero-stat-number {
             display: block;
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: bold;
             color: var(--gold);
             margin-bottom: 0.5rem;
         }
         
         .hero-stat-label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             opacity: 0.9;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -384,13 +390,14 @@
             display: inline-flex; 
             align-items: center; 
             gap: 10px; 
-            margin-top: 2rem; 
+            margin-top: 1.5rem; 
             color: var(--gold); 
             font-weight: 600; 
             padding: 8px 16px; 
             border-radius: 20px; 
             background: rgba(0, 255, 136, 0.1); 
             border: 1px solid rgba(0, 255, 136, 0.3); 
+            font-size: clamp(0.8rem, 2vw, 1rem);
         }
         
         .pulse-container { 
@@ -441,17 +448,19 @@
             justify-content: center; 
             background: linear-gradient(135deg, var(--gold), #f7ef8a); 
             color: var(--primary); 
-            padding: 1rem 2rem; 
+            padding: 0.8rem 1.5rem; 
             border: none; 
             border-radius: 5px; 
             text-decoration: none; 
-            font-size: 1rem; 
+            font-size: clamp(0.9rem, 2vw, 1rem); 
             font-weight: bold; 
             cursor: pointer; 
             transition: all 0.4s ease; 
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); 
-            min-height: 54px; 
-            min-width: 200px; 
+            min-height: 44px; 
+            min-width: 180px; 
+            width: 100%;
+            max-width: 280px;
         }
         
         .btn:hover { 
@@ -472,17 +481,18 @@
 
         /* SECTIONS */
         .section { 
-            padding: 80px 0; 
+            padding: 60px 0; 
             scroll-margin-top: var(--total-fixed-height); 
         }
         
         .section-header { 
             text-align: center; 
-            margin-bottom: 3rem; 
+            margin-bottom: 2rem; 
+            padding: 0 1rem;
         }
         
         .section-header h2 { 
-            font-size: 2.5rem; 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
             color: var(--primary); 
             margin-bottom: 1rem; 
             position: relative; 
@@ -501,10 +511,11 @@
         }
         
         .section-header p { 
-            max-width: 600px; 
+            max-width: 100%; 
             margin: 0 auto; 
             color: var(--secondary); 
-            font-size: 1.1rem; 
+            font-size: clamp(1rem, 2vw, 1.1rem); 
+            padding: 0 1rem;
         }
 
         /* WHY US */
@@ -512,10 +523,11 @@
         
         .intro-text { 
             text-align: center; 
-            max-width: 800px; 
-            margin: 0 auto 3rem; 
-            font-size: 1.1rem; 
+            max-width: 100%; 
+            margin: 0 auto 2rem; 
+            font-size: 1rem; 
             color: var(--secondary); 
+            padding: 0 1rem;
         }
         
         .intro-text p { 
@@ -525,7 +537,8 @@
         .features-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 2rem; 
+            gap: 1.5rem; 
+            padding: 0 1rem;
         }
         
         .feature-card { 
@@ -571,32 +584,35 @@
         }
         
         .sectors h2 { 
-            font-size: 2.5rem; 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
             text-align: center; 
             color: var(--sectors-text); 
             margin-bottom: 16px; 
+            padding: 0 1rem;
         }
         
         .sectors .intro { 
             color: var(--sectors-muted); 
-            font-size: 1.125rem; 
-            max-width: 820px; 
-            margin: 0 auto 48px; 
+            font-size: 1rem; 
+            max-width: 100%; 
+            margin: 0 auto 2rem; 
             text-align: center; 
+            padding: 0 1rem;
         }
         
         .sectors-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 24px; 
-            margin-bottom: 60px; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 1.5rem; 
+            margin-bottom: 3rem; 
+            padding: 0 1rem;
         }
         
         .sector-card { 
             background: var(--sectors-card); 
             border: 1px solid var(--sectors-border); 
             border-radius: 16px; 
-            padding: 28px 24px; 
+            padding: 1.5rem; 
             position: relative;
             transition: all 0.3s ease;
             text-align: center;
@@ -623,10 +639,10 @@
         }
         
         .sector-icon { 
-            font-size: 2.5rem; 
-            margin-bottom: 16px; 
-            width: 70px;
-            height: 70px;
+            font-size: 2rem; 
+            margin-bottom: 1rem; 
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -636,32 +652,33 @@
         }
         
         .sector-card h3 { 
-            font-size: 1.25rem; 
+            font-size: 1.2rem; 
             margin-bottom: 12px; 
             color: var(--sectors-text); 
         }
         
         .sector-card p { 
             color: var(--sectors-muted); 
-            font-size: 1rem; 
+            font-size: 0.9rem; 
             line-height: 1.5;
         }
         
         .sectors-layers { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
-            gap: 24px; 
+            grid-template-columns: 1fr; 
+            gap: 1.5rem; 
+            padding: 0 1rem;
         }
         
         .sectors-layer { 
             background: linear-gradient(135deg, rgba(63,183,255,0.12), rgba(124,242,165,0.08)); 
             border: 1px solid var(--sectors-border); 
             border-radius: 16px; 
-            padding: 28px 24px; 
+            padding: 1.5rem; 
         }
         
         .sectors-layer h4 { 
-            font-size: 1.25rem; 
+            font-size: 1.2rem; 
             margin-bottom: 12px; 
             color: var(--sectors-text); 
         }
@@ -673,20 +690,20 @@
         /* YELLOW BANNER */
         .yellow-banner { 
             background: #ffe600; 
-            padding: 60px 20px; 
+            padding: 40px 1rem; 
             text-align: center; 
         }
         
         .yellow-banner .headline { 
-            font-size: 1.5rem; 
+            font-size: 1.2rem; 
             font-weight: 600; 
             color: #1a1a1a; 
-            margin-bottom: 24px; 
+            margin-bottom: 1rem; 
         }
         
         .yellow-banner .subtext { 
             display: block; 
-            font-size: 1.125rem; 
+            font-size: 1rem; 
             color: #333; 
             margin-top: 8px; 
         }
@@ -695,8 +712,8 @@
             display: inline-block; 
             background: #1a1a1a; 
             color: #ffe600; 
-            padding: 14px 32px; 
-            font-size: 1.125rem; 
+            padding: 12px 24px; 
+            font-size: 1rem; 
             font-weight: 600; 
             border-radius: 8px; 
             text-decoration: none; 
@@ -717,14 +734,15 @@
         
         .regional-tabs { 
             display: flex; 
-            gap: 15px; 
+            gap: 10px; 
             justify-content: center; 
-            margin-bottom: 50px; 
+            margin-bottom: 30px; 
             flex-wrap: wrap; 
+            padding: 0 1rem;
         }
         
         .regional-tab { 
-            padding: 12px 30px; 
+            padding: 10px 20px; 
             background: white; 
             border: 2px solid var(--gold); 
             color: var(--gold); 
@@ -732,7 +750,7 @@
             font-weight: 600; 
             cursor: pointer; 
             transition: all 0.3s; 
-            font-size: 1rem; 
+            font-size: 0.9rem; 
         }
         
         .regional-tab.active { 
@@ -747,6 +765,7 @@
         
         .regional-content { 
             display: none; 
+            padding: 0 1rem;
         }
         
         .regional-content.active { 
@@ -761,14 +780,14 @@
         
         .countries-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 1.5rem; 
         }
         
         .country-card { 
             background: white; 
             border-radius: 12px; 
-            padding: 30px; 
+            padding: 1.5rem; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
             border-top: 4px solid var(--gold); 
             text-align: center; 
@@ -781,21 +800,21 @@
         }
         
         .country-flag { 
-            font-size: 3rem; 
-            margin-bottom: 15px; 
+            font-size: 2.5rem; 
+            margin-bottom: 1rem; 
         }
         
         .country-name { 
-            font-size: 1.4rem; 
+            font-size: 1.3rem; 
             color: var(--primary); 
             font-weight: 700; 
-            margin-bottom: 20px; 
+            margin-bottom: 1rem; 
         }
         
         .metric-row { 
             display: flex; 
             justify-content: space-between; 
-            padding: 12px 0; 
+            padding: 10px 0; 
             border-bottom: 1px solid #e5e7eb; 
         }
         
@@ -806,20 +825,218 @@
         .metric-label { 
             color: var(--secondary); 
             font-weight: 500; 
-            font-size: 0.95rem; 
+            font-size: 0.9rem; 
         }
         
         .metric-value { 
             color: var(--primary); 
             font-weight: 700; 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
+        }
+
+        /* NEW FEATURES: Market Comparison Tool & Executive Brief Generator */
+        .new-features {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .features-grid-2col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .feature-tool-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-tool-card h3 i {
+            color: var(--accent);
+        }
+        
+        .comparison-tool {
+            margin-top: 1.5rem;
+        }
+        
+        .comparison-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .comparison-selectors {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .comparison-selectors {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .comparison-select {
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .metric-selector {
+            margin-top: 1rem;
+        }
+        
+        .comparison-results {
+            margin-top: 2rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .country-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem;
+            background: #f1f5f9;
+            border-radius: 5px;
+        }
+        
+        .metric-value-up {
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .metric-value-down {
+            color: var(--danger);
+            font-weight: bold;
+        }
+        
+        /* Executive Brief Generator */
+        .brief-generator {
+            margin-top: 1.5rem;
+        }
+        
+        .brief-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .brief-preview {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px dashed #e2e8f0;
+            display: none;
+        }
+        
+        .brief-preview.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .brief-preview h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .brief-preview-content {
+            line-height: 1.6;
+        }
+        
+        .brief-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
         }
 
         /* SIGNALS SECTION */
         .signals-section { 
             background: linear-gradient(135deg, #0a1628 0%, #1a365d 50%, #0f1f38 100%); 
             color: white; 
-            padding: 100px 0; 
+            padding: 60px 0; 
             position: relative;
             overflow: hidden;
         }
@@ -846,11 +1063,12 @@
         
         .signals-content { 
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr;
+            gap: 3rem;
             align-items: center;
             position: relative;
             z-index: 1;
+            padding: 0 1rem;
         }
         
         .signals-text {
@@ -858,7 +1076,7 @@
         }
         
         .signals-text h2 { 
-            font-size: 2.8rem; 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
             margin-bottom: 1.5rem; 
             line-height: 1.2; 
             color: white; 
@@ -866,21 +1084,21 @@
         }
         
         .signals-subtitle { 
-            font-size: 1.1rem; 
+            font-size: 1rem; 
             margin-bottom: 1.5rem; 
             opacity: 0.95; 
             line-height: 1.7; 
         }
         
         .signals-description { 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             margin-bottom: 1rem; 
             line-height: 1.8; 
             opacity: 0.95;
         }
         
         .signals-emphasis { 
-            font-size: 1.1rem; 
+            font-size: 1rem; 
             margin-bottom: 1.5rem; 
             font-weight: 600; 
             color: var(--gold);
@@ -888,14 +1106,14 @@
         }
         
         .signals-cta-text { 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             margin-bottom: 2rem; 
             line-height: 1.8; 
             opacity: 0.95;
         }
         
         .signals-subscribe { 
-            font-size: 1.05rem; 
+            font-size: 1rem; 
             color: var(--gold);
             margin-top: 2.5rem;
         }
@@ -907,16 +1125,17 @@
         /* Data Cube Visualization */
         .data-cube-scene {
             position: relative;
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
             perspective: 1200px;
             perspective-origin: 50% 50%;
         }
         
         .data-cube {
             position: absolute;
-            width: 280px;
-            height: 280px;
+            width: 200px;
+            height: 200px;
             top: 50%;
             left: 50%;
             transform-style: preserve-3d;
@@ -939,55 +1158,57 @@
             align-items: center;
             justify-content: center;
             color: var(--gold);
-            font-size: 2rem;
+            font-size: 1.5rem;
             backdrop-filter: blur(5px);
         }
         
-        .front { transform: translateZ(140px); }
-        .back { transform: rotateY(180deg) translateZ(140px); }
-        .right { transform: rotateY(90deg) translateZ(140px); }
-        .left { transform: rotateY(-90deg) translateZ(140px); }
-        .top { transform: rotateX(90deg) translateZ(140px); }
-        .bottom { transform: rotateX(-90deg) translateZ(140px); }
+        .front { transform: translateZ(100px); }
+        .back { transform: rotateY(180deg) translateZ(100px); }
+        .right { transform: rotateY(90deg) translateZ(100px); }
+        .left { transform: rotateY(-90deg) translateZ(100px); }
+        .top { transform: rotateX(90deg) translateZ(100px); }
+        .bottom { transform: rotateX(-90deg) translateZ(100px); }
 
         /* CORRUPTION INDEX */
-        #corruption-index .section-title { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; text-align: center; }
-        #corruption-index .section-subtitle { font-size: 1.2rem; color: var(--secondary); text-align: center; margin-bottom: 2rem; }
-        #corruption-index .section-body { font-size: 1.1rem; color: var(--secondary); max-width: 800px; margin: 0 auto 2rem; text-align: center; }
-        #corruption-index .section-list { max-width: 800px; margin: 0 auto 3rem; list-style: none; }
+        #corruption-index .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--primary); margin-bottom: 1rem; text-align: center; }
+        #corruption-index .section-subtitle { font-size: 1rem; color: var(--secondary); text-align: center; margin-bottom: 2rem; }
+        #corruption-index .section-body { font-size: 1rem; color: var(--secondary); max-width: 100%; margin: 0 auto 2rem; text-align: center; padding: 0 1rem; }
+        #corruption-index .section-list { max-width: 100%; margin: 0 auto 3rem; list-style: none; padding: 0 1rem; }
         #corruption-index .section-list li { padding: 0.8rem 0; border-bottom: 1px solid #e2e8f0; color: var(--secondary); }
-        #corruption-index .cta-button { display: inline-block; background: var(--gold); color: var(--primary); padding: 1rem 2rem; border-radius: 5px; text-decoration: none; font-weight: bold; transition: var(--transition); }
+        #corruption-index .cta-button { display: inline-block; background: var(--gold); color: var(--primary); padding: 0.8rem 1.5rem; border-radius: 5px; text-decoration: none; font-weight: bold; transition: var(--transition); }
         #corruption-index .cta-button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
 
         /* BRIEF CTA */
         .brief-cta { 
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%); 
             color: white; 
-            padding: 3rem 0; 
+            padding: 2rem 0; 
             text-align: center; 
             border-bottom: 2px solid var(--gold); 
         }
         
         .brief-cta h2 { 
-            font-size: 2.5rem; 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
             margin-bottom: 1rem; 
             color: var(--gold); 
+            padding: 0 1rem;
         }
         
         .brief-cta p { 
-            font-size: 1.2rem; 
-            max-width: 600px; 
+            font-size: 1rem; 
+            max-width: 100%; 
             margin: 0 auto 2rem; 
             opacity: 0.9; 
+            padding: 0 1rem;
         }
         
         .brief-btn { 
             background: var(--gold); 
             color: var(--primary); 
-            padding: 1rem 2.5rem; 
+            padding: 0.8rem 1.5rem; 
             border: none; 
             border-radius: 5px; 
-            font-size: 1.1rem; 
+            font-size: 1rem; 
             font-weight: bold; 
             cursor: pointer; 
             transition: var(--transition); 
@@ -1005,9 +1226,10 @@
         
         .speaker-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 2rem; 
-            margin-top: 3rem; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 2rem; 
+            padding: 0 1rem;
         }
         
         .speaker { 
@@ -1026,7 +1248,7 @@
         
         .speaker img { 
             width: 100%; 
-            height: 250px; 
+            height: 200px; 
             object-fit: cover; 
             border-bottom: 3px solid var(--gold); 
         }
@@ -1036,35 +1258,35 @@
         }
         
         .speaker h3 { 
-            font-size: 1.3rem; 
+            font-size: 1.2rem; 
             color: var(--primary); 
             margin-bottom: 0.5rem; 
         }
         
         .speaker p { 
             color: var(--secondary); 
-            font-size: 0.95rem; 
+            font-size: 0.9rem; 
         }
 
         /* SLA SECTION */
         .sla-section { 
             background-color: #0a1f44; 
             color: white; 
-            padding: 80px 20px; 
+            padding: 60px 1rem; 
             text-align: center; 
             border-bottom: 2px solid var(--gold); 
         }
         
         .sla-section h2 { 
-            font-size: 2.5em; 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
             margin-bottom: 20px; 
             color: var(--gold); 
         }
         
         .sla-section > p { 
-            font-size: 1.2em; 
-            margin-bottom: 50px; 
-            max-width: 700px; 
+            font-size: 1rem; 
+            margin-bottom: 40px; 
+            max-width: 100%; 
             margin-left: auto; 
             margin-right: auto; 
         }
@@ -1073,14 +1295,14 @@
             display: flex; 
             flex-wrap: wrap; 
             justify-content: center; 
-            gap: 40px; 
-            max-width: 1200px; 
+            gap: 2rem; 
+            max-width: 100%; 
             margin: 0 auto; 
         }
         
         .sla-column { 
             background-color: #1c2e5a; 
-            padding: 40px 30px; 
+            padding: 2rem 1.5rem; 
             border-radius: 10px; 
             width: 100%; 
             max-width: 500px; 
@@ -1112,7 +1334,7 @@
         }
         
         .sla-column h3 { 
-            font-size: 1.8em; 
+            font-size: 1.5rem; 
             margin-bottom: 25px; 
             text-align: center; 
             color: var(--gold); 
@@ -1126,7 +1348,7 @@
         
         .sla-column li { 
             margin-bottom: 20px; 
-            font-size: 1.05em; 
+            font-size: 1rem; 
             padding-left: 10px; 
             border-left: 2px solid transparent; 
             transition: var(--transition); 
@@ -1151,11 +1373,12 @@
             align-items: center; 
             justify-content: center; 
             gap: 1rem; 
-            margin-bottom: 3rem; 
+            margin-bottom: 2rem; 
+            padding: 0 1rem;
         }
         
         .african-header h2 { 
-            font-size: 2.5rem; 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
             color: var(--africa-green); 
             text-align: center; 
         }
@@ -1166,15 +1389,16 @@
         
         .cities-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 2rem; 
-            margin-bottom: 3rem; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 1.5rem; 
+            margin-bottom: 2rem; 
+            padding: 0 1rem;
         }
         
         .city-card { 
             background: white; 
             border-radius: 10px; 
-            padding: 2rem; 
+            padding: 1.5rem; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
             border-top: 4px solid var(--africa-green); 
             text-align: center; 
@@ -1187,20 +1411,20 @@
         }
         
         .city-icon { 
-            font-size: 2.5rem; 
+            font-size: 2rem; 
             color: var(--africa-green); 
             margin-bottom: 1rem; 
         }
         
         .city-name { 
-            font-size: 1.5rem; 
+            font-size: 1.3rem; 
             color: var(--africa-green); 
             margin-bottom: 1rem; 
             font-weight: bold; 
         }
         
         .city-economy { 
-            font-size: 1rem; 
+            font-size: 0.9rem; 
             color: var(--secondary); 
             margin-bottom: 1.5rem; 
         }
@@ -1225,7 +1449,7 @@
         .stat-value { 
             font-weight: bold; 
             color: var(--africa-green); 
-            font-size: 1.1rem; 
+            font-size: 1rem; 
         }
         
         .stat-label { 
@@ -1235,10 +1459,11 @@
         
         .insight-card { 
             background: white; 
-            padding: 2rem; 
+            padding: 1.5rem; 
             border-radius: 10px; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
             transition: all 0.3s ease;
+            margin: 0 1rem;
         }
         
         .insight-card:hover {
@@ -1247,14 +1472,14 @@
         }
         
         .insight-card h4 { 
-            font-size: 1.5rem; 
+            font-size: 1.3rem; 
             margin-bottom: 1.5rem; 
             color: var(--primary); 
         }
         
         .chart-container { 
             position: relative; 
-            height: 300px; 
+            height: 250px; 
         }
         
         .chart-container::before { 
@@ -1278,14 +1503,15 @@
         
         .pricing-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 2rem; 
-            margin-top: 3rem; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 2rem; 
+            padding: 0 1rem;
         }
         
         .pricing-card { 
             background: white; 
-            padding: 2.5rem 2rem; 
+            padding: 2rem 1.5rem; 
             border-radius: 10px; 
             text-align: center; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
@@ -1300,11 +1526,11 @@
         
         .pricing-card.featured { 
             border: 2px solid var(--gold); 
-            transform: scale(1.05); 
+            transform: scale(1); 
         }
         
         .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-8px);
+            transform: translateY(-8px);
         }
         
         .pricing-badge { 
@@ -1321,13 +1547,13 @@
         }
         
         .pricing-header h3 { 
-            font-size: 1.5rem; 
+            font-size: 1.3rem; 
             color: var(--primary); 
             margin-bottom: 1rem; 
         }
         
         .price { 
-            font-size: 3rem; 
+            font-size: 2.5rem; 
             font-weight: bold; 
             color: var(--primary); 
         }
@@ -1367,7 +1593,7 @@
         }
         
         .feature-icon { 
-            font-size: 3rem; 
+            font-size: 2.5rem; 
             color: var(--gold); 
             margin-bottom: 1.5rem; 
         }
@@ -1379,14 +1605,15 @@
         
         .testimonial-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 2rem; 
-            margin-top: 3rem; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 2rem; 
+            padding: 0 1rem;
         }
         
         .testimonial-card { 
             background: #f8f9fa; 
-            padding: 2rem; 
+            padding: 1.5rem; 
             border-radius: 10px; 
             border-left: 4px solid var(--gold); 
             transition: all 0.3s ease;
@@ -1441,22 +1668,25 @@
         }
         
         .newsletter h2 { 
-            font-size: 2.5rem; 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); 
             margin-bottom: 1rem; 
         }
         
         .newsletter p { 
-            max-width: 600px; 
+            max-width: 100%; 
             margin: 0 auto 2rem; 
-            font-size: 1.1rem; 
+            font-size: 1rem; 
             opacity: 0.9; 
+            padding: 0 1rem;
         }
         
         .newsletter-form { 
-            max-width: 500px; 
+            max-width: 100%; 
             margin: 0 auto; 
             display: flex; 
+            flex-direction: column;
             gap: 1rem; 
+            padding: 0 1rem;
         }
         
         .newsletter-form input { 
@@ -1503,27 +1733,27 @@
         }
         
         .footer-top { 
-            padding: 4rem 0 3rem; 
+            padding: 3rem 1rem 2rem; 
             position: relative; 
             z-index: 1; 
         }
         
         .footer-main { 
             display: grid; 
-            grid-template-columns: 2fr 1fr 1fr 1.5fr; 
-            gap: 3rem; 
-            margin-bottom: 3rem; 
+            grid-template-columns: 1fr; 
+            gap: 2rem; 
+            margin-bottom: 2rem; 
         }
         
         .footer-brand { 
-            padding-right: 2rem; 
+            padding-right: 0; 
         }
         
         .footer-logo { 
             display: flex; 
             align-items: center; 
             margin-bottom: 1.25rem; 
-            height: 120px; 
+            height: 80px; 
             background: linear-gradient(135deg, var(--gold), #f7ef8a); 
             padding: 10px 15px; 
             border-radius: 10px; 
@@ -1540,7 +1770,7 @@
         
         .footer-tagline { 
             color: #94a3b8; 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             line-height: 1.7; 
             margin-bottom: 1.5rem; 
         }
@@ -1710,11 +1940,11 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            gap: 3rem; 
-            padding: 2rem 0; 
+            gap: 1.5rem; 
+            padding: 1.5rem 0; 
             border-top: 1px solid rgba(255, 255, 255, 0.08); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
-            margin-bottom: 2rem; 
+            margin-bottom: 1.5rem; 
             flex-wrap: wrap; 
         }
         
@@ -1752,7 +1982,7 @@
         
         .legal-links { 
             display: flex; 
-            gap: 2rem; 
+            gap: 1rem; 
             flex-wrap: wrap; 
         }
         
@@ -1783,10 +2013,10 @@
         
         .back-to-top { 
             position: fixed; 
-            bottom: 30px; 
-            right: 30px; 
-            width: 50px; 
-            height: 50px; 
+            bottom: 20px; 
+            right: 20px; 
+            width: 45px; 
+            height: 45px; 
             background: linear-gradient(135deg, var(--gold), #f7ef8a); 
             color: var(--primary); 
             border: none; 
@@ -1864,6 +2094,32 @@
         @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } .ticker-track { animation: none; } }
 
         /* RESPONSIVE */
+        @media (min-width: 768px) {
+            .features-grid-2col {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-main {
+                grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            }
+            
+            .signals-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: row;
+            }
+            
+            .btn {
+                width: auto;
+            }
+            
+            .hero-buttons {
+                flex-direction: row;
+            }
+        }
+        
         @media (max-width: 1024px) { 
             .footer-main { grid-template-columns: 1fr 1fr; gap: 2.5rem; } 
             .footer-brand { grid-column: 1 / -1; padding-right: 0; } 
@@ -1877,7 +2133,7 @@
             
             .hero { 
                 padding: 0 !important; 
-                min-height: 100vh;
+                min-height: 90vh;
                 display: flex !important; 
                 align-items: center;
             } 
@@ -1900,7 +2156,7 @@
             
             .sectors-layers { 
                 grid-template-columns: 1fr; 
-            } 
+            }
 
             .footer-legal-row {
                 flex-direction: column;
@@ -2093,6 +2349,7 @@
             .footer-logo { 
                 height: 70px; 
                 padding: 5px 8px; 
+                margin: 0 auto;
             }
             
             .signals-section { 
@@ -2129,8 +2386,8 @@
             }
             
             .data-cube-scene { 
-                width: 300px; 
-                height: 300px; 
+                width: 250px; 
+                height: 250px; 
             }
         }
         
@@ -2173,6 +2430,14 @@
             .ticker-controls {
                 display: none;
             }
+            
+            .hero-stats {
+                gap: 1rem;
+            }
+            
+            .hero-stat {
+                min-width: 100px;
+            }
         }
     </style>
 </head>
@@ -2191,6 +2456,7 @@
                         <li><a href="#sectors" class="nav-link"><i class="fas fa-chart-pie"></i><span>Sectors</span></a></li>
                         <li><a href="#regional-analysis" class="nav-link"><i class="fas fa-globe-africa"></i><span>Regions</span></a></li>
                         <li><a href="#african-markets" class="nav-link"><i class="fas fa-city"></i><span>Markets</span></a></li>
+                        <li><a href="#new-features" class="nav-link"><i class="fas fa-tools"></i><span>Tools</span></a></li>
                         <li><a href="#ai-demo" class="nav-link"><i class="fas fa-robot"></i><span>AI Demo</span></a></li>
                         <li><a href="#corruption-index" class="nav-link"><i class="fas fa-shield-alt"></i><span>Index</span></a></li>
                         <li><a href="#speakers" class="nav-link"><i class="fas fa-users"></i><span>Speakers</span></a></li>
@@ -2465,6 +2731,174 @@
                         <div class="metric-row"><span class="metric-label">GDP Growth</span><span class="metric-value">2.8%</span></div>
                         <div class="metric-row"><span class="metric-label">Inflation</span><span class="metric-value">21.3%</span></div>
                         <div class="metric-row"><span class="metric-label">FDI Inflow</span><span class="metric-value">$180M</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW FEATURES SECTION: Market Comparison Tool & Executive Brief Generator -->
+    <section id="new-features" class="section new-features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Advanced Intelligence Tools</h2>
+                <p>Powerful features to enhance your market analysis and decision-making</p>
+            </div>
+            
+            <div class="features-grid-2col">
+                <!-- Market Comparison Tool -->
+                <div class="feature-tool-card">
+                    <h3><i class="fas fa-balance-scale"></i> Market Comparison Tool</h3>
+                    <p>Compare key economic metrics across multiple African countries to identify investment opportunities and risks.</p>
+                    
+                    <div class="comparison-tool">
+                        <div class="comparison-controls">
+                            <div class="comparison-selectors">
+                                <select class="comparison-select" id="country1">
+                                    <option value="">Select Country 1</option>
+                                    <option value="nigeria">Nigeria</option>
+                                    <option value="kenya">Kenya</option>
+                                    <option value="south-africa">South Africa</option>
+                                    <option value="ghana">Ghana</option>
+                                    <option value="egypt">Egypt</option>
+                                    <option value="rwanda">Rwanda</option>
+                                    <option value="ethiopia">Ethiopia</option>
+                                    <option value="tanzania">Tanzania</option>
+                                </select>
+                                
+                                <select class="comparison-select" id="country2">
+                                    <option value="">Select Country 2</option>
+                                    <option value="nigeria">Nigeria</option>
+                                    <option value="kenya">Kenya</option>
+                                    <option value="south-africa">South Africa</option>
+                                    <option value="ghana">Ghana</option>
+                                    <option value="egypt">Egypt</option>
+                                    <option value="rwanda">Rwanda</option>
+                                    <option value="ethiopia">Ethiopia</option>
+                                    <option value="tanzania">Tanzania</option>
+                                </select>
+                            </div>
+                            
+                            <div class="metric-selector">
+                                <select class="comparison-select" id="metric">
+                                    <option value="gdp">GDP Growth</option>
+                                    <option value="inflation">Inflation Rate</option>
+                                    <option value="fdi">FDI Inflow</option>
+                                    <option value="corruption">Corruption Index</option>
+                                    <option value="ease-business">Ease of Doing Business</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn" id="compareBtn">Compare Markets</button>
+                        </div>
+                        
+                        <div class="comparison-results" id="comparisonResults" style="display: none;">
+                            <h4>Comparison Results</h4>
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th id="country1Header">Country 1</th>
+                                        <th id="country2Header">Country 2</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>GDP Growth</td>
+                                        <td id="gdp1">-</td>
+                                        <td id="gdp2">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Inflation Rate</td>
+                                        <td id="inflation1">-</td>
+                                        <td id="inflation2">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FDI Inflow (USD)</td>
+                                        <td id="fdi1">-</td>
+                                        <td id="fdi2">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Corruption Index</td>
+                                        <td id="corruption1">-</td>
+                                        <td id="corruption2">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ease of Business Rank</td>
+                                        <td id="business1">-</td>
+                                        <td id="business2">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Executive Brief Generator -->
+                <div class="feature-tool-card">
+                    <h3><i class="fas fa-file-alt"></i> Executive Brief Generator</h3>
+                    <p>Create custom intelligence reports tailored to your specific interests and requirements.</p>
+                    
+                    <div class="brief-generator">
+                        <form class="brief-form" id="briefForm">
+                            <div class="form-group">
+                                <label for="briefCountry">Select Country/Region:</label>
+                                <select id="briefCountry" required>
+                                    <option value="">Choose a country</option>
+                                    <option value="nigeria">Nigeria</option>
+                                    <option value="kenya">Kenya</option>
+                                    <option value="south-africa">South Africa</option>
+                                    <option value="ghana">Ghana</option>
+                                    <option value="egypt">Egypt</option>
+                                    <option value="east-africa">East Africa Region</option>
+                                    <option value="west-africa">West Africa Region</option>
+                                    <option value="southern-africa">Southern Africa Region</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="briefSector">Select Sector:</label>
+                                <select id="briefSector" required>
+                                    <option value="">Choose a sector</option>
+                                    <option value="mining">Mining</option>
+                                    <option value="agriculture">Agriculture</option>
+                                    <option value="fintech">Fintech</option>
+                                    <option value="energy">Energy</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="tourism">Tourism</option>
+                                    <option value="aviation">Aviation</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="briefFocus">Report Focus:</label>
+                                <select id="briefFocus" required>
+                                    <option value="">Select focus area</option>
+                                    <option value="investment">Investment Opportunities</option>
+                                    <option value="risk">Risk Assessment</option>
+                                    <option value="regulatory">Regulatory Analysis</option>
+                                    <option value="market-trends">Market Trends</option>
+                                    <option value="competition">Competitive Landscape</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="briefNotes">Additional Notes (Optional):</label>
+                                <textarea id="briefNotes" placeholder="Specify any particular areas of interest or requirements..."></textarea>
+                            </div>
+                            
+                            <div class="brief-actions">
+                                <button type="submit" class="btn">Generate Brief</button>
+                                <button type="button" class="btn btn-secondary" id="downloadBrief" style="display: none;">Download PDF</button>
+                            </div>
+                        </form>
+                        
+                        <div class="brief-preview" id="briefPreview">
+                            <h4>Executive Brief Preview</h4>
+                            <div class="brief-preview-content" id="briefPreviewContent">
+                                <!-- Preview content will be generated here -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2861,6 +3295,249 @@
                 if (content) content.classList.add('active');
             });
         });
+
+        // NEW: Market Comparison Tool
+        const compareBtn = document.getElementById('compareBtn');
+        const comparisonResults = document.getElementById('comparisonResults');
+        
+        // Country data
+        const countryData = {
+            nigeria: {
+                name: "Nigeria",
+                gdp: "3.2%",
+                inflation: "18.5%",
+                fdi: "$4.8B",
+                corruption: "25/100",
+                business: "131/190"
+            },
+            kenya: {
+                name: "Kenya",
+                gdp: "5.5%",
+                inflation: "6.8%",
+                fdi: "$1.8B",
+                corruption: "32/100",
+                business: "56/190"
+            },
+            "south-africa": {
+                name: "South Africa",
+                gdp: "1.9%",
+                inflation: "5.4%",
+                fdi: "$7.2B",
+                corruption: "44/100",
+                business: "84/190"
+            },
+            ghana: {
+                name: "Ghana",
+                gdp: "4.8%",
+                inflation: "23.2%",
+                fdi: "$2.1B",
+                corruption: "43/100",
+                business: "118/190"
+            },
+            egypt: {
+                name: "Egypt",
+                gdp: "4.5%",
+                inflation: "25.8%",
+                fdi: "$8.9B",
+                corruption: "33/100",
+                business: "114/190"
+            },
+            rwanda: {
+                name: "Rwanda",
+                gdp: "7.2%",
+                inflation: "3.8%",
+                fdi: "$450M",
+                corruption: "55/100",
+                business: "38/190"
+            },
+            ethiopia: {
+                name: "Ethiopia",
+                gdp: "6.8%",
+                inflation: "28.9%",
+                fdi: "$3.3B",
+                corruption: "38/100",
+                business: "159/190"
+            },
+            tanzania: {
+                name: "Tanzania",
+                gdp: "4.9%",
+                inflation: "4.2%",
+                fdi: "$1.2B",
+                corruption: "40/100",
+                business: "141/190"
+            }
+        };
+        
+        if (compareBtn) {
+            compareBtn.addEventListener('click', function() {
+                const country1 = document.getElementById('country1').value;
+                const country2 = document.getElementById('country2').value;
+                
+                if (!country1 || !country2) {
+                    alert('Please select two countries to compare.');
+                    return;
+                }
+                
+                if (country1 === country2) {
+                    alert('Please select two different countries.');
+                    return;
+                }
+                
+                // Update table headers
+                document.getElementById('country1Header').textContent = countryData[country1].name;
+                document.getElementById('country2Header').textContent = countryData[country2].name;
+                
+                // Update table data
+                document.getElementById('gdp1').textContent = countryData[country1].gdp;
+                document.getElementById('gdp2').textContent = countryData[country2].gdp;
+                
+                document.getElementById('inflation1').textContent = countryData[country1].inflation;
+                document.getElementById('inflation2').textContent = countryData[country2].inflation;
+                
+                document.getElementById('fdi1').textContent = countryData[country1].fdi;
+                document.getElementById('fdi2').textContent = countryData[country2].fdi;
+                
+                document.getElementById('corruption1').textContent = countryData[country1].corruption;
+                document.getElementById('corruption2').textContent = countryData[country2].corruption;
+                
+                document.getElementById('business1').textContent = countryData[country1].business;
+                document.getElementById('business2').textContent = countryData[country2].business;
+                
+                // Show results
+                comparisonResults.style.display = 'block';
+            });
+        }
+        
+        // NEW: Executive Brief Generator
+        const briefForm = document.getElementById('briefForm');
+        const briefPreview = document.getElementById('briefPreview');
+        const briefPreviewContent = document.getElementById('briefPreviewContent');
+        const downloadBriefBtn = document.getElementById('downloadBrief');
+        
+        if (briefForm) {
+            briefForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const country = document.getElementById('briefCountry').value;
+                const sector = document.getElementById('briefSector').value;
+                const focus = document.getElementById('briefFocus').value;
+                const notes = document.getElementById('briefNotes').value;
+                
+                // Generate brief content
+                let content = `<h4>Executive Brief: ${getCountryName(country)} - ${getSectorName(sector)}</h4>`;
+                content += `<p><strong>Focus Area:</strong> ${getFocusName(focus)}</p>`;
+                content += `<p><strong>Date Generated:</strong> ${new Date().toLocaleDateString()}</p>`;
+                content += `<hr>`;
+                
+                // Add sector-specific insights
+                content += generateSectorInsights(sector, country);
+                
+                // Add focus-specific analysis
+                content += generateFocusAnalysis(focus, country);
+                
+                // Add country overview
+                content += generateCountryOverview(country);
+                
+                // Add notes if provided
+                if (notes.trim()) {
+                    content += `<h5>Additional Requirements:</h5><p>${notes}</p>`;
+                }
+                
+                // Add disclaimer
+                content += `<hr><p><small><em>This executive brief was generated by AlgoEconomics AI. For the most current data and comprehensive analysis, please contact our research team.</em></small></p>`;
+                
+                // Update preview
+                briefPreviewContent.innerHTML = content;
+                briefPreview.classList.add('active');
+                downloadBriefBtn.style.display = 'inline-block';
+                
+                // Scroll to preview
+                briefPreview.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        }
+        
+        if (downloadBriefBtn) {
+            downloadBriefBtn.addEventListener('click', function() {
+                alert('Executive brief PDF download started. In a production environment, this would generate and download a PDF report.');
+            });
+        }
+        
+        // Helper functions for brief generator
+        function getCountryName(code) {
+            const countries = {
+                'nigeria': 'Nigeria',
+                'kenya': 'Kenya',
+                'south-africa': 'South Africa',
+                'ghana': 'Ghana',
+                'egypt': 'Egypt',
+                'east-africa': 'East Africa Region',
+                'west-africa': 'West Africa Region',
+                'southern-africa': 'Southern Africa Region'
+            };
+            return countries[code] || code;
+        }
+        
+        function getSectorName(code) {
+            const sectors = {
+                'mining': 'Mining & Natural Resources',
+                'agriculture': 'Agriculture & Agribusiness',
+                'fintech': 'Fintech & Digital Finance',
+                'energy': 'Energy & Renewables',
+                'healthcare': 'Healthcare & Pharmaceuticals',
+                'tourism': 'Tourism & Hospitality',
+                'aviation': 'Aviation & Logistics'
+            };
+            return sectors[code] || code;
+        }
+        
+        function getFocusName(code) {
+            const focuses = {
+                'investment': 'Investment Opportunities',
+                'risk': 'Risk Assessment',
+                'regulatory': 'Regulatory Analysis',
+                'market-trends': 'Market Trends',
+                'competition': 'Competitive Landscape'
+            };
+            return focuses[code] || code;
+        }
+        
+        function generateSectorInsights(sector, country) {
+            const insights = {
+                'mining': `<h5>Mining Sector Insights</h5><p>Africa's mining sector is experiencing significant transformation with increased focus on critical minerals for the energy transition. Key opportunities exist in lithium, cobalt, and copper mining, particularly in the Democratic Republic of Congo, Zambia, and Namibia. ESG considerations are becoming increasingly important for investors.</p>`,
+                'agriculture': `<h5>Agriculture Sector Insights</h5><p>The African agriculture sector offers substantial growth potential with increasing investment in agri-tech and sustainable farming practices. Climate-smart agriculture and food security initiatives are driving innovation across the continent. Export opportunities in organic and specialty crops are expanding.</p>`,
+                'fintech': `<h5>Fintech Sector Insights</h5><p>Africa's fintech ecosystem is one of the fastest-growing in the world, with mobile money penetration exceeding traditional banking in many markets. Regulatory frameworks are evolving to support innovation while ensuring consumer protection. Cross-border payment solutions and digital lending are particularly promising areas.</p>`,
+                'energy': `<h5>Energy Sector Insights</h5><p>Africa's energy transition is accelerating with significant investment in renewable energy projects. Solar and wind capacity is expanding rapidly, supported by favorable policy environments in many countries. Opportunities exist in both grid-scale projects and decentralized energy solutions for rural electrification.</p>`,
+                'healthcare': `<h5>Healthcare Sector Insights</h5><p>The healthcare sector in Africa is undergoing digital transformation with increased adoption of telemedicine and healthtech solutions. Public-private partnerships are driving infrastructure development, while pharmaceutical manufacturing localisation presents new investment opportunities.</p>`,
+                'tourism': `<h5>Tourism Sector Insights</h5><p>Post-pandemic recovery in African tourism is strong, with ecotourism and cultural tourism experiencing particularly rapid growth. Sustainable tourism initiatives are gaining traction, supported by government incentives and international development funding.</p>`,
+                'aviation': `<h5>Aviation Sector Insights</h5><p>Africa's aviation sector is poised for growth with increasing passenger traffic and new route development. Airport infrastructure upgrades and airline fleet modernization present investment opportunities. The African Continental Free Trade Area (AfCFTA) is expected to boost air cargo demand.</p>`
+            };
+            return insights[sector] || `<h5>Sector Insights</h5><p>Comprehensive analysis of the ${getSectorName(sector)} sector in ${getCountryName(country)}.</p>`;
+        }
+        
+        function generateFocusAnalysis(focus, country) {
+            const analyses = {
+                'investment': `<h5>Investment Opportunities</h5><p>Key investment opportunities in ${getCountryName(country)} include infrastructure development, digital transformation projects, and value-added manufacturing. Public-private partnership frameworks are increasingly well-defined, providing structured investment pathways.</p>`,
+                'risk': `<h5>Risk Assessment</h5><p>Primary risks in ${getCountryName(country)} include currency volatility, regulatory changes, and political transitions. Mitigation strategies include local partnerships, comprehensive due diligence, and political risk insurance. ESG compliance is becoming a critical risk factor.</p>`,
+                'regulatory': `<h5>Regulatory Analysis</h5><p>The regulatory environment in ${getCountryName(country)} is evolving to support foreign investment while protecting domestic interests. Key regulatory trends include digital taxation frameworks, environmental compliance requirements, and local content regulations.</p>`,
+                'market-trends': `<h5>Market Trends</h5><p>Current market trends in ${getCountryName(country)} include rapid urbanisation, growing middle-class consumption, and digital adoption acceleration. Demographic dividends and increasing connectivity are driving market expansion across multiple sectors.</p>`,
+                'competition': `<h5>Competitive Landscape</h5><p>The competitive landscape in ${getCountryName(country)} features a mix of established multinationals, regional champions, and agile local startups. Differentiation strategies increasingly focus on digital integration, local partnerships, and sustainability credentials.</p>`
+            };
+            return analyses[focus] || `<h5>Focus Analysis</h5><p>Detailed analysis of ${getFocusName(focus)} in ${getCountryName(country)}.</p>`;
+        }
+        
+        function generateCountryOverview(country) {
+            const overviews = {
+                'nigeria': `<h5>Nigeria Market Overview</h5><p>Africa's largest economy with diverse sectors including oil & gas, agriculture, and services. Recent economic reforms are improving the investment climate, though infrastructure gaps and security concerns remain challenges. The fintech ecosystem is particularly dynamic.</p>`,
+                'kenya': `<h5>Kenya Market Overview</h5><p>East Africa's economic hub with strong services sector and emerging manufacturing base. Digital innovation leadership with robust mobile money ecosystem. Political stability and improving infrastructure support continued growth.</p>`,
+                'south-africa': `<h5>South Africa Market Overview</h5><p>Africa's most industrialised economy with sophisticated financial services and manufacturing sectors. Energy security challenges are being addressed through renewable energy investments. The AfCFTA presents export opportunities.</p>`,
+                'ghana': `<h5>Ghana Market Overview</h5><p>Stable democracy with diversified economy including cocoa, gold, and oil production. Digital government initiatives and improving infrastructure support business environment. Regional financial services hub with growing tech ecosystem.</p>`,
+                'egypt': `<h5>Egypt Market Overview</h5><p>North Africa's largest economy with strategic location connecting Africa, Europe, and Middle East. Economic reforms are stabilising the macroeconomic environment. Renewable energy and logistics infrastructure present significant opportunities.</p>`,
+                'east-africa': `<h5>East Africa Region Overview</h5><p>One of Africa's fastest-growing regions with strong economic integration through the East African Community. Infrastructure development, particularly in transport and energy, is driving regional connectivity. Digital innovation leadership with vibrant startup ecosystems.</p>`,
+                'west-africa': `<h5>West Africa Region Overview</h5><p>Economically diverse region with Nigeria as the dominant economy. The ECOWAS bloc facilitates regional trade, though implementation challenges remain. Agricultural potential, mining resources, and growing consumer markets present opportunities.</p>`,
+                'southern-africa': `<h5>Southern Africa Region Overview</h5><p>Region anchored by South Africa with strong mining, agriculture, and tourism sectors. SADC integration efforts are improving cross-border trade. Renewable energy potential is significant, particularly in solar and wind resources.</p>`
+            };
+            return overviews[country] || `<h5>Market Overview</h5><p>General overview of the ${getCountryName(country)} market environment.</p>`;
+        }
 
         // Charts
         createSparklineCharts();
