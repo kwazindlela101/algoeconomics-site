@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
+    <title>AlgoEconomics | AI-Powered Economic Intelligence for UK-Africa Markets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <meta name="theme-color" content="#1a365d">
+    <meta name="description" content="AI-powered economic intelligence platform providing real-time insights, predictive analytics, and actionable intelligence for UK-Africa markets.">
     <style>
         :root {
             --primary: #1a365d;
@@ -142,6 +143,22 @@
         }
         
         .nav-link.logo-link:hover { background: linear-gradient(135deg, #f7ef8a, var(--gold)); box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5); transform: translateY(-1px); }
+
+        /* Mobile menu overlay */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+        
+        .nav-overlay.active {
+            display: block;
+        }
 
         /* ENHANCED TICKER */
         .market-indicators { 
@@ -1898,6 +1915,49 @@
         }
         
         @media (max-width: 768px) { 
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
+                flex-direction: column;
+                padding: 6rem 2rem 2rem;
+                transition: left 0.3s ease;
+                z-index: 999;
+                overflow-y: auto;
+                box-shadow: 5px 0 25px rgba(0,0,0,0.2);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-link {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 1rem;
+                border-radius: 8px;
+                font-size: 1rem;
+            }
+            
+            .nav-link.logo-link {
+                position: absolute;
+                top: 1rem;
+                left: 2rem;
+                width: auto;
+            }
+            
+            .nav-link.logo-link img {
+                height: 40px;
+            }
+            
             .hero h1 { 
                 font-size: 2rem; 
             } 
@@ -2109,10 +2169,17 @@
             .sectors-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .ticker-controls {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile menu overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
     <header>
         <div class="container">
             <div class="header-inner">
@@ -2712,18 +2779,30 @@
         // Mobile menu toggle
         const menuToggle = document.getElementById('menu-toggle');
         const navLinks = document.querySelector('.nav-links');
+        const navOverlay = document.getElementById('navOverlay');
+        
         if (menuToggle && navLinks) {
             menuToggle.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
+                if (navOverlay) navOverlay.classList.toggle('active');
+            });
+            
+            // Close menu when clicking overlay
+            if (navOverlay) {
+                navOverlay.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                });
+            }
+            
+            // Close menu on link click (mobile)
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    if (navOverlay) navOverlay.classList.remove('active');
+                });
             });
         }
-
-        // Close menu on link click
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                if (navLinks) navLinks.classList.remove('active');
-            });
-        });
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
