@@ -1778,6 +1778,53 @@
         /* SCROLL MARGINS */
         #home, #why-us, #sectors, #regional-analysis, #african-markets, #ai-demo, #corruption-index, #speakers, #features, #sla-comparison, #pricing, #newsletter, #testimonials { scroll-margin-top: var(--total-fixed-height); }
 
+        /* FIXED: Powered by Algocentric AI positioned next to privacy policy */
+        .footer-legal-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-powered-by {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #cbd5e0;
+        }
+
+        .footer-powered-by .powered-text {
+            color: var(--gold);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .footer-powered-by .powered-arrow {
+            color: #00A87A;
+            font-size: 16px;
+            animation: pulseArrow 2s infinite ease-in-out;
+        }
+
+        .footer-powered-by .powered-tagline {
+            color: #94a3b8;
+            font-style: italic;
+            font-size: 0.8rem;
+        }
+
+        /* Arrow animation */
+        @keyframes pulseArrow {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0); }
+        }
+
         /* REDUCED MOTION */
         @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } .ticker-track { animation: none; } }
 
@@ -1819,6 +1866,17 @@
             .sectors-layers { 
                 grid-template-columns: 1fr; 
             } 
+
+            .footer-legal-row {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-powered-by {
+                order: 1;
+                margin-top: 1rem;
+            }
         }
         
         @media (max-width: 768px) { 
@@ -2169,9 +2227,9 @@
                     <p>Infrastructure capacity, pharma supply chains, and insurance penetration.</p>
                 </article>
                 <article class="sector-card">
-                    <div class="sector-icon">📡</div>
-                    <h3>Technology & Telecom</h3>
-                    <p>Mobile penetration, broadband rollout, and startup ecosystems.</p>
+                    <div class="sector-icon">🏨</div>
+                    <h3>Tourism</h3>
+                    <p>Hotel occupancy rates, tourist arrivals, cultural heritage sites, and hospitality investments.</p>
                 </article>
             </div>
             <div class="sectors-layers">
@@ -2602,19 +2660,20 @@
                     <div class="award-item"><i class="fas fa-certificate"></i><span>FCA Registered</span></div>
                 </div>
 
-                <div class="footer-powered-by">
-                    <div class="powered-text">Powered by AlgoCentric AI</div>
-                    <div class="powered-arrow">&#x25B2;</div>
-                    <div class="powered-tagline">Where governance meets grit.</div>
-                </div>
-
                 <div class="footer-legal">
-                    <div class="legal-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
-                        <a href="#">Cookie Policy</a>
-                        <a href="#">Acceptable Use</a>
-                        <a href="#">Data Processing</a>
+                    <div class="footer-legal-row">
+                        <div class="legal-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                            <a href="#">Acceptable Use</a>
+                            <a href="#">Data Processing</a>
+                        </div>
+                        <div class="footer-powered-by">
+                            <div class="powered-text">Powered by AlgoCentric AI</div>
+                            <div class="powered-arrow">&#x25B2;</div>
+                            <div class="powered-tagline">Where governance meets grit.</div>
+                        </div>
                     </div>
                     <div class="footer-copyright">© 2025 AlgoEconomics Ltd. All rights reserved.</div>
                 </div>
