@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlgoEconomics | Global Markets. UK & African Relevance. AI-Powered Insight.</title>
+    <title>AlgoEconomics | AI-Powered Insight for UK-Africa Economics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -20,6 +20,7 @@
             --dark: #1a202c;
             --success: #38a169;
             --danger: #e53e3e;
+            --warning: #d69e2e;
             --africa-green: #2d5016;
             --africa-gold: #ffd700;
             --transition: all 0.3s ease;
@@ -35,6 +36,7 @@
             --header-height: 105px;
             --ticker-height: 52px;
             --total-fixed-height: 157px;
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -85,11 +87,18 @@
             background: rgba(212, 175, 55, 0.5);
             border-radius: 3px;
         }
-        .header-inner::-webkit-scrollbar-thumb:hover {
-            background: rgba(212, 175, 55, 0.7);
-        }
         
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: white; background: none; border: none; position: absolute; right: 1rem; }
+        .menu-toggle { 
+            display: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            color: white; 
+            background: none; 
+            border: none; 
+            position: absolute; 
+            right: 1rem; 
+            z-index: 1001;
+        }
         
         .nav-links { 
             display: flex; 
@@ -490,6 +499,823 @@
             font-size: 1.1rem; 
         }
 
+        /* NEW: Interactive Dashboard */
+        .interactive-dashboard {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .dashboard-widget {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .dashboard-widget:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-widget h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .heatmap-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .heatmap-item {
+            padding: 0.75rem;
+            border-radius: 6px;
+            background: #f1f5f9;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .heatmap-item:hover {
+            transform: translateX(5px);
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .currency-pairs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .currency-pair {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .currency-value {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .change {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .change.up {
+            background: var(--success);
+            color: white;
+        }
+
+        .change.down {
+            background: var(--danger);
+            color: white;
+        }
+
+        .change.neutral {
+            background: #666;
+            color: white;
+        }
+
+        /* NEW: AI Risk Assessment Tool */
+        .risk-assessment {
+            background: white;
+        }
+
+        .risk-calculator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @media (max-width: 768px) {
+            .risk-calculator {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+        }
+
+        .risk-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .risk-factor {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .risk-factor label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .risk-factor select {
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .risk-factor select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .risk-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .risk-score {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(var(--success) 0%, #f1f5f9 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .score-circle {
+                width: 100px;
+                height: 100px;
+                font-size: 1.5rem;
+            }
+        }
+
+        .score-label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .risk-breakdown {
+            width: 100%;
+        }
+
+        .risk-breakdown h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .risk-breakdown ul {
+            list-style: none;
+        }
+
+        .risk-breakdown li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .risk-breakdown li:last-child {
+            border-bottom: none;
+        }
+
+        /* NEW: Real-time News Feed */
+        .news-feed {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .news-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @media (max-width: 768px) {
+            .news-container {
+                padding: 1.5rem;
+            }
+        }
+
+        .news-ticker {
+            margin-bottom: 2rem;
+        }
+
+        .news-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        @media (max-width: 768px) {
+            .news-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+                padding: 0.75rem;
+            }
+        }
+
+        .news-item:hover {
+            background: #f8f9fa;
+        }
+
+        .news-item.breaking {
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.1), transparent);
+            border-left: 4px solid var(--danger);
+        }
+
+        .news-time {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            min-width: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .news-time {
+                min-width: auto;
+            }
+        }
+
+        .news-tag {
+            padding: 0.25rem 0.5rem;
+            background: var(--gold);
+            color: var(--primary);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .news-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .news-filter {
+            margin-top: 1.5rem;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 0.5rem 1rem;
+            background: #f1f5f9;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-tag.active {
+            background: var(--gold);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .filter-tag:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        /* NEW: Comparison Tool */
+        .comparison-tool {
+            background: white;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .comparison-selector {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-selector {
+                padding: 1rem;
+            }
+        }
+
+        .comparison-item {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .comparison-item.active {
+            background: var(--gold);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .comparison-item:hover:not(.active) {
+            background: #f1f5f9;
+        }
+
+        .comparison-chart {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            min-height: 300px;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-chart {
+                padding: 1rem;
+                min-height: 250px;
+            }
+        }
+
+        /* NEW: Executive Brief Generator */
+        .brief-generator {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .generator-wizard {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @media (max-width: 768px) {
+            .generator-wizard {
+                padding: 1.5rem;
+            }
+        }
+
+        .wizard-step {
+            display: none;
+        }
+
+        .wizard-step.active {
+            display: block;
+        }
+
+        .wizard-step h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .focus-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .focus-areas {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .focus-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .focus-checkbox:hover {
+            background: #f1f5f9;
+        }
+
+        .focus-checkbox input {
+            margin: 0;
+        }
+
+        .brief-preview {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .brief-preview {
+                padding: 1.5rem;
+            }
+        }
+
+        .preview-content {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            min-height: 200px;
+        }
+
+        /* NEW: Mobile App Preview */
+        .mobile-app {
+            background: linear-gradient(135deg, #0a1628 0%, #1a365d 100%);
+            color: white;
+        }
+
+        .app-preview {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .app-preview {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+        }
+
+        .phone-frame {
+            width: 300px;
+            height: 600px;
+            background: #1a202c;
+            border-radius: 40px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .phone-frame {
+                width: 280px;
+                height: 560px;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .phone-frame {
+                width: 250px;
+                height: 500px;
+                padding: 12px;
+            }
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .app-screen {
+            padding: 1.5rem;
+            color: var(--dark);
+            height: 100%;
+        }
+
+        @media (max-width: 480px) {
+            .app-screen {
+                padding: 1rem;
+            }
+        }
+
+        .app-header {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 480px) {
+            .alert-item {
+                padding: 0.75rem;
+                gap: 0.75rem;
+            }
+        }
+
+        .alert-item.new {
+            border-left: 3px solid var(--success);
+        }
+
+        .alert-icon {
+            font-size: 1.2rem;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .alert-time {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .app-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .app-features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .app-feature {
+            text-align: center;
+        }
+
+        .app-feature i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .app-feature h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-feature p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .app-download {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .app-download {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .app-download .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        /* NEW: Data Partnerships Badges */
+        .partners {
+            background: white;
+        }
+
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .partner-logos {
+                gap: 1.5rem;
+            }
+        }
+
+        .partner-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            min-width: 150px;
+        }
+
+        @media (max-width: 768px) {
+            .partner-logo {
+                min-width: 120px;
+                padding: 1rem;
+            }
+        }
+
+        .partner-logo:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .partner-logo i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .partner-logo span {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* NEW: Integration Capabilities */
+        .integrations {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .integration-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .integration-icons {
+                gap: 0.75rem;
+            }
+        }
+
+        .integration-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        @media (max-width: 768px) {
+            .integration-item {
+                min-width: 100px;
+                padding: 1rem;
+            }
+        }
+
+        .integration-item:hover {
+            transform: translateY(-5px);
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .integration-item i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .integration-item span {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .demo-video {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .demo-video {
+                padding: 1.5rem;
+            }
+        }
+
+        .video-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        @media (max-width: 768px) {
+            .video-placeholder {
+                height: 200px;
+            }
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        .video-placeholder i {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .video-placeholder i {
+                font-size: 3rem;
+            }
+        }
+
+        .video-placeholder p {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .video-placeholder p {
+                font-size: 1rem;
+            }
+        }
+
         /* WHY US */
         #why-us { background: white; }
         
@@ -634,6 +1460,12 @@
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
             gap: 24px; 
+        }
+        
+        @media (max-width: 768px) {
+            .sectors-layers {
+                grid-template-columns: 1fr;
+            }
         }
         
         .sectors-layer { 
@@ -836,6 +1668,13 @@
             z-index: 1;
         }
         
+        @media (max-width: 768px) {
+            .signals-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+        
         .signals-text {
             max-width: 100%;
         }
@@ -846,6 +1685,12 @@
             line-height: 1.2; 
             color: white; 
             font-weight: 700;
+        }
+        
+        @media (max-width: 768px) {
+            .signals-text h2 {
+                font-size: 2rem;
+            }
         }
         
         .signals-subtitle { 
@@ -895,6 +1740,14 @@
             perspective: 1200px;
             perspective-origin: 50% 50%;
         }
+
+        @media (max-width: 768px) {
+            .data-cube-scene {
+                width: 300px;
+                height: 300px;
+                margin: 0 auto;
+            }
+        }
         
         .data-cube {
             position: absolute;
@@ -905,6 +1758,13 @@
             transform-style: preserve-3d;
             transform: translate(-50%, -50%) rotateX(-20deg) rotateY(-30deg);
             animation: cubeRotate 20s infinite linear;
+        }
+
+        @media (max-width: 768px) {
+            .data-cube {
+                width: 200px;
+                height: 200px;
+            }
         }
         
         @keyframes cubeRotate {
@@ -924,6 +1784,12 @@
             color: var(--gold);
             font-size: 2rem;
             backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 768px) {
+            .cube-face {
+                font-size: 1.5rem;
+            }
         }
         
         .front { transform: translateZ(140px); }
@@ -1843,13 +2709,87 @@
             100% { transform: translateY(0); }
         }
 
+        /* MOBILE NAVIGATION */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
+                flex-direction: column;
+                padding: 6rem 2rem 2rem;
+                transition: left 0.3s ease;
+                z-index: 999;
+                overflow-y: auto;
+                box-shadow: 5px 0 25px rgba(0,0,0,0.2);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-link {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 1rem;
+                border-radius: 8px;
+                font-size: 1rem;
+            }
+            
+            .nav-link.logo-link {
+                position: absolute;
+                top: 1rem;
+                left: 2rem;
+                width: auto;
+            }
+            
+            .nav-link.logo-link img {
+                height: 40px;
+            }
+            
+            /* Overlay when menu is open */
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 998;
+            }
+            
+            .nav-overlay.active {
+                display: block;
+            }
+        }
+
         /* REDUCED MOTION */
-        @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } .ticker-track { animation: none; } }
+        @media (prefers-reduced-motion: reduce) { 
+            * { 
+                animation-duration: 0.01ms !important; 
+                transition-duration: 0.01ms !important; 
+            } 
+            .ticker-track { animation: none; } 
+        }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) { 
-            .footer-main { grid-template-columns: 1fr 1fr; gap: 2.5rem; } 
-            .footer-brand { grid-column: 1 / -1; padding-right: 0; } 
+            .footer-main { 
+                grid-template-columns: 1fr 1fr; 
+                gap: 2.5rem; 
+            } 
+            .footer-brand { 
+                grid-column: 1 / -1; 
+                padding-right: 0; 
+            } 
         }
         
         @media (max-width: 900px) { 
@@ -1883,7 +2823,7 @@
             
             .sectors-layers { 
                 grid-template-columns: 1fr; 
-            } 
+            }
 
             .footer-legal-row {
                 flex-direction: column;
@@ -2072,6 +3012,28 @@
                 width: 300px; 
                 height: 300px; 
             }
+
+            /* New features responsive */
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .app-preview {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .phone-frame {
+                margin: 0 auto;
+            }
+
+            .app-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
         }
         
         @media (max-width: 480px) { 
@@ -2109,17 +3071,42 @@
             .sectors-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .hero-buttons .btn,
+            .app-download .btn {
+                min-width: auto;
+                padding: 0.75rem 1.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-header p {
+                font-size: 1rem;
+            }
+            
+            .ticker-controls {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile menu overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
     <header>
         <div class="container">
             <div class="header-inner">
-                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <nav id="nav-menu">
                     <ul class="nav-links">
-                        <li><a href="#home" class="nav-link logo-link active"><img src="logo.png" alt="Home" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--primary);font-weight:bold;font-size:1.2rem;\'>AE</span>';"></a></li>
+                        <li><a href="#home" class="nav-link logo-link active">
+                            <img src="logo.png" alt="Home" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--primary);font-weight:bold;font-size:1.2rem;\'>AE</span>';">
+                        </a></li>
                         <li><a href="#why-us" class="nav-link"><i class="fas fa-star"></i><span>Why Us</span></a></li>
                         <li><a href="#sectors" class="nav-link"><i class="fas fa-chart-pie"></i><span>Sectors</span></a></li>
                         <li><a href="#regional-analysis" class="nav-link"><i class="fas fa-globe-africa"></i><span>Regions</span></a></li>
@@ -2209,6 +3196,48 @@
         </div>
     </section>
 
+    <!-- NEW: Interactive Economic Indicators Dashboard -->
+    <section class="interactive-dashboard section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Live Economic Dashboard</h2>
+                <p>Real-time monitoring of key economic indicators</p>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-widget">
+                    <h3><i class="fas fa-chart-line"></i> Inflation Heatmap</h3>
+                    <div class="heatmap-container">
+                        <div class="heatmap-item" data-country="Nigeria" data-value="18.5">Nigeria: 18.5%</div>
+                        <div class="heatmap-item" data-country="Egypt" data-value="25.8">Egypt: 25.8%</div>
+                        <div class="heatmap-item" data-country="Ghana" data-value="23.2">Ghana: 23.2%</div>
+                        <div class="heatmap-item" data-country="Kenya" data-value="6.8">Kenya: 6.8%</div>
+                        <div class="heatmap-item" data-country="South Africa" data-value="5.4">SA: 5.4%</div>
+                    </div>
+                </div>
+                <div class="dashboard-widget">
+                    <h3><i class="fas fa-exchange-alt"></i> Currency Watch</h3>
+                    <div class="currency-pairs">
+                        <div class="currency-pair">
+                            <span>NGN/USD</span>
+                            <span class="currency-value">1,485.50</span>
+                            <span class="change neutral">0.0%</span>
+                        </div>
+                        <div class="currency-pair">
+                            <span>ZAR/USD</span>
+                            <span class="currency-value">18.25</span>
+                            <span class="change up">+0.3%</span>
+                        </div>
+                        <div class="currency-pair">
+                            <span>GHS/USD</span>
+                            <span class="currency-value">11.80</span>
+                            <span class="change down">-0.2%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="sectors" class="sectors section">
         <div class="container">
             <h2>Sectors We Cover</h2>
@@ -2253,6 +3282,55 @@
             <div class="sectors-layers">
                 <div class="sectors-layer"><h4>AI Corruption Index</h4><p>Sector-specific governance risk overlay, highlighting procurement and regulatory integrity.</p></div>
                 <div class="sectors-layer"><h4>Investor Signals</h4><p>FDI flows, capital projects, PPPs, and VC activity mapped across regions.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: AI Risk Assessment Tool -->
+    <section class="risk-assessment section">
+        <div class="container">
+            <div class="section-header">
+                <h2>AI Risk Assessment Calculator</h2>
+                <p>Instant risk scoring for your investment decisions</p>
+            </div>
+            <div class="risk-calculator">
+                <div class="risk-inputs">
+                    <div class="risk-factor">
+                        <label for="country-select">Select Country:</label>
+                        <select id="country-select">
+                            <option value="nigeria">Nigeria</option>
+                            <option value="kenya">Kenya</option>
+                            <option value="south-africa">South Africa</option>
+                            <option value="ghana">Ghana</option>
+                            <option value="egypt">Egypt</option>
+                        </select>
+                    </div>
+                    <div class="risk-factor">
+                        <label for="sector-select">Select Sector:</label>
+                        <select id="sector-select">
+                            <option value="mining">Mining</option>
+                            <option value="agriculture">Agriculture</option>
+                            <option value="fintech">Fintech</option>
+                            <option value="energy">Energy</option>
+                            <option value="tourism">Tourism</option>
+                        </select>
+                    </div>
+                    <button id="calculate-risk" class="btn">Calculate Risk Score</button>
+                </div>
+                <div class="risk-result" id="risk-result">
+                    <div class="risk-score">
+                        <div class="score-circle">
+                            <span id="score-value">--</span>
+                        </div>
+                        <div class="score-label">AI Risk Score</div>
+                    </div>
+                    <div class="risk-breakdown">
+                        <h4>Risk Factors:</h4>
+                        <ul id="risk-factors">
+                            <!-- AI will populate this -->
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -2411,6 +3489,45 @@
         </div>
     </section>
 
+    <!-- NEW: Real-time News Feed -->
+    <section class="news-feed section">
+        <div class="container">
+            <div class="section-header">
+                <h2>AI-Curated Market News</h2>
+                <p>Real-time news filtered for relevance to your interests</p>
+            </div>
+            <div class="news-container">
+                <div class="news-ticker">
+                    <div class="news-item breaking">
+                        <span class="news-time">10:24 AM</span>
+                        <span class="news-tag">BREAKING</span>
+                        <span class="news-text">Central Bank of Nigeria announces new forex measures</span>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-time">09:45 AM</span>
+                        <span class="news-tag">MARKETS</span>
+                        <span class="news-text">Kenya's Treasury proposes new digital tax regulations</span>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-time">08:30 AM</span>
+                        <span class="news-tag">POLICY</span>
+                        <span class="news-text">South Africa launches $2.5B infrastructure fund</span>
+                    </div>
+                </div>
+                <div class="news-filter">
+                    <h4>Filter by Interest:</h4>
+                    <div class="filter-tags">
+                        <span class="filter-tag active">All</span>
+                        <span class="filter-tag">Policy</span>
+                        <span class="filter-tag">Markets</span>
+                        <span class="filter-tag">Deals</span>
+                        <span class="filter-tag">Regulation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="ai-demo" class="section signals-section">
         <div class="container">
             <div class="signals-content">
@@ -2438,6 +3555,39 @@
         </div>
     </section>
 
+    <!-- NEW: Comparison Tool -->
+    <section class="comparison-tool section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Market Comparison Tool</h2>
+                <p>Compare key metrics across African markets</p>
+            </div>
+            <div class="comparison-grid">
+                <div class="comparison-selector">
+                    <div class="comparison-item active" data-country="nigeria">
+                        <span class="flag">🇳🇬</span>
+                        <span class="name">Nigeria</span>
+                    </div>
+                    <div class="comparison-item" data-country="kenya">
+                        <span class="flag">🇰🇪</span>
+                        <span class="name">Kenya</span>
+                    </div>
+                    <div class="comparison-item" data-country="south-africa">
+                        <span class="flag">🇿🇦</span>
+                        <span class="name">South Africa</span>
+                    </div>
+                    <div class="comparison-item" data-country="ghana">
+                        <span class="flag">🇬🇭</span>
+                        <span class="name">Ghana</span>
+                    </div>
+                </div>
+                <div class="comparison-chart">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="corruption-index" class="section">
         <div class="container">
             <h2 class="section-title">AI Corruption Index</h2>
@@ -2450,6 +3600,63 @@
                 <li><strong>Sector-Specific Analysis</strong> - Tailored risk profiles</li>
             </ul>
             <div style="text-align: center;"><a href="#newsletter" class="cta-button">Request Full Report</a></div>
+        </div>
+    </section>
+
+    <!-- NEW: Executive Brief Generator -->
+    <section class="brief-generator section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Executive Brief Generator</h2>
+                <p>Create custom intelligence briefs in minutes</p>
+            </div>
+            <div class="generator-wizard">
+                <div class="wizard-step active">
+                    <h3>1. Select Focus Areas</h3>
+                    <div class="focus-areas">
+                        <label class="focus-checkbox">
+                            <input type="checkbox" checked>
+                            <span>Market Trends</span>
+                        </label>
+                        <label class="focus-checkbox">
+                            <input type="checkbox">
+                            <span>Regulatory Changes</span>
+                        </label>
+                        <label class="focus-checkbox">
+                            <input type="checkbox" checked>
+                            <span>Investment Opportunities</span>
+                        </label>
+                        <label class="focus-checkbox">
+                            <input type="checkbox">
+                            <span>Risk Assessment</span>
+                        </label>
+                    </div>
+                    <div class="wizard-navigation">
+                        <button class="btn" id="next-step-1">Next</button>
+                    </div>
+                </div>
+                <div class="wizard-step">
+                    <h3>2. Generate Brief</h3>
+                    <button class="btn" id="generate-brief">
+                        <i class="fas fa-robot"></i> Generate AI Brief
+                    </button>
+                    <div class="wizard-navigation">
+                        <button class="btn btn-outline" id="prev-step-2">Back</button>
+                    </div>
+                </div>
+                <div class="wizard-step">
+                    <div class="brief-preview">
+                        <h4>Your Custom Brief Preview</h4>
+                        <div class="preview-content" id="brief-preview">
+                            <!-- AI-generated content appears here -->
+                        </div>
+                        <div class="preview-actions">
+                            <button class="btn"><i class="fas fa-download"></i> Download PDF</button>
+                            <button class="btn btn-outline" id="new-brief">Create New Brief</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2468,6 +3675,69 @@
                 <div class="speaker"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=300&fit=crop" alt="Expert Speaker"><div class="speaker-content"><h3>Dr. Amara Okafor</h3><p>Chief Economist, Pan-African Development Bank. 20+ years experience.</p></div></div>
                 <div class="speaker"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=300&fit=crop" alt="Expert Speaker"><div class="speaker-content"><h3>Sarah Mitchell</h3><p>Former Head of UK-Africa Trade Relations.</p></div></div>
                 <div class="speaker"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=300&fit=crop" alt="Expert Speaker"><div class="speaker-content"><h3>Prof. Kwame Asante</h3><p>Director of African Economic Research Institute.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Mobile App Preview -->
+    <section class="mobile-app section">
+        <div class="container">
+            <div class="section-header">
+                <h2>AlgoEconomics Mobile</h2>
+                <p>Intelligence in your pocket, wherever you are</p>
+            </div>
+            <div class="app-preview">
+                <div class="app-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="app-screen active" id="screen1">
+                                <div class="app-header">Market Alerts</div>
+                                <div class="alert-item new">
+                                    <div class="alert-icon">🔔</div>
+                                    <div class="alert-content">
+                                        <div class="alert-title">Naira volatility</div>
+                                        <div class="alert-time">2 min ago</div>
+                                    </div>
+                                </div>
+                                <div class="alert-item">
+                                    <div class="alert-icon">📈</div>
+                                    <div class="alert-content">
+                                        <div class="alert-title">JSE gains 1.2%</div>
+                                        <div class="alert-time">15 min ago</div>
+                                    </div>
+                                </div>
+                                <div class="alert-item">
+                                    <div class="alert-icon">🏦</div>
+                                    <div class="alert-content">
+                                        <div class="alert-title">New BoG policy</div>
+                                        <div class="alert-time">1 hour ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-features">
+                    <div class="app-feature">
+                        <i class="fas fa-bell"></i>
+                        <h3>Push Notifications</h3>
+                        <p>Get instant alerts on market-moving events</p>
+                    </div>
+                    <div class="app-feature">
+                        <i class="fas fa-chart-pie"></i>
+                        <h3>Mobile Dashboards</h3>
+                        <p>Access all your charts and metrics on the go</p>
+                    </div>
+                    <div class="app-feature">
+                        <i class="fas fa-robot"></i>
+                        <h3>Voice Commands</h3>
+                        <p>Ask questions and get AI-powered answers</p>
+                    </div>
+                </div>
+            </div>
+            <div class="app-download">
+                <a href="#" class="btn"><i class="fab fa-apple"></i> App Store</a>
+                <a href="#" class="btn"><i class="fab fa-google-play"></i> Google Play</a>
             </div>
         </div>
     </section>
@@ -2514,6 +3784,38 @@
         </div>
     </section>
 
+    <!-- NEW: Data Partnerships Badges -->
+    <section class="partners section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted Data Partners</h2>
+                <p>Powered by the world's leading data providers</p>
+            </div>
+            <div class="partner-logos">
+                <div class="partner-logo" title="Bloomberg">
+                    <i class="fas fa-chart-network"></i>
+                    <span>Bloomberg</span>
+                </div>
+                <div class="partner-logo" title="Refinitiv">
+                    <i class="fas fa-database"></i>
+                    <span>Refinitiv</span>
+                </div>
+                <div class="partner-logo" title="World Bank">
+                    <i class="fas fa-globe"></i>
+                    <span>World Bank</span>
+                </div>
+                <div class="partner-logo" title="IMF">
+                    <i class="fas fa-landmark"></i>
+                    <span>IMF</span>
+                </div>
+                <div class="partner-logo" title="African Development Bank">
+                    <i class="fas fa-university"></i>
+                    <span>AfDB</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="features" class="section features">
         <div class="container">
             <div class="section-header"><h2>Platform Features</h2><p>Everything you need for comprehensive market intelligence</p></div>
@@ -2531,6 +3833,47 @@
         <div class="sla-table">
             <div class="sla-column"><h3>Standard</h3><ul><li><strong>Response Time:</strong> Within 24 hours</li><li><strong>Support Hours:</strong> Mon-Fri, 9am-5pm GMT</li><li><strong>Channels:</strong> Email support</li><li><strong>Updates:</strong> Weekly market digest</li><li><strong>Data Refresh:</strong> Daily updates</li></ul></div>
             <div class="sla-column enterprise"><h3>Enterprise</h3><ul><li><strong>Response Time:</strong> Within 2 hours</li><li><strong>Support Hours:</strong> 24/7 availability</li><li><strong>Channels:</strong> Phone, Email, Slack</li><li><strong>Updates:</strong> Real-time alerts</li><li><strong>Data Refresh:</strong> Live streaming</li><li><strong>Dedicated Manager:</strong> Named account lead</li></ul></div>
+        </div>
+    </section>
+
+    <!-- NEW: Integration Capabilities -->
+    <section class="integrations section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Enterprise Integrations</h2>
+                <p>Seamlessly connect with your existing workflow</p>
+            </div>
+            <div class="integration-icons">
+                <div class="integration-item">
+                    <i class="fab fa-slack"></i>
+                    <span>Slack</span>
+                </div>
+                <div class="integration-item">
+                    <i class="fab fa-microsoft"></i>
+                    <span>Teams</span>
+                </div>
+                <div class="integration-item">
+                    <i class="fas fa-table"></i>
+                    <span>Excel</span>
+                </div>
+                <div class="integration-item">
+                    <i class="fas fa-code"></i>
+                    <span>API</span>
+                </div>
+                <div class="integration-item">
+                    <i class="fab fa-salesforce"></i>
+                    <span>Salesforce</span>
+                </div>
+            </div>
+            <div class="integration-demo">
+                <h3>See it in Action</h3>
+                <div class="demo-video">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Watch 2-minute integration demo</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2712,18 +4055,30 @@
         // Mobile menu toggle
         const menuToggle = document.getElementById('menu-toggle');
         const navLinks = document.querySelector('.nav-links');
+        const navOverlay = document.getElementById('navOverlay');
+        
         if (menuToggle && navLinks) {
             menuToggle.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
+                if (navOverlay) navOverlay.classList.toggle('active');
+            });
+            
+            // Close menu when clicking overlay
+            if (navOverlay) {
+                navOverlay.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                });
+            }
+            
+            // Close menu on link click (mobile)
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    if (navOverlay) navOverlay.classList.remove('active');
+                });
             });
         }
-
-        // Close menu on link click
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                if (navLinks) navLinks.classList.remove('active');
-            });
-        });
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2786,6 +4141,7 @@
         // Charts
         createSparklineCharts();
         createGDPChart();
+        createComparisonChart();
 
         // Active nav highlight on scroll
         window.addEventListener('scroll', function() {
@@ -2818,6 +4174,367 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
+
+        // NEW: Risk Calculator
+        const calculateBtn = document.getElementById('calculate-risk');
+        if (calculateBtn) {
+            calculateBtn.addEventListener('click', function() {
+                const country = document.getElementById('country-select').value;
+                const sector = document.getElementById('sector-select').value;
+                
+                // Mock AI risk calculation
+                const scores = {
+                    'nigeria': { mining: 65, agriculture: 45, fintech: 72, energy: 68, tourism: 58 },
+                    'kenya': { mining: 42, agriculture: 35, fintech: 82, energy: 55, tourism: 75 },
+                    'south-africa': { mining: 78, agriculture: 60, fintech: 88, energy: 72, tourism: 65 },
+                    'ghana': { mining: 55, agriculture: 40, fintech: 68, energy: 62, tourism: 52 },
+                    'egypt': { mining: 48, agriculture: 38, fintech: 65, energy: 58, tourism: 70 }
+                };
+                
+                const score = scores[country]?.[sector] || 65;
+                document.getElementById('score-value').textContent = score;
+                
+                // Update score circle gradient
+                const scoreCircle = document.querySelector('.score-circle');
+                scoreCircle.style.background = `conic-gradient(var(--success) ${score}%, #f1f5f9 ${score}%)`;
+                
+                // Update risk factors based on country and sector
+                const riskFactors = {
+                    'nigeria': [
+                        'Currency volatility: High risk',
+                        'Regulatory changes: Moderate risk',
+                        'Infrastructure gaps: Significant risk',
+                        'Political stability: Moderate risk'
+                    ],
+                    'kenya': [
+                        'Currency stability: Moderate risk',
+                        'Digital infrastructure: Low risk',
+                        'Policy consistency: Moderate risk',
+                        'Regional integration: Low risk'
+                    ],
+                    'south-africa': [
+                        'Grid stability: High risk',
+                        'Labor regulations: Moderate risk',
+                        'Exchange controls: Low risk',
+                        'Market sophistication: Low risk'
+                    ],
+                    'ghana': [
+                        'Debt sustainability: High risk',
+                        'Inflation control: Moderate risk',
+                        'Energy reliability: High risk',
+                        'Governance reforms: Moderate risk'
+                    ],
+                    'egypt': [
+                        'Currency controls: High risk',
+                        'State intervention: Moderate risk',
+                        'Tourism recovery: Low risk',
+                        'Geopolitical tensions: Moderate risk'
+                    ]
+                };
+                
+                const factors = riskFactors[country] || [
+                    'Regulatory stability: Moderate',
+                    'Market volatility: High',
+                    'Infrastructure: Developing',
+                    'Currency risk: Significant'
+                ];
+                
+                const factorsList = document.getElementById('risk-factors');
+                factorsList.innerHTML = factors.map(f => `<li>${f}</li>`).join('');
+                
+                // Show a success message
+                const countryName = document.getElementById('country-select').options[document.getElementById('country-select').selectedIndex].text;
+                const sectorName = document.getElementById('sector-select').options[document.getElementById('sector-select').selectedIndex].text;
+                console.log(`Risk assessment complete for ${countryName} - ${sectorName}: ${score}/100`);
+            });
+        }
+
+        // NEW: Comparison Tool
+        const comparisonItems = document.querySelectorAll('.comparison-item');
+        comparisonItems.forEach(item => {
+            item.addEventListener('click', function() {
+                comparisonItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                updateComparisonChart(this.dataset.country);
+            });
+        });
+        
+        function updateComparisonChart(country) {
+            const ctx = document.getElementById('comparisonChart');
+            if (!ctx) return;
+            
+            const datasets = {
+                'nigeria': {
+                    gdp: 3.2,
+                    inflation: 18.5,
+                    fdi: 4.8,
+                    easeOfBusiness: 56
+                },
+                'kenya': {
+                    gdp: 5.5,
+                    inflation: 6.8,
+                    fdi: 1.8,
+                    easeOfBusiness: 73
+                },
+                'south-africa': {
+                    gdp: 1.9,
+                    inflation: 5.4,
+                    fdi: 7.2,
+                    easeOfBusiness: 84
+                },
+                'ghana': {
+                    gdp: 4.8,
+                    inflation: 23.2,
+                    fdi: 2.1,
+                    easeOfBusiness: 60
+                }
+            };
+            
+            const data = datasets[country] || datasets.nigeria;
+            
+            // Destroy existing chart if it exists
+            if (window.comparisonChartInstance) {
+                window.comparisonChartInstance.destroy();
+            }
+            
+            // Create new chart
+            window.comparisonChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['GDP Growth %', 'Inflation %', 'FDI ($B)', 'Ease of Business'],
+                    datasets: [{
+                        label: country.charAt(0).toUpperCase() + country.slice(1),
+                        data: [data.gdp, data.inflation, data.fdi, data.easeOfBusiness],
+                        backgroundColor: [
+                            'rgba(212, 175, 55, 0.8)',
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(56, 161, 105, 0.8)',
+                            'rgba(49, 130, 206, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgb(212, 175, 55)',
+                            'rgb(239, 68, 68)',
+                            'rgb(56, 161, 105)',
+                            'rgb(49, 130, 206)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Market Indicators Comparison',
+                            color: 'var(--primary)',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            ticks: {
+                                color: 'var(--secondary)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: 'var(--secondary)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // NEW: Brief Generator
+        const wizardSteps = document.querySelectorAll('.wizard-step');
+        const nextStep1 = document.getElementById('next-step-1');
+        const prevStep2 = document.getElementById('prev-step-2');
+        const generateBtn = document.getElementById('generate-brief');
+        const newBriefBtn = document.getElementById('new-brief');
+        
+        if (nextStep1) {
+            nextStep1.addEventListener('click', function() {
+                wizardSteps[0].classList.remove('active');
+                wizardSteps[1].classList.add('active');
+            });
+        }
+        
+        if (prevStep2) {
+            prevStep2.addEventListener('click', function() {
+                wizardSteps[1].classList.remove('active');
+                wizardSteps[0].classList.add('active');
+            });
+        }
+        
+        if (generateBtn) {
+            generateBtn.addEventListener('click', function() {
+                const preview = document.getElementById('brief-preview');
+                const checkboxes = document.querySelectorAll('.focus-checkbox input:checked');
+                const selectedAreas = Array.from(checkboxes).map(cb => cb.nextElementSibling.textContent);
+                
+                // Generate brief based on selected areas
+                let briefContent = '';
+                
+                if (selectedAreas.includes('Market Trends')) {
+                    briefContent += `
+                        <div class="brief-section">
+                            <h5>Market Trends Analysis</h5>
+                            <p>AI analysis indicates strong growth potential in selected markets with manageable risk profiles. East African fintech shows 25% YoY growth, while West African energy investments are diversifying beyond traditional oil.</p>
+                        </div>
+                    `;
+                }
+                
+                if (selectedAreas.includes('Regulatory Changes')) {
+                    briefContent += `
+                        <div class="brief-section">
+                            <h5>Regulatory Updates</h5>
+                            <ul>
+                                <li>Nigeria: New fintech licensing framework expected Q3 2024</li>
+                                <li>Kenya: Digital tax regulations under parliamentary review</li>
+                                <li>Ghana: Bank of Ghana considering CBDC pilot expansion</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+                if (selectedAreas.includes('Investment Opportunities')) {
+                    briefContent += `
+                        <div class="brief-section">
+                            <h5>Investment Opportunities</h5>
+                            <ul>
+                                <li>Renewable energy: Solar investments in Sahel region showing 18% IRR</li>
+                                <li>Agritech: Precision farming solutions in Kenya and Ethiopia</li>
+                                <li>Healthcare infrastructure: PPP opportunities in Nigeria and Ghana</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+                if (selectedAreas.includes('Risk Assessment')) {
+                    briefContent += `
+                        <div class="brief-section">
+                            <h5>Risk Assessment Summary</h5>
+                            <p>Currency volatility remains the primary concern, followed by regulatory changes. Geopolitical tensions in the Horn of Africa require careful monitoring.</p>
+                        </div>
+                    `;
+                }
+                
+                // If no areas selected, show default content
+                if (!briefContent) {
+                    briefContent = `
+                        <div class="brief-section">
+                            <h5>Executive Summary</h5>
+                            <p>AI analysis indicates strong growth potential in selected markets with manageable risk profiles.</p>
+                        </div>
+                        <div class="brief-section">
+                            <h5>Key Opportunities</h5>
+                            <ul>
+                                <li>Fintech expansion in East Africa</li>
+                                <li>Renewable energy investments</li>
+                                <li>Tourism infrastructure development</li>
+                            </ul>
+                        </div>
+                        <div class="brief-section">
+                            <h5>Risk Assessment</h5>
+                            <p>Currency volatility remains the primary concern, followed by regulatory changes.</p>
+                        </div>
+                    `;
+                }
+                
+                preview.innerHTML = briefContent;
+                
+                // Move to next step
+                wizardSteps[1].classList.remove('active');
+                wizardSteps[2].classList.add('active');
+            });
+        }
+        
+        if (newBriefBtn) {
+            newBriefBtn.addEventListener('click', function() {
+                // Reset form and go back to step 1
+                document.querySelectorAll('.focus-checkbox input').forEach(cb => {
+                    cb.checked = false;
+                });
+                // Check default boxes
+                document.querySelector('.focus-checkbox input[type="checkbox"]').checked = true;
+                document.querySelectorAll('.focus-checkbox input[type="checkbox"]')[2].checked = true;
+                
+                wizardSteps[2].classList.remove('active');
+                wizardSteps[0].classList.add('active');
+                
+                // Clear preview
+                document.getElementById('brief-preview').innerHTML = '';
+            });
+        }
+
+        // NEW: News Filter
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const newsItems = document.querySelectorAll('.news-item');
+        
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                const filter = this.textContent.toLowerCase();
+                
+                // Update active tag
+                filterTags.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter news items
+                newsItems.forEach(item => {
+                    if (filter === 'all') {
+                        item.style.display = 'flex';
+                    } else {
+                        const newsTag = item.querySelector('.news-tag').textContent.toLowerCase();
+                        if (newsTag.includes(filter)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // NEW: Heatmap interaction
+        const heatmapItems = document.querySelectorAll('.heatmap-item');
+        heatmapItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const country = this.dataset.country;
+                const value = this.dataset.value;
+                
+                // Highlight selected item
+                heatmapItems.forEach(i => i.style.background = '#f1f5f9');
+                heatmapItems.forEach(i => i.style.color = '');
+                this.style.background = 'var(--gold)';
+                this.style.color = 'var(--primary)';
+                
+                console.log(`Selected ${country}: Inflation rate ${value}%`);
+            });
+        });
+
+        // Initialize comparison chart
+        if (document.getElementById('comparisonChart')) {
+            updateComparisonChart('nigeria');
+        }
+
+        // Initialize existing charts
+        createSparklineCharts();
+        createGDPChart();
     });
 
     function createSparklineCharts() {
@@ -2906,7 +4623,23 @@
             }, 1000);
         }
     }
+
+    function createComparisonChart() {
+        // This is now handled by the updateComparisonChart function
+        // which is called when comparison items are clicked
+    }
+
+    // Handle window resize for better mobile experience
+    window.addEventListener('resize', function() {
+        // Reinitialize charts if needed
+        if (window.innerWidth < 768) {
+            // Mobile-specific adjustments
+            const phoneFrame = document.querySelector('.phone-frame');
+            if (phoneFrame) {
+                phoneFrame.style.margin = '0 auto';
+            }
+        }
+    });
     </script>
 </body>
 </html>
-
