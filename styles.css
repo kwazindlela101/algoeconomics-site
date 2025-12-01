@@ -2009,3 +2009,32 @@ footer::after {
     .market-change { font-size: 0.75rem; padding: 3px 6px; } 
     .footer-logo { height: 60px; }
 }
+@media (max-width: 768px) { 
+    .hero { 
+        padding: 40px 0 !important;
+        min-height: auto;
+        display: flex !important;
+        align-items: center;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .hero h1 { 
+        font-size: 2rem; 
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .hero p { 
+        font-size: 1.1rem; 
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .hero-buttons { 
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
