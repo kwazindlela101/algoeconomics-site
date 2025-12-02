@@ -3315,7 +3315,7 @@
             #mc_embed_signup .indicates-required {
                 text-align: center;
                 color: white;
-                margin-bottom: 1rem;
+                margin-bottom: 1.5rem;
                 font-size: 0.9rem;
             }
             
@@ -3326,14 +3326,14 @@
             
             #mc_embed_signup .mc-field-group {
                 width: 100%;
-                padding-bottom: 1rem;
+                padding-bottom: 1.5rem;
             }
             
             #mc_embed_signup label {
                 color: white;
                 font-weight: 600;
                 display: block;
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.8rem;
                 text-align: left;
                 font-size: 1rem;
             }
@@ -3355,13 +3355,17 @@
             
             #mc_embed_signup .clear.foot {
                 text-align: center;
-                margin-top: 1.5rem;
+                margin-top: 2rem;
             }
             
+            /* BUTTON FIX - Complete override */
+            #mc_embed_signup input.button,
+            #mc_embed_signup input[type="submit"],
             #mc_embed_signup .button {
                 background: linear-gradient(135deg, #d4af37, #f7ef8a) !important;
                 color: #1a365d !important;
-                padding: 1rem 2rem !important;
+                padding: 0 !important;
+                margin: 0 !important;
                 border: none !important;
                 border-radius: 5px !important;
                 font-size: 1rem !important;
@@ -3370,13 +3374,16 @@
                 cursor: pointer !important;
                 transition: all 0.4s ease !important;
                 box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important;
-                min-width: 200px;
+                min-width: 220px !important;
+                height: 50px !important;
+                line-height: 50px !important;
                 text-align: center !important;
                 display: inline-block !important;
-                line-height: 1.2 !important;
-                letter-spacing: 0.5px !important;
+                vertical-align: middle !important;
             }
             
+            #mc_embed_signup input.button:hover,
+            #mc_embed_signup input[type="submit"]:hover,
             #mc_embed_signup .button:hover {
                 transform: translateY(-3px) !important;
                 box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4) !important;
@@ -3411,9 +3418,12 @@
                 #mc_embed_signup {
                     padding: 0 0.5rem;
                 }
+                #mc_embed_signup input.button,
+                #mc_embed_signup input[type="submit"],
                 #mc_embed_signup .button {
-                    width: 100%;
-                    max-width: 100%;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    min-width: 0 !important;
                 }
             }
         </style>
@@ -3441,7 +3451,29 @@
         </div>
     </div>
 </section>
-            
+         <div id="mc_embed_signup">
+            <form action="https://algoeconomics.us9.list-manage.com/subscribe/post?u=7f33efbbec31ffdd7dd87bce1&amp;id=fddc7c24c3&amp;f_id=007042e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <div id="mc_embed_signup_scroll">
+                    <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+                    <div class="mc-field-group">
+                        <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+                        <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" required placeholder="Enter your email address">
+                    </div>
+                    <div id="mce-responses" class="clear foot">
+                        <div class="response" id="mce-error-response" style="display:none"></div>
+                        <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                        <input type="text" name="b_7f33efbbec31ffdd7dd87bce1_fddc7c24c3" tabindex="-1" value="">
+                    </div>
+                    <div class="clear foot">
+                        <input type="submit" value="Subscribe Free" name="subscribe" id="mc-embedded-subscribe" class="button">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
             
            
                
@@ -4007,6 +4039,7 @@
     </script>
 </body>
 </html>
+
 
 
 
