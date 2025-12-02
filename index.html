@@ -300,38 +300,6 @@
         }
         
         .ticker-track:hover { animation-play-state: paused; }
-        
-        .ticker-controls {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            gap: 5px;
-            z-index: 10;
-            background: rgba(0,0,0,0.3);
-            padding: 5px;
-            border-radius: 4px;
-        }
-        
-        .ticker-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 3px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .ticker-btn:hover {
-            background: var(--gold);
-            color: var(--primary);
-        }
 
         /* ENHANCED HERO SECTION - FIXED FOR MOBILE */
         .hero { 
@@ -2639,12 +2607,6 @@
                 <div class="ticker-item"><span class="market-name">Ghana SE</span><span class="market-value">2,845.30</span><span class="market-change up">+1.1%</span></div>
                 <div class="ticker-item"><span class="market-name">Egypt EGX 30</span><span class="market-value">17,923.45</span><span class="market-change up">+0.7%</span></div>
             </div>
-            
-            <!-- TICKER CONTROLS ADDED HERE -->
-            <div class="ticker-controls">
-                <button class="ticker-btn" id="pauseTicker" aria-label="Pause ticker"><i class="fas fa-pause"></i></button>
-                <button class="ticker-btn" id="playTicker" aria-label="Play ticker"><i class="fas fa-play"></i></button>
-            </div>
         </div>
     </div>
 
@@ -3603,21 +3565,6 @@
         if (briefBtn) {
             briefBtn.addEventListener('click', function() {
                 alert("Thank you! We'll send your brief shortly.");
-            });
-        }
-
-        // Ticker controls
-        const tickerTrack = document.querySelector('.ticker-track');
-        const pauseBtn = document.getElementById('pauseTicker');
-        const playBtn = document.getElementById('playTicker');
-        
-        if (tickerTrack && pauseBtn && playBtn) {
-            pauseBtn.addEventListener('click', function() {
-                tickerTrack.style.animationPlayState = 'paused';
-            });
-            
-            playBtn.addEventListener('click', function() {
-                tickerTrack.style.animationPlayState = 'running';
             });
         }
 
