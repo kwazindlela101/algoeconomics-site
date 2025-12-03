@@ -1208,17 +1208,18 @@
             color: var(--gold);
         }
         
-        /* Data Cube Visualization */
+        /* OPTION 4: African Economic Dashboard Cube - MOBILE READY */
         .data-cube-scene {
             position: relative;
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
             height: 300px;
             margin: 0 auto;
             perspective: 1200px;
             perspective-origin: 50% 50%;
         }
         
-        .data-cube {
+        .economic-cube {
             position: absolute;
             width: 200px;
             height: 200px;
@@ -1226,7 +1227,7 @@
             left: 50%;
             transform-style: preserve-3d;
             transform: translate(-50%, -50%) rotateX(-20deg) rotateY(-30deg);
-            animation: cubeRotate 20s infinite linear;
+            animation: cubeRotate 25s infinite linear;
         }
         
         @keyframes cubeRotate {
@@ -1234,26 +1235,116 @@
             100% { transform: translate(-50%, -50%) rotateX(-20deg) rotateY(330deg); }
         }
         
-        .cube-face {
+        .economic-cube .cube-face {
             position: absolute;
             width: 100%;
             height: 100%;
             border: 2px solid rgba(212, 175, 55, 0.3);
-            background: rgba(26, 54, 93, 0.1);
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.15), rgba(212, 175, 55, 0.08));
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--gold);
             font-size: 1.5rem;
             backdrop-filter: blur(5px);
+            border-radius: 8px;
         }
         
-        .front { transform: translateZ(100px); }
-        .back { transform: rotateY(180deg) translateZ(100px); }
-        .right { transform: rotateY(90deg) translateZ(100px); }
-        .left { transform: rotateY(-90deg) translateZ(100px); }
-        .top { transform: rotateX(90deg) translateZ(100px); }
-        .bottom { transform: rotateX(-90deg) translateZ(100px); }
+        .economic-cube .cube-face .metric {
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+        }
+        
+        .economic-cube .cube-face .metric-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .economic-cube .cube-face .metric-label {
+            font-size: 0.85rem;
+            color: var(--light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+        
+        .economic-cube .front { transform: translateZ(100px); }
+        .economic-cube .back { transform: rotateY(180deg) translateZ(100px); }
+        .economic-cube .right { transform: rotateY(90deg) translateZ(100px); }
+        .economic-cube .left { transform: rotateY(-90deg) translateZ(100px); }
+        .economic-cube .top { transform: rotateX(90deg) translateZ(100px); }
+        .economic-cube .bottom { transform: rotateX(-90deg) translateZ(100px); }
+        
+        /* Cube interaction for mobile */
+        .economic-cube {
+            touch-action: manipulation;
+        }
+        
+        /* Mobile responsiveness for the cube */
+        @media (max-width: 768px) {
+            .data-cube-scene {
+                max-width: 250px;
+                height: 250px;
+            }
+            
+            .economic-cube {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .economic-cube .cube-face .metric-value {
+                font-size: 1.4rem;
+            }
+            
+            .economic-cube .cube-face .metric-label {
+                font-size: 0.75rem;
+            }
+            
+            .economic-cube .front { transform: translateZ(80px); }
+            .economic-cube .back { transform: rotateY(180deg) translateZ(80px); }
+            .economic-cube .right { transform: rotateY(90deg) translateZ(80px); }
+            .economic-cube .left { transform: rotateY(-90deg) translateZ(80px); }
+            .economic-cube .top { transform: rotateX(90deg) translateZ(80px); }
+            .economic-cube .bottom { transform: rotateX(-90deg) translateZ(80px); }
+        }
+        
+        @media (max-width: 480px) {
+            .data-cube-scene {
+                max-width: 220px;
+                height: 220px;
+            }
+            
+            .economic-cube {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .economic-cube .cube-face .metric-value {
+                font-size: 1.2rem;
+            }
+            
+            .economic-cube .cube-face .metric-label {
+                font-size: 0.7rem;
+            }
+            
+            .economic-cube .front { transform: translateZ(70px); }
+            .economic-cube .back { transform: rotateY(180deg) translateZ(70px); }
+            .economic-cube .right { transform: rotateY(90deg) translateZ(70px); }
+            .economic-cube .left { transform: rotateY(-90deg) translateZ(70px); }
+            .economic-cube .top { transform: rotateX(90deg) translateZ(70px); }
+            .economic-cube .bottom { transform: rotateX(-90deg) translateZ(70px); }
+        }
+        
+        /* Pause animation on hover for desktop */
+        @media (hover: hover) and (pointer: fine) {
+            .economic-cube:hover {
+                animation-play-state: paused;
+            }
+        }
 
         /* CORRUPTION INDEX */
         #corruption-index .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--primary); margin-bottom: 1rem; text-align: center; }
@@ -2484,11 +2575,6 @@
             .signals-subscribe { 
                 font-size: 1rem; 
             }
-            
-            .data-cube-scene { 
-                width: 250px; 
-                height: 250px; 
-            }
         }
         
         @media (max-width: 480px) { 
@@ -3075,14 +3161,45 @@
                     <p class="signals-subscribe"><strong>Subscribe for weekly insights:</strong> algoeconomics.org</p>
                 </div>
                 <div class="signals-visual">
+                    <!-- OPTION 4: African Economic Dashboard Cube - MOBILE READY -->
                     <div class="data-cube-scene">
-                        <div class="data-cube">
-                            <div class="cube-face front"><i class="fas fa-chart-line"></i></div>
-                            <div class="cube-face back"><i class="fas fa-database"></i></div>
-                            <div class="cube-face right"><i class="fas fa-brain"></i></div>
-                            <div class="cube-face left"><i class="fas fa-signal"></i></div>
-                            <div class="cube-face top"><i class="fas fa-bolt"></i></div>
-                            <div class="cube-face bottom"><i class="fas fa-robot"></i></div>
+                        <div class="economic-cube">
+                            <div class="cube-face front">
+                                <div class="metric">
+                                    <div class="metric-value">$3.1T</div>
+                                    <div class="metric-label">African GDP</div>
+                                </div>
+                            </div>
+                            <div class="cube-face back">
+                                <div class="metric">
+                                    <div class="metric-value">1.4B</div>
+                                    <div class="metric-label">Population</div>
+                                </div>
+                            </div>
+                            <div class="cube-face right">
+                                <div class="metric">
+                                    <div class="metric-value">+3.8%</div>
+                                    <div class="metric-label">Avg Growth</div>
+                                </div>
+                            </div>
+                            <div class="cube-face left">
+                                <div class="metric">
+                                    <div class="metric-value">$83B</div>
+                                    <div class="metric-label">FDI 2024</div>
+                                </div>
+                            </div>
+                            <div class="cube-face top">
+                                <div class="metric">
+                                    <div class="metric-value">46%</div>
+                                    <div class="metric-label">Urbanization</div>
+                                </div>
+                            </div>
+                            <div class="cube-face bottom">
+                                <div class="metric">
+                                    <div class="metric-value">570M</div>
+                                    <div class="metric-label">Internet Users</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3865,6 +3982,36 @@
             });
             backToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+        
+        // Add click interaction for the African Economic Cube
+        const economicCube = document.querySelector('.economic-cube');
+        if (economicCube) {
+            economicCube.addEventListener('click', function() {
+                // Pause/resume animation on click (for touch devices)
+                const isPaused = this.style.animationPlayState === 'paused';
+                this.style.animationPlayState = isPaused ? 'running' : 'paused';
+                
+                // Show brief info about Africa's economy
+                if (!isPaused) {
+                    setTimeout(() => {
+                        alert("Africa's Economic Snapshot:\n\n• $3.1 Trillion GDP\n• 1.4 Billion Population\n• 3.8% Average Growth\n• $83 Billion FDI in 2024\n• 46% Urbanization Rate\n• 570 Million Internet Users\n\nClick the cube again to resume rotation.");
+                    }, 300);
+                }
+            });
+            
+            // Add touch events for mobile
+            economicCube.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.style.animationPlayState = 'paused';
+            });
+            
+            economicCube.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                setTimeout(() => {
+                    this.style.animationPlayState = 'running';
+                }, 2000); // Resume after 2 seconds
             });
         }
     });
