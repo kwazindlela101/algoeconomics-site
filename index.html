@@ -1,4 +1,4 @@
-<!DOCTYPE html>                                              
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +11,7 @@
     <meta name="theme-color" content="#1a365d">
     <meta name="description" content="AI-powered economic intelligence platform providing real-time insights, predictive analytics, and actionable intelligence for UK-Africa markets.">
     <style>
+        /* ALL YOUR EXISTING CSS CODE REMAINS EXACTLY THE SAME */
         :root {
             --primary: #1a365d;
             --secondary: #2d3748;
@@ -300,6 +301,65 @@
         }
         
         .ticker-track:hover { animation-play-state: paused; }
+
+        /* Smart Ticker Enhancements - ADDED */
+        .ticker-item.trend-up .market-change { background: var(--success); }
+        .ticker-item.trend-down .market-change { background: var(--danger); }
+        .ticker-item.trend-neutral .market-change { background: #666; }
+
+        .ticker-value-up { color: #00ff88; }
+        .ticker-value-down { color: #ff4444; }
+        .ticker-value-neutral { color: #cccccc; }
+
+        #tickerStatus {
+            position: absolute;
+            right: 20px;
+            bottom: 5px;
+            font-size: 0.7rem;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 1000;
+        }
+
+        .data-transparency {
+            background: linear-gradient(135deg, #0a1f44 0%, #1a365d 100%);
+            color: white;
+            padding: 8px 0;
+            border-bottom: 2px solid var(--gold);
+            font-size: 0.8rem;
+            position: fixed;
+            top: calc(var(--header-height) + var(--ticker-height));
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 998;
+        }
+
+        .data-transparency .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .data-transparency .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+            
+            .data-transparency {
+                padding: 6px 0;
+            }
+            
+            body {
+                padding-top: calc(var(--total-fixed-height) + 40px);
+            }
+        }
 
         /* ENHANCED HERO SECTION - FIXED FOR MOBILE */
         .hero { 
@@ -2677,22 +2737,34 @@
         </div>
     </div>
 
+    <!-- MODIFIED: Smart Ticker with Live Status -->
     <div class="market-indicators">
         <div class="ticker-container">
-            <div class="ticker-track">
-                <div class="ticker-item"><span class="market-name">FTSE 100</span><span class="market-value">7,542.76</span><span class="market-change up">+1.2%</span></div>
-                <div class="ticker-item"><span class="market-name">Nairobi SE</span><span class="market-value">1,842.15</span><span class="market-change up">+0.8%</span></div>
-                <div class="ticker-item"><span class="market-name">NGN/USD</span><span class="market-value">1,485.50</span><span class="market-change neutral">0.0%</span></div>
-                <div class="ticker-item"><span class="market-name">JSE All Share</span><span class="market-value">73,842.91</span><span class="market-change down">-0.4%</span></div>
-                <div class="ticker-item"><span class="market-name">Ghana SE</span><span class="market-value">2,845.30</span><span class="market-change up">+1.1%</span></div>
-                <div class="ticker-item"><span class="market-name">Egypt EGX 30</span><span class="market-value">17,923.45</span><span class="market-change up">+0.7%</span></div>
-                <div class="ticker-item"><span class="market-name">FTSE 100</span><span class="market-value">7,542.76</span><span class="market-change up">+1.2%</span></div>
-                <div class="ticker-item"><span class="market-name">Nairobi SE</span><span class="market-value">1,842.15</span><span class="market-change up">+0.8%</span></div>
-                <div class="ticker-item"><span class="market-name">NGN/USD</span><span class="market-value">1,485.50</span><span class="market-change neutral">0.0%</span></div>
-                <div class="ticker-item"><span class="market-name">JSE All Share</span><span class="market-value">73,842.91</span><span class="market-change down">-0.4%</span></div>
-                <div class="ticker-item"><span class="market-name">Ghana SE</span><span class="market-value">2,845.30</span><span class="market-change up">+1.1%</span></div>
-                <div class="ticker-item"><span class="market-name">Egypt EGX 30</span><span class="market-value">17,923.45</span><span class="market-change up">+0.7%</span></div>
+            <div class="ticker-track" id="smartTickerTrack">
+                <!-- Dynamic content will be injected here by JavaScript -->
             </div>
+            <!-- NEW: Live status indicator -->
+            <div id="tickerStatus" style="position: absolute; right: 20px; bottom: 5px; font-size: 0.7rem; color: var(--gold); display: flex; align-items: center; gap: 5px;">
+                <div id="liveIndicator" style="width: 8px; height: 8px; background: #00ff88; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                <span id="lastUpdateTime">Live</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW: Transparency bar added BELOW the ticker -->
+    <div class="data-transparency">
+        <div class="container">
+            <span style="display: flex; align-items: center; gap: 5px;">
+                <i class="fas fa-database"></i>
+                <span>Data Sources: World Bank | IMF | African Development Bank | National Statistics</span>
+            </span>
+            <span style="display: flex; align-items: center; gap: 5px; color: var(--gold);">
+                <i class="fas fa-sync-alt fa-spin"></i>
+                <span id="liveUpdateStatus">Live simulation active • Updates every 30s</span>
+            </span>
+            <a href="#data-sources" style="color: #d4af37; text-decoration: none; display: flex; align-items: center; gap: 5px;">
+                <i class="fas fa-info-circle"></i> Learn about our data
+            </a>
         </div>
     </div>
 
@@ -2763,7 +2835,7 @@
         </div>
     </section>
 
-    <!-- Rest of the sections remain exactly the same as before -->
+    <!-- Rest of your HTML sections remain exactly the same -->
     <section id="why-us" class="section">
         <div class="container">
             <div class="section-header"><h2>Why Choose Us</h2><p>At AlgoEconomics, we decode the signals that shape markets.</p></div>
@@ -3624,6 +3696,253 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // =============================================
+        // SMART DATA SIMULATION - SAFE IMPLEMENTATION
+        // =============================================
+
+        class SafeMarketSimulator {
+            constructor() {
+                // Base values for realistic simulation
+                this.markets = {
+                    'FTSE 100': { 
+                        value: 7542.76, 
+                        min: 7400, 
+                        max: 7700, 
+                        volatility: 0.8,
+                        decimals: 2
+                    },
+                    'Nairobi SE': { 
+                        value: 1842.15, 
+                        min: 1700, 
+                        max: 1900, 
+                        volatility: 1.2,
+                        decimals: 2
+                    },
+                    'NGN/USD': { 
+                        value: 1485.50, 
+                        min: 1450, 
+                        max: 1520, 
+                        volatility: 1.5,
+                        decimals: 2
+                    },
+                    'JSE All Share': { 
+                        value: 73842.91, 
+                        min: 73000, 
+                        max: 75000, 
+                        volatility: 0.5,
+                        decimals: 2
+                    },
+                    'Ghana SE': { 
+                        value: 2845.30, 
+                        min: 2800, 
+                        max: 2900, 
+                        volatility: 1.0,
+                        decimals: 2
+                    },
+                    'Egypt EGX 30': { 
+                        value: 17923.45, 
+                        min: 17500, 
+                        max: 18200, 
+                        volatility: 0.7,
+                        decimals: 2
+                    }
+                };
+                
+                this.lastUpdate = new Date();
+                this.isLive = true;
+                this.updateInterval = 30000; // 30 seconds
+                this.simulationTimer = null;
+                this.isInitialized = false;
+            }
+
+            // Safe random number generator
+            generateRealisticChange(currentValue, min, max, volatility) {
+                // Small, realistic change (percentage)
+                const changePercent = (Math.random() - 0.5) * 2 * (volatility / 100);
+                const newValue = currentValue * (1 + changePercent);
+                
+                // Keep within realistic bounds
+                return Math.max(min, Math.min(max, newValue));
+            }
+
+            // Safely update all markets
+            updateAllMarkets() {
+                try {
+                    for (const [marketName, marketData] of Object.entries(this.markets)) {
+                        const newValue = this.generateRealisticChange(
+                            marketData.value,
+                            marketData.min,
+                            marketData.max,
+                            marketData.volatility
+                        );
+                        
+                        // Round to specified decimals
+                        marketData.value = parseFloat(newValue.toFixed(marketData.decimals));
+                        marketData.previousValue = marketData.value;
+                    }
+                    
+                    this.lastUpdate = new Date();
+                    this.updateDisplay();
+                    this.updateStatus(true);
+                    
+                } catch (error) {
+                    console.error('Error updating markets:', error);
+                    // Keep showing data even if simulation fails
+                    this.updateStatus(false);
+                }
+            }
+
+            // Safely update the display
+            updateDisplay() {
+                try {
+                    const tickerTrack = document.getElementById('smartTickerTrack');
+                    if (!tickerTrack) return;
+
+                    let html = '';
+                    
+                    // Create duplicates for smooth scrolling
+                    for (let i = 0; i < 2; i++) { // Create 2 sets for seamless loop
+                        for (const [marketName, marketData] of Object.entries(this.markets)) {
+                            const previousValue = marketData.previousValue || marketData.value;
+                            const changePercent = ((marketData.value - previousValue) / previousValue * 100);
+                            const changeAbs = Math.abs(changePercent);
+                            
+                            let changeClass = 'neutral';
+                            let changeSign = '';
+                            let changeText = '0.0%';
+                            
+                            if (changePercent > 0.05) {
+                                changeClass = 'up';
+                                changeSign = '+';
+                                changeText = `${changeSign}${changeAbs.toFixed(1)}%`;
+                            } else if (changePercent < -0.05) {
+                                changeClass = 'down';
+                                changeText = `${changeAbs.toFixed(1)}%`;
+                            }
+                            
+                            // Format number with commas
+                            const formattedValue = marketData.value.toLocaleString('en-US', {
+                                minimumFractionDigits: marketData.decimals,
+                                maximumFractionDigits: marketData.decimals
+                            });
+                            
+                            html += `
+                                <div class="ticker-item trend-${changeClass}" data-market="${marketName}">
+                                    <span class="market-name">${marketName}</span>
+                                    <span class="market-value ${changeClass === 'up' ? 'ticker-value-up' : changeClass === 'down' ? 'ticker-value-down' : 'ticker-value-neutral'}">
+                                        ${formattedValue}
+                                    </span>
+                                    <span class="market-change ${changeClass}">${changeText}</span>
+                                </div>
+                            `;
+                        }
+                    }
+                    
+                    tickerTrack.innerHTML = html;
+                    
+                } catch (error) {
+                    console.error('Error updating display:', error);
+                }
+            }
+
+            // Update status indicator
+            updateStatus(success = true) {
+                try {
+                    const lastUpdateTime = document.getElementById('lastUpdateTime');
+                    const liveUpdateStatus = document.getElementById('liveUpdateStatus');
+                    const liveIndicator = document.getElementById('liveIndicator');
+                    
+                    if (lastUpdateTime) {
+                        const timeString = this.lastUpdate.toLocaleTimeString([], { 
+                            hour: '2-digit', 
+                            minute: '2-digit',
+                            second: '2-digit'
+                        });
+                        lastUpdateTime.textContent = `Updated: ${timeString}`;
+                    }
+                    
+                    if (liveUpdateStatus) {
+                        if (success) {
+                            liveUpdateStatus.textContent = 'Live simulation active • Updates every 30s';
+                        } else {
+                            liveUpdateStatus.textContent = 'Simulation paused • Click to resume';
+                        }
+                    }
+                    
+                    if (liveIndicator) {
+                        liveIndicator.style.background = success ? '#00ff88' : '#ff9900';
+                    }
+                    
+                } catch (error) {
+                    console.error('Error updating status:', error);
+                }
+            }
+
+            // Start the simulation
+            start() {
+                if (this.isInitialized) return;
+                
+                try {
+                    // Initial display
+                    this.updateDisplay();
+                    
+                    // Start periodic updates
+                    this.simulationTimer = setInterval(() => {
+                        this.updateAllMarkets();
+                    }, this.updateInterval);
+                    
+                    this.isInitialized = true;
+                    this.updateStatus(true);
+                    
+                    console.log('Market simulation started successfully');
+                    
+                } catch (error) {
+                    console.error('Error starting simulation:', error);
+                    this.updateStatus(false);
+                }
+            }
+
+            // Stop the simulation
+            stop() {
+                if (this.simulationTimer) {
+                    clearInterval(this.simulationTimer);
+                    this.simulationTimer = null;
+                }
+                this.isLive = false;
+                this.updateStatus(false);
+            }
+
+            // Toggle simulation
+            toggle() {
+                if (this.isLive) {
+                    this.stop();
+                } else {
+                    this.start();
+                }
+            }
+        }
+
+        // Initialize and start the simulation
+        let marketSimulator;
+        
+        try {
+            marketSimulator = new SafeMarketSimulator();
+            marketSimulator.start();
+            
+            // Add click handler to toggle simulation
+            const liveUpdateStatus = document.getElementById('liveUpdateStatus');
+            if (liveUpdateStatus) {
+                liveUpdateStatus.style.cursor = 'pointer';
+                liveUpdateStatus.addEventListener('click', function() {
+                    marketSimulator.toggle();
+                });
+            }
+            
+        } catch (error) {
+            console.error('Failed to initialize market simulator:', error);
+        }
+
+        // Your existing JavaScript code continues here...
         // Mobile menu toggle
         const menuToggle = document.getElementById('menu-toggle');
         const navLinks = document.querySelector('.nav-links');
