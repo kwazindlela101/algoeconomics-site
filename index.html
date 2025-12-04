@@ -3031,8 +3031,12 @@
                 <p>This is a hands-on learning opportunity. To apply, contact 
                 <strong>Kwazi Ndlela</strong> or <strong>James Mulligan</strong> directly.</p>
 
-                <!-- CTA Button -->
-                <a href="mailto:contact@algoeconomics.org" class="backend-cta">
+                <!-- FIXED: CTA Button with clean email link -->
+                <a href="mailto:contact@algoeconomics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme&body=Dear%20AlgoEconomics%20Team,%0A%0AI%20am%20interested%20in%20applying%20for%20the%20Student%20Backend%20Engineering%20Programme.%0A%0APlease%20find%20my%20details%20below:%0A%0AName:%0AUniversity:%0ACourse:%0AYear%20of%20Study:%0A%0AThank%20you,%0A[Your%20Name]" 
+                   class="backend-cta"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="text-decoration: none; color: inherit;">
                     Apply as Student Developer
                 </a>
             </div>
@@ -4102,6 +4106,32 @@
             
         } catch (error) {
             console.error('Failed to initialize market simulator:', error);
+        }
+
+        // =============================================
+        // FIX FOR "APPLY AS STUDENT DEVELOPER" BUTTON
+        // =============================================
+        const applyButton = document.querySelector('.backend-cta');
+        if (applyButton) {
+            // Remove any existing event listeners by cloning
+            const newButton = applyButton.cloneNode(true);
+            applyButton.parentNode.replaceChild(newButton, applyButton);
+            
+            // Force the correct href
+            newButton.setAttribute('href', 'mailto:contact@algoeconomics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme&body=Dear%20AlgoEconomics%20Team,%0A%0AI%20am%20interested%20in%20applying%20for%20the%20Student%20Backend%20Engineering%20Programme.%0A%0APlease%20find%20my%20details%20below:%0A%0AName:%0AUniversity:%0ACourse:%0AYear%20of%20Study:%0A%0AThank%20you,%0A[Your%20Name]');
+            newButton.setAttribute('target', '_blank');
+            newButton.setAttribute('rel', 'noopener noreferrer');
+            
+            // Add clean click handler
+            newButton.addEventListener('click', function(e) {
+                // Only prevent default if it's not a mailto link
+                const href = this.getAttribute('href');
+                if (!href || !href.includes('mailto:')) {
+                    e.preventDefault();
+                    // Force open email client
+                    window.location.href = 'mailto:contact@algoeconomics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme';
+                }
+            });
         }
 
         // Your existing JavaScript code continues here...
