@@ -797,6 +797,103 @@
             color: var(--sectors-muted); 
         }
 
+        /* NEW: BACKEND ENGINEERING SECTION STYLES */
+        .backend-engineering {
+            background: #0a0f2c;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .backend-engineering::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(49, 130, 206, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .backend-engineering .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .backend-content h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+        }
+        
+        .backend-content p {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+        }
+        
+        .backend-content strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        .backend-cta {
+            display: inline-block;
+            padding: 0.875rem 1.75rem;
+            background: linear-gradient(135deg, var(--gold), #f7ef8a);
+            color: #000;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+        }
+        
+        .backend-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+            border-color: var(--gold);
+        }
+        
+        .backend-cta:active {
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+            .backend-engineering {
+                padding: 3rem 0 !important;
+            }
+            
+            .backend-content h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            
+            .backend-content p {
+                font-size: 1rem;
+                text-align: center;
+            }
+            
+            .backend-cta {
+                width: 100%;
+                text-align: center;
+                display: block;
+                max-width: 280px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
         /* YELLOW BANNER */
         .yellow-banner { 
             background: #ffe600; 
@@ -2741,6 +2838,7 @@
                         <li><a href="#new-features" class="nav-link"><i class="fas fa-tools"></i><span>Tools</span></a></li>
                         <li><a href="#ai-demo" class="nav-link"><i class="fas fa-robot"></i><span>AI Demo</span></a></li>
                         <li><a href="#corruption-index" class="nav-link"><i class="fas fa-shield-alt"></i><span>Index</span></a></li>
+                        <li><a href="#backend-programme" class="nav-link"><i class="fas fa-code"></i><span>Backend Programme</span></a></li>
                         <li><a href="#speakers" class="nav-link"><i class="fas fa-users"></i><span>Speakers</span></a></li>
                         <li><a href="#features" class="nav-link"><i class="fas fa-cogs"></i><span>Platform</span></a></li>
                         <li><a href="#sla-comparison" class="nav-link"><i class="fas fa-handshake"></i><span>SLA</span></a></li>
@@ -2761,6 +2859,7 @@
                 <a href="#new-features" class="mobile-quick-link"><i class="fas fa-tools"></i> Tools</a>
                 <a href="#african-markets" class="mobile-quick-link"><i class="fas fa-city"></i> Markets</a>
                 <a href="#ai-demo" class="mobile-quick-link"><i class="fas fa-robot"></i> AI Demo</a>
+                <a href="#backend-programme" class="mobile-quick-link"><i class="fas fa-code"></i> Backend Programme</a>
             </div>
         </div>
     </div>
@@ -2820,6 +2919,10 @@
                         <a href="#ai-demo" class="hero-nav-item">
                             <i class="fas fa-robot"></i>
                             <span>AI Demo</span>
+                        </a>
+                        <a href="#backend-programme" class="hero-nav-item">
+                            <i class="fas fa-code"></i>
+                            <span>Backend Programme</span>
                         </a>
                     </div>
                 </div>
@@ -2906,6 +3009,32 @@
             <div class="sectors-layers">
                 <div class="sectors-layer"><h4>AI Corruption Index</h4><p>Sector-specific governance risk overlay, highlighting procurement and regulatory integrity.</p></div>
                 <div class="sectors-layer"><h4>Investor Signals</h4><p>FDI flows, capital projects, PPPs, and VC activity mapped across regions.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: BACKEND ENGINEERING SECTION ADDED HERE -->
+    <!-- Anchor for scrolling -->
+    <span id="backend-programme"></span>
+
+    <section id="backend-engineering" class="section backend-engineering">
+        <div class="container">
+            <div class="backend-content">
+                <h2>Backend Engineering Programme (Student Track)</h2>
+                
+                <p>AlgoEconomics is inviting motivated student developers to help build the backend systems 
+                that power our real-time UK–Africa economic intelligence platform.</p>
+                
+                <p>Students will work on data pipelines, APIs, and database infrastructure that support 
+                our live market dashboards and governance intelligence tools.</p>
+                
+                <p>This is a hands-on learning opportunity. To apply, contact 
+                <strong>Kwazi Ndlela</strong> or <strong>James Mulligan</strong> directly.</p>
+
+                <!-- CTA Button -->
+                <a href="mailto:contact@algoeconomics.org" class="backend-cta">
+                    Apply as Student Developer
+                </a>
             </div>
         </div>
     </section>
