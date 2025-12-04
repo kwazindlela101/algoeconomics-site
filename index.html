@@ -4109,30 +4109,78 @@
         }
 
         // =============================================
-        // FIX FOR "APPLY AS STUDENT DEVELOPER" BUTTON
+        // NUCLEAR FIX FOR "APPLY AS STUDENT DEVELOPER" BUTTON
         // =============================================
-        const applyButton = document.querySelector('.backend-cta');
-        if (applyButton) {
-            // Remove any existing event listeners by cloning
-            const newButton = applyButton.cloneNode(true);
-            applyButton.parentNode.replaceChild(newButton, applyButton);
+        function applyNuclearEmailFix() {
+            console.log('🚨 Applying nuclear email fix...');
             
-            // Force the correct href
-            newButton.setAttribute('href', 'mailto:contact@algoeconomics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme&body=Dear%20AlgoEconomics%20Team,%0A%0AI%20am%20interested%20in%20applying%20for%20the%20Student%20Backend%20Engineering%20Programme.%0A%0APlease%20find%20my%20details%20below:%0A%0AName:%0AUniversity:%0ACourse:%0AYear%20of%20Study:%0A%0AThank%20you,%0A[Your%20Name]');
-            newButton.setAttribute('target', '_blank');
-            newButton.setAttribute('rel', 'noopener noreferrer');
+            // Find ALL links on the page
+            const allLinks = document.querySelectorAll('a[href]');
+            let fixedCount = 0;
             
-            // Add clean click handler
-            newButton.addEventListener('click', function(e) {
-                // Only prevent default if it's not a mailto link
-                const href = this.getAttribute('href');
-                if (!href || !href.includes('mailto:')) {
-                    e.preventDefault();
-                    // Force open email client
-                    window.location.href = 'mailto:contact@algoeconomics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme';
+            allLinks.forEach(link => {
+                const href = link.href.toLowerCase();
+                const text = (link.textContent || link.innerText || '').toLowerCase();
+                
+                // Check if this is the "Apply as Student Developer" button
+                const isApplyButton = text.includes('apply as student') || 
+                                     text.includes('student developer') ||
+                                     link.classList.contains('backend-cta');
+                
+                // Check if it contains wrong references
+                const hasWrongReference = href.includes('onedrive') ||
+                                         href.includes('mudhoeve') ||
+                                         href.includes('live.com') ||
+                                         href.includes('sharepoint') ||
+                                         href.includes('file://') ||
+                                         (href.includes('mailto:') && !href.includes('contact@algoeconomics.org'));
+                
+                if (isApplyButton || hasWrongReference) {
+                    console.log('⚠️ Fixing link:', href, 'Text:', text);
+                    
+                    // Clone and replace to remove all event listeners
+                    const newLink = link.cloneNode(true);
+                    
+                    // Set the CORRECT email for Apply buttons
+                    if (isApplyButton) {
+                        newLink.href = 'mailto:contact@algoeconomics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme&body=Dear%20AlgoEconomics%20Team,%0A%0AI%20am%20interested%20in%20applying%20for%20the%20Student%20Backend%20Engineering%20Programme.%0A%0APlease%20find%20my%20details%20below:%0A%0AName:%0AUniversity:%0ACourse:%0AYear%20of%20Study:%0A%0AThank%20you,%0A[Your%20Name]';
+                        newLink.className = 'backend-cta';
+                    } else {
+                        newLink.href = 'mailto:contact@algoeconomics.org';
+                    }
+                    
+                    newLink.target = '_blank';
+                    newLink.rel = 'noopener noreferrer';
+                    
+                    // Replace the old link
+                    link.parentNode.replaceChild(newLink, link);
+                    fixedCount++;
+                    
+                    // Add clean click handler to the new link
+                    newLink.addEventListener('click', function(e) {
+                        // Just let the mailto: link work normally
+                        console.log('✅ Email link clicked, opening mail client');
+                    });
                 }
             });
+            
+            console.log(`✅ Nuclear fix applied to ${fixedCount} links`);
+            
+            // Special fix for the Backend Engineering section
+            const backendSection = document.querySelector('#backend-engineering');
+            if (backendSection) {
+                const backendLinks = backendSection.querySelectorAll('a');
+                backendLinks.forEach(link => {
+                    if (link.href && !link.href.includes('contact@algoeconomics.org')) {
+                        link.href = 'mailto:contact@algoeconomics.org';
+                        console.log('✅ Fixed backend section link');
+                    }
+                });
+            }
         }
+        
+        // Run the nuclear fix
+        setTimeout(applyNuclearEmailFix, 100);
 
         // Your existing JavaScript code continues here...
         // Mobile menu toggle
@@ -4614,86 +4662,5 @@
         }
     }
     </script>
-    <!-- ============================================= -->
-<!-- EMERGENCY FIX FOR APPLY BUTTON - ADDED AT END -->
-<!-- ============================================= -->
-<script>
-(function() {
-    console.log('Running emergency button fix...');
-    
-    // Wait for page to fully load
-    setTimeout(function() {
-        // FIND AND FIX ALL APPLY BUTTONS
-        const allLinks = document.querySelectorAll('a');
-        
-        allLinks.forEach(link => {
-            // Check if this is an "Apply as Student Developer" button
-            const linkText = link.textContent || link.innerText || '';
-            const isApplyButton = linkText.includes('Apply as Student') || 
-                                 linkText.includes('Student Developer') ||
-                                 link.className.includes('backend-cta');
-            
-            if (isApplyButton) {
-                console.log('Found apply button to fix:', link);
-                
-                // COMPLETELY REMOVE any old event listeners
-                const newLink = link.cloneNode(true);
-                link.parentNode.replaceChild(newLink, link);
-                
-                // FORCE CORRECT HREF
-                newLink.href = 'mailto:contact@algoeconomics.org?subject=Student Developer Application';
-                newLink.target = '_blank';
-                newLink.rel = 'noopener noreferrer';
-                
-                // ADD NUCLEAR CLICK HANDLER
-                newLink.addEventListener('click', function(e) {
-                    console.log('Button clicked - forcing email open');
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                    
-                    // Triple method to ensure email opens
-                    setTimeout(() => {
-                        // Method 1: window.location
-                        window.location.href = 'mailto:contact@algoeconomics.org?subject=Student Developer Application';
-                        
-                        // Method 2: window.open (backup)
-                        setTimeout(() => {
-                            window.open('mailto:contact@algoeconomics.org?subject=Student Developer Application', '_blank');
-                        }, 100);
-                        
-                        // Method 3: Create hidden link and click it
-                        setTimeout(() => {
-                            const hiddenLink = document.createElement('a');
-                            hiddenLink.href = 'mailto:contact@algoeconomics.org?subject=Student Developer Application';
-                            hiddenLink.target = '_blank';
-                            hiddenLink.style.display = 'none';
-                            document.body.appendChild(hiddenLink);
-                            hiddenLink.click();
-                            document.body.removeChild(hiddenLink);
-                        }, 200);
-                    }, 10);
-                    
-                    return false;
-                }, true); // Use capture phase
-                
-                console.log('Button fixed successfully');
-            }
-        });
-        
-        // Also check for any buttons with wrong href
- document.querySelectorAll('a[href*="onedrive"], a[href*="mudhoeve"], a[href*="file://"]').forEach(badLink => {   {
-            console.log('Found bad link:', badLink.href);
-            badLink.href = 'mailto:contact@algoeconomics.org';
-        });
-        
-    }, 500); // Wait half a second
-    
-})();
-</script>
 </body>
 </html>
-</body>
-</html>
-
-
