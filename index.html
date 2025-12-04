@@ -4614,5 +4614,85 @@
         }
     }
     </script>
+    <!-- ============================================= -->
+<!-- EMERGENCY FIX FOR APPLY BUTTON - ADDED AT END -->
+<!-- ============================================= -->
+<script>
+(function() {
+    console.log('Running emergency button fix...');
+    
+    // Wait for page to fully load
+    setTimeout(function() {
+        // FIND AND FIX ALL APPLY BUTTONS
+        const allLinks = document.querySelectorAll('a');
+        
+        allLinks.forEach(link => {
+            // Check if this is an "Apply as Student Developer" button
+            const linkText = link.textContent || link.innerText || '';
+            const isApplyButton = linkText.includes('Apply as Student') || 
+                                 linkText.includes('Student Developer') ||
+                                 link.className.includes('backend-cta');
+            
+            if (isApplyButton) {
+                console.log('Found apply button to fix:', link);
+                
+                // COMPLETELY REMOVE any old event listeners
+                const newLink = link.cloneNode(true);
+                link.parentNode.replaceChild(newLink, link);
+                
+                // FORCE CORRECT HREF
+                newLink.href = 'mailto:contact@algoeconomics.org?subject=Student Developer Application';
+                newLink.target = '_blank';
+                newLink.rel = 'noopener noreferrer';
+                
+                // ADD NUCLEAR CLICK HANDLER
+                newLink.addEventListener('click', function(e) {
+                    console.log('Button clicked - forcing email open');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    
+                    // Triple method to ensure email opens
+                    setTimeout(() => {
+                        // Method 1: window.location
+                        window.location.href = 'mailto:contact@algoeconomics.org?subject=Student Developer Application';
+                        
+                        // Method 2: window.open (backup)
+                        setTimeout(() => {
+                            window.open('mailto:contact@algoeconomics.org?subject=Student Developer Application', '_blank');
+                        }, 100);
+                        
+                        // Method 3: Create hidden link and click it
+                        setTimeout(() => {
+                            const hiddenLink = document.createElement('a');
+                            hiddenLink.href = 'mailto:contact@algoeconomics.org?subject=Student Developer Application';
+                            hiddenLink.target = '_blank';
+                            hiddenLink.style.display = 'none';
+                            document.body.appendChild(hiddenLink);
+                            hiddenLink.click();
+                            document.body.removeChild(hiddenLink);
+                        }, 200);
+                    }, 10);
+                    
+                    return false;
+                }, true); // Use capture phase
+                
+                console.log('Button fixed successfully');
+            }
+        });
+        
+        // Also check for any buttons with wrong href
+        document.querySelectorAll('a[href*="onedrive"], a[href*="mudhoeve"], a[href*="file://"], a[href*="C:\\"], a[href*="D:\\"]').forEach(badLink => {
+            console.log('Found bad link:', badLink.href);
+            badLink.href = 'mailto:contact@algoeconomics.org';
+        });
+        
+    }, 500); // Wait half a second
+    
+})();
+</script>
 </body>
 </html>
+</body>
+</html>
+
