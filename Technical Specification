@@ -1,0 +1,2257 @@
+# AlgoEconomics Corruption Index (ACI)
+## Technical Specification Document v1.0
+
+**Document Version:** 1.0  
+**Last Updated:** December 2025  
+**Target Completion:** March 2026 (MVP)  
+**Audience:** Student Developers, CTO Candidates, Technical Stakeholders
+
+---
+
+## Executive Summary
+
+The AlgoEconomics Corruption Index (ACI) is a multi-layered governance risk measurement system designed for institutional investors making capital allocation decisions in UK-Africa markets. This document provides the technical blueprint for building the MVP (Phase 1) of the ACI scoring engine and platform.
+
+**MVP Scope:**
+- 6 African countries (Kenya, Nigeria, South Africa, Ghana, Rwanda, Ethiopia)
+- 7 sectors (Mining, Agriculture, Fintech, Energy, Aviation, Healthcare, Tourism)
+- 3-layer scoring architecture (Country, Sector, Project)
+- 7 Governance Flags
+- Quarterly manual updates with semi-automated data collection
+- Basic web dashboard for internal use
+
+---
+
+## Table of Contents
+
+1. [System Architecture](#1-system-architecture)
+2. [Technology Stack](#2-technology-stack)
+3. [MVP Scope & Phasing](#3-mvp-scope--phasing)
+4. [Data Sources & Collection](#4-data-sources--collection)
+5. [Database Schema](#5-database-schema)
+6. [Scoring Engine Logic](#6-scoring-engine-logic)
+7. [API Design](#7-api-design)
+8. [Frontend Requirements](#8-frontend-requirements)
+9. [Development Milestones](#9-development-milestones)
+10. [Infrastructure & Deployment](#10-infrastructure--deployment)
+11. [Testing & Validation](#11-testing--validation)
+12. [Security Considerations](#12-security-considerations)
+
+---
+
+## 1. System Architecture
+
+### 1.1 High-Level Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         USER INTERFACE                          │
+│  (React Dashboard - Internal Admin + Future Customer Portal)   │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        API LAYER (REST)                         │
+│              (Node.js/Express or Python/FastAPI)                │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                ┌────────────┴────────────┐
+                ▼                         ▼
+┌───────────────────────────┐  ┌──────────────────────────────┐
+│    SCORING ENGINE         │  │   DATA COLLECTION LAYER      │
+│  (Python calculation      │  │   (ETL Pipeline)             │
+│   modules)                │  │   - World Bank API           │
+│  - Layer 1: Country       │  │   - IMF API                  │
+│  - Layer 2: Sector        │  │   - Manual data entry        │
+│  - Layer 3: Project       │  │   - Web scraping (limited)   │
+│  - Governance Flags       │  │                              │
+└───────────────┬───────────┘  └──────────────┬───────────────┘
+                │                             │
+                └──────────┬──────────────────┘
+                           ▼
+                ┌──────────────────────────┐
+                │    DATABASE LAYER        │
+                │   (PostgreSQL)           │
+                │   - Country data         │
+                │   - Sector data          │
+                │   - Indicator scores     │
+                │   - Historical scores    │
+                │   - User data (future)   │
+                └──────────────────────────┘
+```
+
+### 1.2 Component Overview
+
+**Frontend (React + Tailwind CSS)**
+- Admin dashboard for data entry and score review
+- Visualization components (charts, heatmaps, flags)
+- Future: Customer-facing portal
+
+**Backend API (Node.js/Express or Python/FastAPI)**
+- RESTful endpoints for data retrieval
+- Authentication (JWT for admin access)
+- Data validation middleware
+- Rate limiting
+
+**Scoring Engine (Python)**
+- Calculation modules for each layer
+- Governance Flags evaluation
+- Composite score generation
+- Historical trend analysis
+
+**Data Collection (Python/Bash Scripts)**
+- API integrations (World Bank, IMF)
+- Manual data entry forms
+- Data validation and cleaning
+- Scheduled data refresh jobs
+
+**Database (PostgreSQL)**
+- Normalized data structure
+- Time-series support for historical tracking
+- Full-text search for documentation
+- Backup and recovery
+
+---
+
+## 2. Technology Stack
+
+### 2.1 Core Technologies (Budget-Conscious, Student-Friendly)
+
+| Component | Technology | Rationale |
+|-----------|-----------|-----------|
+| **Frontend** | React + Vite + Tailwind CSS | Fast, modern, excellent learning resources |
+| **Backend API** | Node.js + Express OR Python + FastAPI | Choose based on team expertise |
+| **Scoring Engine** | Python 3.11+ | Best for data science, NumPy/Pandas |
+| **Database** | PostgreSQL 15+ | Free, robust, time-series support |
+| **Data Pipeline** | Python + requests + pandas | Simple, powerful, widely used |
+| **Hosting** | Railway.app OR Render (Free tier) | Easy deployment, generous free tiers |
+| **Version Control** | GitHub | Already in use |
+| **Documentation** | Markdown + GitHub Wiki | Simple, version-controlled |
+
+### 2.2 Key Libraries & Frameworks
+
+**Python:**
+```python
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+requests>=2.31.0
+
+# Database
+psycopg2-binary>=2.9.0
+SQLAlchemy>=2.0.0
+
+# API (if using Python backend)
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# Data validation
+pydantic>=2.0.0
+
+# Task scheduling
+schedule>=1.2.0
+```
+
+**JavaScript/Node.js:**
+```json
+{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "express": "^4.18.0",
+    "pg": "^8.11.0",
+    "jsonwebtoken": "^9.0.0",
+    "axios": "^1.6.0",
+    "recharts": "^2.10.0",
+    "tailwindcss": "^3.3.0"
+  }
+}
+```
+
+---
+
+## 3. MVP Scope & Phasing
+
+### 3.1 Phase 1 (MVP) - December 2025 to March 2026
+
+**IN SCOPE:**
+
+✅ **Geographic Coverage:**
+- Kenya
+- Nigeria  
+- South Africa
+- Ghana
+- Rwanda
+- Ethiopia
+
+✅ **Sectors:**
+- Mining
+- Agriculture
+- Fintech
+- Energy
+- Aviation
+- Healthcare
+- Tourism
+
+✅ **Scoring Layers:**
+- Layer 1: Institutional Integrity (Country-level)
+- Layer 2: Sector Exposure (Sector-level)
+- Layer 3: Execution Risk (Project-level baseline)
+
+✅ **Governance Flags:**
+- Transparency Flag
+- Procurement Integrity Flag
+- Regulatory Predictability Flag
+- Rule of Law Flag
+- State Capacity Flag
+- Accountability Flag
+- Political Interference Flag
+
+✅ **Features:**
+- Manual/semi-automated data collection
+- Basic scoring engine with fixed weights
+- Simple admin dashboard
+- Country comparison view
+- Sector comparison view
+- CSV data export
+- Historical score tracking (quarterly)
+
+**OUT OF SCOPE (Phase 2):**
+
+❌ Dynamic weighting by investment type
+❌ Real-time news monitoring
+❌ Corruption type disaggregation (4 types)
+❌ Lifecycle mapping (entry to exit)
+❌ Machine learning / predictive models
+❌ Customer-facing portal with authentication
+❌ API for external integrations
+❌ Additional countries beyond initial 6
+❌ Automated web scraping
+❌ Mobile responsiveness (desktop-first MVP)
+
+### 3.2 Development Timeline
+
+| Week | Focus Area | Deliverables |
+|------|-----------|--------------|
+| 1-2 | Setup & Architecture | Repo setup, DB schema, tech stack decisions |
+| 3-4 | Data Collection | API integrations, manual entry forms |
+| 5-6 | Database & Models | PostgreSQL setup, data models, migrations |
+| 7-8 | Scoring Engine (Layer 1) | Country-level scoring logic |
+| 9-10 | Scoring Engine (Layer 2 & 3) | Sector and project scoring |
+| 11-12 | Governance Flags | Flag calculation logic |
+| 13-14 | API Development | REST endpoints, authentication |
+| 15-16 | Frontend (Dashboard) | Admin UI, data visualization |
+| 17-18 | Integration & Testing | End-to-end testing, bug fixes |
+| 19-20 | Documentation & Handoff | User guides, technical docs |
+
+**Target Launch:** Mid-March 2026 (18-20 weeks)
+
+---
+
+## 4. Data Sources & Collection
+
+### 4.1 Layer 1: Institutional Integrity - Data Sources
+
+| Indicator | Primary Source | API/Manual | Update Frequency |
+|-----------|---------------|------------|------------------|
+| **Procurement Transparency** | World Bank PEFA | Manual | Annual |
+| **Judicial Independence** | World Justice Project Rule of Law Index | Manual | Annual |
+| **Rule of Law** | World Bank Governance Indicators | API | Annual |
+| **Public Financial Management** | World Bank PEFA | Manual | Annual |
+| **Freedom of Information** | Freedom House | Manual | Annual |
+| **Anti-Corruption Enforcement** | Transparency International CPI | Manual | Annual |
+| **Political Stability** | World Bank Governance Indicators | API | Annual |
+| **Regulatory Clarity** | World Bank Doing Business (archived) + Manual assessment | Manual | Annual |
+
+### 4.2 World Bank API Integration
+
+**Base URL:** `https://api.worldbank.org/v2/`
+
+**Example: Governance Indicators**
+```python
+import requests
+import pandas as pd
+
+def get_wb_governance_indicators(country_code, indicators, start_year, end_year):
+    """
+    Fetch World Bank Governance Indicators
+    
+    Args:
+        country_code: ISO 3-letter code (e.g., 'KEN' for Kenya)
+        indicators: List of indicator codes (e.g., ['CC.EST', 'GE.EST'])
+        start_year: Start year
+        end_year: End year
+    
+    Returns:
+        DataFrame with indicator values
+    """
+    base_url = "https://api.worldbank.org/v2/country/{}/indicator/{}?format=json&date={}:{}"
+    
+    data = []
+    for indicator in indicators:
+        url = base_url.format(country_code, indicator, start_year, end_year)
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            json_data = response.json()
+            if len(json_data) > 1:
+                for entry in json_data[1]:
+                    data.append({
+                        'country': entry['country']['value'],
+                        'indicator': indicator,
+                        'year': entry['date'],
+                        'value': entry['value']
+                    })
+    
+    return pd.DataFrame(data)
+
+# World Bank Governance Indicator Codes
+WB_GOVERNANCE_INDICATORS = {
+    'CC.EST': 'Control of Corruption',
+    'GE.EST': 'Government Effectiveness',
+    'PV.EST': 'Political Stability',
+    'RL.EST': 'Rule of Law',
+    'RQ.EST': 'Regulatory Quality',
+    'VA.EST': 'Voice and Accountability'
+}
+
+# Usage
+df = get_wb_governance_indicators('KEN', list(WB_GOVERNANCE_INDICATORS.keys()), 2020, 2024)
+```
+
+**Key Governance Indicators for Layer 1:**
+
+- `CC.EST` - Control of Corruption (-2.5 to +2.5 scale)
+- `GE.EST` - Government Effectiveness (-2.5 to +2.5 scale)
+- `PV.EST` - Political Stability (-2.5 to +2.5 scale)
+- `RL.EST` - Rule of Law (-2.5 to +2.5 scale)
+- `RQ.EST` - Regulatory Quality (-2.5 to +2.5 scale)
+- `VA.EST` - Voice and Accountability (-2.5 to +2.5 scale)
+
+### 4.3 IMF API Integration (Limited)
+
+**Note:** IMF data is less structured and harder to access programmatically. Most will be manual entry.
+
+**Available:** Some macroeconomic indicators that can serve as proxies
+- Government debt levels (fiscal stress indicator)
+- Tax revenue as % of GDP (state capacity indicator)
+
+### 4.4 Manual Data Entry Sources
+
+For MVP, the following will be manually entered quarterly:
+
+1. **Transparency International CPI**
+   - Source: https://www.transparency.org/en/cpi
+   - Annual update (January each year)
+   - Scale: 0-100 (0 = highly corrupt, 100 = very clean)
+
+2. **World Justice Project Rule of Law Index**
+   - Source: https://worldjusticeproject.org/rule-of-law-index
+   - Annual update
+   - Sub-indices for judicial independence, civil justice, etc.
+
+3. **Freedom House Freedom in the World**
+   - Source: https://freedomhouse.org/report/freedom-world
+   - Annual update
+   - Civil liberties and political rights scores
+
+4. **World Bank PEFA (Public Expenditure and Financial Accountability)**
+   - Source: https://www.pefa.org
+   - Country-specific reports (irregular updates)
+   - Procurement transparency scores
+
+5. **Sector-Specific Regulatory Data**
+   - Manual research from national regulators
+   - Industry reports
+   - News sources
+
+### 4.5 Data Collection Workflow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   QUARTERLY DATA REFRESH                    │
+└─────────────────────────────────────────────────────────────┘
+                             │
+                    ┌────────┴────────┐
+                    ▼                 ▼
+        ┌──────────────────┐  ┌──────────────────┐
+        │  AUTOMATED       │  │  MANUAL ENTRY    │
+        │  (API Calls)     │  │  (Admin Form)    │
+        │                  │  │                  │
+        │  - World Bank    │  │  - TI CPI        │
+        │    Governance    │  │  - WJP Index     │
+        │    Indicators    │  │  - Freedom House │
+        │                  │  │  - PEFA scores   │
+        │                  │  │  - Sector data   │
+        └────────┬─────────┘  └────────┬─────────┘
+                 │                     │
+                 └──────────┬──────────┘
+                            ▼
+                 ┌─────────────────────┐
+                 │  DATA VALIDATION    │
+                 │  - Range checks     │
+                 │  - Completeness     │
+                 │  - Consistency      │
+                 └──────────┬──────────┘
+                            ▼
+                 ┌─────────────────────┐
+                 │  DATABASE UPDATE    │
+                 │  - Insert raw data  │
+                 │  - Trigger scoring  │
+                 │  - Update history   │
+                 └──────────┬──────────┘
+                            ▼
+                 ┌─────────────────────┐
+                 │  SCORING ENGINE     │
+                 │  - Recalculate ACI  │
+                 │  - Update flags     │
+                 │  - Generate reports │
+                 └─────────────────────┘
+```
+
+---
+
+## 5. Database Schema
+
+### 5.1 Entity Relationship Diagram
+
+```
+┌─────────────┐       ┌──────────────────┐       ┌─────────────┐
+│  countries  │──────<│ country_scores   │>──────│  indicators │
+└─────────────┘       └──────────────────┘       └─────────────┘
+      │                                                   
+      │               ┌──────────────────┐                
+      └──────────────<│  sector_scores   │>───────┐      
+                      └──────────────────┘        │      
+                              │                   │      
+                              │                   │      
+                      ┌───────────────┐   ┌───────────────┐
+                      │   sectors     │   │  sector_      │
+                      └───────────────┘   │  indicators   │
+                                          └───────────────┘
+                                                  
+┌──────────────────┐       ┌──────────────────┐          
+│ governance_flags │──────<│  flag_history    │          
+└──────────────────┘       └──────────────────┘          
+```
+
+### 5.2 Table Definitions
+
+#### 5.2.1 `countries`
+
+```sql
+CREATE TABLE countries (
+    id SERIAL PRIMARY KEY,
+    code VARCHAR(3) UNIQUE NOT NULL,  -- ISO 3-letter code (e.g., 'KEN')
+    name VARCHAR(100) NOT NULL,
+    region VARCHAR(50),
+    income_level VARCHAR(50),
+    population BIGINT,
+    gdp_usd BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Example data
+INSERT INTO countries (code, name, region, income_level) VALUES
+('KEN', 'Kenya', 'East Africa', 'Lower middle income'),
+('NGA', 'Nigeria', 'West Africa', 'Lower middle income'),
+('ZAF', 'South Africa', 'Southern Africa', 'Upper middle income'),
+('GHA', 'Ghana', 'West Africa', 'Lower middle income'),
+('RWA', 'Rwanda', 'East Africa', 'Low income'),
+('ETH', 'Ethiopia', 'East Africa', 'Low income');
+```
+
+#### 5.2.2 `indicators`
+
+```sql
+CREATE TABLE indicators (
+    id SERIAL PRIMARY KEY,
+    code VARCHAR(50) UNIQUE NOT NULL,  -- e.g., 'WB_CC_EST'
+    name VARCHAR(200) NOT NULL,
+    description TEXT,
+    source VARCHAR(100),  -- 'World Bank', 'TI', 'WJP', etc.
+    layer INT CHECK (layer IN (1, 2, 3)),  -- Which layer it feeds into
+    weight DECIMAL(5,2),  -- Weight in layer calculation (0-100)
+    min_value DECIMAL(10,2),
+    max_value DECIMAL(10,2),
+    higher_is_better BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Example indicators for Layer 1
+INSERT INTO indicators (code, name, source, layer, weight, min_value, max_value) VALUES
+('WB_CC_EST', 'Control of Corruption', 'World Bank', 1, 15.0, -2.5, 2.5),
+('WB_GE_EST', 'Government Effectiveness', 'World Bank', 1, 15.0, -2.5, 2.5),
+('WB_RL_EST', 'Rule of Law', 'World Bank', 1, 20.0, -2.5, 2.5),
+('WB_RQ_EST', 'Regulatory Quality', 'World Bank', 1, 15.0, -2.5, 2.5),
+('TI_CPI', 'Transparency International CPI', 'TI', 1, 20.0, 0, 100),
+('WJP_RLI', 'Rule of Law Index', 'WJP', 1, 15.0, 0, 1);
+```
+
+#### 5.2.3 `country_scores`
+
+```sql
+CREATE TABLE country_scores (
+    id SERIAL PRIMARY KEY,
+    country_id INT REFERENCES countries(id),
+    indicator_id INT REFERENCES indicators(id),
+    year INT NOT NULL,
+    quarter INT CHECK (quarter BETWEEN 1 AND 4),
+    raw_value DECIMAL(10,2),
+    normalized_value DECIMAL(5,2) CHECK (normalized_value BETWEEN 0 AND 100),  -- 0-100 scale
+    data_quality VARCHAR(20) CHECK (data_quality IN ('high', 'medium', 'low')),
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(country_id, indicator_id, year, quarter)
+);
+
+CREATE INDEX idx_country_scores_lookup ON country_scores(country_id, year, quarter);
+```
+
+#### 5.2.4 `sectors`
+
+```sql
+CREATE TABLE sectors (
+    id SERIAL PRIMARY KEY,
+    code VARCHAR(20) UNIQUE NOT NULL,  -- 'MINING', 'AGRICULTURE', etc.
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO sectors (code, name) VALUES
+('MINING', 'Mining'),
+('AGRICULTURE', 'Agriculture'),
+('FINTECH', 'Fintech'),
+('ENERGY', 'Energy'),
+('AVIATION', 'Aviation'),
+('HEALTHCARE', 'Healthcare'),
+('TOURISM', 'Tourism');
+```
+
+#### 5.2.5 `sector_indicators`
+
+```sql
+CREATE TABLE sector_indicators (
+    id SERIAL PRIMARY KEY,
+    sector_id INT REFERENCES sectors(id),
+    code VARCHAR(50) UNIQUE NOT NULL,
+    name VARCHAR(200) NOT NULL,
+    description TEXT,
+    dimension VARCHAR(50),  -- 'Regulatory Discretion', 'State Involvement', etc.
+    weight DECIMAL(5,2),  -- Weight within sector scoring (0-100)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Example: Mining sector indicators
+INSERT INTO sector_indicators (sector_id, code, name, dimension, weight) VALUES
+(1, 'MINING_REG_DISCRETION', 'Regulatory Discretion Score', 'Regulatory Discretion', 20.0),
+(1, 'MINING_STATE_INVOLVE', 'State Involvement Score', 'State Involvement', 20.0),
+(1, 'MINING_INFO_ASYMM', 'Information Asymmetry Score', 'Information Asymmetry', 20.0),
+(1, 'MINING_RENT_DENSITY', 'Rent Density Score', 'Rent Density', 20.0),
+(1, 'MINING_HIST_CORRUPT', 'Historical Corruption Pattern', 'Historical Patterns', 20.0);
+```
+
+#### 5.2.6 `sector_scores`
+
+```sql
+CREATE TABLE sector_scores (
+    id SERIAL PRIMARY KEY,
+    country_id INT REFERENCES countries(id),
+    sector_id INT REFERENCES sectors(id),
+    indicator_id INT REFERENCES sector_indicators(id),
+    year INT NOT NULL,
+    quarter INT CHECK (quarter BETWEEN 1 AND 4),
+    score DECIMAL(5,2) CHECK (score BETWEEN 0 AND 100),
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(country_id, sector_id, indicator_id, year, quarter)
+);
+
+CREATE INDEX idx_sector_scores_lookup ON sector_scores(country_id, sector_id, year, quarter);
+```
+
+#### 5.2.7 `governance_flags`
+
+```sql
+CREATE TABLE governance_flags (
+    id SERIAL PRIMARY KEY,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    evaluation_criteria TEXT,  -- How to evaluate red/amber/green
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO governance_flags (code, name, evaluation_criteria) VALUES
+('TRANSPARENCY', 'Transparency Flag', 'Green: Real-time procurement disclosure | Amber: Partial disclosure | Red: Opaque'),
+('PROCUREMENT', 'Procurement Integrity Flag', 'Green: E-procurement, open bidding | Amber: Mixed compliance | Red: Frequent sole-sourcing'),
+('REGULATORY', 'Regulatory Predictability Flag', 'Green: Rules-based, transparent | Amber: Moderate consistency | Red: Arbitrary enforcement'),
+('RULE_OF_LAW', 'Rule of Law Flag', 'Green: Strong judicial independence | Amber: Mixed record | Red: Courts defer to executive'),
+('STATE_CAPACITY', 'State Capacity Flag', 'Green: Professional bureaucracy | Amber: Uneven capacity | Red: Weak institutions'),
+('ACCOUNTABILITY', 'Accountability Flag', 'Green: Systematic prosecution | Amber: Selective enforcement | Red: Impunity'),
+('POLITICAL', 'Political Interference Flag', 'Green: Arms-length government | Amber: Occasional influence | Red: Frequent intervention');
+```
+
+#### 5.2.8 `flag_history`
+
+```sql
+CREATE TABLE flag_history (
+    id SERIAL PRIMARY KEY,
+    country_id INT REFERENCES countries(id),
+    flag_id INT REFERENCES governance_flags(id),
+    year INT NOT NULL,
+    quarter INT CHECK (quarter BETWEEN 1 AND 4),
+    status VARCHAR(10) CHECK (status IN ('green', 'amber', 'red')),
+    trend VARCHAR(20) CHECK (trend IN ('improving', 'stable', 'deteriorating', NULL)),
+    confidence VARCHAR(20) CHECK (confidence IN ('high', 'medium', 'low')),
+    justification TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(country_id, flag_id, year, quarter)
+);
+
+CREATE INDEX idx_flag_history_lookup ON flag_history(country_id, year, quarter);
+```
+
+#### 5.2.9 `aci_composite_scores`
+
+```sql
+CREATE TABLE aci_composite_scores (
+    id SERIAL PRIMARY KEY,
+    country_id INT REFERENCES countries(id),
+    sector_id INT REFERENCES sectors(id) NULL,  -- NULL for country-level ACI
+    year INT NOT NULL,
+    quarter INT CHECK (quarter BETWEEN 1 AND 4),
+    layer1_score DECIMAL(5,2) CHECK (layer1_score BETWEEN 0 AND 100),
+    layer2_score DECIMAL(5,2) CHECK (layer2_score BETWEEN 0 AND 100),
+    layer3_score DECIMAL(5,2) CHECK (layer3_score BETWEEN 0 AND 100),
+    composite_score DECIMAL(5,2) CHECK (composite_score BETWEEN 0 AND 100),
+    risk_band VARCHAR(20) CHECK (risk_band IN ('Low Risk', 'Moderate Risk', 'Elevated Risk', 'High Risk', 'Critical Risk')),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(country_id, sector_id, year, quarter)
+);
+
+CREATE INDEX idx_aci_lookup ON aci_composite_scores(country_id, sector_id, year, quarter);
+```
+
+### 5.3 Database Setup Script
+
+```bash
+# Create database
+createdb algoeconomics_aci
+
+# Run migrations (using simple SQL files for MVP)
+psql -d algoeconomics_aci -f schema/01_create_tables.sql
+psql -d algoeconomics_aci -f schema/02_insert_reference_data.sql
+psql -d algoeconomics_aci -f schema/03_create_indexes.sql
+```
+
+---
+
+## 6. Scoring Engine Logic
+
+### 6.1 Layer 1: Institutional Integrity Calculation
+
+**Objective:** Calculate country-level governance quality (0-100 scale)
+
+**Formula:**
+```
+Layer1_Score = Σ (Normalized_Indicator_Value × Indicator_Weight)
+
+Where:
+- Normalized_Indicator_Value = Indicator value converted to 0-100 scale
+- Indicator_Weight = Percentage weight of indicator (sum = 100%)
+```
+
+**Python Implementation:**
+
+```python
+def normalize_indicator(raw_value, min_val, max_val, higher_is_better=True):
+    """
+    Normalize indicator to 0-100 scale
+    
+    Args:
+        raw_value: Raw indicator value
+        min_val: Minimum possible value
+        max_val: Maximum possible value
+        higher_is_better: True if higher values indicate better governance
+    
+    Returns:
+        Normalized score (0-100)
+    """
+    if raw_value is None:
+        return None
+    
+    # Linear normalization
+    normalized = ((raw_value - min_val) / (max_val - min_val)) * 100
+    
+    # Invert if lower is better
+    if not higher_is_better:
+        normalized = 100 - normalized
+    
+    # Clamp to 0-100
+    return max(0, min(100, normalized))
+
+
+def calculate_layer1_score(country_id, year, quarter, db_connection):
+    """
+    Calculate Layer 1 (Institutional Integrity) score
+    
+    Returns:
+        float: Layer 1 score (0-100)
+    """
+    query = """
+        SELECT 
+            cs.raw_value,
+            i.min_value,
+            i.max_value,
+            i.higher_is_better,
+            i.weight
+        FROM country_scores cs
+        JOIN indicators i ON cs.indicator_id = i.id
+        WHERE cs.country_id = %s
+          AND cs.year = %s
+          AND cs.quarter = %s
+          AND i.layer = 1
+    """
+    
+    cursor = db_connection.cursor()
+    cursor.execute(query, (country_id, year, quarter))
+    rows = cursor.fetchall()
+    
+    if not rows:
+        return None
+    
+    total_score = 0
+    total_weight = 0
+    
+    for row in rows:
+        raw_value, min_val, max_val, higher_is_better, weight = row
+        
+        if raw_value is not None:
+            normalized = normalize_indicator(raw_value, min_val, max_val, higher_is_better)
+            total_score += normalized * (weight / 100)
+            total_weight += weight
+    
+    # Adjust for missing data
+    if total_weight < 100:
+        print(f"Warning: Missing data. Total weight: {total_weight}%")
+        # Scale up proportionally
+        total_score = (total_score / total_weight) * 100
+    
+    return round(total_score, 2)
+
+
+# Example usage
+layer1_score = calculate_layer1_score(
+    country_id=1,  # Kenya
+    year=2024,
+    quarter=4,
+    db_connection=conn
+)
+print(f"Kenya Layer 1 Score: {layer1_score}")
+```
+
+**Indicator Weights (MVP):**
+
+| Indicator | Weight | Rationale |
+|-----------|--------|-----------|
+| World Bank Rule of Law | 20% | Core institutional quality |
+| TI Corruption Perceptions Index | 20% | Most recognized benchmark |
+| World Bank Control of Corruption | 15% | Direct corruption measure |
+| World Bank Government Effectiveness | 15% | State capacity signal |
+| World Bank Regulatory Quality | 15% | Predictability indicator |
+| WJP Rule of Law Index | 15% | Judicial independence |
+
+**Total:** 100%
+
+### 6.2 Layer 2: Sector Exposure Calculation
+
+**Objective:** Calculate sector-specific corruption vulnerability (0-100 scale)
+
+**Formula:**
+```
+Layer2_Score = Σ (Dimension_Score × Dimension_Weight)
+
+Where dimensions are:
+1. Regulatory Discretion (20%)
+2. State Involvement (20%)
+3. Information Asymmetry (20%)
+4. Rent Density (20%)
+5. Historical Corruption Patterns (20%)
+```
+
+**Python Implementation:**
+
+```python
+def calculate_layer2_score(country_id, sector_id, year, quarter, db_connection):
+    """
+    Calculate Layer 2 (Sector Exposure) score
+    
+    Returns:
+        float: Layer 2 score (0-100)
+    """
+    query = """
+        SELECT 
+            ss.score,
+            si.weight
+        FROM sector_scores ss
+        JOIN sector_indicators si ON ss.indicator_id = si.id
+        WHERE ss.country_id = %s
+          AND ss.sector_id = %s
+          AND ss.year = %s
+          AND ss.quarter = %s
+    """
+    
+    cursor = db_connection.cursor()
+    cursor.execute(query, (country_id, sector_id, year, quarter))
+    rows = cursor.fetchall()
+    
+    if not rows:
+        return None
+    
+    total_score = 0
+    total_weight = 0
+    
+    for score, weight in rows:
+        if score is not None:
+            total_score += score * (weight / 100)
+            total_weight += weight
+    
+    if total_weight < 100:
+        print(f"Warning: Missing sector data. Total weight: {total_weight}%")
+        total_score = (total_score / total_weight) * 100
+    
+    return round(total_score, 2)
+```
+
+**Sector Dimension Scoring Guidelines (Manual Assessment):**
+
+Each dimension scored 0-100 where:
+- **0-20:** Very Low Risk
+- **21-40:** Low Risk
+- **41-60:** Moderate Risk
+- **61-80:** High Risk
+- **81-100:** Very High Risk
+
+**Example: Aviation Sector in Kenya**
+
+| Dimension | Score | Justification |
+|-----------|-------|---------------|
+| Regulatory Discretion | 65 | Route allocation, slot assignment have high discretion |
+| State Involvement | 70 | KAA (state-owned), national carrier influence |
+| Information Asymmetry | 55 | Some transparency in licensing, but limited pricing data |
+| Rent Density | 75 | High-value concessions, duty-free monopolies |
+| Historical Patterns | 60 | Several documented cases (2018-2020 scandals) |
+| **Weighted Average** | **65** | High Risk |
+
+### 6.3 Layer 3: Execution Risk Calculation
+
+**Objective:** Calculate project-level implementation risk (0-100 scale)
+
+**MVP Approach:** For Phase 1, Layer 3 will use a simplified baseline calculation based on:
+- Number of approvals required (manual entry per sector)
+- Time to approval (World Bank Doing Business data where available)
+- Bureaucratic friction index (manual assessment)
+
+**Formula:**
+```
+Layer3_Score = (Approvals_Score × 40%) + (Time_Score × 30%) + (Friction_Score × 30%)
+```
+
+**Python Implementation:**
+
+```python
+def calculate_layer3_baseline(country_id, sector_id):
+    """
+    Calculate baseline Layer 3 score (simplified for MVP)
+    Uses country-sector averages, not project-specific
+    
+    Returns:
+        float: Layer 3 baseline score (0-100)
+    """
+    # For MVP, use lookup table of baseline scores
+    # In Phase 2, this becomes project-specific
+    
+    baseline_scores = {
+        # (country_id, sector_id): score
+        (1, 1): 58,  # Kenya Mining
+        (1, 2): 45,  # Kenya Agriculture
+        (1, 3): 42,  # Kenya Fintech
+        (1, 4): 62,  # Kenya Energy
+        (1, 5): 68,  # Kenya Aviation
+        (1, 6): 52,  # Kenya Healthcare
+        (1, 7): 48,  # Kenya Tourism
+        # ... more entries
+    }
+    
+    return baseline_scores.get((country_id, sector_id), 50)  # Default 50 if missing
+```
+
+**Note:** Phase 2 will make this dynamic with actual approval counts, timeline data, and project-specific parameters.
+
+### 6.4 Governance Flags Evaluation
+
+**Objective:** Determine Red/Amber/Green status for each flag
+
+**Evaluation Process:**
+1. Gather relevant indicators for each flag
+2. Apply decision rules
+3. Assign confidence level based on data quality
+4. Determine trend (comparing to previous quarter)
+
+**Python Implementation:**
+
+```python
+def evaluate_transparency_flag(country_id, year, quarter, db_connection):
+    """
+    Evaluate Transparency Flag
+    
+    Returns:
+        dict: {status: 'green'/'amber'/'red', confidence: 'high'/'medium'/'low', justification: str}
+    """
+    # Get relevant indicators
+    # For Transparency: TI CPI, WB Voice & Accountability, PEFA scores
+    
+    query = """
+        SELECT i.code, cs.normalized_value
+        FROM country_scores cs
+        JOIN indicators i ON cs.indicator_id = i.id
+        WHERE cs.country_id = %s
+          AND cs.year = %s
+          AND cs.quarter = %s
+          AND i.code IN ('TI_CPI', 'WB_VA_EST', 'PEFA_PI24')
+    """
+    
+    cursor = db_connection.cursor()
+    cursor.execute(query, (country_id, year, quarter))
+    indicators = dict(cursor.fetchall())
+    
+    # Decision logic
+    ti_cpi = indicators.get('TI_CPI', 50)  # Default to 50 if missing
+    
+    if ti_cpi >= 60:
+        status = 'green'
+    elif ti_cpi >= 40:
+        status = 'amber'
+    else:
+        status = 'red'
+    
+    # Confidence based on data availability
+    confidence = 'high' if len(indicators) >= 2 else 'low'
+    
+    justification = f"TI CPI: {ti_cpi}/100. "
+    if status == 'green':
+        justification += "Strong transparency framework."
+    elif status == 'amber':
+        justification += "Moderate transparency with gaps."
+    else:
+        justification += "Significant transparency deficits."
+    
+    return {
+        'status': status,
+        'confidence': confidence,
+        'justification': justification
+    }
+
+
+def calculate_flag_trend(country_id, flag_id, current_status, db_connection):
+    """
+    Determine if flag is improving, stable, or deteriorating
+    
+    Returns:
+        str: 'improving', 'stable', or 'deteriorating'
+    """
+    # Get previous 2 quarters
+    query = """
+        SELECT status
+        FROM flag_history
+        WHERE country_id = %s
+          AND flag_id = %s
+        ORDER BY year DESC, quarter DESC
+        LIMIT 3
+    """
+    
+    cursor = db_connection.cursor()
+    cursor.execute(query, (country_id, flag_id))
+    history = [row[0] for row in cursor.fetchall()]
+    
+    if len(history) < 2:
+        return 'stable'  # Not enough history
+    
+    # Status ordering: green > amber > red
+    status_value = {'green': 3, 'amber': 2, 'red': 1}
+    
+    current_val = status_value[current_status]
+    prev_val = status_value[history[1]] if len(history) > 1 else current_val
+    
+    if current_val > prev_val:
+        return 'improving'
+    elif current_val < prev_val:
+        return 'deteriorating'
+    else:
+        return 'stable'
+```
+
+### 6.5 ACI Composite Score Calculation
+
+**Objective:** Combine three layers into final ACI score
+
+**Formula (MVP - Fixed Weights):**
+```
+ACI_Composite = (Layer1 × 40%) + (Layer2 × 35%) + (Layer3 × 25%)
+```
+
+**Risk Bands:**
+- **90-100:** Low Risk (Green)
+- **70-89:** Moderate Risk (Yellow-Green)
+- **50-69:** Elevated Risk (Yellow)
+- **30-49:** High Risk (Orange)
+- **0-29:** Critical Risk (Red)
+
+**Python Implementation:**
+
+```python
+def calculate_aci_composite(country_id, sector_id, year, quarter, db_connection):
+    """
+    Calculate final ACI composite score
+    
+    Returns:
+        dict: {
+            'layer1': float,
+            'layer2': float,
+            'layer3': float,
+            'composite': float,
+            'risk_band': str
+        }
+    """
+    # Calculate each layer
+    layer1 = calculate_layer1_score(country_id, year, quarter, db_connection)
+    layer2 = calculate_layer2_score(country_id, sector_id, year, quarter, db_connection)
+    layer3 = calculate_layer3_baseline(country_id, sector_id)
+    
+    # MVP weights (fixed for Phase 1)
+    W1, W2, W3 = 0.40, 0.35, 0.25
+    
+    # Calculate composite
+    composite = (layer1 * W1) + (layer2 * W2) + (layer3 * W3)
+    composite = round(composite, 2)
+    
+    # Determine risk band
+    if composite >= 90:
+        risk_band = 'Low Risk'
+    elif composite >= 70:
+        risk_band = 'Moderate Risk'
+    elif composite >= 50:
+        risk_band = 'Elevated Risk'
+    elif composite >= 30:
+        risk_band = 'High Risk'
+    else:
+        risk_band = 'Critical Risk'
+    
+    return {
+        'layer1': layer1,
+        'layer2': layer2,
+        'layer3': layer3,
+        'composite': composite,
+        'risk_band': risk_band
+    }
+
+
+# Save to database
+def save_aci_score(country_id, sector_id, year, quarter, scores, db_connection):
+    """
+    Save ACI composite score to database
+    """
+    query = """
+        INSERT INTO aci_composite_scores 
+        (country_id, sector_id, year, quarter, layer1_score, layer2_score, layer3_score, composite_score, risk_band)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT (country_id, sector_id, year, quarter)
+        DO UPDATE SET
+            layer1_score = EXCLUDED.layer1_score,
+            layer2_score = EXCLUDED.layer2_score,
+            layer3_score = EXCLUDED.layer3_score,
+            composite_score = EXCLUDED.composite_score,
+            risk_band = EXCLUDED.risk_band,
+            updated_at = CURRENT_TIMESTAMP
+    """
+    
+    cursor = db_connection.cursor()
+    cursor.execute(query, (
+        country_id, sector_id, year, quarter,
+        scores['layer1'], scores['layer2'], scores['layer3'],
+        scores['composite'], scores['risk_band']
+    ))
+    db_connection.commit()
+```
+
+### 6.6 Full Scoring Pipeline
+
+```python
+def run_full_scoring_pipeline(year, quarter, db_connection):
+    """
+    Run complete ACI scoring for all country-sector combinations
+    """
+    countries = [1, 2, 3, 4, 5, 6]  # Kenya, Nigeria, SA, Ghana, Rwanda, Ethiopia
+    sectors = [1, 2, 3, 4, 5, 6, 7]  # All 7 sectors
+    
+    results = []
+    
+    for country_id in countries:
+        # Calculate Layer 1 once per country
+        layer1 = calculate_layer1_score(country_id, year, quarter, db_connection)
+        
+        for sector_id in sectors:
+            # Calculate ACI for this country-sector
+            scores = calculate_aci_composite(country_id, sector_id, year, quarter, db_connection)
+            
+            # Save to database
+            save_aci_score(country_id, sector_id, year, quarter, scores, db_connection)
+            
+            results.append({
+                'country_id': country_id,
+                'sector_id': sector_id,
+                'scores': scores
+            })
+    
+    print(f"Scored {len(results)} country-sector combinations for {year} Q{quarter}")
+    return results
+```
+
+---
+
+## 7. API Design
+
+### 7.1 REST API Endpoints
+
+**Base URL:** `https://api.algoeconomics.com/v1` (future production)  
+**Local Dev:** `http://localhost:3000/api/v1`
+
+#### 7.1.1 Countries
+
+```
+GET /countries
+Description: List all countries in the system
+Response: 
+{
+  "data": [
+    {
+      "id": 1,
+      "code": "KEN",
+      "name": "Kenya",
+      "region": "East Africa"
+    },
+    ...
+  ]
+}
+```
+
+```
+GET /countries/:code
+Description: Get detailed country information
+Example: GET /countries/KEN
+Response:
+{
+  "data": {
+    "id": 1,
+    "code": "KEN",
+    "name": "Kenya",
+    "region": "East Africa",
+    "latest_aci_score": 58.5,
+    "latest_risk_band": "Elevated Risk",
+    "last_updated": "2024-12-01"
+  }
+}
+```
+
+#### 7.1.2 Sectors
+
+```
+GET /sectors
+Description: List all sectors
+Response:
+{
+  "data": [
+    {
+      "id": 1,
+      "code": "MINING",
+      "name": "Mining"
+    },
+    ...
+  ]
+}
+```
+
+#### 7.1.3 ACI Scores
+
+```
+GET /aci/country/:country_code
+Description: Get latest ACI scores for all sectors in a country
+Example: GET /aci/country/KEN
+Query params: ?year=2024&quarter=4 (optional, defaults to latest)
+Response:
+{
+  "data": {
+    "country": {
+      "code": "KEN",
+      "name": "Kenya"
+    },
+    "year": 2024,
+    "quarter": 4,
+    "layer1_score": 52.3,
+    "sectors": [
+      {
+        "sector": "Mining",
+        "layer2_score": 68.0,
+        "layer3_score": 58.0,
+        "composite_score": 58.5,
+        "risk_band": "Elevated Risk"
+      },
+      ...
+    ]
+  }
+}
+```
+
+```
+GET /aci/sector/:country_code/:sector_code
+Description: Get ACI score for specific country-sector
+Example: GET /aci/sector/KEN/MINING
+Query params: ?year=2024&quarter=4
+Response:
+{
+  "data": {
+    "country": "Kenya",
+    "sector": "Mining",
+    "year": 2024,
+    "quarter": 4,
+    "layer1_score": 52.3,
+    "layer2_score": 68.0,
+    "layer3_score": 58.0,
+    "composite_score": 58.5,
+    "risk_band": "Elevated Risk",
+    "flags": [
+      {
+        "name": "Transparency Flag",
+        "status": "amber",
+        "trend": "stable"
+      },
+      ...
+    ]
+  }
+}
+```
+
+```
+GET /aci/comparison
+Description: Compare ACI scores across countries or sectors
+Query params: 
+  - countries: comma-separated country codes (e.g., ?countries=KEN,NGA,ZAF)
+  - sectors: comma-separated sector codes (e.g., &sectors=MINING,ENERGY)
+  - year, quarter
+Response:
+{
+  "data": {
+    "comparison_type": "countries",
+    "countries": ["Kenya", "Nigeria", "South Africa"],
+    "sector": "Mining",
+    "scores": [
+      {
+        "country": "Kenya",
+        "composite_score": 58.5,
+        "risk_band": "Elevated Risk"
+      },
+      ...
+    ]
+  }
+}
+```
+
+#### 7.1.4 Governance Flags
+
+```
+GET /flags/:country_code
+Description: Get all governance flags for a country
+Example: GET /flags/KEN
+Response:
+{
+  "data": {
+    "country": "Kenya",
+    "year": 2024,
+    "quarter": 4,
+    "flags": [
+      {
+        "code": "TRANSPARENCY",
+        "name": "Transparency Flag",
+        "status": "amber",
+        "trend": "stable",
+        "confidence": "high",
+        "justification": "TI CPI: 49/100. Moderate transparency with gaps."
+      },
+      ...
+    ]
+  }
+}
+```
+
+#### 7.1.5 Historical Data
+
+```
+GET /aci/history/:country_code/:sector_code
+Description: Get historical ACI scores (time series)
+Example: GET /aci/history/KEN/MINING?start_year=2022&end_year=2024
+Response:
+{
+  "data": {
+    "country": "Kenya",
+    "sector": "Mining",
+    "time_series": [
+      {
+        "year": 2022,
+        "quarter": 4,
+        "composite_score": 61.2,
+        "risk_band": "Elevated Risk"
+      },
+      {
+        "year": 2023,
+        "quarter": 1,
+        "composite_score": 59.8,
+        "risk_band": "Elevated Risk"
+      },
+      ...
+    ]
+  }
+}
+```
+
+### 7.2 API Implementation (Node.js/Express Example)
+
+```javascript
+// server.js
+const express = require('express');
+const { Pool } = require('pg');
+const app = express();
+
+// Database connection
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: 'algoeconomics_aci',
+  password: process.env.DB_PASSWORD,
+  port: 5432,
+});
+
+// Middleware
+app.use(express.json());
+
+// CORS (for local development)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+// Routes
+app.get('/api/v1/countries', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM countries ORDER BY name');
+    res.json({ data: result.rows });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/v1/aci/country/:code', async (req, res) => {
+  try {
+    const { code } = req.params;
+    const { year, quarter } = req.query;
+    
+    // Get latest year/quarter if not specified
+    let queryYear = year;
+    let queryQuarter = quarter;
+    
+    if (!year || !quarter) {
+      const latestResult = await pool.query(`
+        SELECT year, quarter 
+        FROM aci_composite_scores 
+        ORDER BY year DESC, quarter DESC 
+        LIMIT 1
+      `);
+      queryYear = latestResult.rows[0].year;
+      queryQuarter = latestResult.rows[0].quarter;
+    }
+    
+    // Get country info and scores
+    const query = `
+      SELECT 
+        c.code,
+        c.name,
+        acs.year,
+        acs.quarter,
+        acs.layer1_score,
+        s.name as sector_name,
+        s.code as sector_code,
+        acs.layer2_score,
+        acs.layer3_score,
+        acs.composite_score,
+        acs.risk_band
+      FROM aci_composite_scores acs
+      JOIN countries c ON acs.country_id = c.id
+      JOIN sectors s ON acs.sector_id = s.id
+      WHERE c.code = $1
+        AND acs.year = $2
+        AND acs.quarter = $3
+      ORDER BY s.name
+    `;
+    
+    const result = await pool.query(query, [code, queryYear, queryQuarter]);
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'No data found' });
+    }
+    
+    // Format response
+    const response = {
+      data: {
+        country: {
+          code: result.rows[0].code,
+          name: result.rows[0].name
+        },
+        year: result.rows[0].year,
+        quarter: result.rows[0].quarter,
+        layer1_score: result.rows[0].layer1_score,
+        sectors: result.rows.map(row => ({
+          sector: row.sector_name,
+          sector_code: row.sector_code,
+          layer2_score: row.layer2_score,
+          layer3_score: row.layer3_score,
+          composite_score: row.composite_score,
+          risk_band: row.risk_band
+        }))
+      }
+    };
+    
+    res.json(response);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`ACI API running on port ${PORT}`);
+});
+```
+
+---
+
+## 8. Frontend Requirements
+
+### 8.1 Admin Dashboard Views (MVP)
+
+#### 8.1.1 Dashboard Home
+- **Purpose:** Overview of system status
+- **Components:**
+  - Latest scoring run status
+  - Data freshness indicators
+  - Quick stats (countries covered, sectors analyzed, last update)
+  - Navigation to other views
+
+#### 8.1.2 Data Entry View
+- **Purpose:** Manual data entry for indicators that aren't automated
+- **Components:**
+  - Country selector
+  - Year/Quarter selector
+  - Form with all indicators (Layer 1 and Layer 2)
+  - Validation and error messages
+  - Save button
+  - Data quality indicator selection
+
+#### 8.1.3 Country Dashboard
+- **Purpose:** View all ACI data for a specific country
+- **Components:**
+  - Country selector dropdown
+  - Year/Quarter filter
+  - Layer 1 score card (with indicator breakdown)
+  - Sector comparison table (all 7 sectors)
+  - Governance Flags display (7 flags with traffic light colors)
+  - Historical trend chart (line graph showing composite scores over time)
+
+**Wireframe Concept:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│  AlgoEconomics ACI Dashboard                    [Admin]    │
+├─────────────────────────────────────────────────────────────┤
+│  Country: [Kenya ▼]    Year: [2024 ▼]   Quarter: [Q4 ▼]   │
+├─────────────────────────────────────────────────────────────┤
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │  Layer 1: Institutional Integrity                    │  │
+│  │  Score: 52.3 / 100  [Elevated Risk]                  │  │
+│  │  ───────────────────────────────────────────────────  │  │
+│  │  • Control of Corruption: 48                         │  │
+│  │  • Rule of Law: 55                                   │  │
+│  │  • Government Effectiveness: 51                      │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │  Governance Flags                                    │  │
+│  │  🟢 Rule of Law         🟡 Transparency              │  │
+│  │  🟡 Procurement         🔴 Political Interference    │  │
+│  │  🟢 State Capacity      🟡 Accountability            │  │
+│  │  🟡 Regulatory Predictability                        │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │  Sector Scores                                       │  │
+│  │  Sector        | L2  | L3  | Composite | Risk       │  │
+│  │  ──────────────────────────────────────────────────  │  │
+│  │  Mining        | 68  | 58  | 58.5      | Elevated   │  │
+│  │  Agriculture   | 52  | 45  | 50.2      | Elevated   │  │
+│  │  Fintech       | 48  | 42  | 48.1      | Elevated   │  │
+│  │  Energy        | 72  | 62  | 62.8      | Elevated   │  │
+│  │  Aviation      | 70  | 68  | 63.5      | Elevated   │  │
+│  │  Healthcare    | 58  | 52  | 54.3      | Elevated   │  │
+│  │  Tourism       | 50  | 48  | 50.6      | Elevated   │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                                                             │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │  Historical Trend (Line Chart)                       │  │
+│  │  [Chart showing composite scores Q1 2022 - Q4 2024] │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+#### 8.1.4 Country Comparison View
+- **Purpose:** Compare multiple countries side-by-side
+- **Components:**
+  - Multi-select country chooser
+  - Sector selector (compare same sector across countries)
+  - Year/Quarter filter
+  - Comparison table
+  - Radar chart showing Layer 1, 2, 3 scores
+  - Export to CSV button
+
+#### 8.1.5 Sector Deep Dive
+- **Purpose:** Analyze a specific sector across countries
+- **Components:**
+  - Sector selector
+  - Year/Quarter filter
+  - Heatmap (countries as rows, risk metrics as columns)
+  - Ranking table (countries sorted by composite score)
+  - Sector-specific indicators breakdown
+
+#### 8.1.6 Scoring Run Manager
+- **Purpose:** Trigger and monitor scoring calculations
+- **Components:**
+  - "Run Scoring" button (triggers Python scoring engine)
+  - Progress indicator
+  - Log output
+  - History of past scoring runs
+  - Error/warning messages
+
+### 8.2 Frontend Technology Stack
+
+**Framework:** React 18+ with Vite  
+**Styling:** Tailwind CSS  
+**Charts:** Recharts or Chart.js  
+**State Management:** React Context API (simple for MVP)  
+**HTTP Client:** Axios  
+**Routing:** React Router  
+
+### 8.3 Key React Components
+
+```jsx
+// src/components/CountrySelector.jsx
+import React from 'react';
+
+const CountrySelector = ({ value, onChange, countries }) => {
+  return (
+    <select 
+      value={value} 
+      onChange={(e) => onChange(e.target.value)}
+      className="border rounded px-3 py-2"
+    >
+      <option value="">Select Country...</option>
+      {countries.map(country => (
+        <option key={country.code} value={country.code}>
+          {country.name}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+export default CountrySelector;
+```
+
+```jsx
+// src/components/GovernanceFlags.jsx
+import React from 'react';
+
+const FlagIcon = ({ status }) => {
+  const colors = {
+    green: 'bg-green-500',
+    amber: 'bg-yellow-500',
+    red: 'bg-red-500'
+  };
+  
+  return (
+    <div className={`w-4 h-4 rounded-full ${colors[status]}`}></div>
+  );
+};
+
+const GovernanceFlags = ({ flags }) => {
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {flags.map(flag => (
+        <div key={flag.code} className="flex items-center gap-2">
+          <FlagIcon status={flag.status} />
+          <span>{flag.name}</span>
+          {flag.trend && (
+            <span className="text-sm text-gray-600">
+              {flag.trend === 'improving' && '↗'}
+              {flag.trend === 'stable' && '→'}
+              {flag.trend === 'deteriorating' && '↘'}
+            </span>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default GovernanceFlags;
+```
+
+```jsx
+// src/components/SectorScoreTable.jsx
+import React from 'react';
+
+const RiskBadge = ({ band }) => {
+  const colors = {
+    'Low Risk': 'bg-green-100 text-green-800',
+    'Moderate Risk': 'bg-yellow-100 text-yellow-800',
+    'Elevated Risk': 'bg-orange-100 text-orange-800',
+    'High Risk': 'bg-red-100 text-red-800',
+    'Critical Risk': 'bg-red-200 text-red-900'
+  };
+  
+  return (
+    <span className={`px-2 py-1 rounded text-xs font-medium ${colors[band]}`}>
+      {band}
+    </span>
+  );
+};
+
+const SectorScoreTable = ({ sectors }) => {
+  return (
+    <table className="w-full border-collapse">
+      <thead>
+        <tr className="bg-gray-100">
+          <th className="p-2 text-left">Sector</th>
+          <th className="p-2 text-center">Layer 2</th>
+          <th className="p-2 text-center">Layer 3</th>
+          <th className="p-2 text-center">Composite</th>
+          <th className="p-2 text-left">Risk Band</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sectors.map(sector => (
+          <tr key={sector.sector_code} className="border-b">
+            <td className="p-2">{sector.sector}</td>
+            <td className="p-2 text-center">{sector.layer2_score}</td>
+            <td className="p-2 text-center">{sector.layer3_score}</td>
+            <td className="p-2 text-center font-bold">{sector.composite_score}</td>
+            <td className="p-2">
+              <RiskBadge band={sector.risk_band} />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+export default SectorScoreTable;
+```
+
+---
+
+## 9. Development Milestones
+
+### Week 1-2: Project Setup & Architecture
+**Owner:** All developers
+
+**Tasks:**
+- [ ] Set up GitHub repository structure
+- [ ] Initialize PostgreSQL database
+- [ ] Create database schema (run SQL scripts)
+- [ ] Set up development environments (local)
+- [ ] Technology stack decisions finalized
+- [ ] Create project documentation structure
+- [ ] Set up basic Node.js/Express API server
+- [ ] Set up React frontend with Vite
+
+**Deliverables:**
+- GitHub repo with folder structure
+- Running local database
+- "Hello World" API endpoint
+- "Hello World" React app
+
+---
+
+### Week 3-4: Data Collection Layer
+**Owner:** Backend developer(s)
+
+**Tasks:**
+- [ ] Implement World Bank API integration
+- [ ] Create data normalization functions
+- [ ] Build manual data entry forms (admin UI)
+- [ ] Insert reference data (countries, sectors, indicators)
+- [ ] Create data validation logic
+- [ ] Test data collection with 1-2 countries
+
+**Deliverables:**
+- Working API integration for World Bank
+- Admin forms for manual data entry
+- Sample data for Kenya and Nigeria in database
+
+---
+
+### Week 5-6: Database & Data Models
+**Owner:** Backend developer(s)
+
+**Tasks:**
+- [ ] Implement all database tables
+- [ ] Create database migration scripts
+- [ ] Build data access layer (SQL queries or ORM)
+- [ ] Insert historical data for 6 countries
+- [ ] Create database backup procedures
+- [ ] Performance optimization (indexes)
+
+**Deliverables:**
+- Complete database with sample data
+- Data access functions
+- Database documentation
+
+---
+
+### Week 7-8: Scoring Engine - Layer 1
+**Owner:** Backend/Data developer
+
+**Tasks:**
+- [ ] Implement Layer 1 calculation logic (Python)
+- [ ] Create indicator normalization functions
+- [ ] Build weighted scoring algorithm
+- [ ] Test with sample data
+- [ ] Validate against expected results
+- [ ] Document calculation methodology
+
+**Deliverables:**
+- Working Layer 1 scoring module
+- Unit tests for scoring logic
+- Sample Layer 1 scores for all 6 countries
+
+---
+
+### Week 9-10: Scoring Engine - Layers 2 & 3
+**Owner:** Backend/Data developer
+
+**Tasks:**
+- [ ] Implement Layer 2 calculation logic
+- [ ] Implement Layer 3 baseline scoring
+- [ ] Build composite score calculation
+- [ ] Implement risk band assignment
+- [ ] Test full scoring pipeline
+- [ ] Generate scores for all country-sector combinations
+
+**Deliverables:**
+- Working Layer 2 and Layer 3 modules
+- Complete ACI scores in database
+- Validation report
+
+---
+
+### Week 11-12: Governance Flags
+**Owner:** Backend developer
+
+**Tasks:**
+- [ ] Implement flag evaluation logic for all 7 flags
+- [ ] Build trend analysis function
+- [ ] Create confidence scoring
+- [ ] Test flag calculations
+- [ ] Generate flags for all countries
+- [ ] Document flag decision rules
+
+**Deliverables:**
+- Working Governance Flags module
+- Flags in database for all countries
+- Flag evaluation documentation
+
+---
+
+### Week 13-14: API Development
+**Owner:** Backend developer(s)
+
+**Tasks:**
+- [ ] Implement all REST endpoints
+- [ ] Add request validation
+- [ ] Add error handling
+- [ ] Create API documentation (Swagger/OpenAPI)
+- [ ] Add basic authentication for admin routes
+- [ ] Test all endpoints
+
+**Deliverables:**
+- Complete REST API
+- API documentation
+- Postman collection for testing
+
+---
+
+### Week 15-16: Frontend Dashboard
+**Owner:** Frontend developer(s)
+
+**Tasks:**
+- [ ] Build Country Dashboard view
+- [ ] Build Country Comparison view
+- [ ] Build Sector Deep Dive view
+- [ ] Build Data Entry forms
+- [ ] Implement charts and visualizations
+- [ ] Add responsive design (desktop-first)
+- [ ] Connect to API
+
+**Deliverables:**
+- Working admin dashboard
+- All major views functional
+- Basic styling complete
+
+---
+
+### Week 17-18: Integration & Testing
+**Owner:** All developers
+
+**Tasks:**
+- [ ] End-to-end testing of full system
+- [ ] Bug fixes
+- [ ] Performance optimization
+- [ ] Security review
+- [ ] User acceptance testing (with Kwazi/James)
+- [ ] Final data validation
+- [ ] Create user guide
+
+**Deliverables:**
+- Stable, tested system
+- Bug fix list resolved
+- User guide document
+
+---
+
+### Week 19-20: Documentation & Handoff
+**Owner:** All developers
+
+**Tasks:**
+- [ ] Complete technical documentation
+- [ ] Create deployment guide
+- [ ] Record demo video
+- [ ] Knowledge transfer session with Kwazi
+- [ ] Final code review
+- [ ] Prepare for CTO handoff
+
+**Deliverables:**
+- Complete documentation package
+- Demo video
+- Deployment-ready codebase
+- Handoff complete
+
+---
+
+## 10. Infrastructure & Deployment
+
+### 10.1 Hosting Recommendations (Budget-Conscious)
+
+**Option 1: Railway.app (Recommended for MVP)**
+- **Pros:** 
+  - $5/month for Hobby plan
+  - Automatic deployments from GitHub
+  - Built-in PostgreSQL
+  - Simple environment management
+  - Good for student projects
+- **Cons:**
+  - Limited to hobby scale
+  - Not suitable for production long-term
+
+**Option 2: Render**
+- **Pros:**
+  - Free tier available (with limitations)
+  - Similar to Railway in ease of use
+  - Good documentation
+- **Cons:**
+  - Free tier has cold starts
+  - Database not included in free tier
+
+**Option 3: DigitalOcean Droplet**
+- **Pros:**
+  - $6/month for basic droplet
+  - Full control
+  - Scalable
+- **Cons:**
+  - Requires more DevOps knowledge
+  - Manual setup needed
+
+**MVP Recommendation:** Start with Railway.app for simplicity, plan to migrate to AWS/DigitalOcean post-funding.
+
+### 10.2 Deployment Architecture (MVP)
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Railway.app                          │
+│                                                         │
+│  ┌──────────────────┐    ┌─────────────────────────┐  │
+│  │  Frontend        │    │  Backend API            │  │
+│  │  (React/Vite)    │───>│  (Node.js/Express)      │  │
+│  │  Static build    │    │  + Python scoring       │  │
+│  └──────────────────┘    └──────────┬──────────────┘  │
+│                                     │                  │
+│                          ┌──────────▼──────────────┐  │
+│                          │  PostgreSQL Database    │  │
+│                          │  (Railway managed)      │  │
+│                          └─────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 10.3 Environment Variables
+
+```bash
+# .env file (not committed to git)
+
+# Database
+DB_HOST=your-railway-db-host.railway.app
+DB_PORT=5432
+DB_NAME=railway
+DB_USER=postgres
+DB_PASSWORD=your-secure-password
+
+# API
+PORT=3000
+NODE_ENV=development
+API_SECRET_KEY=your-jwt-secret
+
+# External APIs
+WORLD_BANK_API_KEY=  # Not required, but good to have placeholder
+IMF_API_KEY=
+
+# Admin credentials (temporary for MVP)
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=change-this-immediately
+```
+
+### 10.4 Deployment Workflow
+
+```bash
+# GitHub Actions (future) or manual deployment
+
+# 1. Push to GitHub
+git push origin main
+
+# 2. Railway auto-deploys from main branch
+
+# 3. Database migrations run automatically
+# 4. Frontend builds and serves static files
+# 5. Backend restarts with new code
+```
+
+### 10.5 Monitoring & Logs
+
+**For MVP:**
+- Railway built-in logs
+- Manual database query monitoring
+- Simple uptime monitoring (UptimeRobot free tier)
+
+**Post-Seed (Phase 2):**
+- Sentry for error tracking
+- DataDog or New Relic for APM
+- CloudWatch (if on AWS)
+
+---
+
+## 11. Testing & Validation
+
+### 11.1 Unit Testing
+
+**Backend (Python scoring engine):**
+```python
+# tests/test_layer1_scoring.py
+import pytest
+from scoring_engine.layer1 import normalize_indicator, calculate_layer1_score
+
+def test_normalize_indicator_basic():
+    # Test normal case
+    result = normalize_indicator(raw_value=1.0, min_val=-2.5, max_val=2.5, higher_is_better=True)
+    assert result == 70.0  # (1.0 - (-2.5)) / (2.5 - (-2.5)) * 100 = 70
+    
+def test_normalize_indicator_edge_cases():
+    # Test minimum
+    result = normalize_indicator(raw_value=-2.5, min_val=-2.5, max_val=2.5, higher_is_better=True)
+    assert result == 0.0
+    
+    # Test maximum
+    result = normalize_indicator(raw_value=2.5, min_val=-2.5, max_val=2.5, higher_is_better=True)
+    assert result == 100.0
+    
+    # Test None
+    result = normalize_indicator(raw_value=None, min_val=-2.5, max_val=2.5, higher_is_better=True)
+    assert result is None
+
+def test_calculate_layer1_score():
+    # Mock database connection and test
+    # This would use a test database with known values
+    pass
+```
+
+**Frontend (React components):**
+```javascript
+// tests/CountrySelector.test.jsx
+import { render, screen } from '@testing-library/react';
+import CountrySelector from '../components/CountrySelector';
+
+test('renders country options', () => {
+  const countries = [
+    { code: 'KEN', name: 'Kenya' },
+    { code: 'NGA', name: 'Nigeria' }
+  ];
+  
+  render(<CountrySelector countries={countries} value="" onChange={() => {}} />);
+  
+  expect(screen.getByText('Kenya')).toBeInTheDocument();
+  expect(screen.getByText('Nigeria')).toBeInTheDocument();
+});
+```
+
+### 11.2 Integration Testing
+
+**API Testing (using pytest or Jest):**
+```python
+# tests/test_api.py
+import requests
+
+def test_get_countries():
+    response = requests.get('http://localhost:3000/api/v1/countries')
+    assert response.status_code == 200
+    data = response.json()
+    assert 'data' in data
+    assert len(data['data']) == 6  # 6 countries in MVP
+
+def test_get_aci_score():
+    response = requests.get('http://localhost:3000/api/v1/aci/country/KEN')
+    assert response.status_code == 200
+    data = response.json()
+    assert data['data']['country']['code'] == 'KEN'
+    assert 'layer1_score' in data['data']
+    assert 'sectors' in data['data']
+```
+
+### 11.3 Data Validation
+
+**Validation Checklist:**
+- [ ] All 6 countries have Layer 1 scores
+- [ ] All 42 country-sector combinations have scores (6 countries × 7 sectors)
+- [ ] All scores are between 0 and 100
+- [ ] All governance flags have status (red/amber/green)
+- [ ] Risk bands match score ranges
+- [ ] Historical data shows consistent trends (no unexplained jumps)
+- [ ] Data quality indicators are set appropriately
+
+### 11.4 User Acceptance Testing
+
+**Test Scenarios:**
+1. **Country Dashboard:**
+   - Select Kenya → verify all data loads correctly
+   - Change to Q3 2024 → verify historical data shows
+   - Check all 7 governance flags display
+   
+2. **Country Comparison:**
+   - Compare Kenya vs Nigeria in Mining sector
+   - Verify scores display side-by-side
+   - Export to CSV → verify file downloads correctly
+
+3. **Data Entry:**
+   - Enter new indicator values for Ghana
+   - Trigger scoring run
+   - Verify new scores appear in dashboard
+
+4. **Error Handling:**
+   - Try to load data for non-existent country code
+   - Verify appropriate error message
+   - Try to access API without authentication (admin routes)
+
+---
+
+## 12. Security Considerations
+
+### 12.1 MVP Security Measures
+
+**Authentication (Basic for MVP):**
+- Admin dashboard protected with JWT
+- Simple username/password (stored hashed in database)
+- No public access to data entry or scoring trigger
+
+**Database Security:**
+- PostgreSQL user with limited permissions (no DROP/ALTER in production)
+- Encrypted connection (SSL)
+- Regular backups
+
+**API Security:**
+- Input validation on all endpoints
+- Rate limiting (prevent abuse)
+- CORS configured appropriately
+- SQL injection prevention (parameterized queries)
+
+**Environment Variables:**
+- Never commit `.env` file
+- Use Railway's environment variable management
+- Rotate credentials regularly
+
+### 12.2 Phase 2 Security Enhancements
+
+**To implement post-funding:**
+- OAuth/SSO for customer access
+- Role-based access control (RBAC)
+- API keys for external integrations
+- Audit logging
+- Security scanning (Snyk, Dependabot)
+- Penetration testing
+
+---
+
+## 13. Developer Onboarding Checklist
+
+### For New Student Developers
+
+**Before you start:**
+- [ ] Clone the GitHub repository
+- [ ] Install Node.js (v18+)
+- [ ] Install Python (v3.11+)
+- [ ] Install PostgreSQL (v15+)
+- [ ] Install Git
+- [ ] Set up code editor (VS Code recommended)
+
+**Setup steps:**
+```bash
+# 1. Clone repo
+git clone https://github.com/kwazindlela101/algoeconomics-aci.git
+cd algoeconomics-aci
+
+# 2. Install backend dependencies
+cd backend
+npm install  # or pip install -r requirements.txt for Python
+
+# 3. Install frontend dependencies
+cd ../frontend
+npm install
+
+# 4. Set up database
+createdb algoeconomics_aci
+psql -d algoeconomics_aci -f ../database/schema.sql
+
+# 5. Configure environment
+cp .env.example .env
+# Edit .env with your local database credentials
+
+# 6. Start development servers
+# Terminal 1: Backend
+cd backend && npm run dev
+
+# Terminal 2: Frontend
+cd frontend && npm run dev
+```
+
+**Resources:**
+- Technical specification (this document)
+- API documentation (in `/docs/api.md`)
+- Database schema diagram (in `/docs/schema.png`)
+- Weekly meeting notes (in `/docs/meetings/`)
+
+---
+
+## 14. Success Criteria
+
+### MVP is complete when:
+
+**Functional:**
+- ✅ All 6 countries can be scored
+- ✅ All 7 sectors can be analyzed
+- ✅ 3-layer scoring works correctly
+- ✅ 7 governance flags evaluated
+- ✅ Admin dashboard displays all data
+- ✅ API returns correct data
+- ✅ Data can be entered and updated
+
+**Quality:**
+- ✅ No critical bugs
+- ✅ Core functions have unit tests
+- ✅ API responds in <2 seconds
+- ✅ Dashboard loads in <3 seconds
+- ✅ Data validation passes
+
+**Documentation:**
+- ✅ Technical docs complete
+- ✅ User guide written
+- ✅ Code is commented
+- ✅ README has setup instructions
+
+**Handoff:**
+- ✅ Kwazi can run system locally
+- ✅ Demo video recorded
+- ✅ Knowledge transfer complete
+- ✅ Future CTO has clear documentation
+
+---
+
+## 15. Contact & Support
+
+**Project Lead:** Kwazi (CEO, AlgoEconomics)  
+**GitHub:** https://github.com/kwazindlela101/algoeconomics-aci  
+**Questions:** Use GitHub Issues or project Slack channel
+
+---
+
+## Appendix A: Technology Decision Matrix
+
+| Aspect | Option 1 | Option 2 | Chosen | Reason |
+|--------|----------|----------|--------|--------|
+| Backend Language | Node.js | Python | **TBD** | Depends on team skills |
+| Frontend Framework | React | Vue | **React** | More learning resources |
+| Database | PostgreSQL | MongoDB | **PostgreSQL** | Better for structured data |
+| Hosting | Railway | Render | **Railway** | Simpler for students |
+| Charts Library | Recharts | Chart.js | **Recharts** | Better React integration |
+
+---
+
+## Appendix B: Useful Resources
+
+**World Bank API:**
+- Documentation: https://datahelpdesk.worldbank.org/knowledgebase/articles/889392
+- Governance Indicators: https://info.worldbank.org/governance/wgi/
+
+**Transparency International:**
+- CPI Methodology: https://www.transparency.org/en/cpi/2023
+
+**World Justice Project:**
+- Rule of Law Index: https://worldjusticeproject.org/rule-of-law-index/
+
+**Development Tutorials:**
+- PostgreSQL + Node.js: https://node-postgres.com/
+- React + Recharts: https://recharts.org/en-US/guide
+- FastAPI (Python): https://fastapi.tiangolo.com/
+
+---
+
+**END OF TECHNICAL SPECIFICATION v1.0**
+
+---
+
+This technical specification document should be treated as a living document and updated as the project evolves. Version control all changes through GitHub.
+
+For questions or clarifications, create an issue in the GitHub repository with the label "technical-spec".
