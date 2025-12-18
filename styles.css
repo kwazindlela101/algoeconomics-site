@@ -2038,3 +2038,29 @@ footer::after {
         opacity: 1 !important;
     }
 }
+/* ========== ABOUT SECTION STYLES ========== */
+.about-section { background: white; padding: 80px 0; }
+.about-hero-statement { text-align: center; margin-bottom: 60px; padding-bottom: 40px; border-bottom: 1px solid #e0e0e0; }
+.about-hero-statement h2 { font-size: 2.5rem; font-weight: 300; color: #1a365d; margin-bottom: 20px; }
+.about-hero-tagline { font-size: 1.1rem; color: #5a5a5a; font-weight: 300; }
+.about-intro-content p { font-size: 1.1rem; line-height: 1.8; color: #2c2c2c; margin-bottom: 20px; }
+.about-intro-highlight { display: flex; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
+.about-intro-highlight div { flex: 1; min-width: 200px; }
+.about-intro-highlight strong { display: block; font-size: 0.95rem; color: #1a365d; margin-bottom: 5px; }
+.about-intro-highlight span { font-size: 0.95rem; color: #5a5a5a; }
+.about-opportunity-section { background: #f8f9fa; padding: 50px 60px; margin: 60px 0; border-left: 4px solid #1a365d; border-radius: 8px; }
+.about-opportunity-section h3 { font-size: 1.8rem; color: #1a365d; margin-bottom: 25px; }
+.about-opportunity-section p { font-size: 1.05rem; line-height: 1.8; color: #2c2c2c; margin-bottom: 20px; }
+.about-leadership-section { margin-top: 80px; }
+.about-leadership-section h3 { font-size: 2rem; color: #1a365d; margin-bottom: 50px; text-align: center; }
+.about-team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 60px; }
+.about-team-member { display: flex; gap: 30px; align-items: flex-start; }
+.about-team-photo img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid #e0e0e0; }
+.about-team-info h4 { font-size: 1.5rem; color: #1a365d; margin-bottom: 5px; }
+.about-team-info .about-title { font-size: 0.95rem; color: #5a5a5a; margin-bottom: 20px; font-style: italic; }
+.about-team-info p { font-size: 1rem; line-height: 1.7; color: #2c2c2c; margin-bottom: 15px; }
+@media (max-width: 768px) {
+    .about-team-grid { grid-template-columns: 1fr; }
+    .about-team-member { flex-direction: column; align-items: center; text-align: center; }
+    .about-team-photo img { width: 150px; height: 150px; }
+}
