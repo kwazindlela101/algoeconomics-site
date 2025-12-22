@@ -3189,7 +3189,74 @@ p {
 .sectors-layer:nth-child(2) h4 {
     color: #007A33;
 }
+/* PASTE THIS AT THE BOTTOM OF YOUR <style> TAG IN index.html */
 
+/* Sectors Section - Force Visibility */
+#sectors.sectors {
+    background-color: #0b0d12 !important;
+    padding: 80px 0 !important;
+    display: block !important;
+}
+
+#sectors h2 {
+    color: #FFFFFF !important;
+    font-size: 2.5rem !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+    display: block !important;
+}
+
+#sectors .intro {
+    color: #E8EAED !important;
+    font-size: 1.2rem !important;
+    text-align: center !important;
+    margin-bottom: 3rem !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+.sectors-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 2rem !important;
+    margin-top: 3rem !important;
+}
+
+.sector-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 2rem !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+}
+
+.sector-card:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-5px) !important;
+}
+
+.sector-icon {
+    font-size: 3rem !important;
+    margin-bottom: 1rem !important;
+    display: block !important;
+    height: 80px !important;
+    line-height: 80px !important;
+}
+
+.sector-card h3 {
+    color: #FFFFFF !important;
+    font-size: 1.5rem !important;
+    margin: 1rem 0 !important;
+}
+
+.sector-card p {
+    color: #B8BABD !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    opacity: 1 !important;
+}
 </style>
 </head>
 
@@ -5647,6 +5714,7 @@ p {
     </script>
 </body>
 </html>
+
 
 
 
