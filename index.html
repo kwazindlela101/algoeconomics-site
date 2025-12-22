@@ -2997,70 +2997,323 @@
     </div>
   </div>
 </section>
-<section id="about-us" class="section about-section">
-    <div class="container">
-        <div class="about-hero-statement">
-            <h2>About AlgoEconomics</h2>
-            <p class="about-hero-tagline">London-based intelligence infrastructure for UK–Africa capital flows.</p>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlgoEconomics</title>
 
-        <div class="about-intro-section">
-            <div class="about-intro-content">
-                <p>AlgoEconomics delivers institutional-grade governance intelligence across UK–Africa markets. We transform regulatory events, institutional behavior, and policy shifts into actionable risk assessment — purpose-built for Mining, Agriculture, Fintech, Energy, and Aviation sectors.</p>
-                
-                <div class="about-intro-highlight">
-                    <div>
-                        <strong>Real-time clarity.</strong>
-                        <span>Continuous monitoring and analysis</span>
-                    </div>
-                    <div>
-                        <strong>Premium methodology.</strong>
-                        <span>Institutional-grade standards</span>
-                    </div>
-                    <div>
-                        <strong>Built for the £42 billion UK–Africa investment corridor.</strong>
-                        <span>Market-specific intelligence</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+<style>
 
-        <div class="about-opportunity-section">
-            <h3>The Opportunity</h3>
-            <p>Africa represents one of the world's highest-growth investment frontiers. Yet institutional capital moving through the UK–Africa corridor operates with incomplete governance visibility — relying on outdated indices, fragmented media reports, and perception-based risk frameworks.</p>
-            <p>AlgoEconomics was built to solve this. We provide real-time, sector-specific governance intelligence that institutional investors, fund managers, and corporate strategists can trust. Not commentary. Not perception. Verifiable, traceable, decision-grade data.</p>
-        </div>
+/* ------------------------------
+   GLOBAL
+------------------------------ */
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+}
 
-        <div class="about-leadership-section">
-            <h3>Leadership</h3>
+h2, h3, h4 {
+    color: #003366;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+p {
+    line-height: 1.6;
+    font-size: 17px;
+}
+
+/* ------------------------------
+   ABOUT SECTION
+------------------------------ */
+.about-hero-statement h2 {
+    font-size: 36px;
+}
+
+.about-hero-tagline {
+    font-size: 20px;
+    color: #007A33;
+    font-weight: 500;
+}
+
+.about-intro-content p {
+    font-size: 18px;
+}
+
+.about-intro-highlight {
+    margin-top: 20px;
+    display: grid;
+    gap: 15px;
+}
+
+.about-intro-highlight div {
+    background: #F7F7F7;
+    padding: 12px 15px;
+    border-left: 4px solid #D4AF37;
+    border-radius: 4px;
+}
+
+.about-intro-highlight strong {
+    font-size: 18px;
+    color: #003366;
+}
+
+.about-intro-highlight span {
+    font-size: 15px;
+    color: #555;
+}
+
+/* ------------------------------
+   OPPORTUNITY SECTION
+------------------------------ */
+.about-opportunity-section h3 {
+    font-size: 28px;
+    margin-top: 40px;
+}
+
+.about-opportunity-section p {
+    font-size: 18px;
+}
+
+/* ------------------------------
+   LEADERSHIP
+------------------------------ */
+.about-team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.about-team-member {
+    background: #F5F5F5;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-team-photo img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #003366;
+}
+
+.about-team-info h4 {
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+.about-title {
+    font-size: 18px;
+    color: #007A33;
+    font-weight: 600;
+}
+
+/* ------------------------------
+   SECTORS GRID
+------------------------------ */
+.sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.sector-card {
+    background: #FAFAFA;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sector-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.sector-icon {
+    font-size: 34px;
+    margin-bottom: 10px;
+    color: #D4AF37;
+}
+
+.sector-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #003366;
+}
+
+.sector-card p {
+    font-size: 15px;
+    color: #444;
+}
+
+/* ------------------------------
+   AI CORRUPTION INDEX + INVESTOR SIGNALS
+------------------------------ */
+.sectors-layers {
+    margin-top: 40px;
+    display: grid;
+    gap: 20px;
+}
+
+.sectors-layer {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 6px solid #C8102E;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.sectors-layer h4 {
+    font-size: 20px;
+    color: #C8102E;
+    margin-bottom: 8px;
+}
+
+.sectors-layer:nth-child(2) {
+    border-left-color: #007A33;
+}
+
+.sectors-layer:nth-child(2) h4 {
+    color: #007A33;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="about-hero-statement">
+        <h2>About AlgoEconomics</h2>
+        <p class="about-hero-tagline">London-based intelligence infrastructure for UK–Africa capital flows.</p>
+    </div>
+
+    <div class="about-intro-section">
+        <div class="about-intro-content">
+            <p>AlgoEconomics delivers institutional-grade governance intelligence across UK–Africa markets. We transform regulatory events, institutional behavior, and policy shifts into actionable risk assessment — purpose-built for Mining, Agriculture, Fintech, Energy, and Aviation sectors.</p>
             
-            <div class="about-team-grid">
-                <div class="about-team-member">
-                    <div class="about-team-photo">
-                        <img src="kwazi-photo.png" alt="Kwazi Ndlela">
-                    </div>
-                    <div class="about-team-info">
-                        <h4>Kwazi Ndlela</h4>
-                        <p class="about-title">Founder & Chief Executive</p>
-                        <p>Kwazi founded AlgoEconomics to bring institutional-grade transparency to Africa's economic narrative. With expertise spanning economics, AI-driven analytics, and enterprise product strategy, he leads the company's vision and market positioning. His advisory board includes leadership from the World Economic Forum, UN Economic Commission for Africa, and former IMF/World Bank principals.</p>
-                        <p>Educated at University of East London (BSc Economics, 2002), Kwazi holds professional certification in Data Science with R, bringing rigorous analytical methodology to governance intelligence.</p>
-                    </div>
+            <div class="about-intro-highlight">
+                <div>
+                    <strong>Real-time clarity.</strong>
+                    <span>Continuous monitoring and analysis</span>
                 </div>
-
-                <div class="about-team-member">
-                    <div class="about-team-photo">
-                        <img src="james-photo.png" alt="James Mulligan">
-                    </div>
-                    <div class="about-team-info">
-                        <h4>James Mulligan</h4>
-                        <p class="about-title">Chief Operating Officer</p>
-                        <p>James architects AlgoEconomics' operational infrastructure and enterprise client delivery. With over a decade scaling SaaS platforms and high-performing teams, he brings execution discipline and institutional client experience to every layer of the business. His focus: translating intelligence into client outcomes and sustainable competitive advantage.</p>
-                    </div>
+                <div>
+                    <strong>Premium methodology.</strong>
+                    <span>Institutional-grade standards</span>
+                </div>
+                <div>
+                    <strong>Built for the £42 billion UK–Africa investment corridor.</strong>
+                    <span>Market-specific intelligence</span>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="about-opportunity-section">
+        <h3>The Opportunity</h3>
+        <p>Africa represents one of the world's highest-growth investment frontiers. Yet institutional capital moving through the UK–Africa corridor operates with incomplete governance visibility — relying on outdated indices, fragmented media reports, and perception-based risk frameworks.</p>
+        <p>AlgoEconomics was built to solve this. We provide real-time, sector-specific governance intelligence that institutional investors, fund managers, and corporate strategists can trust. Not commentary. Not perception. Verifiable, traceable, decision-grade data.</p>
+    </div>
+
+    <div class="about-leadership-section">
+        <h3>Leadership</h3>
+        
+        <div class="about-team-grid">
+            <div class="about-team-member">
+                <div class="about-team-photo">
+                    <img src="kwazi-photo.png" alt="Kwazi Ndlela">
+                </div>
+                <div class="about-team-info">
+                    <h4>Kwazi Ndlela</h4>
+                    <p class="about-title">Founder & Chief Executive</p>
+                    <p>Kwazi founded AlgoEconomics to bring institutional-grade transparency to Africa's economic narrative. With expertise spanning economics, AI-driven analytics, and enterprise product strategy, he leads the company's vision and market positioning. His advisory board includes leadership from the World Economic Forum, UN Economic Commission for Africa, and former IMF/World Bank principals.</p>
+                    <p>Educated at University of East London (BSc Economics, 2002), Kwazi holds professional certification in Data Science with R, bringing rigorous analytical methodology to governance intelligence.</p>
+                </div>
+            </div>
+
+            <div class="about-team-member">
+                <div class="about-team-photo">
+                    <img src="james-photo.png" alt="James Mulligan">
+                </div>
+                <div class="about-team-info">
+                    <h4>James Mulligan</h4>
+                    <p class="about-title">Chief Operating Officer</p>
+                    <p>James architects AlgoEconomics' operational infrastructure and enterprise client delivery. With over a decade scaling SaaS platforms and high-performing teams, he brings execution discipline and institutional client experience to every layer of the business. His focus: translating intelligence into client outcomes and sustainable competitive advantage.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="sectors" class="sectors section">
+    <div class="container">
+        <h2>Sectors We Cover</h2>
+        <p class="intro">AlgoEconomics maps Africa's growth across seven strategic pillars—powered by AI and governance intelligence.</p>
+        <div class="sectors-grid">
+            <article class="sector-card">
+                <div class="sector-icon">⛏️</div>
+                <h3>Mining</h3>
+                <p>Tracking mineral flows, licensing transparency, and ESG compliance across key markets.</p>
+            </article>
+            <article class="sector-card">
+                <div class="sector-icon">🌾</div>
+                <h3>Agriculture</h3>
+                <p>Crop yields, food security signals, and export market dynamics informed by satellite data.</p>
+            </article>
+            <article class="sector-card">
+                <div class="sector-icon">💳</div>
+                <h3>Fintech</h3>
+                <p>Mobile money adoption, digital banking penetration, and regulatory shifts.</p>
+            </article>
+            <article class="sector-card">
+                <div class="sector-icon">⚡</div>
+                <h3>Energy</h3>
+                <p>Power generation mix, renewables investment, and grid reliability.</p>
+            </article>
+            <article class="sector-card">
+                <div class="sector-icon">✈️</div>
+                <h3>Aviation</h3>
+                <p>Passenger and cargo flows, route expansion, and airport concessions.</p>
+            </article>
+            <article class="sector-card">
+                <div class="sector-icon">🏥</div>
+                <h3>Healthcare</h3>
+                <p>Infrastructure capacity, pharma supply chains, and insurance penetration.</p>
+            </article>
+            <article class="sector-card">
+                <div class="sector-icon">🏨</div>
+                <h3>Tourism</h3>
+                <p>Hotel occupancy rates, tourist arrivals, cultural heritage sites, and hospitality investments.</p>
+            </article>
+        </div>
+
+        <div class="sectors-layers">
+            <div class="sectors-layer">
+                <h4>AI Corruption Index</h4>
+                <p>Sector-specific governance risk overlay, highlighting procurement and regulatory integrity.</p>
+            </div>
+            <div class="sectors-layer">
+                <h4>Investor Signals</h4>
+                <p>FDI flows, capital projects, PPPs, and VC activity mapped across regions.</p>
+            </div>
+        </div>
+    </div>
 </section>
+
+</body>
+</html>
 
     <section id="sectors" class="sectors section">
         <div class="container">
@@ -5440,7 +5693,6 @@
     </script>
 </body>
 </html>
-
 
 
 
