@@ -4047,185 +4047,204 @@ p {
             <button class="brief-btn">Send Me Today's Brief</button>
         </div>
     </section>
-Yes! Here's all the code separated out for you:
+>
+     <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Contributors - AlgoEconomics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-## HTML
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
 
-```html
-<section id="speakers" class="section speakers">
-    <div class="container">
-        <div class="section-header">
-            <h2>Expert Contributors</h2>
-            <p>Learn from leading voices in African economics</p>
+        .section {
+            padding: 60px 20px;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #003366;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .speaker {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .speaker:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .speaker-image-container {
+            width: 160px;
+            height: 160px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .speaker img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #003366;
+        }
+
+        .speaker-content h3 {
+            font-size: 1.5rem;
+            color: #003366;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .speaker-content p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .speaker-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .speaker {
+                padding: 25px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .speaker-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="speakers" class="section speakers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Expert Contributors</h2>
+                <p>Learn from leading voices in African economics</p>
+            </div>
+            
+            <div class="speaker-grid">
+                <!-- Speaker 1: Dr Daniel B. Ndlela -->
+                <div class="speaker">
+                    <div class="speaker-image-container">
+                        <img src="daniel-ndlela.png" alt="Dr Daniel B. Ndlela">
+                    </div>
+                    <div class="speaker-content">
+                        <h3>Dr Daniel B. Ndlela</h3>
+                        <p>Zimbabwean economist, director of Zimconsult since 1991. Previously taught economics at University of Zimbabwe and served as senior regional advisor at UN Economic Commission for Africa.</p>
+                    </div>
+                </div>
+
+                <!-- Speaker 2: Chido Munyati -->
+                <div class="speaker">
+                    <div class="speaker-image-container">
+                        <img src="chido-munyati.png" alt="Chido Munyati">
+                    </div>
+                    <div class="speaker-content">
+                        <h3>Chido Munyati</h3>
+                        <p>Head of Africa and Global Leadership Fellow at the World Economic Forum. Previously worked as a lawyer at Swiss law firm Froriep and the UN International Criminal Tribunal for Rwanda.</p>
+                    </div>
+                </div>
+
+                <!-- Speaker 3: Dr Peter Robinson -->
+                <div class="speaker">
+                    <div class="speaker-image-container">
+                        <img src="peter-robinson.png" alt="Dr Peter Robinson">
+                    </div>
+                    <div class="speaker-content">
+                        <h3>Dr Peter Robinson</h3>
+                        <p>Economist with 25 years based in Zimbabwe working on development issues across East and Southern Africa. Director for Africa region at E.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="speaker-grid">
-            <!-- Speaker 1: Dr Daniel B. Ndlela -->
-            <div class="speaker">
-                <div class="speaker-image-container">
-                    <img src="daniel-ndlela.jpg" alt="Dr Daniel B. Ndlela" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="speaker-image-placeholder" style="display: none;">DN</div>
-                </div>
-                <div class="speaker-content">
-                    <h3>Dr Daniel B. Ndlela</h3>
-                    <p>Zimbabwean economist, director of Zimconsult since 1991. Previously taught economics at University of Zimbabwe and served as senior regional advisor at UN Economic Commission for Africa.</p>
-                </div>
-            </div>
+    </section>
 
-            <!-- Speaker 2: Chido Munyati -->
-            <div class="speaker">
-                <div class="speaker-image-container">
-                    <img src="chido-munyati.jpg" alt="Chido Munyati" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="speaker-image-placeholder" style="display: none;">CM</div>
-                </div>
-                <div class="speaker-content">
-                    <h3>Chido Munyati</h3>
-                    <p>Head of Africa and Global Leadership Fellow at the World Economic Forum. Previously worked as a lawyer at Swiss law firm Froriep and the UN International Criminal Tribunal for Rwanda.</p>
-                </div>
-            </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const speakers = document.querySelectorAll('.speaker');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-            <!-- Speaker 3: Dr Peter Robinson -->
-            <div class="speaker">
-                <div class="speaker-image-container">
-                    <img src="peter-robinson.jpg" alt="Dr Peter Robinson" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="speaker-image-placeholder" style="display: none;">PR</div>
-                </div>
-                <div class="speaker-content">
-                    <h3>Dr Peter Robinson</h3>
-                    <p>Economist with 25 years based in Zimbabwe working on development issues across East and Southern Africa. Director for Africa region at E.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-```
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transform = 'translateY(20px)';
+                        
+                        setTimeout(() => {
+                            entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, 100);
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
 
-## CSS
+            speakers.forEach(speaker => {
+                observer.observe(speaker);
+            });
+        });
+    </script>         
 
-```css
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
-}
-
-.section {
-    padding: 60px 20px;
-    background-color: #ffffff;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.section-header h2 {
-    font-size: 2.5rem;
-    color: #003366;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.section-header p {
-    font-size: 1.1rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.speaker-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.speaker {
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.speaker:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.speaker-image-container {
-    width: 160px;
-    height: 160px;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.speaker img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid #003366;
-}
-
-/* Placeholder for missing images */
-.speaker-image-placeholder {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 4px solid #003366;
-    background: linear-gradient(135deg, #003366 0%, #0066cc 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 3rem;
-    font-weight: bold;
-}
-
-.speaker-content h3 {
-    font-size: 1.5rem;
-    color: #003366;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.speaker-content p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .section-header h2 {
-        font-size: 2rem;
-    }
-
-    .speaker-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .speaker {
-        padding: 25px;
-    }
-}
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .speaker-grid {
@@ -6137,6 +6156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
+
 
 
 
