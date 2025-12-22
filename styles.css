@@ -2064,3 +2064,85 @@ footer::after {
     .about-team-member { flex-direction: column; align-items: center; text-align: center; }
     .about-team-photo img { width: 150px; height: 150px; }
 }
+
+/* EMERGENCY FIX FOR SECTORS SECTION - ADD THIS TO YOUR CSS */
+
+/* Force dark background and white text for sectors */
+#sectors.sectors {
+    background-color: #0b0d12 !important;
+    background: #0b0d12 !important;
+    padding: 80px 0 !important;
+}
+
+#sectors h2 {
+    color: #FFFFFF !important;
+    font-size: 2.5rem !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+}
+
+#sectors .intro {
+    color: #E8EAED !important;
+    font-size: 1.2rem !important;
+    text-align: center !important;
+    margin-bottom: 3rem !important;
+    opacity: 1 !important;
+}
+
+.sectors-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 2rem !important;
+    margin-top: 3rem !important;
+}
+
+.sector-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 2rem !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+}
+
+.sector-card:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.sector-icon {
+    font-size: 3rem !important;
+    margin-bottom: 1rem !important;
+    display: block !important;
+}
+
+.sector-card h3 {
+    color: #FFFFFF !important;
+    font-size: 1.5rem !important;
+    margin: 1rem 0 !important;
+}
+
+.sector-card p {
+    color: #B8BABD !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    opacity: 1 !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .sectors-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+    
+    #sectors h2 {
+        font-size: 2rem !important;
+    }
+    
+    #sectors .intro {
+        font-size: 1rem !important;
+    }
+}
