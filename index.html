@@ -3256,42 +3256,48 @@ p {
         </div>
     </div>
 </div>
-
 <section id="sectors" class="sectors section">
     <div class="container">
         <h2>Sectors We Cover</h2>
         <p class="intro">AlgoEconomics maps Africa's growth across seven strategic pillars—powered by AI and governance intelligence.</p>
+        
         <div class="sectors-grid">
             <article class="sector-card">
                 <div class="sector-icon">⛏️</div>
                 <h3>Mining</h3>
                 <p>Tracking mineral flows, licensing transparency, and ESG compliance across key markets.</p>
             </article>
+            
             <article class="sector-card">
                 <div class="sector-icon">🌾</div>
                 <h3>Agriculture</h3>
                 <p>Crop yields, food security signals, and export market dynamics informed by satellite data.</p>
             </article>
+            
             <article class="sector-card">
                 <div class="sector-icon">💳</div>
                 <h3>Fintech</h3>
                 <p>Mobile money adoption, digital banking penetration, and regulatory shifts.</p>
             </article>
+            
             <article class="sector-card">
                 <div class="sector-icon">⚡</div>
                 <h3>Energy</h3>
                 <p>Power generation mix, renewables investment, and grid reliability.</p>
             </article>
+            
             <article class="sector-card">
                 <div class="sector-icon">✈️</div>
                 <h3>Aviation</h3>
                 <p>Passenger and cargo flows, route expansion, and airport concessions.</p>
             </article>
+            
             <article class="sector-card">
                 <div class="sector-icon">🏥</div>
                 <h3>Healthcare</h3>
                 <p>Infrastructure capacity, pharma supply chains, and insurance penetration.</p>
             </article>
+            
             <article class="sector-card">
                 <div class="sector-icon">🏨</div>
                 <h3>Tourism</h3>
@@ -3311,59 +3317,159 @@ p {
         </div>
     </div>
 </section>
+```
 
-</body>
-</html>
+---
 
-    <section id="sectors" class="sectors section">
-        <div class="container">
-            <h2>Sectors We Cover</h2>
-            <p class="intro">AlgoEconomics maps Africa's growth across seven strategic pillars—powered by AI and governance intelligence.</p>
-            <div class="sectors-grid">
-                <article class="sector-card">
-                    <div class="sector-icon">⛏️</div>
-                    <h3>Mining</h3>
-                    <p>Tracking mineral flows, licensing transparency, and ESG compliance across key markets.</p>
-                </article>
-                <article class="sector-card">
-                    <div class="sector-icon">🌾</div>
-                    <h3>Agriculture</h3>
-                    <p>Crop yields, food security signals, and export market dynamics informed by satellite data.</p>
-                </article>
-                <article class="sector-card">
-                    <div class="sector-icon">💳</div>
-                    <h3>Fintech</h3>
-                    <p>Mobile money adoption, digital banking penetration, and regulatory shifts.</p>
-                </article>
-                <article class="sector-card">
-                    <div class="sector-icon">⚡</div>
-                    <h3>Energy</h3>
-                    <p>Power generation mix, renewables investment, and grid reliability.</p>
-                </article>
-                <article class="sector-card">
-                    <div class="sector-icon">✈️</div>
-                    <h3>Aviation</h3>
-                    <p>Passenger and cargo flows, route expansion, and airport concessions.</p>
-                </article>
-                <article class="sector-card">
-                    <div class="sector-icon">🏥</div>
-                    <h3>Healthcare</h3>
-                    <p>Infrastructure capacity, pharma supply chains, and insurance penetration.</p>
-                </article>
-                <article class="sector-card">
-                    <div class="sector-icon">🏨</div>
-                    <h3>Tourism</h3>
-                    <p>Hotel occupancy rates, tourist arrivals, cultural heritage sites, and hospitality investments.</p>
-                </article>
-            </div>
-            <div class="sectors-layers">
-                <div class="sectors-layer"><h4>AI Corruption Index</h4><p>Sector-specific governance risk overlay, highlighting procurement and regulatory integrity.</p></div>
-                <div class="sectors-layer"><h4>Investor Signals</h4><p>FDI flows, capital projects, PPPs, and VC activity mapped across regions.</p></div>
-            </div>
-        </div>
-    </section>
+## CSS CODE (Add to your `<style>` section):
 
-    <!-- NEW: BACKEND ENGINEERING SECTION ADDED HERE -->
+```css
+/* SECTORS SECTION - IMPROVED VISIBILITY */
+.sectors { 
+    background: var(--sectors-bg); 
+    color: var(--sectors-text); 
+    padding: 60px 0;
+}
+
+.sectors h2 { 
+    font-size: clamp(2rem, 4vw, 2.8rem); 
+    text-align: center; 
+    color: #FFFFFF; 
+    margin-bottom: 20px; 
+    padding: 0 1rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.sectors .intro { 
+    color: #FFFFFF; 
+    font-size: 1.2rem; 
+    font-weight: 500; 
+    max-width: 900px; 
+    margin: 0 auto 3rem; 
+    text-align: center; 
+    padding: 0 1rem;
+    line-height: 1.7;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.sectors-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 2rem; 
+    margin-bottom: 3rem; 
+    padding: 0 1rem;
+}
+
+.sector-card { 
+    background: var(--sectors-card); 
+    border: 1px solid var(--sectors-border); 
+    border-radius: 16px; 
+    padding: 2rem 1.5rem; 
+    position: relative;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sector-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    border-color: var(--sectors-accent);
+}
+
+.sector-card::before { 
+    content: ""; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    height: 3px; 
+    background: linear-gradient(90deg, var(--sectors-accent), var(--sectors-highlight));
+    border-radius: 16px 16px 0 0;
+}
+
+.sector-icon { 
+    font-size: 3rem; 
+    margin-bottom: 1.2rem; 
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(63, 183, 255, 0.2);
+    border-radius: 50%;
+}
+
+.sector-card h3 { 
+    font-size: 1.4rem; 
+    margin-bottom: 15px; 
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.sector-card p { 
+    color: #E8EAED;
+    font-size: 1rem; 
+    line-height: 1.7;
+}
+
+.sectors-layers { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem; 
+    padding: 0 1rem;
+    margin-top: 3rem;
+}
+
+.sectors-layer { 
+    background: linear-gradient(135deg, rgba(63,183,255,0.15), rgba(124,242,165,0.1)); 
+    border: 1px solid rgba(63, 183, 255, 0.3);
+    border-radius: 16px; 
+    padding: 2rem; 
+    transition: all 0.3s ease;
+}
+
+.sectors-layer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border-color: rgba(63, 183, 255, 0.5);
+}
+
+.sectors-layer h4 { 
+    font-size: 1.4rem; 
+    margin-bottom: 15px; 
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.sectors-layer p { 
+    color: #E8EAED;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .sectors h2 {
+        font-size: 1.8rem;
+    }
+    
+    .sectors .intro {
+        font-size: 1.1rem;
+    }
+    
+    .sectors-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .sectors-layers {
+        grid-template-columns: 1fr;
+    }
+}
+   <!-- NEW: BACKEND ENGINEERING SECTION ADDED HERE -->
     <!-- Anchor for scrolling -->
     <span id="backend-programme"></span>
 
@@ -5693,6 +5799,7 @@ p {
     </script>
 </body>
 </html>
+
 
 
 
