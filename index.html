@@ -3090,6 +3090,24 @@
         width: 100%;
     }
 }
+        /* Hide scrollbar styling for demo section */
+.demo-container {
+    overflow: hidden;
+}
+
+/* Or if you need scrolling, style the scrollbar */
+.demo-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.demo-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.demo-container::-webkit-scrollbar-thumb {
+    background: #D4AF37;
+    border-radius: 4px;
+}
  </style>
 </head>
 <body>
@@ -3460,7 +3478,6 @@ p {
 .sectors-layer:nth-child(2) h4 {
     color: #007A33;
 }
-/* PASTE THIS AT THE BOTTOM OF YOUR <style> TAG IN index.html */
 
 /* Sectors Section - Force Visibility */
 #sectors.sectors {
@@ -5763,6 +5780,7 @@ document.getElementById('demoForm').addEventListener('submit', function(e) {
   </script>
 </body>
 </html>
+
 
 
 
