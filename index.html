@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+<!DOCTYPE html>                                        
 <html lang="en">
-<head>
+<head>                                                 
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlgoEconomics | AI-Powered Economic Intelligence for UK-Africa Markets</title>
@@ -2784,7 +2784,7 @@
             
             .market-name, .market-value { 
                 font-size: 0.8rem; 
-            } 
+            }  
             
             .market-change { 
                 font-size: 0.75rem; 
@@ -2819,7 +2819,278 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+        /* ========== DEMO REQUEST SECTION STYLES ========== */
+.demo-section {
+    background: linear-gradient(135deg, #0A1628 0%, #162840 100%);
+    padding: 100px 0;
+    position: relative;
+}
+
+.demo-section .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+}
+
+.corner-accent {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 1px solid #D4AF37;
+    opacity: 0.3;
+}
+
+.corner-accent.top-left {
+    top: -30px;
+    left: -30px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.corner-accent.bottom-right {
+    bottom: -30px;
+    right: -30px;
+    border-left: none;
+    border-top: none;
+}
+
+.demo-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 3.5rem 3rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.demo-container h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: #8B9AA8;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+}
+
+#demoForm {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #E8E8E8;
+    font-weight: 400;
+}
+
+.form-group label .required {
+    color: #D4AF37;
+    margin-left: 2px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #E8E8E8;
+    padding: 0.875rem 1rem;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #D4AF37;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(139, 154, 168, 0.6);
+}
+
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23D4AF37' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+.form-group select option {
+    background: #0A1628;
+    color: #E8E8E8;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: 'Crimson Pro', serif;
+}
+
+.submit-button {
+    background: #D4AF37;
+    color: #0A1628;
+    border: none;
+    padding: 1.125rem 2.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.submit-button:hover {
+    background: #E8C55C;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+}
+
+.submit-button:hover::before {
+    left: 100%;
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.privacy-note {
+    font-size: 0.8rem;
+    color: #8B9AA8;
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.privacy-note a {
+    color: #D4AF37;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.privacy-note a:hover {
+    border-bottom-color: #D4AF37;
+}
+
+.success-message {
+    display: none;
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    color: #A5D6A7;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.success-message.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .demo-section {
+        padding: 60px 0;
+    }
+
+    .demo-section .container {
+        padding: 0 1rem;
+    }
+
+    .demo-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .demo-container h2 {
+        font-size: 2rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .corner-accent {
+        display: none;
+    }
+
+    .submit-button {
+        width: 100%;
+    }
+}
+ </style>
 </head>
 <body>
     <!-- Mobile menu overlay -->
@@ -3080,9 +3351,9 @@ p {
 .about-opportunity-section p {
     font-size: 18px;
 }
-
-/* ------------------------------
-   LEADERSHIP
+                                                                                        
+/* ------------------------------                                         
+   LEADERSHIP TEAM
 ------------------------------ */
 .about-team-grid {
     display: flex;
@@ -3973,406 +4244,7 @@ p {
             </div>
         </div>
     </section>
-/* ========== DEMO REQUEST SECTION STYLES ========== */
-.demo-section {
-    background: linear-gradient(135deg, #0A1628 0%, #162840 100%);
-    padding: 100px 0;
-    position: relative;
-}
 
-.demo-section .container {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    position: relative;
-}
-
-.corner-accent {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    border: 1px solid #D4AF37;
-    opacity: 0.3;
-}
-
-.corner-accent.top-left {
-    top: -30px;
-    left: -30px;
-    border-right: none;
-    border-bottom: none;
-}
-
-.corner-accent.bottom-right {
-    bottom: -30px;
-    right: -30px;
-    border-left: none;
-    border-top: none;
-}
-
-.demo-container {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 3.5rem 3rem;
-    position: relative;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-}
-
-.section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #D4AF37;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-}
-
-.demo-container h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    color: #FFFFFF;
-    letter-spacing: -0.02em;
-}
-
-.subtitle {
-    font-size: 1.125rem;
-    color: #8B9AA8;
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-    font-weight: 300;
-}
-
-#demoForm {
-    display: grid;
-    gap: 1.5rem;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.form-group.full-width {
-    grid-column: 1 / -1;
-}
-
-.form-group label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #E8E8E8;
-    font-weight: 400;
-}
-
-.form-group label .required {
-    color: #D4AF37;
-    margin-left: 2px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #E8E8E8;
-    padding: 0.875rem 1rem;
-    font-family: 'Crimson Pro', serif;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    outline: none;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: #D4AF37;
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: rgba(139, 154, 168, 0.6);
-}
-
-.form-group select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23D4AF37' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    padding-right: 2.5rem;
-    cursor: pointer;
-}
-
-.form-group select option {
-    background: #0A1628;
-    color: #E8E8E8;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-    font-family: 'Crimson Pro', serif;
-}
-
-.submit-button {
-    background: #D4AF37;
-    color: #0A1628;
-    border: none;
-    padding: 1.125rem 2.5rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.875rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.submit-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s ease;
-}
-
-.submit-button:hover {
-    background: #E8C55C;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-}
-
-.submit-button:hover::before {
-    left: 100%;
-}
-
-.submit-button:active {
-    transform: translateY(0);
-}
-
-.privacy-note {
-    font-size: 0.8rem;
-    color: #8B9AA8;
-    line-height: 1.5;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.privacy-note a {
-    color: #D4AF37;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s ease;
-}
-
-.privacy-note a:hover {
-    border-bottom-color: #D4AF37;
-}
-
-.success-message {
-    display: none;
-    background: rgba(76, 175, 80, 0.1);
-    border: 1px solid rgba(76, 175, 80, 0.3);
-    padding: 1.5rem;
-    margin-top: 1.5rem;
-    color: #A5D6A7;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-.success-message.show {
-    display: block;
-    animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 768px) {
-    .demo-section {
-        padding: 60px 0;
-    }
-
-    .demo-section .container {
-        padding: 0 1rem;
-    }
-
-    .demo-container {
-        padding: 2rem 1.5rem;
-    }
-
-    .demo-container h2 {
-        font-size: 2rem;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .corner-accent {
-        display: none;
-    }
-
-    .submit-button {
-        width: 100%;
-    }
-}
-<section id="demo-request" class="section demo-section">
-    <div class="container">
-        <div class="corner-accent top-left"></div>
-        <div class="corner-accent bottom-right"></div>
-        
-        <div class="demo-container">
-            <div class="section-label">Institutional Access</div>
-            <h2>Request Platform Demo</h2>
-             <p class="subtitle">
-                Join institutional investors accessing real-time governance intelligence across Africa's highest-growth sectors.
-            </p>
-         <form id="demoForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="firstName">First Name <span class="required">*</span></label>
-                        <input type="text" id="firstName" name="firstName" required placeholder="John">
-                    </div>
-                   <div class="form-group">
-                        <label for="lastName">Last Name <span class="required">*</span></label>
-                        <input type="text" id="lastName" name="lastName" required placeholder="Smith">
-                    </div>
-                </div>
-          <div class="form-group full-width">
-                    <label for="email">Work Email <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required placeholder="john.smith@institution.com">
-                </div>
-                  <div class="form-group full-width">
-                    <label for="company">Institution / Company <span class="required">*</span></label>
-                    <input type="text" id="company" name="company" required placeholder="e.g., BlackRock, CDC Group">
-                </div>
-                   <div class="form-grid">
-                    <div class="form-group">
-                        <label for="role">Role / Title <span class="required">*</span></label>
-                        <input type="text" id="role" name="role" required placeholder="e.g., Investment Director">
-                    </div>
-                         <div class="form-group">
-                        <label for="investorType">Investor Type <span class="required">*</span></label>
-                        <select id="investorType" name="investorType" required>
-                            <option value="">Select type</option>
-                            <option value="institutional">Institutional Investor</option>
-                            <option value="pension">Pension Fund</option>
-                            <option value="sovereign">Sovereign Wealth Fund</option>
-                            <option value="pe">Private Equity</option>
-                            <option value="vc">Venture Capital</option>
-                            <option value="family-office">Family Office</option>
-                            <option value="bank">Development Bank</option>
-                            <option value="advisor">Investment Advisor</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                </div>
-               <div class="form-group full-width">
-                    <label for="sectors">Sectors of Interest <span class="required">*</span></label>
-                    <select id="sectors" name="sectors" required>
-                        <option value="">Select primary sector</option>
-                        <option value="mining">Mining & Resources</option>
-                        <option value="agriculture">Agriculture & Food Security</option>
-                        <option value="fintech">Fintech & Financial Services</option>
-                        <option value="energy">Energy & Infrastructure</option>
-                        <option value="aviation">Aviation & Transport</option>
-                        <option value="healthcare">Healthcare & Pharmaceuticals</option>
-                        <option value="tourism">Tourism & Hospitality</option>
-                        <option value="multiple">Multiple Sectors</option>
-                    </select>
-                </div>
-                  <div class="form-group full-width">
-                    <label for="message">Additional Context (Optional)</label>
-                    <textarea id="message" name="message" placeholder="Specific markets, deal sizes, or intelligence needs..."></textarea>
-                </div>
-                <button type="submit" class="submit-button">Request Demo Access</button>
-                  <div class="success-message" id="successMessage">
-                    <strong>Request Received</strong><br>
-                    Thank you for your interest in AlgoEconomics. Our team will contact you within 48 hours to schedule your personalized platform demonstration.
-                </div>
-                    <div class="privacy-note">
-                    By submitting this form, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>. 
-                    We respect your privacy and will only use your information to provide platform access and relevant market intelligence.
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
-// Demo Request Form Handler
-document.getElementById('demoForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
-    
-    console.log('Demo request submitted:', data);
-    
-    // Show success message
-    const successMessage = document.getElementById('successMessage');
-    successMessage.classList.add('show');
-    
-    // Reset form
-    this.reset();
-    
-    // Hide success message after 10 seconds
-    setTimeout(() => {
-        successMessage.classList.remove('show');
-    }, 10000);
-    
-    // TODO: Integration point - Connect to Mailchimp, Zapier, or your backend
-    // When ready to collect real submissions, uncomment one of these examples:
-    
-    /* MAILCHIMP EXAMPLE:
-    fetch('YOUR_MAILCHIMP_API_ENDPOINT', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => console.log('Sent to Mailchimp:', result))
-    .catch(error => console.error('Error:', error));
-    */
-    
-    /* ZAPIER WEBHOOK EXAMPLE:
-    fetch('YOUR_ZAPIER_WEBHOOK_URL', {
-        method: 'POST',
-        body: JSON.stringify(data)
-    })
-    .then(() => console.log('Sent to Zapier'))
-    .catch(error => console.error('Error:', error));
-    */
-});
   <footer>
         <div class="footer-top">
             <div class="container">
@@ -5753,6 +5625,7 @@ document.getElementById('demoForm').addEventListener('submit', function(e) {
     </script>
 </body>
 </html>
+
 
 
 
