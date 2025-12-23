@@ -3973,366 +3973,407 @@ p {
             </div>
         </div>
     </section>
-
-    <section id="newsletter" class="section newsletter">
-        <div class="container">
-            <h2>Stay Informed</h2>
-            <p>Join 10,000+ professionals receiving our daily market intelligence brief</p>
-            
-            <!-- Begin Mailchimp Signup Form -->
-            <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
-            <style type="text/css">
-                #mc_embed_signup {
-                    background: transparent !important;
-                    clear: left;
-                    font: 14px Helvetica,Arial,sans-serif;
-                    max-width: 600px;
-                    margin: 0 auto;
-                    padding: 0 1rem;
-                }
-                
-                #mc_embed_signup h2 {
-                    display: none;
-                }
-                
-                #mc_embed_signup .indicates-required {
-                    text-align: center;
-                    color: white;
-                    margin-bottom: 1.5rem;
-                    font-size: 0.9rem;
-                }
-                
-                #mc_embed_signup .asterisk {
-                    color: #d4af37;
-                    font-weight: bold;
-                }
-                
-                #mc_embed_signup .mc-field-group {
-                    width: 100%;
-                    padding-bottom: 1.5rem;
-                }
-                
-                #mc_embed_signup label {
-                    color: white;
-                    font-weight: 600;
-                    display: block;
-                    margin-bottom: 0.8rem;
-                    text-align: left;
-                    font-size: 1rem;
-                }
-                
-                #mc_embed_signup input.email {
-                    width: 100% !important;
-                    padding: 1rem;
-                    border: none;
-                    border-radius: 5px;
-                    font-size: 1rem;
-                    box-sizing: border-box;
-                    font-family: 'Segoe UI', system-ui, sans-serif;
-                }
-                
-                #mc_embed_signup input.email:focus {
-                    outline: none;
-                    border: 2px solid #d4af37;
-                }
-                
-                #mc_embed_signup .clear.foot {
-                    text-align: center;
-                    margin-top: 2rem;
-                }
-                
-                /* BUTTON FIX - Complete override */
-                #mc_embed_signup input.button,
-                #mc_embed_signup input[type="submit"],
-                #mc_embed_signup .button {
-                    background: linear-gradient(135deg, #d4af37, #f7ef8a) !important;
-                    color: #1a365d !important;
-                    padding: 0 !important;
-                    margin: 0 !important;
-                    border: none !important;
-                    border-radius: 5px !important;
-                    font-size: 1rem !important;
-                    font-weight: bold !important;
-                    font-family: 'Segoe UI', system-ui, sans-serif !important;
-                    cursor: pointer !important;
-                    transition: all 0.4s ease !important;
-                    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important;
-                    min-width: 220px !important;
-                    height: 50px !important;
-                    line-height: 50px !important;
-                    text-align: center !important;
-                    display: inline-block !important;
-                    vertical-align: middle !important;
-                }
-                
-                #mc_embed_signup input.button:hover,
-                #mc_embed_signup input[type="submit"]:hover,
-                #mc_embed_signup .button:hover {
-                    transform: translateY(-3px) !important;
-                    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4) !important;
-                    background: linear-gradient(135deg, #f7ef8a, #d4af37) !important;
-                }
-                
-                #mc_embed_signup #mce-responses {
-                    margin: 1rem 0;
-                }
-                
-                #mc_embed_signup .response {
-                    padding: 1rem;
-                    border-radius: 5px;
-                    margin: 0.5rem 0;
-                    text-align: center;
-                    font-weight: 600;
-                }
-                
-                #mc_embed_signup #mce-error-response {
-                    background: #fee;
-                    color: #c33;
-                    border: 1px solid #c33;
-                }
-                
-                #mc_embed_signup #mce-success-response {
-                    background: #efe;
-                    color: #3c3;
-                    border: 1px solid #3c3;
-                }
-                
-                @media (max-width: 768px) {
-                    #mc_embed_signup {
-                        padding: 0 0.5rem;
-                    }
-                    #mc_embed_signup input.button,
-                    #mc_embed_signup input[type="submit"],
-                    #mc_embed_signup .button {
-                        width: 100% !important;
-                        max-width: 100% !important;
-                        min-width: 0 !important;
-                    }
-                }
-            </style>
-            <style>
-/* ========== ABOUT SECTION STYLES ========== */
-.about-section {
-    background: white;
-    padding: 80px 0;
+/* ========== DEMO REQUEST SECTION STYLES ========== */
+.demo-section {
+    background: linear-gradient(135deg, #0A1628 0%, #162840 100%);
+    padding: 100px 0;
+    position: relative;
 }
 
-.about-hero-statement {
-    text-align: center;
-    margin-bottom: 60px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid #e0e0e0;
+.demo-section .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
 }
 
-.about-hero-statement h2 {
+.corner-accent {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 1px solid #D4AF37;
+    opacity: 0.3;
+}
+
+.corner-accent.top-left {
+    top: -30px;
+    left: -30px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.corner-accent.bottom-right {
+    bottom: -30px;
+    right: -30px;
+    border-left: none;
+    border-top: none;
+}
+
+.demo-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 3.5rem 3rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.demo-container h2 {
     font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: #8B9AA8;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
     font-weight: 300;
-    color: #1a365d;
-    margin-bottom: 20px;
-    letter-spacing: -0.5px;
 }
 
-.about-hero-tagline {
-    font-size: 1.1rem;
-    color: #5a5a5a;
-    font-weight: 300;
-    line-height: 1.5;
-}
-
-.about-intro-section {
-    margin-bottom: 60px;
-}
-
-.about-intro-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #2c2c2c;
-    margin-bottom: 20px;
-}
-
-.about-intro-highlight {
-    display: flex;
-    gap: 30px;
-    margin-top: 30px;
-    padding: 20px 0;
-    flex-wrap: wrap;
-}
-
-.about-intro-highlight div {
-    flex: 1;
-    min-width: 200px;
-}
-
-.about-intro-highlight strong {
-    display: block;
-    font-size: 0.95rem;
-    color: #1a365d;
-    margin-bottom: 5px;
-}
-
-.about-intro-highlight span {
-    font-size: 0.95rem;
-    color: #5a5a5a;
-}
-
-.about-opportunity-section {
-    background-color: #f8f9fa;
-    padding: 50px 60px;
-    margin: 60px 0;
-    border-left: 4px solid #1a365d;
-    border-radius: 8px;
-}
-
-.about-opportunity-section h3 {
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: #1a365d;
-    margin-bottom: 25px;
-}
-
-.about-opportunity-section p {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: #2c2c2c;
-    margin-bottom: 20px;
-}
-
-.about-leadership-section {
-    margin-top: 80px;
-}
-
-.about-leadership-section h3 {
-    font-size: 2rem;
-    font-weight: 300;
-    color: #1a365d;
-    margin-bottom: 50px;
-    text-align: center;
-}
-
-.about-team-grid {
+#demoForm {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 60px;
-    margin-top: 40px;
+    gap: 1.5rem;
 }
 
-.about-team-member {
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
     display: flex;
-    gap: 30px;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.about-team-photo {
-    flex-shrink: 0;
+.form-group.full-width {
+    grid-column: 1 / -1;
 }
 
-.about-team-photo img {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #e0e0e0;
+.form-group label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #E8E8E8;
+    font-weight: 400;
 }
 
-.about-team-info {
-    flex: 1;
+.form-group label .required {
+    color: #D4AF37;
+    margin-left: 2px;
 }
 
-.about-team-info h4 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #1a365d;
-    margin-bottom: 5px;
-}
-
-.about-team-info .about-title {
-    font-size: 0.95rem;
-    color: #5a5a5a;
-    margin-bottom: 20px;
-    font-style: italic;
-}
-
-.about-team-info p {
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #E8E8E8;
+    padding: 0.875rem 1rem;
+    font-family: 'Crimson Pro', serif;
     font-size: 1rem;
-    line-height: 1.7;
-    color: #2c2c2c;
-    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    outline: none;
 }
 
-/* Responsive Design */
-@media (max-width: 968px) {
-    .about-opportunity-section {
-        padding: 40px 30px;
-        margin: 60px -20px;
-    }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #D4AF37;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
 
-    .about-team-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(139, 154, 168, 0.6);
+}
+
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23D4AF37' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+.form-group select option {
+    background: #0A1628;
+    color: #E8E8E8;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: 'Crimson Pro', serif;
+}
+
+.submit-button {
+    background: #D4AF37;
+    color: #0A1628;
+    border: none;
+    padding: 1.125rem 2.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.submit-button:hover {
+    background: #E8C55C;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+}
+
+.submit-button:hover::before {
+    left: 100%;
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.privacy-note {
+    font-size: 0.8rem;
+    color: #8B9AA8;
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.privacy-note a {
+    color: #D4AF37;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.privacy-note a:hover {
+    border-bottom-color: #D4AF37;
+}
+
+.success-message {
+    display: none;
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    color: #A5D6A7;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.success-message.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
 @media (max-width: 768px) {
-    .about-hero-statement h2 {
-        font-size: 1.8rem;
+    .demo-section {
+        padding: 60px 0;
     }
 
-    .about-hero-tagline {
-        font-size: 1rem;
+    .demo-section .container {
+        padding: 0 1rem;
     }
 
-    .about-intro-highlight {
-        flex-direction: column;
-        gap: 15px;
+    .demo-container {
+        padding: 2rem 1.5rem;
     }
 
-    .about-opportunity-section {
-        padding: 30px 20px;                                    
-        margin: 40px -15px;
+    .demo-container h2 {
+        font-size: 2rem;
     }
 
-    .about-team-member {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .about-team-photo img {
-        width: 150px;
-        height: 150px;
-    }
-    
-    .about-team-grid {
+    .form-grid {
         grid-template-columns: 1fr;
     }
-}
-</style>
-            
-            <div id="mc_embed_signup">
-                <form action="https://algoeconomics.us9.list-manage.com/subscribe/post?u=7f33efbbec31ffdd7dd87bce1&amp;id=fddc7c24c3&amp;f_id=007042e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                    <div id="mc_embed_signup_scroll">
-                        <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-                        <div class="mc-field-group">
-                            <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
-                            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" required placeholder="Enter your email address">
-                        </div>
-                        <div id="mce-responses" class="clear foot">
-                            <div class="response" id="mce-error-response" style="display:none"></div>
-                            <div class="response" id="mce-success-response" style="display:none"></div>
-                        </div>
-                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                            <input type="text" name="b_7f33efbbec31ffdd7dd87bce1_fddc7c24c3" tabindex="-1" value="">
-                        </div>
-                        <div class="clear foot">
-                            <input type="submit" value="Subscribe Free" name="subscribe" id="mc-embedded-subscribe" class="button">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
 
-    <footer>
+    .corner-accent {
+        display: none;
+    }
+
+    .submit-button {
+        width: 100%;
+    }
+}
+<section id="demo-request" class="section demo-section">
+    <div class="container">
+        <div class="corner-accent top-left"></div>
+        <div class="corner-accent bottom-right"></div>
+        
+        <div class="demo-container">
+            <div class="section-label">Institutional Access</div>
+            <h2>Request Platform Demo</h2>
+             <p class="subtitle">
+                Join institutional investors accessing real-time governance intelligence across Africa's highest-growth sectors.
+            </p>
+         <form id="demoForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required placeholder="John">
+                    </div>
+                   <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required placeholder="Smith">
+                    </div>
+                </div>
+          <div class="form-group full-width">
+                    <label for="email">Work Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="john.smith@institution.com">
+                </div>
+                  <div class="form-group full-width">
+                    <label for="company">Institution / Company <span class="required">*</span></label>
+                    <input type="text" id="company" name="company" required placeholder="e.g., BlackRock, CDC Group">
+                </div>
+                   <div class="form-grid">
+                    <div class="form-group">
+                        <label for="role">Role / Title <span class="required">*</span></label>
+                        <input type="text" id="role" name="role" required placeholder="e.g., Investment Director">
+                    </div>
+                         <div class="form-group">
+                        <label for="investorType">Investor Type <span class="required">*</span></label>
+                        <select id="investorType" name="investorType" required>
+                            <option value="">Select type</option>
+                            <option value="institutional">Institutional Investor</option>
+                            <option value="pension">Pension Fund</option>
+                            <option value="sovereign">Sovereign Wealth Fund</option>
+                            <option value="pe">Private Equity</option>
+                            <option value="vc">Venture Capital</option>
+                            <option value="family-office">Family Office</option>
+                            <option value="bank">Development Bank</option>
+                            <option value="advisor">Investment Advisor</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+               <div class="form-group full-width">
+                    <label for="sectors">Sectors of Interest <span class="required">*</span></label>
+                    <select id="sectors" name="sectors" required>
+                        <option value="">Select primary sector</option>
+                        <option value="mining">Mining & Resources</option>
+                        <option value="agriculture">Agriculture & Food Security</option>
+                        <option value="fintech">Fintech & Financial Services</option>
+                        <option value="energy">Energy & Infrastructure</option>
+                        <option value="aviation">Aviation & Transport</option>
+                        <option value="healthcare">Healthcare & Pharmaceuticals</option>
+                        <option value="tourism">Tourism & Hospitality</option>
+                        <option value="multiple">Multiple Sectors</option>
+                    </select>
+                </div>
+                  <div class="form-group full-width">
+                    <label for="message">Additional Context (Optional)</label>
+                    <textarea id="message" name="message" placeholder="Specific markets, deal sizes, or intelligence needs..."></textarea>
+                </div>
+                <button type="submit" class="submit-button">Request Demo Access</button>
+                  <div class="success-message" id="successMessage">
+                    <strong>Request Received</strong><br>
+                    Thank you for your interest in AlgoEconomics. Our team will contact you within 48 hours to schedule your personalized platform demonstration.
+                </div>
+                    <div class="privacy-note">
+                    By submitting this form, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>. 
+                    We respect your privacy and will only use your information to provide platform access and relevant market intelligence.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+// Demo Request Form Handler
+document.getElementById('demoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    
+    console.log('Demo request submitted:', data);
+    
+    // Show success message
+    const successMessage = document.getElementById('successMessage');
+    successMessage.classList.add('show');
+    
+    // Reset form
+    this.reset();
+    
+    // Hide success message after 10 seconds
+    setTimeout(() => {
+        successMessage.classList.remove('show');
+    }, 10000);
+    
+    // TODO: Integration point - Connect to Mailchimp, Zapier, or your backend
+    // When ready to collect real submissions, uncomment one of these examples:
+    
+    /* MAILCHIMP EXAMPLE:
+    fetch('YOUR_MAILCHIMP_API_ENDPOINT', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => console.log('Sent to Mailchimp:', result))
+    .catch(error => console.error('Error:', error));
+    */
+    
+    /* ZAPIER WEBHOOK EXAMPLE:
+    fetch('YOUR_ZAPIER_WEBHOOK_URL', {
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
+    .then(() => console.log('Sent to Zapier'))
+    .catch(error => console.error('Error:', error));
+    */
+});
+  <footer>
         <div class="footer-top">
             <div class="container">
                 <div class="footer-main">
@@ -5712,6 +5753,7 @@ p {
     </script>
 </body>
 </html>
+
 
 
 
