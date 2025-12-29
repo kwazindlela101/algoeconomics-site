@@ -5731,55 +5731,41 @@ p {
         }
     }
         // Demo Request Form Handler
+<script>
 document.getElementById('demoForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Get form data
     const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
     
-    console.log('Demo request submitted:', data);
-    
-    // Show success message
-    const successMessage = document.getElementById('successMessage');
-    successMessage.classList.add('show');
-    
-    // Reset form
-    this.reset();
-    
-    // Hide success message after 10 seconds
-    setTimeout(() => {
-        successMessage.classList.remove('show');
-    }, 10000);
-    
-    // TODO: Integration point - Connect to Mailchimp, Zapier, or your backend
-    // When ready to collect real submissions, uncomment one of these examples:
-    
-    /* MAILCHIMP EXAMPLE:
-    fetch('YOUR_MAILCHIMP_API_ENDPOINT', {
+    // Submit to Formspree
+    fetch('https://formspree.io/f/xeeqvazo', {
         method: 'POST',
+        body: formData,
         headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
+            'Accept': 'application/json'
+        }
     })
-    .then(response => response.json())
-    .then(result => console.log('Sent to Mailchimp:', result))
-    .catch(error => console.error('Error:', error));
-    */
-    
-    /* ZAPIER WEBHOOK EXAMPLE:
-    fetch('YOUR_ZAPIER_WEBHOOK_URL', {
-        method: 'POST',
-        body: JSON.stringify(data)
+    .then(response => {
+        if (response.ok) {
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 10 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 10000);
+        }
     })
-    .then(() => console.log('Sent to Zapier'))
     .catch(error => console.error('Error:', error));
-    */
 });
-  </script>
+</script>
 </body>
 </html>
+
 
 
 
