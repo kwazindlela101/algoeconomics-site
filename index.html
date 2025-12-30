@@ -247,15 +247,14 @@
             height: 100%;
             position: relative;
         }
-        
-        .ticker-track { 
-            display: inline-flex;
-            animation: ticker-scroll 40s linear infinite;
-            will-change: transform;
-            padding: 0.75rem 0;
-        }
-        
-        .ticker-item { 
+        .ticker-track {
+    display: inline-flex;
+    animation: ticker-scroll 40s linear infinite !important;
+    animation-play-state: running !important;
+    will-change: transform;
+    padding: 0.75rem 0;
+}
+           .ticker-item { 
             display: flex; 
             align-items: center; 
             gap: 15px; 
@@ -300,10 +299,7 @@
             0% { transform: translateX(0); } 
             100% { transform: translateX(-50%); } 
         }
-        
-        .ticker-track:hover { animation-play-state: paused; }
-
-        /* Smart Ticker Enhancements - ADDED */
+         /* Smart Ticker Enhancements - ADDED */
         .ticker-item.trend-up .market-change { background: var(--success); }
         .ticker-item.trend-down .market-change { background: var(--danger); }
         .ticker-item.trend-neutral .market-change { background: #666; }
@@ -5763,6 +5759,7 @@ document.getElementById('demoForm').addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
+
 
 
 
