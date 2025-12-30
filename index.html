@@ -4975,7 +4975,7 @@ p {
                 };
                 
                 this.lastUpdate = new Date();
-                this.isLive = false; // Start with simulation paused
+                this.isLive = true; // Auto-start the simulation
                 this.updateInterval = 30000; // 30 seconds
                 this.simulationTimer = null;
                 this.isInitialized = false;
@@ -5759,6 +5759,7 @@ document.getElementById('demoForm').addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
+
 
 
 
