@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">  
 <head>     
     <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AlgoEconomics | AI-Powered Economic Intelligence for UK-Africa Markets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- <link rel="stylesheet" href="SECTORS-VISIBILITY-FIX.css"> -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script> 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">                            
     <meta name="theme-color" content="#1a365d">
@@ -3663,7 +3663,111 @@ p {
         </div>
     </div>
 </section>
+<script>
+// Fix 484 errors - Resource retry system
+(function() {
+  // Store original fetch
+  const originalFetch = window.fetch;
+  
+  window.fetch = function(...args) {
+    return originalFetch.apply(this, args)
+      .catch(err => {
+        console.log('Fetch failed, retrying:', args[0]);
+        // Retry once
+        return originalFetch.apply(this, args);
+      });
+  };
+  
+  // Fix script/image loading errors
+  window.addEventListener('error', function(e) {
+    const tag = e.target.tagName;
+    if ((tag === 'SCRIPT' || tag === 'IMG' || tag === 'LINK') && e.target.src) {
+      setTimeout(() => {
+        const newSrc = e.target.src + (e.target.src.includes('?') ? '&' : '?') + 'retry=' + Date.now();
+        if (tag === 'SCRIPT') {
+          const script = document.createElement('script');
+          script.src = newSrc;
+          document.head.appendChild(script);
+        }
+      }, 1000);
+    }
+  }, true);
+})();
+</script>
+ <head>
+    <!-- Your existing head content... -->
+    
+    <!-- Other CSS files and styles... -->
+    
+    <!-- ADD THIS RIGHT BEFORE CLOSING HEAD TAG -->
+    <style>
+        /* WebGL fallback styling */
+        .webgl-fallback {
+            display: none;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
+        .webgl-fallback h4 {
+            color: #2d4c20;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .webgl-fallback ul {
+            margin: 15px auto;
+            padding-left: 20px;
+            max-width: 400px;
+        }
+
+        .webgl-fallback li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* Simulation status indicator */
+        .simulation-status {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 10000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Emergency restart button */
+        #emergencyRestart {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 9999;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #emergencyRestart:hover {
+            background: #ff3742;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>   
 </body>
 </html>
 
@@ -4918,818 +5022,946 @@ p {
             </div>
         </div>
     </footer> 
-
-    <!-- Your existing JavaScript code remains exactly the same -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // =============================================
-        // SMART DATA SIMULATION - SAFE IMPLEMENTATION
-        // =============================================
-
-        class SafeMarketSimulator {
-            constructor() {
-                // Base values for realistic simulation
-                this.markets = {
-                    'FTSE 100': { 
-                        value: 7542.76, 
-                        min: 7400, 
-                        max: 7700, 
-                        volatility: 0.8,
-                        decimals: 2
-                    },
-                    'Nairobi SE': { 
-                        value: 1842.15, 
-                        min: 1700, 
-                        max: 1900, 
-                        volatility: 1.2,
-                        decimals: 2
-                    },
-                    'NGN/USD': { 
-                        value: 1485.50, 
-                        min: 1450, 
-                        max: 1520, 
-                        volatility: 1.5,
-                        decimals: 2
-                    },
-                    'JSE All Share': { 
-                        value: 73842.91, 
-                        min: 73000, 
-                        max: 75000, 
-                        volatility: 0.5,
-                        decimals: 2
-                    },
-                    'Ghana SE': { 
-                        value: 2845.30, 
-                        min: 2800, 
-                        max: 2900, 
-                        volatility: 1.0,
-                        decimals: 2
-                    },
-                    'Egypt EGX 30': { 
-                        value: 17923.45, 
-                        min: 17500, 
-                        max: 18200, 
-                        volatility: 0.7,
-                        decimals: 2
-                    }
+<!-- Your existing JavaScript code remains exactly the same -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // =============================================
+    // WEBGL & THREE.JS SAFETY CHECKS
+    // =============================================
+    (function() {
+        // Check WebGL support first
+        function checkWebGL() {
+            try {
+                const canvas = document.createElement('canvas');
+                return !!(window.WebGLRenderingContext && 
+                         (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+            } catch(e) {
+                return false;
+            }
+        }
+        
+        // Load Three.js dynamically with fallback
+        function loadThreeJS() {
+            if (window.THREE) return Promise.resolve();
+            
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js';
+                script.onload = () => {
+                    console.log('Three.js loaded from CDN');
+                    resolve();
                 };
-                
-                this.lastUpdate = new Date();
-                this.isLive = true; // Auto-start the simulation
-                this.updateInterval = 30000; // 30 seconds
-                this.simulationTimer = null;
-                this.isInitialized = false;
-            }
-
-            // Safe random number generator
-            generateRealisticChange(currentValue, min, max, volatility) {
-                // Small, realistic change (percentage)
-                const changePercent = (Math.random() - 0.5) * 2 * (volatility / 100);
-                const newValue = currentValue * (1 + changePercent);
-                
-                // Keep within realistic bounds
-                return Math.max(min, Math.min(max, newValue));
-            }
-
-            // Safely update all markets
-            updateAllMarkets() {
-                try {
-                    for (const [marketName, marketData] of Object.entries(this.markets)) {
-                        const newValue = this.generateRealisticChange(
-                            marketData.value,
-                            marketData.min,
-                            marketData.max,
-                            marketData.volatility
-                        );
-                        
-                        // Round to specified decimals
-                        marketData.value = parseFloat(newValue.toFixed(marketData.decimals));
-                        marketData.previousValue = marketData.value;
-                    }
-                    
-                    this.lastUpdate = new Date();
-                    this.updateDisplay();
-                    this.updateStatus(true);
-                    
-                } catch (error) {
-                    console.error('Error updating markets:', error);
-                    // Keep showing data even if simulation fails
-                    this.updateStatus(false);
-                }
-            }
-
-            // Safely update the display
-            updateDisplay() {
-                try {
-                    const tickerTrack = document.getElementById('smartTickerTrack');
-                    if (!tickerTrack) return;
-
-                    let html = '';
-                    
-                    // Create duplicates for smooth scrolling
-                    for (let i = 0; i < 2; i++) { // Create 2 sets for seamless loop
-                        for (const [marketName, marketData] of Object.entries(this.markets)) {
-                            const previousValue = marketData.previousValue || marketData.value;
-                            const changePercent = ((marketData.value - previousValue) / previousValue * 100);
-                            const changeAbs = Math.abs(changePercent);
-                            
-                            let changeClass = 'neutral';
-                            let changeSign = '';
-                            let changeText = '0.0%';
-                            
-                            if (changePercent > 0.05) {
-                                changeClass = 'up';
-                                changeSign = '+';
-                                changeText = `${changeSign}${changeAbs.toFixed(1)}%`;
-                            } else if (changePercent < -0.05) {
-                                changeClass = 'down';
-                                changeText = `${changeAbs.toFixed(1)}%`;
-                            }
-                            
-                            // Format number with commas
-                            const formattedValue = marketData.value.toLocaleString('en-US', {
-                                minimumFractionDigits: marketData.decimals,
-                                maximumFractionDigits: marketData.decimals
-                            });
-                            
-                            html += `
-                                <div class="ticker-item trend-${changeClass}" data-market="${marketName}">
-                                    <span class="market-name">${marketName}</span>
-                                    <span class="market-value ${changeClass === 'up' ? 'ticker-value-up' : changeClass === 'down' ? 'ticker-value-down' : 'ticker-value-neutral'}">
-                                        ${formattedValue}
-                                    </span>
-                                    <span class="market-change ${changeClass}">${changeText}</span>
-                                </div>
-                            `;
-                        }
-                    }
-                    
-                    tickerTrack.innerHTML = html;
-                    
-                } catch (error) {
-                    console.error('Error updating display:', error);
-                }
-            }
-
-            // Update status indicator
-            updateStatus(success = true) {
-                try {
-                    const lastUpdateTime = document.getElementById('lastUpdateTime');
-                    const liveIndicator = document.getElementById('liveIndicator');
-                    
-                    if (lastUpdateTime) {
-                        if (this.isLive) {
-                            const timeString = this.lastUpdate.toLocaleTimeString([], { 
-                                hour: '2-digit', 
-                                minute: '2-digit',
-                                second: '2-digit'
-                            });
-                            lastUpdateTime.textContent = `Updated: ${timeString}`;
-                        } else {
-                            lastUpdateTime.textContent = 'Simulation paused';
-                        }
-                    }
-                    
-                    if (liveIndicator) {
-                        liveIndicator.style.background = this.isLive ? '#00ff88' : '#ff9900';
-                    }
-                    
-                } catch (error) {
-                    console.error('Error updating status:', error);
-                }
-            }
-
-            // Start the simulation
-            start() {
-                if (this.isInitialized && this.isLive) return;
-                
-                try {
-                    // Initial display
-                    this.updateDisplay();
-                    
-                    // Start periodic updates
-                    this.simulationTimer = setInterval(() => {
-                        this.updateAllMarkets();
-                    }, this.updateInterval);
-                    
-                    this.isLive = true;
-                    this.isInitialized = true;
-                    this.updateStatus(true);
-                    
-                    console.log('Market simulation started successfully');
-                    
-                } catch (error) {
-                    console.error('Error starting simulation:', error);
-                    this.updateStatus(false);
-                }
-            }
-
-            // Stop the simulation
-            stop() {
-                if (this.simulationTimer) {
-                    clearInterval(this.simulationTimer);
-                    this.simulationTimer = null;
-                }
-                this.isLive = false;
-                this.updateStatus(false);
-            }
-
-            // Toggle simulation
-            toggle() {
-                if (this.isLive) {
-                    this.stop();
-                } else {
-                    this.start();
-                }
-            }
-        }
-
-        // Initialize and start the simulation
-        let marketSimulator;
-        
-        try {
-            console.log('About to create SafeMarketSimulator');
-            marketSimulator = new SafeMarketSimulator();
-            // Auto-start the simulation
-            marketSimulator.updateDisplay();
-            marketSimulator.start();
-            
-            // Add click handler to toggle simulation in ticker
-            const tickerStatus = document.getElementById('tickerStatus');
-            if (tickerStatus) {
-                tickerStatus.addEventListener('click', function() {
-                    marketSimulator.toggle();
-                });
-            }
-            
-            // Add click handler to toggle simulation in footer
-            const footerSimulationToggle = document.getElementById('footerSimulationToggle');
-            if (footerSimulationToggle) {
-                footerSimulationToggle.addEventListener('click', function() {
-                    marketSimulator.toggle();
-                });
-            }
-            
-        } catch (error) {
-            console.error('Failed to initialize market simulator:', error);
-        }
-
-        // =============================================
-        // NUCLEAR FIX FOR "APPLY AS STUDENT DEVELOPER" BUTTON
-        // =============================================
-        function applyNuclearEmailFix() {
-            console.log('🚨 Applying nuclear email fix...');
-            
-            // Find ALL links on the page
-            const allLinks = document.querySelectorAll('a[href]');
-            let fixedCount = 0;
-            
-            allLinks.forEach(link => {
-                const href = link.href.toLowerCase();
-                const text = (link.textContent || link.innerText || '').toLowerCase();
-                
-                // Check if this is the "Apply as Student Developer" button
-                                const isApplyButton = text.includes('apply as student') || 
-                                     text.includes('student developer') ||
-                                     link.classList.contains('backend-cta');
-                
-                // Check if it contains wrong references
-                const hasWrongReference = href.includes('onedrive') ||
-                                         href.includes('mudhoeve') ||
-                                         href.includes('live.com') ||
-                                         href.includes('sharepoint') ||
-                                         href.includes('file://') ||
-                                         (href.includes('mailto:') && !href.includes('contact@algoeconomics.org'));
-                
-                if (isApplyButton || hasWrongReference) {
-                    console.log('⚠️ Fixing link:', href, 'Text:', text);
-                    
-                    // Clone and replace to remove all event listeners
-                    const newLink = link.cloneNode(true);
-                    
-                    // Set the CORRECT email for Apply buttons
-                    if (isApplyButton) {
-                        newLink.href = 'mailto:contact@algoeconomics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme&body=Dear%20AlgoEconomics%20Team,%0A%0AI%20am%20interested%20in%20applying%20for%20the%20Student%20Backend%20Engineering%20Programme.%0A%0APlease%20find%20my%20details%20below:%0A%0AName:%0AUniversity:%0ACourse:%0AYear%20of%20Study:%0A%0AThank%20you,%0A[Your%20Name]';
-                        newLink.className = 'backend-cta';
-                    } else {
-                        newLink.href = 'mailto:contact@algoeconomics.org';
-                    }
-                    
-                    newLink.target = '_blank';
-                    newLink.rel = 'noopener noreferrer';
-                    
-                    // Replace the old link
-                    link.parentNode.replaceChild(newLink, link);
-                    fixedCount++;
-                    
-                    // Add clean click handler to the new link
-                    newLink.addEventListener('click', function(e) {
-                        // Just let the mailto: link work normally
-                        console.log('✅ Email link clicked, opening mail client');
-                    });
-                }
+                script.onerror = () => {
+                    console.warn('CDN failed, trying backup...');
+                    const backup = document.createElement('script');
+                    backup.src = 'https://unpkg.com/three@0.128.0/build/three.min.js';
+                    backup.onload = resolve;
+                    backup.onerror = reject;
+                    document.head.appendChild(backup);
+                };
+                document.head.appendChild(script);
             });
-            
-            console.log(`✅ Nuclear fix applied to ${fixedCount} links`);
-            
-            // Special fix for the Backend Engineering section
-            const backendSection = document.querySelector('#backend-engineering');
-            if (backendSection) {
-                const backendLinks = backendSection.querySelectorAll('a');
-                backendLinks.forEach(link => {
-                    if (link.href && !link.href.includes('contact@algoeconomics.org')) {
-                        link.href = 'mailto:contact@algoeconomics.org';
-                        console.log('✅ Fixed backend section link');
-                    }
-                });
-            }
         }
         
-        // Run the nuclear fix
-        setTimeout(applyNuclearEmailFix, 100);
-
-        // Your existing JavaScript code continues here...
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        const navOverlay = document.getElementById('navOverlay');
-        const mobileQuickLinks = document.getElementById('mobileQuickLinks');
-        
-        if (menuToggle && navLinks) {
-            menuToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                if (navOverlay) navOverlay.classList.toggle('active');
-                // Toggle mobile quick links visibility
-                if (mobileQuickLinks) {
-                    mobileQuickLinks.classList.toggle('active');
-                }
-            });
-            
-            // Close menu when clicking overlay
-            if (navOverlay) {
-                navOverlay.addEventListener('click', function() {
-                    navLinks.classList.remove('active');
-                    navOverlay.classList.remove('active');
-                    if (mobileQuickLinks) {
-                        mobileQuickLinks.classList.remove('active');
-                    }
-                });
+        // Initialize WebGL and Three.js
+        window.initializeWebGL = async function() {
+            if (!checkWebGL()) {
+                console.error('WebGL not supported');
+                showWebGLFallback();
+                return false;
             }
             
-            // Close menu on link click (mobile)
-            document.querySelectorAll('.nav-link, .mobile-quick-link, .hero-nav-item').forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.classList.remove('active');
-                    if (navOverlay) navOverlay.classList.remove('active');
-                    if (mobileQuickLinks) {
-                        mobileQuickLinks.classList.remove('active');
-                    }
-                });
-            });
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'start' 
-                    });
-                }
-            });
-        });
-
-        // Brief button
-        const briefBtn = document.querySelector('.brief-btn');
-        if (briefBtn) {
-            briefBtn.addEventListener('click', function() {
-                alert("Thank you! We'll send your brief shortly.");
-            });
-        }
-
-        // Regional tabs functionality
-        const regionalTabs = document.querySelectorAll('.regional-tab');
-        regionalTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                const region = this.getAttribute('data-region');
-
-                // Remove active class from all tabs
-                regionalTabs.forEach(t => t.classList.remove('active'));
-
-                // Remove active class from all content
-                document.querySelectorAll('.regional-content').forEach(c => c.classList.remove('active'));
-
-                // Add active class to clicked tab
-                this.classList.add('active');
-
-                // Show corresponding content
-                const content = document.getElementById(region + '-content');
-                if (content) content.classList.add('active');
-            });
-        });
-
-        // NEW: Market Comparison Tool
-        const compareBtn = document.getElementById('compareBtn');
-        const comparisonResults = document.getElementById('comparisonResults');
-        
-        // Country data
-        const countryData = {
-            nigeria: {
-                name: "Nigeria",
-                gdp: "3.2%",
-                inflation: "18.5%",
-                fdi: "$4.8B",
-                corruption: "25/100",
-                business: "131/190"
-            },
-            kenya: {
-                name: "Kenya",
-                gdp: "5.5%",
-                inflation: "6.8%",
-                fdi: "$1.8B",
-                corruption: "32/100",
-                business: "56/190"
-            },
-            "south-africa": {
-                name: "South Africa",
-                gdp: "1.9%",
-                inflation: "5.4%",
-                fdi: "$7.2B",
-                corruption: "44/100",
-                business: "84/190"
-            },
-            ghana: {
-                name: "Ghana",
-                gdp: "4.8%",
-                inflation: "23.2%",
-                fdi: "$2.1B",
-                corruption: "43/100",
-                business: "118/190"
-            },
-            egypt: {
-                name: "Egypt",
-                gdp: "4.5%",
-                inflation: "25.8%",
-                fdi: "$8.9B",
-                corruption: "33/100",
-                business: "114/190"
-            },
-            rwanda: {
-                name: "Rwanda",
-                gdp: "7.2%",
-                inflation: "3.8%",
-                fdi: "$450M",
-                corruption: "55/100",
-                business: "38/190"
-            },
-            ethiopia: {
-                name: "Ethiopia",
-                gdp: "6.8%",
-                inflation: "28.9%",
-                fdi: "$3.3B",
-                corruption: "38/100",
-                business: "159/190"
-            },
-            tanzania: {
-                name: "Tanzania",
-                gdp: "4.9%",
-                inflation: "4.2%",
-                fdi: "$1.2B",
-                corruption: "40/100",
-                business: "141/190"
+            try {
+                await loadThreeJS();
+                return true;
+            } catch (error) {
+                console.error('Failed to load Three.js:', error);
+                return false;
             }
         };
         
-        if (compareBtn) {
-            compareBtn.addEventListener('click', function() {
-                const country1 = document.getElementById('country1').value;
-                const country2 = document.getElementById('country2').value;
-                
-                if (!country1 || !country2) {
-                    alert('Please select two countries to compare.');
-                    return;
-                }
-                
-                if (country1 === country2) {
-                    alert('Please select two different countries.');
-                    return;
-                }
-                
-                // Update table headers
-                document.getElementById('country1Header').textContent = countryData[country1].name;
-                document.getElementById('country2Header').textContent = countryData[country2].name;
-                
-                // Update table data
-                document.getElementById('gdp1').textContent = countryData[country1].gdp;
-                document.getElementById('gdp2').textContent = countryData[country2].gdp;
-                
-                document.getElementById('inflation1').textContent = countryData[country1].inflation;
-                document.getElementById('inflation2').textContent = countryData[country2].inflation;
-                
-                document.getElementById('fdi1').textContent = countryData[country1].fdi;
-                document.getElementById('fdi2').textContent = countryData[country2].fdi;
-                
-                document.getElementById('corruption1').textContent = countryData[country1].corruption;
-                document.getElementById('corruption2').textContent = countryData[country2].corruption;
-                
-                document.getElementById('business1').textContent = countryData[country1].business;
-                document.getElementById('business2').textContent = countryData[country2].business;
-                
-                // Show results
-                comparisonResults.style.display = 'block';
-            });
+        function showWebGLFallback() {
+            const container = document.getElementById('simulation-container') || 
+                             document.getElementById('smartTickerTrack')?.parentElement;
+            if (container) {
+                container.innerHTML = `
+                    <div style="padding: 20px; text-align: center; background: #f5f5f5; border-radius: 8px;">
+                        <h4>WebGL Required</h4>
+                        <p>Your browser doesn't support 3D graphics.</p>
+                        <p><strong>Try:</strong></p>
+                        <ul style="text-align: left; display: inline-block;">
+                            <li>Chrome/Firefox/Edge on desktop</li>
+                            <li>Enable WebGL in browser settings</li>
+                            <li>Update graphics drivers</li>
+                        </ul>
+                    </div>
+                `;
+            }
         }
-        
-        // NEW: Executive Brief Generator
-        const briefForm = document.getElementById('briefForm');
-        const briefPreview = document.getElementById('briefPreview');
-        const briefPreviewContent = document.getElementById('briefPreviewContent');
-        const downloadBriefBtn = document.getElementById('downloadBrief');
-        
-        if (briefForm) {
-            briefForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const country = document.getElementById('briefCountry').value;
-                const sector = document.getElementById('briefSector').value;
-                const focus = document.getElementById('briefFocus').value;
-                const notes = document.getElementById('briefNotes').value;
-                
-                // Generate brief content
-                let content = `<h4>Executive Brief: ${getCountryName(country)} - ${getSectorName(sector)}</h4>`;
-                content += `<p><strong>Focus Area:</strong> ${getFocusName(focus)}</p>`;
-                content += `<p><strong>Date Generated:</strong> ${new Date().toLocaleDateString()}</p>`;
-                content += `<hr>`;
-                
-                // Add sector-specific insights
-                content += generateSectorInsights(sector, country);
-                
-                // Add focus-specific analysis
-                content += generateFocusAnalysis(focus, country);
-                
-                // Add country overview
-                content += generateCountryOverview(country);
-                
-                // Add notes if provided
-                if (notes.trim()) {
-                    content += `<h5>Additional Requirements:</h5><p>${notes}</p>`;
-                }
-                
-                // Add disclaimer
-                content += `<hr><p><small><em>This executive brief was generated by AlgoEconomics AI. For the most current data and comprehensive analysis, please contact our research team.</em></small></p>`;
-                
-                // Update preview
-                briefPreviewContent.innerHTML = content;
-                briefPreview.classList.add('active');
-                downloadBriefBtn.style.display = 'inline-block';
-                
-                // Scroll to preview
-                briefPreview.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            });
-        }
-        
-        if (downloadBriefBtn) {
-            downloadBriefBtn.addEventListener('click', function() {
-                alert('Executive brief PDF download started. In a production environment, this would generate and download a PDF report.');
-            });
-        }
-        
-        // Helper functions for brief generator                                               
-        function getCountryName(code) {
-            const countries = {
-                'nigeria': 'Nigeria',
-                'kenya': 'Kenya',
-                'south-africa': 'South Africa',
-                'ghana': 'Ghana',
-                'egypt': 'Egypt',
-                'east-africa': 'East Africa Region',
-                'west-africa': 'West Africa Region',
-                'southern-africa': 'Southern Africa Region'
-            };
-            return countries[code] || code;
-        }
-        
-        function getSectorName(code) {
-            const sectors = {
-                'mining': 'Mining & Natural Resources',
-                'agriculture': 'Agriculture & Agribusiness',
-                'fintech': 'Fintech & Digital Finance',
-                'energy': 'Energy & Renewables',
-                'healthcare': 'Healthcare & Pharmaceuticals',
-                'tourism': 'Tourism & Hospitality',
-                'aviation': 'Aviation & Logistics'
-            };
-            return sectors[code] || code;
-        }
-        
-        function getFocusName(code) {
-            const focuses = {
-                'investment': 'Investment Opportunities',
-                'risk': 'Risk Assessment',
-                'regulatory': 'Regulatory Analysis',
-                'market-trends': 'Market Trends',
-                'competition': 'Competitive Landscape'
-            };
-            return focuses[code] || code;
-        }
-        
-        function generateSectorInsights(sector, country) {
-            const insights = {
-                'mining': `<h5>Mining Sector Insights</h5><p>Africa's mining sector is experiencing significant transformation with increased focus on critical minerals for the energy transition. Key opportunities exist in lithium, cobalt, and copper mining, particularly in the Democratic Republic of Congo, Zambia, and Namibia. ESG considerations are becoming increasingly important for investors.</p>`,
-                'agriculture': `<h5>Agriculture Sector Insights</h5><p>The African agriculture sector offers substantial growth potential with increasing investment in agri-tech and sustainable farming practices. Climate-smart agriculture and food security initiatives are driving innovation across the continent. Export opportunities in organic and specialty crops are expanding.</p>`,
-                'fintech': `<h5>Fintech Sector Insights</h5><p>Africa's fintech ecosystem is one of the fastest-growing in the world, with mobile money penetration exceeding traditional banking in many markets. Regulatory frameworks are evolving to support innovation while ensuring consumer protection. Cross-border payment solutions and digital lending are particularly promising areas.</p>`,
-                'energy': `<h5>Energy Sector Insights</h5><p>Africa's energy transition is accelerating with significant investment in renewable energy projects. Solar and wind capacity is expanding rapidly, supported by favorable policy environments in many countries. Opportunities exist in both grid-scale projects and decentralized energy solutions for rural electrification.</p>`,
-                'healthcare': `<h5>Healthcare Sector Insights</h5><p>The healthcare sector in Africa is undergoing digital transformation with increased adoption of telemedicine and healthtech solutions. Public-private partnerships are driving infrastructure development, while pharmaceutical manufacturing localisation presents new investment opportunities.</p>`,
-                'tourism': `<h5>Tourism Sector Insights</h5><p>Post-pandemic recovery in African tourism is strong, with ecotourism and cultural tourism experiencing particularly rapid growth. Sustainable tourism initiatives are gaining traction, supported by government incentives and international development funding.</p>`,
-                'aviation': `<h5>Aviation Sector Insights</h5><p>Africa's aviation sector is poised for growth with increasing passenger traffic and new route development. Airport infrastructure upgrades and airline fleet modernization present investment opportunities. The African Continental Free Trade Area (AfCFTA) is expected to boost air cargo demand.</p>`
-            };
-            return insights[sector] || `<h5>Sector Insights</h5><p>Comprehensive analysis of the ${getSectorName(sector)} sector in ${getCountryName(country)}.</p>`;
-        }
-        
-        function generateFocusAnalysis(focus, country) {
-            const analyses = {
-                'investment': `<h5>Investment Opportunities</h5><p>Key investment opportunities in ${getCountryName(country)} include infrastructure development, digital transformation projects, and value-added manufacturing. Public-private partnership frameworks are increasingly well-defined, providing structured investment pathways.</p>`,
-                'risk': `<h5>Risk Assessment</h5><p>Primary risks in ${getCountryName(country)} include currency volatility, regulatory changes, and political transitions. Mitigation strategies include local partnerships, comprehensive due diligence, and political risk insurance. ESG compliance is becoming a critical risk factor.</p>`,
-                'regulatory': `<h5>Regulatory Analysis</h5><p>The regulatory environment in ${getCountryName(country)} is evolving to support foreign investment while protecting domestic interests. Key regulatory trends include digital taxation frameworks, environmental compliance requirements, and local content regulations.</p>`,
-                'market-trends': `<h5>Market Trends</h5><p>Current market trends in ${getCountryName(country)} include rapid urbanisation, growing middle-class consumption, and digital adoption acceleration. Demographic dividends and increasing connectivity are driving market expansion across multiple sectors.</p>`,
-                'competition': `<h5>Competitive Landscape</h5><p>The competitive landscape in ${getCountryName(country)} features a mix of established multinationals, regional champions, and agile local startups. Differentiation strategies increasingly focus on digital integration, local partnerships, and sustainability credentials.</p>`
-            };
-            return analyses[focus] || `<h5>Focus Analysis</h5><p>Detailed analysis of ${getFocusName(focus)} in ${getCountryName(country)}.</p>`;
-        }
-        
-        function generateCountryOverview(country) {
-            const overviews = {
-                'nigeria': `<h5>Nigeria Market Overview</h5><p>Africa's largest economy with diverse sectors including oil & gas, agriculture, and services. Recent economic reforms are improving the investment climate, though infrastructure gaps and security concerns remain challenges. The fintech ecosystem is particularly dynamic.</p>`,
-                'kenya': `<h5>Kenya Market Overview</h5><p>East Africa's economic hub with strong services sector and emerging manufacturing base. Digital innovation leadership with robust mobile money ecosystem. Political stability and improving infrastructure support continued growth.</p>`,
-                'south-africa': `<h5>South Africa Market Overview</h5><p>Africa's most industrialised economy with sophisticated financial services and manufacturing sectors. Energy security challenges are being addressed through renewable energy investments. The AfCFTA presents export opportunities.</p>`,
-                'ghana': `<h5>Ghana Market Overview</h5><p>Stable democracy with diversified economy including cocoa, gold, and oil production. Digital government initiatives and improving infrastructure support business environment. Regional financial services hub with growing tech ecosystem.</p>`,
-                'egypt': `<h5>Egypt Market Overview</h5><p>North Africa's largest economy with strategic location connecting Africa, Europe, and Middle East. Economic reforms are stabilising the macroeconomic environment. Renewable energy and logistics infrastructure present significant opportunities.</p>`,
-                'east-africa': `<h5>East Africa Region Overview</h5><p>One of Africa's fastest-growing regions with strong economic integration through the East African Community. Infrastructure development, particularly in transport and energy, is driving regional connectivity. Digital innovation leadership with vibrant startup ecosystems.</p>`,
-                'west-africa': `<h5>West Africa Region Overview</h5><p>Economically diverse region with Nigeria as the dominant economy. The ECOWAS bloc facilitates regional trade, though implementation challenges remain. Agricultural potential, mining resources, and growing consumer markets present opportunities.</p>`,
-                'southern-africa': `<h5>Southern Africa Region Overview</h5><p>Region anchored by South Africa with strong mining, agriculture, and tourism sectors. SADC integration efforts are improving cross-border trade. Renewable energy potential is significant, particularly in solar and wind resources.</p>`
-            };
-            return overviews[country] || `<h5>Market Overview</h5><p>General overview of the ${getCountryName(country)} market environment.</p>`;
-        }
+    })();
 
-        // Charts
-        createSparklineCharts();
-        createGDPChart();
+    // =============================================
+    // SMART DATA SIMULATION - SAFE IMPLEMENTATION
+    // =============================================
 
-        // Active nav highlight on scroll
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section');
-            let current = '';
-            sections.forEach(section => {
-                if (pageYOffset >= section.offsetTop - 150) {
-                    current = section.getAttribute('id');
-                }
-            });
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Back to top
-        const backToTopBtn = document.getElementById('backToTop');
-        if (backToTopBtn) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 500) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            });
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
-        
-        // Add click interaction for the African Economic Cube
-        const economicCube = document.querySelector('.economic-cube');
-        if (economicCube) {
-            economicCube.addEventListener('click', function() {
-                // Pause/resume animation on click (for touch devices)
-                const isPaused = this.style.animationPlayState === 'paused';
-                this.style.animationPlayState = isPaused ? 'running' : 'paused';
-                
-                // Show brief info about Africa's economy
-                if (!isPaused) {
-                    setTimeout(() => {
-                        alert("Africa's Economic Snapshot:\n\n• $3.1 Trillion GDP\n• 1.4 Billion Population\n• 3.8% Average Growth\n• $83 Billion FDI in 2024\n• 46% Urbanization Rate\n• 570 Million Internet Users\n\nClick the cube again to resume rotation.");
-                    }, 300);
-                }
-            });
+    class SafeMarketSimulator {
+        constructor() {
+            // Track WebGL status
+            this.webglInitialized = false;
             
-            // Add touch events for mobile
-            economicCube.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                this.style.animationPlayState = 'paused';
-            });
+            // Base values for realistic simulation
+            this.markets = {
+                'FTSE 100': { 
+                    value: 7542.76, 
+                    min: 7400, 
+                    max: 7700, 
+                    volatility: 0.8,
+                    decimals: 2
+                },
+                'Nairobi SE': { 
+                    value: 1842.15, 
+                    min: 1700, 
+                    max: 1900, 
+                    volatility: 1.2,
+                    decimals: 2
+                },
+                'NGN/USD': { 
+                    value: 1485.50, 
+                    min: 1450, 
+                    max: 1520, 
+                    volatility: 1.5,
+                    decimals: 2
+                },
+                'JSE All Share': { 
+                    value: 73842.91, 
+                    min: 73000, 
+                    max: 75000, 
+                    volatility: 0.5,
+                    decimals: 2
+                },
+                'Ghana SE': { 
+                    value: 2845.30, 
+                    min: 2800, 
+                    max: 2900, 
+                    volatility: 1.0,
+                    decimals: 2
+                },
+                'Egypt EGX 30': { 
+                    value: 17923.45, 
+                    min: 17500, 
+                    max: 18200, 
+                    volatility: 0.7,
+                    decimals: 2
+                }
+            };
             
-            economicCube.addEventListener('touchend', function(e) {
-                e.preventDefault();
-                setTimeout(() => {
-                    this.style.animationPlayState = 'running';
-                }, 2000); // Resume after 2 seconds
-            });
+            this.lastUpdate = new Date();
+            this.isLive = true; // Auto-start the simulation
+            this.updateInterval = 30000; // 30 seconds
+            this.simulationTimer = null;
+            this.isInitialized = false;
         }
-    });
 
-    function createSparklineCharts() {
-        const cities = [
-            { id: 'lagosChart', data: [65, 59, 80, 81, 76, 75, 80] },
-            { id: 'nairobiChart', data: [45, 55, 65, 75, 80, 85, 90] },
-            { id: 'johannesburgChart', data: [80, 75, 70, 65, 60, 65, 70] }
-        ];
+        // Safe random number generator
+        generateRealisticChange(currentValue, min, max, volatility) {
+            // Small, realistic change (percentage)
+            const changePercent = (Math.random() - 0.5) * 2 * (volatility / 100);
+            const newValue = currentValue * (1 + changePercent);
+            
+            // Keep within realistic bounds
+            return Math.max(min, Math.min(max, newValue));
+        }
 
-        cities.forEach(city => {
-            const ctxEl = document.getElementById(city.id);
-            if (ctxEl && ctxEl.getContext) {
-                const ctx = ctxEl.getContext('2d');
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                        datasets: [{
-                            data: city.data,
-                            borderColor: 'rgba(45, 80, 22, 1)',
-                            backgroundColor: 'rgba(45, 80, 22, 0.1)',
-                            borderWidth: 2,
-                            fill: true,
-                            tension: 0.4,
-                            pointRadius: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: { enabled: false }
-                        },
-                        scales: {
-                            x: { display: false },
-                            y: { display: false }
+        // Safely update all markets
+        updateAllMarkets() {
+            try {
+                for (const [marketName, marketData] of Object.entries(this.markets)) {
+                    const newValue = this.generateRealisticChange(
+                        marketData.value,
+                        marketData.min,
+                        marketData.max,
+                        marketData.volatility
+                    );
+                    
+                    // Round to specified decimals
+                    marketData.value = parseFloat(newValue.toFixed(marketData.decimals));
+                    marketData.previousValue = marketData.value;
+                }
+                
+                this.lastUpdate = new Date();
+                this.updateDisplay();
+                this.updateStatus(true);
+                
+            } catch (error) {
+                console.error('Error updating markets:', error);
+                // Keep showing data even if simulation fails
+                this.updateStatus(false);
+            }
+        }
+
+        // Safely update the display
+        updateDisplay() {
+            try {
+                const tickerTrack = document.getElementById('smartTickerTrack');
+                if (!tickerTrack) return;
+
+                let html = '';
+                
+                // Create duplicates for smooth scrolling
+                for (let i = 0; i < 2; i++) { // Create 2 sets for seamless loop
+                    for (const [marketName, marketData] of Object.entries(this.markets)) {
+                        const previousValue = marketData.previousValue || marketData.value;
+                        const changePercent = ((marketData.value - previousValue) / previousValue * 100);
+                        const changeAbs = Math.abs(changePercent);
+                        
+                        let changeClass = 'neutral';
+                        let changeSign = '';
+                        let changeText = '0.0%';
+                        
+                        if (changePercent > 0.05) {
+                            changeClass = 'up';
+                            changeSign = '+';
+                            changeText = `${changeSign}${changeAbs.toFixed(1)}%`;
+                        } else if (changePercent < -0.05) {
+                            changeClass = 'down';
+                            changeText = `${changeAbs.toFixed(1)}%`;
                         }
+                        
+                        // Format number with commas
+                        const formattedValue = marketData.value.toLocaleString('en-US', {
+                            minimumFractionDigits: marketData.decimals,
+                            maximumFractionDigits: marketData.decimals
+                        });
+                        
+                        html += `
+                            <div class="ticker-item trend-${changeClass}" data-market="${marketName}">
+                                <span class="market-name">${marketName}</span>
+                                <span class="market-value ${changeClass === 'up' ? 'ticker-value-up' : changeClass === 'down' ? 'ticker-value-down' : 'ticker-value-neutral'}">
+                                    ${formattedValue}
+                                </span>
+                                <span class="market-change ${changeClass}">${changeText}</span>
+                            </div>
+                        `;
                     }
+                }
+                
+                tickerTrack.innerHTML = html;
+                
+            } catch (error) {
+                console.error('Error updating display:', error);
+            }
+        }
+
+        // Update status indicator
+        updateStatus(success = true) {
+            try {
+                const lastUpdateTime = document.getElementById('lastUpdateTime');
+                const liveIndicator = document.getElementById('liveIndicator');
+                
+                if (lastUpdateTime) {
+                    if (this.isLive) {
+                        const timeString = this.lastUpdate.toLocaleTimeString([], { 
+                            hour: '2-digit', 
+                            minute: '2-digit',
+                            second: '2-digit'
+                        });
+                        lastUpdateTime.textContent = `Updated: ${timeString}`;
+                    } else {
+                        lastUpdateTime.textContent = 'Simulation paused';
+                    }
+                }
+                
+                if (liveIndicator) {
+                    liveIndicator.style.background = this.isLive ? '#00ff88' : '#ff9900';
+                }
+                
+            } catch (error) {
+                console.error('Error updating status:', error);
+            }
+        }
+
+        // Initialize WebGL and simulation
+        async initialize() {
+            try {
+                // Check WebGL first
+                if (window.initializeWebGL) {
+                    this.webglInitialized = await window.initializeWebGL();
+                }
+                
+                // Start simulation regardless of WebGL status
+                this.start();
+                return true;
+            } catch (error) {
+                console.error('Simulator initialization failed:', error);
+                // Fallback to 2D only
+                this.start();
+                return false;
+            }
+        }
+
+        // Start the simulation
+        start() {
+            if (this.isInitialized && this.isLive) return;
+            
+            try {
+                // Initial display
+                this.updateDisplay();
+                
+                // Start periodic updates
+                this.simulationTimer = setInterval(() => {
+                    this.updateAllMarkets();
+                }, this.updateInterval);
+                
+                this.isLive = true;
+                this.isInitialized = true;
+                this.updateStatus(true);
+                
+                console.log('Market simulation started. WebGL:', this.webglInitialized);
+                
+            } catch (error) {
+                console.error('Error starting simulation:', error);
+                this.updateStatus(false);
+            }
+        }
+
+        // Stop the simulation
+        stop() {
+            if (this.simulationTimer) {
+                clearInterval(this.simulationTimer);
+                this.simulationTimer = null;
+            }
+            this.isLive = false;
+            this.updateStatus(false);
+        }
+
+        // Toggle simulation
+        toggle() {
+            if (this.isLive) {
+                this.stop();
+            } else {
+                this.start();
+            }
+        }
+    }
+
+    // Initialize and start the simulation
+    let marketSimulator;
+    
+    try {
+        console.log('About to create SafeMarketSimulator');
+        marketSimulator = new SafeMarketSimulator();
+        
+        // Use async initialization
+        marketSimulator.initialize().then(success => {
+            if (success) {
+                console.log('Simulator initialized successfully');
+            } else {
+                console.log('Simulator running in fallback mode');
+            }
+        });
+        
+        // Add click handler to toggle simulation in ticker
+        const tickerStatus = document.getElementById('tickerStatus');
+        if (tickerStatus) {
+            tickerStatus.addEventListener('click', function() {
+                marketSimulator.toggle();
+            });
+        }
+        
+        // Add click handler to toggle simulation in footer
+        const footerSimulationToggle = document.getElementById('footerSimulationToggle');
+        if (footerSimulationToggle) {
+            footerSimulationToggle.addEventListener('click', function() {
+                marketSimulator.toggle();
+            });
+        }
+        
+    } catch (error) {
+        console.error('Failed to initialize market simulator:', error);
+    }
+
+    // =============================================
+    // NUCLEAR FIX FOR "APPLY AS STUDENT DEVELOPER" BUTTON
+    // =============================================
+    function applyNuclearEmailFix() {
+        console.log('🚨 Applying nuclear email fix...');
+        
+        // Find ALL links on the page
+        const allLinks = document.querySelectorAll('a[href]');
+        let fixedCount = 0;
+        
+        allLinks.forEach(link => {
+            const href = link.href.toLowerCase();
+            const text = (link.textContent || link.innerText || '').toLowerCase();
+            
+            // Check if this is the "Apply as Student Developer" button
+            const isApplyButton = text.includes('apply as student') || 
+                                 text.includes('student developer') ||
+                                 link.classList.contains('backend-cta');
+            
+            // Check if it contains wrong references
+            const hasWrongReference = href.includes('onedrive') ||
+                                     href.includes('mudhoeve') ||
+                                     href.includes('live.com') ||
+                                     href.includes('sharepoint') ||
+                                     href.includes('file://') ||
+                                     (href.includes('mailto:') && !href.includes('contact@algoeconomics.org'));
+            
+            if (isApplyButton || hasWrongReference) {
+                console.log('⚠️ Fixing link:', href, 'Text:', text);
+                
+                // Clone and replace to remove all event listeners
+                const newLink = link.cloneNode(true);
+                
+                // Set the CORRECT email for Apply buttons
+                if (isApplyButton) {
+                    newLink.href = 'mailto:contact@algoeconomics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme&body=Dear%20AlgoEconomics%20Team,%0A%0AI%20am%20interested%20in%20applying%20for%20the%20Student%20Backend%20Engineering%20Programme.%0A%0APlease%20find%20my%20details%20below:%0A%0AName:%0AUniversity:%0ACourse:%0AYear%20of%20Study:%0A%0AThank%20you,%0A[Your%20Name]';
+                    newLink.className = 'backend-cta';
+                } else {
+                    newLink.href = 'mailto:contact@algoeconomics.org';
+                }
+                
+                newLink.target = '_blank';
+                newLink.rel = 'noopener noreferrer';
+                
+                // Replace the old link
+                link.parentNode.replaceChild(newLink, link);
+                fixedCount++;
+                
+                // Add clean click handler to the new link
+                newLink.addEventListener('click', function(e) {
+                    // Just let the mailto: link work normally
+                    console.log('✅ Email link clicked, opening mail client');
                 });
             }
         });
-    }
-
-    function createGDPChart() {
-        const ctx = document.getElementById('gdpChart');
-        const container = document.getElementById('gdpChartContainer');
-        if (ctx) {
-            setTimeout(() => {
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Nigeria', 'Kenya', 'South Africa', 'Ghana', 'Egypt'],
-                        datasets: [{
-                            label: 'GDP Growth %',
-                            data: [3.2, 5.1, 1.9, 4.8, 4.5],
-                            backgroundColor: [
-                                'rgba(212, 175, 55, 0.8)',
-                                'rgba(56, 161, 105, 0.8)',
-                                'rgba(49, 130, 206, 0.8)',
-                                'rgba(147, 51, 234, 0.8)',
-                                'rgba(236, 72, 153, 0.8)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return 'GDP Growth: ' + context.parsed.y + '%';
-                                    }
-                                }
-                            }
-                        },
-                        animation: {
-                            duration: 2000,
-                            easing: 'easeOutQuart'
-                        }
-                    }
-                });
-                if (container) container.classList.add('loaded');
-            }, 1000);
+        
+        console.log(`✅ Nuclear fix applied to ${fixedCount} links`);
+        
+        // Special fix for the Backend Engineering section
+        const backendSection = document.querySelector('#backend-engineering');
+        if (backendSection) {
+            const backendLinks = backendSection.querySelectorAll('a');
+            backendLinks.forEach(link => {
+                if (link.href && !link.href.includes('contact@algoeconomics.org')) {
+                    link.href = 'mailto:contact@algoeconomics.org';
+                    console.log('✅ Fixed backend section link');
+                }
+            });
         }
     }
-        // Demo Request Form Handler
-<script>
-document.getElementById('demoForm').addEventListener('submit', function(e) {
+    
+    // Run the nuclear fix
+    setTimeout(applyNuclearEmailFix, 100);
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const navOverlay = document.getElementById('navOverlay');
+    const mobileQuickLinks = document.getElementById('mobileQuickLinks');
+    
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            if (navOverlay) navOverlay.classList.toggle('active');
+            // Toggle mobile quick links visibility
+            if (mobileQuickLinks) {
+                mobileQuickLinks.classList.toggle('active');
+            }
+        });
+        
+        // Close menu when clicking overlay
+        if (navOverlay) {
+            navOverlay.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                navOverlay.classList.remove('active');
+                if (mobileQuickLinks) {
+                    mobileQuickLinks.classList.remove('active');
+                }
+            });
+        }
+        
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-link, .mobile-quick-link, .hero-nav-item').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                if (navOverlay) navOverlay.classList.remove('active');
+                if (mobileQuickLinks) {
+                    mobileQuickLinks.classList.remove('active');
+                }
+            });
+        });
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+        });
+    });
+
+    // Brief button
+    const briefBtn = document.querySelector('.brief-btn');
+    if (briefBtn) {
+        briefBtn.addEventListener('click', function() {
+            alert("Thank you! We'll send your brief shortly.");
+        });
+    }
+
+    // Regional tabs functionality
+    const regionalTabs = document.querySelectorAll('.regional-tab');
+    regionalTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const region = this.getAttribute('data-region');
+
+            // Remove active class from all tabs
+            regionalTabs.forEach(t => t.classList.remove('active'));
+
+            // Remove active class from all content
+            document.querySelectorAll('.regional-content').forEach(c => c.classList.remove('active'));
+
+            // Add active class to clicked tab
+            this.classList.add('active');
+
+            // Show corresponding content
+            const content = document.getElementById(region + '-content');
+            if (content) content.classList.add('active');
+        });
+    });
+
+    // NEW: Market Comparison Tool
+    const compareBtn = document.getElementById('compareBtn');
+    const comparisonResults = document.getElementById('comparisonResults');
+    
+    // Country data
+    const countryData = {
+        nigeria: {
+            name: "Nigeria",
+            gdp: "3.2%",
+            inflation: "18.5%",
+            fdi: "$4.8B",
+            corruption: "25/100",
+            business: "131/190"
+        },
+        kenya: {
+            name: "Kenya",
+            gdp: "5.5%",
+            inflation: "6.8%",
+            fdi: "$1.8B",
+            corruption: "32/100",
+            business: "56/190"
+        },
+        "south-africa": {
+            name: "South Africa",
+            gdp: "1.9%",
+            inflation: "5.4%",
+            fdi: "$7.2B",
+            corruption: "44/100",
+            business: "84/190"
+        },
+        ghana: {
+            name: "Ghana",
+            gdp: "4.8%",
+            inflation: "23.2%",
+            fdi: "$2.1B",
+            corruption: "43/100",
+            business: "118/190"
+        },
+        egypt: {
+            name: "Egypt",
+            gdp: "4.5%",
+            inflation: "25.8%",
+            fdi: "$8.9B",
+            corruption: "33/100",
+            business: "114/190"
+        },
+        rwanda: {
+            name: "Rwanda",
+            gdp: "7.2%",
+            inflation: "3.8%",
+            fdi: "$450M",
+            corruption: "55/100",
+            business: "38/190"
+        },
+        ethiopia: {
+            name: "Ethiopia",
+            gdp: "6.8%",
+            inflation: "28.9%",
+            fdi: "$3.3B",
+            corruption: "38/100",
+            business: "159/190"
+        },
+        tanzania: {
+            name: "Tanzania",
+            gdp: "4.9%",
+            inflation: "4.2%",
+            fdi: "$1.2B",
+            corruption: "40/100",
+            business: "141/190"
+        }
+    };
+    
+    if (compareBtn) {
+        compareBtn.addEventListener('click', function() {
+            const country1 = document.getElementById('country1').value;
+            const country2 = document.getElementById('country2').value;
+            
+            if (!country1 || !country2) {
+                alert('Please select two countries to compare.');
+                return;
+            }
+            
+            if (country1 === country2) {
+                alert('Please select two different countries.');
+                return;
+            }
+            
+            // Update table headers
+            document.getElementById('country1Header').textContent = countryData[country1].name;
+            document.getElementById('country2Header').textContent = countryData[country2].name;
+            
+            // Update table data
+            document.getElementById('gdp1').textContent = countryData[country1].gdp;
+            document.getElementById('gdp2').textContent = countryData[country2].gdp;
+            
+            document.getElementById('inflation1').textContent = countryData[country1].inflation;
+            document.getElementById('inflation2').textContent = countryData[country2].inflation;
+            
+            document.getElementById('fdi1').textContent = countryData[country1].fdi;
+            document.getElementById('fdi2').textContent = countryData[country2].fdi;
+            
+            document.getElementById('corruption1').textContent = countryData[country1].corruption;
+            document.getElementById('corruption2').textContent = countryData[country2].corruption;
+            
+            document.getElementById('business1').textContent = countryData[country1].business;
+            document.getElementById('business2').textContent = countryData[country2].business;
+            
+            // Show results
+            comparisonResults.style.display = 'block';
+        });
+    }
+    
+    // NEW: Executive Brief Generator
+    const briefForm = document.getElementById('briefForm');
+    const briefPreview = document.getElementById('briefPreview');
+    const briefPreviewContent = document.getElementById('briefPreviewContent');
+    const downloadBriefBtn = document.getElementById('downloadBrief');
+    
+    if (briefForm) {
+        briefForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const country = document.getElementById('briefCountry').value;
+            const sector = document.getElementById('briefSector').value;
+            const focus = document.getElementById('briefFocus').value;
+            const notes = document.getElementById('briefNotes').value;
+            
+            // Generate brief content
+            let content = `<h4>Executive Brief: ${getCountryName(country)} - ${getSectorName(sector)}</h4>`;
+            content += `<p><strong>Focus Area:</strong> ${getFocusName(focus)}</p>`;
+            content += `<p><strong>Date Generated:</strong> ${new Date().toLocaleDateString()}</p>`;
+            content += `<hr>`;
+            
+            // Add sector-specific insights
+            content += generateSectorInsights(sector, country);
+            
+            // Add focus-specific analysis
+            content += generateFocusAnalysis(focus, country);
+            
+            // Add country overview
+            content += generateCountryOverview(country);
+            
+            // Add notes if provided
+            if (notes.trim()) {
+                content += `<h5>Additional Requirements:</h5><p>${notes}</p>`;
+            }
+            
+            // Add disclaimer
+            content += `<hr><p><small><em>This executive brief was generated by AlgoEconomics AI. For the most current data and comprehensive analysis, please contact our research team.</em></small></p>`;
+            
+            // Update preview
+            briefPreviewContent.innerHTML = content;
+            briefPreview.classList.add('active');
+            downloadBriefBtn.style.display = 'inline-block';
+            
+            // Scroll to preview
+            briefPreview.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    }
+    
+    if (downloadBriefBtn) {
+        downloadBriefBtn.addEventListener('click', function() {
+            alert('Executive brief PDF download started. In a production environment, this would generate and download a PDF report.');
+        });
+    }
+    
+    // Helper functions for brief generator                                               
+    function getCountryName(code) {
+        const countries = {
+            'nigeria': 'Nigeria',
+            'kenya': 'Kenya',
+            'south-africa': 'South Africa',
+            'ghana': 'Ghana',
+            'egypt': 'Egypt',
+            'east-africa': 'East Africa Region',
+            'west-africa': 'West Africa Region',
+            'southern-africa': 'Southern Africa Region'
+        };
+        return countries[code] || code;
+    }
+    
+    function getSectorName(code) {
+        const sectors = {
+            'mining': 'Mining & Natural Resources',
+            'agriculture': 'Agriculture & Agribusiness',
+            'fintech': 'Fintech & Digital Finance',
+            'energy': 'Energy & Renewables',
+            'healthcare': 'Healthcare & Pharmaceuticals',
+            'tourism': 'Tourism & Hospitality',
+            'aviation': 'Aviation & Logistics'
+        };
+        return sectors[code] || code;
+    }
+    
+    function getFocusName(code) {
+        const focuses = {
+            'investment': 'Investment Opportunities',
+            'risk': 'Risk Assessment',
+            'regulatory': 'Regulatory Analysis',
+            'market-trends': 'Market Trends',
+            'competition': 'Competitive Landscape'
+        };
+        return focuses[code] || code;
+    }
+    
+    function generateSectorInsights(sector, country) {
+        const insights = {
+            'mining': `<h5>Mining Sector Insights</h5><p>Africa's mining sector is experiencing significant transformation with increased focus on critical minerals for the energy transition. Key opportunities exist in lithium, cobalt, and copper mining, particularly in the Democratic Republic of Congo, Zambia, and Namibia. ESG considerations are becoming increasingly important for investors.</p>`,
+            'agriculture': `<h5>Agriculture Sector Insights</h5><p>The African agriculture sector offers substantial growth potential with increasing investment in agri-tech and sustainable farming practices. Climate-smart agriculture and food security initiatives are driving innovation across the continent. Export opportunities in organic and specialty crops are expanding.</p>`,
+            'fintech': `<h5>Fintech Sector Insights</h5><p>Africa's fintech ecosystem is one of the fastest-growing in the world, with mobile money penetration exceeding traditional banking in many markets. Regulatory frameworks are evolving to support innovation while ensuring consumer protection. Cross-border payment solutions and digital lending are particularly promising areas.</p>`,
+            'energy': `<h5>Energy Sector Insights</h5><p>Africa's energy transition is accelerating with significant investment in renewable energy projects. Solar and wind capacity is expanding rapidly, supported by favorable policy environments in many countries. Opportunities exist in both grid-scale projects and decentralized energy solutions for rural electrification.</p>`,
+            'healthcare': `<h5>Healthcare Sector Insights</h5><p>The healthcare sector in Africa is undergoing digital transformation with increased adoption of telemedicine and healthtech solutions. Public-private partnerships are driving infrastructure development, while pharmaceutical manufacturing localisation presents new investment opportunities.</p>`,
+            'tourism': `<h5>Tourism Sector Insights</h5><p>Post-pandemic recovery in African tourism is strong, with ecotourism and cultural tourism experiencing particularly rapid growth. Sustainable tourism initiatives are gaining traction, supported by government incentives and international development funding.</p>`,
+            'aviation': `<h5>Aviation Sector Insights</h5><p>Africa's aviation sector is poised for growth with increasing passenger traffic and new route development. Airport infrastructure upgrades and airline fleet modernization present investment opportunities. The African Continental Free Trade Area (AfCFTA) is expected to boost air cargo demand.</p>`
+        };
+        return insights[sector] || `<h5>Sector Insights</h5><p>Comprehensive analysis of the ${getSectorName(sector)} sector in ${getCountryName(country)}.</p>`;
+    }
+    
+    function generateFocusAnalysis(focus, country) {
+        const analyses = {
+            'investment': `<h5>Investment Opportunities</h5><p>Key investment opportunities in ${getCountryName(country)} include infrastructure development, digital transformation projects, and value-added manufacturing. Public-private partnership frameworks are increasingly well-defined, providing structured investment pathways.</p>`,
+            'risk': `<h5>Risk Assessment</h5><p>Primary risks in ${getCountryName(country)} include currency volatility, regulatory changes, and political transitions. Mitigation strategies include local partnerships, comprehensive due diligence, and political risk insurance. ESG compliance is becoming a critical risk factor.</p>`,
+            'regulatory': `<h5>Regulatory Analysis</h5><p>The regulatory environment in ${getCountryName(country)} is evolving to support foreign investment while protecting domestic interests. Key regulatory trends include digital taxation frameworks, environmental compliance requirements, and local content regulations.</p>`,
+            'market-trends': `<h5>Market Trends</h5><p>Current market trends in ${getCountryName(country)} include rapid urbanisation, growing middle-class consumption, and digital adoption acceleration. Demographic dividends and increasing connectivity are driving market expansion across multiple sectors.</p>`,
+            'competition': `<h5>Competitive Landscape</h5><p>The competitive landscape in ${getCountryName(country)} features a mix of established multinationals, regional champions, and agile local startups. Differentiation strategies increasingly focus on digital integration, local partnerships, and sustainability credentials.</p>`
+        };
+        return analyses[focus] || `<h5>Focus Analysis</h5><p>Detailed analysis of ${getFocusName(focus)} in ${getCountryName(country)}.</p>`;
+    }
+    
+    function generateCountryOverview(country) {
+        const overviews = {
+            'nigeria': `<h5>Nigeria Market Overview</h5><p>Africa's largest economy with diverse sectors including oil & gas, agriculture, and services. Recent economic reforms are improving the investment climate, though infrastructure gaps and security concerns remain challenges. The fintech ecosystem is particularly dynamic.</p>`,
+            'kenya': `<h5>Kenya Market Overview</h5><p>East Africa's economic hub with strong services sector and emerging manufacturing base. Digital innovation leadership with robust mobile money ecosystem. Political stability and improving infrastructure support continued growth.</p>`,
+            'south-africa': `<h5>South Africa Market Overview</h5><p>Africa's most industrialised economy with sophisticated financial services and manufacturing sectors. Energy security challenges are being addressed through renewable energy investments. The AfCFTA presents export opportunities.</p>`,
+            'ghana': `<h5>Ghana Market Overview</h5><p>Stable democracy with diversified economy including cocoa, gold, and oil production. Digital government initiatives and improving infrastructure support business environment. Regional financial services hub with growing tech ecosystem.</p>`,
+            'egypt': `<h5>Egypt Market Overview</h5><p>North Africa's largest economy with strategic location connecting Africa, Europe, and Middle East. Economic reforms are stabilising the macroeconomic environment. Renewable energy and logistics infrastructure present significant opportunities.</p>`,
+            'east-africa': `<h5>East Africa Region Overview</h5><p>One of Africa's fastest-growing regions with strong economic integration through the East African Community. Infrastructure development, particularly in transport and energy, is driving regional connectivity. Digital innovation leadership with vibrant startup ecosystems.</p>`,
+            'west-africa': `<h5>West Africa Region Overview</h5><p>Economically diverse region with Nigeria as the dominant economy. The ECOWAS bloc facilitates regional trade, though implementation challenges remain. Agricultural potential, mining resources, and growing consumer markets present opportunities.</p>`,
+            'southern-africa': `<h5>Southern Africa Region Overview</h5><p>Region anchored by South Africa with strong mining, agriculture, and tourism sectors. SADC integration efforts are improving cross-border trade. Renewable energy potential is significant, particularly in solar and wind resources.</p>`
+        };
+        return overviews[country] || `<h5>Market Overview</h5><p>General overview of the ${getCountryName(country)} market environment.</p>`;
+    }
+
+    // Charts
+    createSparklineCharts();
+    createGDPChart();
+
+    // Active nav highlight on scroll
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section');
+        let current = '';
+        sections.forEach(section => {
+            if (pageYOffset >= section.offsetTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Back to top
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+    
+    // Add click interaction for the African Economic Cube
+    const economicCube = document.querySelector('.economic-cube');
+    if (economicCube) {
+        economicCube.addEventListener('click', function() {
+            // Pause/resume animation on click (for touch devices)
+            const isPaused = this.style.animationPlayState === 'paused';
+            this.style.animationPlayState = isPaused ? 'running' : 'paused';
+            
+            // Show brief info about Africa's economy
+            if (!isPaused) {
+                setTimeout(() => {
+                    alert("Africa's Economic Snapshot:\n\n• $3.1 Trillion GDP\n• 1.4 Billion Population\n• 3.8% Average Growth\n• $83 Billion FDI in 2024\n• 46% Urbanization Rate\n• 570 Million Internet Users\n\nClick the cube again to resume rotation.");
+                }, 300);
+            }
+        });
+        
+        // Add touch events for mobile
+        economicCube.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            this.style.animationPlayState = 'paused';
+        });
+        
+        economicCube.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            setTimeout(() => {
+                this.style.animationPlayState = 'running';
+            }, 2000); // Resume after 2 seconds
+        });
+    }
+    
+    // =============================================
+    // ERROR RECOVERY & AUTO-RESTART
+    // =============================================
+    
+    // Monitor simulation status
+    setInterval(() => {
+        if (window.marketSimulator && !window.marketSimulator.isLive) {
+            console.log('Simulation stopped, attempting restart...');
+            window.marketSimulator.start();
+        }
+    }, 60000); // Check every minute
+    
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden && window.marketSimulator) {
+            // Page became visible - restart if needed
+            setTimeout(() => {
+                if (!window.marketSimulator.isLive) {
+                    window.marketSimulator.start();
+                }
+            }, 1000);
+        }
+    });
+    
+    // Export for debugging
+    window.marketSimulator = marketSimulator;
+});
+
+function createSparklineCharts() {
+    const cities = [
+        { id: 'lagosChart', data: [65, 59, 80, 81, 76, 75, 80] },
+        { id: 'nairobiChart', data: [45, 55, 65, 75, 80, 85, 90] },
+        { id: 'johannesburgChart', data: [80, 75, 70, 65, 60, 65, 70] }
+    ];
+
+    cities.forEach(city => {
+        const ctxEl = document.getElementById(city.id);
+        if (ctxEl && ctxEl.getContext) {
+            const ctx = ctxEl.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        data: city.data,
+                        borderColor: 'rgba(45, 80, 22, 1)',
+                        backgroundColor: 'rgba(45, 80, 22, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    },
+                    scales: {
+                        x: { display: false },
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+    });
+}
+
+function createGDPChart() {
+    const ctx = document.getElementById('gdpChart');
+    const container = document.getElementById('gdpChartContainer');
+    if (ctx) {
+        setTimeout(() => {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Nigeria', 'Kenya', 'South Africa', 'Ghana', 'Egypt'],
+                    datasets: [{
+                        label: 'GDP Growth %',
+                        data: [3.2, 5.1, 1.9, 4.8, 4.5],
+                        backgroundColor: [
+                            'rgba(212, 175, 55, 0.8)',
+                            'rgba(56, 161, 105, 0.8)',
+                            'rgba(49, 130, 206, 0.8)',
+                            'rgba(147, 51, 234, 0.8)',
+                            'rgba(236, 72, 153, 0.8)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'GDP Growth: ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+            if (container) container.classList.add('loaded');
+        }, 1000);
+    }
+}
+
+// Demo Request Form Handler
+document.getElementById('demoForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
     const formData = new FormData(this);
@@ -5759,7 +5991,8 @@ document.getElementById('demoForm').addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
-
+</script>
+  
 
 
 
