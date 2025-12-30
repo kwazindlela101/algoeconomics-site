@@ -5153,9 +5153,9 @@ p {
         
         try {
             marketSimulator = new SafeMarketSimulator();
-            // Start with simulation paused
+            // Auto-start the simulation
             marketSimulator.updateDisplay();
-            marketSimulator.updateStatus(false);
+            marketSimulator.start();
             
             // Add click handler to toggle simulation in ticker
             const tickerStatus = document.getElementById('tickerStatus');
@@ -5762,6 +5762,7 @@ document.getElementById('demoForm').addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
+
 
 
 
