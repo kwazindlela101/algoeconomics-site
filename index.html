@@ -3766,8 +3766,197 @@ p {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
+<head>
+    <!-- Your existing head content... -->
+    
+    <style>
+        /* YOUR EXISTING CSS HERE... */
+        
+        /* ========== ADD THESE NEW STYLES ========== */
+        /* WebGL fallback styling */
+        .webgl-fallback {
+            display: none;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .webgl-fallback h4 {
+            color: #2d4c20;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .webgl-fallback ul {
+            margin: 15px auto;
+            padding-left: 20px;
+            max-width: 400px;
+        }
+
+        .webgl-fallback li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* Mobile optimization */
+        .ticker-item {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (max-width: 768px) {
+            .ticker-item {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            #emergencyRestart {
+                padding: 12px 20px;
+                font-size: 14px;
+                bottom: 80px;
+            }
+        }
+        /* ========== END NEW STYLES ========== */
+    </style>
+    
+    <!-- Your other head content... -->
+</head>
+        
     </style>
 </head>   
+<!-- Add this RIGHT BEFORE CLOSING </body> tag -->
+<div id="simStatus" style="position: fixed; bottom: 10px; right: 10px; 
+     background: rgba(0,0,0,0.8); color: #00ff88; padding: 5px 10px; 
+     border-radius: 3px; font-size: 11px; font-family: monospace; z-index: 10000;
+     backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
+    ✅ Simulation: LIVE
+</div>
+
+<!-- Emergency Restart Button -->
+<button id="emergencyRestart" style="position: fixed; bottom: 20px; left: 20px; 
+       background: #ff4757; color: white; border: none; padding: 10px 15px; 
+       border-radius: 5px; cursor: pointer; z-index: 9999; font-size: 12px;
+       display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+   🔄 Restart Simulation
+</button>
+
+<!-- SIMULATION STATUS SCRIPT -->
+<script>
+// Show emergency restart button after 5 seconds
+setTimeout(() => {
+    const restartBtn = document.getElementById('emergencyRestart');
+    if (restartBtn) {
+        restartBtn.style.display = 'block';
+        
+        restartBtn.addEventListener('click', function() {
+            if (window.marketSimulator) {
+                window.marketSimulator.stop();
+                setTimeout(() => {
+                    window.marketSimulator.start();
+                    this.textContent = '✅ Restarted';
+                    this.style.background = '#00b894';
+                    setTimeout(() => {
+                        this.textContent = '🔄 Restart Simulation';
+                        this.style.background = '#ff4757';
+                    }, 2000);
+                }, 500);
+            }
+        });
+    }
+}, 5000);
+
+// Update simulation status every second
+setInterval(() => {
+    const status = document.getElementById('simStatus');
+    if (status && window.marketSimulator) {
+        status.textContent = window.marketSimulator.isLive ? 
+            '✅ Simulation: LIVE' : '⏸️ Simulation: PAUSED';
+        status.style.color = window.marketSimulator.isLive ? '#00ff88' : '#ff9900';
+    }
+}, 1000);
+    // =============================================
+// SIMULATION ANALYTICS & PERFORMANCE
+// =============================================
+class SimulationAnalytics {
+    constructor() {
+        this.startTime = Date.now();
+        this.updatesCount = 0;
+        this.errorsCount = 0;
+        this.userInteractions = 0;
+        this.lastFrameTime = Date.now();
+    }
+    
+    logUpdate() {
+        this.updatesCount++;
+        // Log every 100 updates
+        if (this.updatesCount % 100 === 0) {
+            console.log(`📊 Simulation Stats: ${this.updatesCount} updates, ${this.errorsCount} errors, ${Math.round((Date.now() - this.startTime)/1000)}s runtime`);
+            this.logPerformance();
+        }
+    }
+    
+    logError(error) {
+        this.errorsCount++;
+        console.warn(`⚠️ Simulation Error #${this.errorsCount}:`, error.message || error);
+    }
+    
+    logPerformance() {
+        if (window.performance && window.performance.memory) {
+            const fps = Math.round(1000 / (Date.now() - this.lastFrameTime));
+            console.log('⚡ Performance:', {
+                usedJSHeapSize: Math.round(window.performance.memory.usedJSHeapSize / 1024 / 1024) + 'MB',
+                totalJSHeapSize: Math.round(window.performance.memory.totalJSHeapSize / 1024 / 1024) + 'MB',
+                fps: fps > 0 ? fps + ' FPS' : 'Calculating...'
+            });
+            this.lastFrameTime = Date.now();
+        }
+    }
+    
+    logInteraction(type) {
+        this.userInteractions++;
+        console.log(`👆 User interaction #${this.userInteractions}: ${type}`);
+    }
+}
+
+// Initialize analytics
+window.simAnalytics = new SimulationAnalytics();
+
+// =============================================
+// MODIFY YOUR SafeMarketSimulator class to use analytics:
+// =============================================
+
+// In your updateAllMarkets() method, add this line:
+updateAllMarkets() {
+    try {
+        // ... your existing code ...
+        
+        // Add this line at the end:
+        if (window.simAnalytics) window.simAnalytics.logUpdate();
+        
+    } catch (error) {
+        console.error('Error updating markets:', error);
+        if (window.simAnalytics) window.simAnalytics.logError(error);
+        this.updateStatus(false);
+    }
+}
+
+// In your toggle() method, add:
+toggle() {
+    if (window.simAnalytics) window.simAnalytics.logInteraction('toggle_simulation');
+    if (this.isLive) {
+        this.stop();
+    } else {
+        this.start();
+    }
+}
+</script>
+    
+    
 </body>
 </html>
 
@@ -5993,6 +6182,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
