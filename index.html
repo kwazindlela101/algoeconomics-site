@@ -5152,6 +5152,7 @@ p {
         let marketSimulator;
         
         try {
+            console.log('About to create SafeMarketSimulator');
             marketSimulator = new SafeMarketSimulator();
             // Auto-start the simulation
             marketSimulator.updateDisplay();
@@ -5762,6 +5763,7 @@ document.getElementById('demoForm').addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
+
 
 
 
