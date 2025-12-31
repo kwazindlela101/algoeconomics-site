@@ -3121,6 +3121,285 @@ select.bg-dark-blue {
     background: #1a1f3a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%2341b3ff" viewBox="0 0 16 16"><path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>') no-repeat right 12px center/12px !important;
     padding-right: 30px !important;
 }      
+/* ===== NEW AI CORRUPTION INDEX STYLES ===== */
+.aci-section {
+    max-width: 1200px;
+    margin: 80px auto 60px;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.aci-hero {
+    background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+    color: #ffffff;
+    padding: 80px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.aci-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.aci-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.aci-badge {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.15);
+    color: #e8c766;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.aci-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.aci-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 700px;
+    margin: 0 auto 30px;
+    font-weight: 400;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.aci-value-prop {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.aci-content {
+    padding: 80px 60px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.feature-card {
+    background: #f8f6f0;
+    padding: 40px;
+    border-radius: 8px;
+    border-left: 4px solid #d4af37;
+    transition: all 0.3s ease;
+    animation: fadeInScale 0.6s ease-out backwards;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-left-color: #1a2332;
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #d4af37 0%, #e8c766 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.feature-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1a2332;
+    margin-bottom: 12px;
+    font-family: 'DM Serif Display', serif;
+}
+
+.feature-description {
+    color: #2c3e50;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.trust-signal {
+    background: linear-gradient(135deg, rgba(26, 35, 50, 0.03) 0%, rgba(44, 62, 80, 0.05) 100%);
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 50px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.trust-signal-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.trust-signal-text {
+    font-size: 1.1rem;
+    color: #1a2332;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.trust-signal-text strong {
+    color: #d4af37;
+}
+
+.cta-container {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.cta-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 18px 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #d4af37 0%, #e8c766 100%);
+    color: #1a2332;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #1a2332;
+    border: 2px solid #1a2332;
+}
+
+.btn-secondary:hover {
+    background: #1a2332;
+    color: #ffffff;
+}
+
+.cta-note {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .aci-hero {
+        padding: 60px 30px;
+    }
+
+    .aci-title {
+        font-size: 2.5rem;
+    }
+
+    .aci-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .aci-content {
+        padding: 50px 30px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .feature-card {
+        padding: 30px;
+    }
+
+    .cta-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}        
  </style>
 </head>
 <body>
@@ -6254,6 +6533,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
