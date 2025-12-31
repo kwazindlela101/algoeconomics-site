@@ -3384,6 +3384,47 @@ h4 {
     border-bottom-color: #f4c542;
     transform: translateX(5px);
 }
+        /* STAY INFORMED Column */
+.footer-column {
+    width: 33.333%;
+    padding: 0 20px;
+    min-height: 200px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.footer-column h4 {
+    color: #f4c542;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.footer-column p {
+    color: #a0aec0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 250px;
+}
+
+.dashboard-link {
+    color: #f4c542;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(244, 197, 66, 0.3);
+    padding-bottom: 3px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.dashboard-link:hover {
+    color: #ffdb6b;
+    border-bottom-color: #f4c542;
+    transform: translateX(5px);
+}
  </style>
 </head>
 <body>
@@ -4968,7 +5009,7 @@ toggle() {
 </section>
   <footer>
         <div class="footer-top">
-            <div class="container">
+            <div class="container"> 
                 <div class="footer-main">
                     <div class="footer-brand">
                         <div class="footer-logo">
@@ -5012,15 +5053,14 @@ toggle() {
                             <li><a href="#">Help Centre</a></li>
                         </ul>
                     </div>
-                  <div class="footer-column">
-                      <div class="footer-column" style="width: 33.333%; padding: 0 20px; min-height: 200px;">
+                    <div class="footer-column">
     <h4>STAY INFORMED</h4>
-    <p style="max-width: 250px;">Platform updates and market intelligence insights delivered to institutional subscribers.</p>
-    <a href="/client-portal" style="border-bottom: 1px solid rgba(244, 197, 66, 0.3); padding: 8px 0; display: inline-block;">
-        Already a client? Access your dashboard →
-    </a>
+    <p>Platform updates and market intelligence insights delivered to institutional subscribers.</p>
+    <a href="/client-portal" class="dashboard-link">Already a client? Access your dashboard →</a>
 </div>
-      <!-- NEW: Added simulation info to footer -->
+
+        
+     -- NEW: Added simulation info to footer -->
                 <div class="footer-simulation-info">
                     <div class="container">
                         <div class="data-sources">
@@ -6040,6 +6080,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
