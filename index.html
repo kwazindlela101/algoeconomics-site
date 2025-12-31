@@ -3104,6 +3104,23 @@
     background: #D4AF37;
     border-radius: 4px;
 }
+  /* ===== SAFE DROPDOWN FIX - ADD THIS AT THE END ===== */
+/* This will override only dropdown arrows without breaking other styles */
+
+/* Fix for Executive Brief Generator dropdowns */
+.brief-generator .custom-select,
+.brief-generator select {
+    background: #252a45 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="%2341b3ff" viewBox="0 0 16 16"><path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>') no-repeat right 16px center/14px !important;
+    border: 1px solid #3a4f8c !important;
+    color: #ffffff !important;
+    padding-right: 40px !important;
+}
+
+/* Fix for Market Comparison Tool dropdowns */
+select.bg-dark-blue {
+    background: #1a1f3a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%2341b3ff" viewBox="0 0 16 16"><path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>') no-repeat right 12px center/12px !important;
+    padding-right: 30px !important;
+}      
  </style>
 </head>
 <body>
@@ -6182,6 +6199,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
