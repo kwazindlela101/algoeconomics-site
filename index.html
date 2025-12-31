@@ -12,25 +12,6 @@
     <meta name="theme-color" content="#1a365d">
     <meta name="description" content="AI-powered economic intelligence platform providing real-time insights, predictive analytics, and actionable intelligence for UK-Africa markets.">
     <style>
-        <!-- Add this RIGHT AFTER your opening <head> tag to test -->
-<style>
-  .aci-section { 
-    background: #fff !important; 
-    border-radius: 12px !important;
-    margin: 40px auto !important;
-    max-width: 1200px !important;
-  }
-  .aci-hero { 
-    background: #1a1f3a !important; 
-    color: white !important;
-    padding: 60px !important;
-    text-align: center !important;
-  }
-  .aci-title { 
-    color: white !important; 
-    font-size: 2.5rem !important;
-  }
-</style>
         /* ALL YOUR EXISTING CSS CODE REMAINS EXACTLY THE SAME */
         :root {
             --primary: #1a365d;
@@ -3139,262 +3120,7 @@
 select.bg-dark-blue {
     background: #1a1f3a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%2341b3ff" viewBox="0 0 16 16"><path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>') no-repeat right 12px center/12px !important;
     padding-right: 30px !important;
-/* ===== NEW AI CORRUPTION INDEX STYLES ===== */
-.aci-section {
-    max-width: 1200px;
-    margin: 80px auto 60px;
-    background: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.aci-hero {
-    background: linear-gradient(135deg, #0d1424 0%, #1a1f3a 100%); /* Darker blue to match your site */
-    color: #ffffff;
-    padding: 80px 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.aci-hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(65, 179, 255, 0.1) 0%, transparent 70%); /* Blue glow to match your theme */
-    animation: pulse 8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.3; }
-    50% { transform: scale(1.2); opacity: 0.5; }
-}
-
-.aci-hero-content {
-    position: relative;
-    z-index: 1;
-}
-
-.aci-badge {
-    display: inline-block;
-    background: rgba(65, 179, 255, 0.15); /* Blue to match your site */
-    color: #66c7ff; /* Light blue */
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    border: 1px solid rgba(65, 179, 255, 0.3);
-    font-family: 'IBM Plex Sans', sans-serif; /* Your site's font */
-}
-
-.aci-title {
-    font-family: 'IBM Plex Sans', sans-serif; /* Changed from DM Serif to match your site */
-    font-size: 3rem; /* Slightly smaller */
-    margin-bottom: 20px;
-    font-weight: 600; /* Bold instead of regular */
-    letter-spacing: 0px;
-    color: #ffffff; /* White text */
-}
-
-.aci-subtitle {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.9); /* Brighter white */
-    max-width: 700px;
-    margin: 0 auto 30px;
-    font-weight: 500;
-    line-height: 1.5;
-}
-
-.aci-value-prop {
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.8); /* Brighter */
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.7;
-    font-weight: 400;
-}
-
-.aci-content {
-    padding: 80px 60px;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    margin-bottom: 60px;
-}
-
-.feature-card {
-    background: #f8fafc; /* Lighter, cleaner background */
-    padding: 40px;
-    border-radius: 8px;
-    border-left: 4px solid #41b3ff; /* Blue accent to match your site */
-    transition: all 0.3s ease;
-    border-top: 1px solid #e2e8f0;
-    border-right: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(65, 179, 255, 0.1);
-    border-left-color: #1a1f3a;
-}
-
-.feature-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #41b3ff 0%, #66c7ff 100%); /* Blue gradient */
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    color: white;
-}
-
-.feature-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #1a1f3a; /* Your navy color */
-    margin-bottom: 12px;
-    font-family: 'IBM Plex Sans', sans-serif;
-}
-
-.feature-description {
-    color: #4a5568; /* Dark gray for readability */
-    line-height: 1.7;
-    font-size: 0.95rem;
-}
-
-.trust-signal {
-    background: linear-gradient(135deg, rgba(26, 31, 58, 0.03) 0%, rgba(65, 179, 255, 0.05) 100%);
-    padding: 40px;
-    border-radius: 8px;
-    text-align: center;
-    margin-bottom: 50px;
-    border: 1px solid rgba(65, 179, 255, 0.2);
-}
-
-.trust-signal-label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #41b3ff; /* Blue */
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.trust-signal-text {
-    font-size: 1.1rem;
-    color: #1a1f3a;
-    font-weight: 500;
-    line-height: 1.6;
-}
-
-.trust-signal-text strong {
-    color: #41b3ff; /* Blue */
-}
-
-.cta-container {
-    text-align: center;
-    padding-top: 20px;
-}
-
-.cta-group {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.btn {
-    padding: 16px 40px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    font-family: 'IBM Plex Sans', sans-serif;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #41b3ff 0%, #66c7ff 100%); /* Blue gradient */
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(65, 179, 255, 0.3);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(65, 179, 255, 0.4);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: #1a1f3a;
-    border: 2px solid #1a1f3a;
-}
-
-.btn-secondary:hover {
-    background: #1a1f3a;
-    color: #ffffff;
-}
-
-.cta-note {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #718096;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .aci-hero {
-        padding: 60px 30px;
-    }
-
-    .aci-title {
-        font-size: 2.2rem;
-    }
-
-    .aci-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .aci-content {
-        padding: 50px 30px;
-    }
-
-    .features-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .feature-card {
-        padding: 30px;
-    }
-
-    .cta-group {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .btn {
-        width: 100%;
-    }
-}
+}      
  </style>
 </head>
 <body>
@@ -4662,83 +4388,28 @@ toggle() {
         </div>
     </section>
 
-  <!-- AI Corruption Index Section -->
-<section id="ai-corruption-index" class="aci-section">
-    <!-- Hero Section -->
-    <div class="aci-hero">
-        <div class="aci-hero-content">
-            <div class="aci-badge">Proprietary Intelligence</div>
-            <h2 class="aci-title">AI Corruption Index</h2>
-            <p class="aci-subtitle">Governance Risk Intelligence for Smart Investment Decisions</p>
-            <p class="aci-value-prop">
-                Real-time governance intelligence that quantifies corruption risk across African markets — 
-                turning institutional opacity into actionable investment signals.
-            </p>
+    <section id="corruption-index" class="section">
+        <div class="container">
+            <h2 class="section-title">AI Corruption Index</h2>
+            <p class="section-subtitle">Governance Risk Intelligence for Smart Investment Decisions</p>
+            <p class="section-body">Our proprietary AI Corruption Index analyzes governance patterns across African markets, helping investors identify and mitigate risks.</p>
+            <ul class="section-list">
+                <li><strong>Procurement Transparency Scores</strong> - Track public tender integrity</li>
+                <li><strong>Regulatory Risk Mapping</strong> - Identify jurisdictional vulnerabilities</li>
+                <li><strong>Institutional Quality Metrics</strong> - Assess legal frameworks</li>
+                <li><strong>Sector-Specific Analysis</strong> - Tailored risk profiles</li>
+            </ul>
+            <div style="text-align: center;"><a href="#newsletter" class="cta-button">Request Full Report</a></div>
         </div>
-    </div>
+    </section>
 
-    <!-- Content Section -->
-    <div class="aci-content">
-        <!-- Features Grid -->
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3 class="feature-title">Procurement Transparency Scores</h3>
-                <p class="feature-description">
-                    Real-time tracking of billions in public tenders across 15 African markets. 
-                    Identify procurement irregularities before they impact your investment thesis.
-                </p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🗺️</div>
-                <h3 class="feature-title">Regulatory Risk Mapping</h3>
-                <p class="feature-description">
-                    Predictive alerts on jurisdictional vulnerabilities before they impact your portfolio. 
-                    Monitor policy changes and enforcement capacity across regulatory frameworks.
-                </p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🏛️</div>
-                <h3 class="feature-title">Institutional Quality Metrics</h3>
-                <p class="feature-description">
-                    Quantified assessment of legal enforcement capacity and institutional stability. 
-                    Move beyond perception-based indices to data-driven governance analysis.
-                </p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3 class="feature-title">Sector-Specific Analysis</h3>
-                <p class="feature-description">
-                    Customized risk profiles for Mining, Energy, Fintech, Agriculture, Aviation, Healthcare, and Tourism. 
-                    Understand how governance affects your specific sector exposure.
-                </p>
-            </div>
+    <section class="brief-cta">
+        <div class="container">
+            <h2>Get Today's Market Brief</h2>
+            <p>Receive our curated daily intelligence report delivered to your inbox every morning.</p>
+            <button class="brief-btn">Send Me Today's Brief</button>
         </div>
-
-        <!-- Trust Signal -->
-        <div class="trust-signal">
-            <div class="trust-signal-label">Advisory Validation</div>
-            <p class="trust-signal-text">
-                Methodology validated by advisors from <strong>World Economic Forum</strong>, <strong>International Monetary Fund</strong>, 
-                <strong>World Bank</strong>, and <strong>UN Economic Commission for Africa</strong>
-            </p>
-        </div>
-
-        <!-- Call to Action -->
-        <div class="cta-container">
-            <div class="cta-group">
-                <a href="#demo" class="btn btn-primary">Request Institutional Demo</a>
-                <a href="#sample-report" class="btn btn-secondary">View Sample Report</a>
-            </div>
-            <p class="cta-note">
-                Trusted by asset managers, pension funds, and development finance institutions
-            </p>
-        </div>
-    </div>
-</section>
+    </section>
 <section id="speakers" class="section speakers">
         <div class="container">
             <div class="section-header"><h2>Expert Contributors</h2><p>Learn from leading voices in African economics</p></div>
@@ -6528,11 +6199,6 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
-
-
-
-
-
 
 
 
