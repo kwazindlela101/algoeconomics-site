@@ -3343,6 +3343,47 @@ h4 {
 .client-portal-link:hover .link-arrow {
     transform: translateX(3px);
 }        
+        /* Match Screenshot 3 spacing */
+.footer-column {
+    width: 33.333%; /* Equal 3-column layout */
+    float: left;
+    padding: 0 20px; /* More spacing */
+    box-sizing: border-box;
+    min-height: 200px; /* Match other columns height */
+}
+
+.footer-column h4 {
+    color: #f4c542;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px; /* More space below heading */
+    font-weight: 600;
+}
+
+.footer-column p {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 250px; /* Limit width for better readability */
+}
+
+.footer-column a {
+    color: #f4c542;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(244, 197, 66, 0.3);
+    transition: all 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: #ffdb6b;
+    border-bottom-color: #f4c542;
+    transform: translateX(5px);
+}
  </style>
 </head>
 <body>
@@ -4972,11 +5013,14 @@ toggle() {
                         </ul>
                     </div>
                   <div class="footer-column">
+                      <div class="footer-column" style="width: 33.333%; padding: 0 20px; min-height: 200px;">
     <h4>STAY INFORMED</h4>
-    <p>Platform updates and market intelligence insights delivered to institutional subscribers.</p>
-    <a href="/client-portal">Already a client? Access your dashboard →</a>
-</div>  
-   <!-- NEW: Added simulation info to footer -->
+    <p style="max-width: 250px;">Platform updates and market intelligence insights delivered to institutional subscribers.</p>
+    <a href="/client-portal" style="border-bottom: 1px solid rgba(244, 197, 66, 0.3); padding: 8px 0; display: inline-block;">
+        Already a client? Access your dashboard →
+    </a>
+</div>
+      <!-- NEW: Added simulation info to footer -->
                 <div class="footer-simulation-info">
                     <div class="container">
                         <div class="data-sources">
@@ -5996,6 +6040,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
