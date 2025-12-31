@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>  
 <html lang="en">  
 <head>     
     <meta charset="UTF-8"> 
@@ -3298,6 +3298,51 @@ h4 {
 .client-portal-link:hover .link-arrow {
     transform: translateX(3px);
 }
+.footer-column {
+    width: 25%;
+    float: left;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.footer-column h4 {
+    color: #f4c542;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.footer-column p {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.client-portal-link {
+    display: inline-flex;
+    align-items: center;
+    color: #f4c542;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+}
+
+.client-portal-link:hover {
+    color: #ffdb6b;
+    transform: translateX(5px);
+}
+
+.client-portal-link .link-arrow {
+    transition: transform 0.3s ease;
+}
+
+.client-portal-link:hover .link-arrow {
+    transform: translateX(3px);
+}        
  </style>
 </head>
 <body>
@@ -5962,6 +6007,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
