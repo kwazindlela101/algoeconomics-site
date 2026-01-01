@@ -5223,9 +5223,8 @@ p {
     </style>
     
     <!-- Your other head content... -->
-</head>
+
         
-    </style>
 </head>   
 <!-- Add this RIGHT BEFORE CLOSING </body> tag -->
 <div id="simStatus" style="position: fixed; bottom: 10px; right: 10px; 
@@ -5321,7 +5320,7 @@ class SimulationAnalytics {
     }
 }
 
-// Initialize analytics
+// Initialize analytics 
 window.simAnalytics = new SimulationAnalytics();
 
 // =============================================
@@ -5903,7 +5902,136 @@ toggle() {
             <div class="insight-card"><h4>Regional GDP Comparison</h4><div class="chart-container" id="gdpChartContainer"><canvas id="gdpChart"></canvas></div></div>
         </div>
     </section>
-  <!-- Platform Demo Section -->
+  <div class="container" id="index-section">
+        <!-- AI Corruption Index Header -->
+        <div class="section-header">
+            <h1>AI Corruption Index (ACI)</h1>
+            <p class="tagline">Real-time governance risk assessment powered by machine learning across Mining, Agriculture, Fintech, Energy, and Aviation sectors.</p>
+            <p>The ACI provides continuous monitoring of governance risks across key investment sectors in Africa, delivering actionable intelligence for investors, policymakers, and development partners.</p>
+        </div>
+
+        <!-- See ACI in Action Button -->
+        <div class="action-button-container">
+            <button class="action-button" onclick="scrollToDemo()">
+                See ACI in Action <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- ACI Overview -->
+        <div class="aci-overview">
+            <h2>Real-Time Governance Intelligence</h2>
+            <p>The AI Corruption Index (ACI) moves beyond static quarterly reports to provide continuous governance risk assessment. Our platform updates in real-time as new governance data emerges, delivering market signals—not just PDFs.</p>
+            <p>By applying machine learning to verified institutional data, the ACI identifies patterns, anomalies, and governance trends across sectors and countries, enabling proactive risk management and investment decision-making.</p>
+        </div>
+
+        <!-- Three-Layer Methodology -->
+        <div class="methodology-section">
+            <h2>Three-Layer Methodology</h2>
+            <div class="methodology-cards">
+                <div class="methodology-card">
+                    <h3><span>1</span> Institutional Integrity</h3>
+                    <ul>
+                        <li>Regulatory frameworks analysis</li>
+                        <li>Enforcement capacity assessment</li>
+                        <li>Judicial independence metrics</li>
+                        <li>Public accountability indicators</li>
+                    </ul>
+                </div>
+                
+                <div class="methodology-card">
+                    <h3><span>2</span> Sector Exposure</h3>
+                    <ul>
+                        <li>Licensing transparency evaluation</li>
+                        <li>Procurement practices analysis</li>
+                        <li>Market competition indicators</li>
+                        <li>Sector-specific governance risks</li>
+                    </ul>
+                </div>
+                
+                <div class="methodology-card">
+                    <h3><span>3</span> Execution Risk</h3>
+                    <ul>
+                        <li>Project delays monitoring</li>
+                        <li>Cost overrun analysis</li>
+                        <li>Political interference tracking</li>
+                        <li>Contract compliance assessment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- How the ACI Works -->
+        <div class="how-it-works">
+            <h2>How the ACI Works</h2>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fas fa-database"></i></div>
+                    <h3>Data Ingestion</h3>
+                    <p>World Bank, IMF, AfDB, UN ECFA, national statistics offices, and 200+ verified institutional sources</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI Processing</h3>
+                    <p>Machine learning models analyze patterns, anomalies, and governance trends across structured and unstructured data</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Risk Scores</h3>
+                    <p>0-100 scale: Institutional, Sector, Execution risk across all markets with three-layer assessment</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-icon"><i class="fas fa-bell"></i></div>
+                    <h3>Investor Signals</h3>
+                    <p>Actionable alerts delivered to your dashboard in real-time for proactive risk management</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-Time Signals & Advisory Board -->
+        <div class="features-section">
+            <div class="feature-card">
+                <h3><i class="fas fa-bolt"></i> Real-Time Signals</h3>
+                <p>Move beyond static quarterly reports. Our ACI updates continuously as new governance data emerges, giving you market signals—not PDFs.</p>
+                <p>Get alerts on regulatory changes, procurement anomalies, project delays, and political developments that could impact your investments.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3><i class="fas fa-users"></i> Advisory Board Validated</h3>
+                <p>Methodology reviewed and endorsed by leading governance and economic experts:</p>
+                <ul class="advisors-list">
+                    <li>
+                        <div class="advisor-icon"><i class="fas fa-user-tie"></i></div>
+                        <div>
+                            <strong>Dr. Daniel Ndlela</strong><br>
+                            UN Economic Commission for Africa (UN ECFA)
+                        </div>
+                    </li>
+                    <li>
+                        <div class="advisor-icon"><i class="fas fa-user-tie"></i></div>
+                        <div>
+                            <strong>Chido Munyati</strong><br>
+                            World Economic Forum
+                        </div>
+                    </li>
+                    <li>
+                        <div class="advisor-icon"><i class="fas fa-user-tie"></i></div>
+                        <div>
+                            <strong>Dr. Peter Robinson</strong><br>
+                            Economic Commission for Africa (ECA)
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Platform Demo Section -->
         <div class="demo-section" id="platform-demo">
             <div class="demo-container">
                 <div class="demo-header">
@@ -5923,7 +6051,7 @@ toggle() {
                     <input type="hidden" name="_subject" value="New ACI Platform Demo Request - Institutional Investor">
                     <input type="hidden" name="_template" value="table">
                     <input type="hidden" name="_language" value="en">
-                    <input type="hidden" name="_cc" value="kwasi.ndlela@algo-economics.org">
+                    <input type="hidden" name="_cc" value="kwazi.ndlela@algo-economics.org">
                     
                     <div class="form-row">
                         <div class="form-group">
@@ -7474,6 +7602,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
