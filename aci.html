@@ -266,6 +266,66 @@
             box-shadow: 0 8px 30px rgba(212, 165, 116, 0.4);
         }
 
+        .submit-button:disabled {
+            background: #2a3150;
+            color: #8b92a8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(212, 165, 116, 0.3);
+            border-radius: 50%;
+            border-top-color: #d4a574;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #1a3a1f 0%, #122e16 100%);
+            border: 1px solid #2a5030;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .success-message h3 {
+            color: #74d485;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: #b8d3c1;
+            margin-bottom: 10px;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: #74d485;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, #3a1a1a 0%, #2e1212 100%);
+            border: 1px solid #50302a;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            color: #ff6b6b;
+            display: none;
+        }
+
         /* Methodology Section */
         .methodology-section {
             margin-bottom: 80px;
@@ -824,38 +884,50 @@
                     <p>Join institutional investors accessing real-time governance intelligence across Africa's highest-growth sectors.</p>
                 </div>
                 
-                <form class="demo-form" id="demoForm">
+                <!-- FORMSPREE FORM - This will use your existing Formspree setup -->
+                <form 
+                    class="demo-form" 
+                    id="demoForm"
+                    action="https://formspree.io/f/xgegwrzz" 
+                    method="POST"
+                >
+                    <!-- Formspree hidden fields for configuration -->
+                    <input type="hidden" name="_subject" value="New ACI Platform Demo Request - Institutional Investor">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_language" value="en">
+                    <input type="hidden" name="_cc" value="kwasi.ndlela@algo-economics.org">
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">FIRST NAME</label>
-                            <input type="text" id="firstName" placeholder="John" required>
+                            <input type="text" id="firstName" name="firstName" placeholder="John" required>
                         </div>
                         <div class="form-group">
                             <label for="lastName">LAST NAME <span>*</span></label>
-                            <input type="text" id="lastName" placeholder="Smith" required>
+                            <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">WORK EMAIL <span>*</span></label>
-                        <input type="email" id="email" placeholder="john.smith@institution.com" required>
+                        <input type="email" id="email" name="_replyto" placeholder="john.smith@institution.com" required>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label for="company">INSTITUTION / COMPANY <span>*</span></label>
-                            <input type="text" id="company" placeholder="e.g., BlackRock, CDC Group" required>
+                            <input type="text" id="company" name="company" placeholder="e.g., BlackRock, CDC Group" required>
                         </div>
                         <div class="form-group">
                             <label for="role">ROLE / TITLE <span>*</span></label>
-                            <input type="text" id="role" placeholder="e.g., Investment Director" required>
+                            <input type="text" id="role" name="role" placeholder="e.g., Investment Director" required>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label for="investorType">INVESTOR TYPE <span>*</span></label>
-                            <select id="investorType" required>
+                            <select id="investorType" name="investorType" required>
                                 <option value="" disabled selected>Select type</option>
                                 <option value="institutional">Institutional Investor</option>
                                 <option value="private-equity">Private Equity</option>
@@ -873,41 +945,61 @@
                         <div class="sectors-title">SECTORS OF INTEREST</div>
                         <div class="sectors-grid">
                             <div class="sector-checkbox">
-                                <input type="checkbox" id="sector-mining" name="sectors" value="mining">
+                                <input type="checkbox" id="sector-mining" name="Mining & Extractives" value="selected">
                                 <label for="sector-mining">Mining & Extractives</label>
                             </div>
                             <div class="sector-checkbox">
-                                <input type="checkbox" id="sector-agriculture" name="sectors" value="agriculture">
+                                <input type="checkbox" id="sector-agriculture" name="Agriculture & Food Security" value="selected">
                                 <label for="sector-agriculture">Agriculture & Food Security</label>
                             </div>
                             <div class="sector-checkbox">
-                                <input type="checkbox" id="sector-fintech" name="sectors" value="fintech">
+                                <input type="checkbox" id="sector-fintech" name="Fintech & Financial Services" value="selected">
                                 <label for="sector-fintech">Fintech & Financial Services</label>
                             </div>
                             <div class="sector-checkbox">
-                                <input type="checkbox" id="sector-energy" name="sectors" value="energy">
+                                <input type="checkbox" id="sector-energy" name="Energy & Infrastructure" value="selected">
                                 <label for="sector-energy">Energy & Infrastructure</label>
                             </div>
                             <div class="sector-checkbox">
-                                <input type="checkbox" id="sector-aviation" name="sectors" value="aviation">
+                                <input type="checkbox" id="sector-aviation" name="Aviation & Transport" value="selected">
                                 <label for="sector-aviation">Aviation & Transport</label>
                             </div>
                             <div class="sector-checkbox">
-                                <input type="checkbox" id="sector-tourism" name="sectors" value="tourism">
+                                <input type="checkbox" id="sector-tourism" name="Tourism & Hospitality" value="selected">
                                 <label for="sector-tourism">Tourism & Hospitality</label>
                             </div>
                             <div class="sector-checkbox">
-                                <input type="checkbox" id="sector-healthcare" name="sectors" value="healthcare">
+                                <input type="checkbox" id="sector-healthcare" name="Healthcare & Pharmaceuticals" value="selected">
                                 <label for="sector-healthcare">Healthcare & Pharmaceuticals</label>
                             </div>
                             <div class="sector-checkbox">
-                                <input type="checkbox" id="sector-all" name="sectors" value="all">
+                                <input type="checkbox" id="sector-all" name="All Sectors" value="selected">
                                 <label for="sector-all">All Sectors</label>
                             </div>
                         </div>
                     </div>
                     
-                    <button type="submit" class="submit-button">REQUEST DEMO</button>
+                    <!-- Formspree bot protection -->
+                    <input type="text" name="_gotcha" style="display:none">
+                    
+                    <button type="submit" class="submit-button" id="submitButton">
+                        <span id="buttonText">REQUEST DEMO</span>
+                    </button>
+                    
+                    <div class="error-message" id="errorMessage"></div>
+                    
+                    <div class="success-message" id="successMessage">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Demo Request Submitted Successfully!</h3>
+                        <p>Thank you for your interest in the AI Corruption Index.</p>
+                        <p>Our team will contact you within 24 hours to schedule your platform demo.</p>
+                        <p>In the meantime, feel free to explore our data sources and methodology above.</p>
+                        <button class="action-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="margin-top: 20px;">
+                            Back to Top <i class="fas fa-arrow-up"></i>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -1191,41 +1283,125 @@
             }, 1000);
         }
 
-        // Form submission handling
-        document.getElementById('demoForm').addEventListener('submit', function(e) {
+        // Form submission handling with Formspree
+        document.getElementById('demoForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Get form values
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
-            const company = document.getElementById('company').value;
-            const role = document.getElementById('role').value;
+            // Get form elements
+            const submitButton = document.getElementById('submitButton');
+            const buttonText = document.getElementById('buttonText');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const form = e.target;
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Get form values for validation
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const role = document.getElementById('role').value.trim();
             const investorType = document.getElementById('investorType').value;
             
-            // Get selected sectors
-            const selectedSectors = [];
-            const sectorCheckboxes = document.querySelectorAll('input[name="sectors"]:checked');
-            sectorCheckboxes.forEach(checkbox => {
-                selectedSectors.push(checkbox.value);
-            });
+            // Check if at least one sector is selected
+            const sectorCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const hasSelectedSectors = sectorCheckboxes.length > 0;
             
-            // Simple validation
-            if (!firstName || !lastName || !email || !company || !role || !investorType || selectedSectors.length === 0) {
-                alert('Please fill in all required fields and select at least one sector of interest.');
+            // Validate form
+            if (!firstName || !lastName || !email || !company || !role || !investorType || !hasSelectedSectors) {
+                showError('Please fill in all required fields and select at least one sector of interest.');
                 return;
             }
             
-            // In a real application, you would send this data to a server
-            // For demo purposes, we'll show a success message
-            alert(`Thank you ${firstName} ${lastName}!\n\nYour demo request has been submitted successfully.\n\nWe will contact you at ${email} within 24 hours to schedule your ACI platform demo.`);
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address.');
+                return;
+            }
             
-            // Reset form
-            document.getElementById('demoForm').reset();
+            // Disable submit button and show loading state
+            submitButton.disabled = true;
+            buttonText.innerHTML = '<div class="loading-spinner"></div> Submitting Request...';
             
-            // Scroll back to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            try {
+                // Prepare Formspree submission
+                const formData = new FormData(form);
+                
+                // Submit to Formspree
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    form.reset();
+                    
+                    // Reset checkbox states
+                    const otherSectorsCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#sector-all)');
+                    otherSectorsCheckboxes.forEach(checkbox => {
+                        checkbox.disabled = false;
+                    });
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Optional: Send data to analytics or CRM
+                    logToAnalytics({
+                        firstName,
+                        lastName,
+                        email,
+                        company,
+                        role,
+                        investorType,
+                        timestamp: new Date().toISOString(),
+                        source: 'ACI Platform Demo Request'
+                    });
+                    
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `Form submission failed with status ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                showError('Unable to submit form. Please try again or contact us directly.');
+            } finally {
+                // Re-enable submit button
+                submitButton.disabled = false;
+                buttonText.textContent = 'REQUEST DEMO';
+            }
         });
+
+        // Helper function to show error messages
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Optional: Log to analytics or CRM
+        function logToAnalytics(data) {
+            // This is where you can add tracking to Google Analytics, CRM, etc.
+            console.log('Demo request logged for analytics:', data);
+            
+            // Example: Send to Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'demo_request', {
+                    'event_category': 'engagement',
+                    'event_label': 'ACI Platform Demo',
+                    'value': 1
+                });
+            }
+        }
 
         // Add some interactive effects
         document.addEventListener('DOMContentLoaded', function() {
@@ -1261,7 +1437,7 @@
             
             // Highlight the "All Sectors" checkbox when clicked
             const allSectorsCheckbox = document.getElementById('sector-all');
-            const otherSectorsCheckboxes = document.querySelectorAll('input[name="sectors"]:not(#sector-all)');
+            const otherSectorsCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#sector-all)');
             
             allSectorsCheckbox.addEventListener('change', function() {
                 if (this.checked) {
