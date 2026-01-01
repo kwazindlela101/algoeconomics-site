@@ -1,7 +1,7 @@
 <!DOCTYPE html>  
 <html lang="en">  
 <head>      
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">  
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AlgoEconomics | AI-Powered Economic Intelligence for UK-Africa Markets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -4143,6 +4143,66 @@ p {
     line-height: 1.6 !important;
     opacity: 1 !important;
 }
+    .cta-banner {
+  background-color: #FFD700; /* Your yellow */
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.cta-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta-headline {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.cta-subheadline {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 400;
+  color: #2a2a2a;
+  margin: 0 0 32px 0;
+  line-height: 1.5;
+}
+
+.cta-button {
+  background-color: #1a1a1a; /* Dark navy/black like your original */
+  color: #FFD700;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  padding: 16px 40px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #2a2a2a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cta-headline {
+    font-size: 1.875rem; /* 30px */
+  }
+  
+  .cta-subheadline {
+    font-size: 1.125rem; /* 18px */
+  }
+  
+  .cta-button {
+    font-size: 1rem; /* 16px */
+    padding: 14px 32px;
+  }
+}
 </style>
 </head>
 
@@ -4907,14 +4967,14 @@ toggle() {
             </div>
         </div>
     </section>
-
-    <section class="yellow-banner">
-        <div class="container">
-            <p class="headline"> <span class="subtext">Ready for institutional- grade Africa Intelligence? "Join fund managers and corporates using AlgoEconomics for market entry decisions."</span></p>
-            </div>
-    </section>
-
-    <section id="ai-demo" class="section signals-section">
+<section class="cta-banner">
+  <div class="cta-content">
+    <h2 class="cta-headline">Ready for institutional-grade Africa intelligence?</h2>
+    <p class="cta-subheadline">Join fund managers and corporates using AlgoEconomics for market entry decisions.</p>
+    <button class="cta-button">Request Platform Access</button>
+  </div>
+</section>
+     <section id="ai-demo" class="section signals-section">
         <div class="container">
             <div class="signals-content">
                 <div class="signals-text">
@@ -6295,6 +6355,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
