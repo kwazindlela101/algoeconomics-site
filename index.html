@@ -3705,7 +3705,743 @@ h4 {
     gap: 15px;
   }
 }
-</style>      
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0e27;
+            color: #e0e6ed;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        /* Header Styles */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #d4a574 0%, #f5c992 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #8b92a8;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Action Button */
+        .action-button-container {
+            text-align: center;
+            margin: 40px 0 60px;
+        }
+
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d4a574 0%, #b8935f 100%);
+            color: #0a0e27;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(212, 165, 116, 0.3);
+        }
+
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 165, 116, 0.4);
+            background: linear-gradient(135deg, #f5c992 0%, #d4a574 100%);
+        }
+
+        .action-button i {
+            margin-left: 10px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .action-button:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ACI Overview Section */
+        .aci-overview {
+            background: linear-gradient(135deg, #1a1f3a 0%, #0f1629 100%);
+            border: 1px solid #2a3150;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+        }
+
+        .aci-overview h2 {
+            color: #d4a574;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .aci-overview p {
+            color: #b8c1d3;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #f5c992;
+            text-align: center;
+            margin: 20px 0 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2a3150;
+        }
+
+        /* Platform Demo Section */
+        .demo-section {
+            margin: 100px 0;
+            padding: 60px 0;
+            border-top: 1px solid #2a3150;
+            border-bottom: 1px solid #2a3150;
+        }
+
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .demo-header h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #d4a574 0%, #f5c992 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-header p {
+            font-size: 1.2rem;
+            color: #8b92a8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .demo-form {
+            background: linear-gradient(135deg, #1a1f3a 0%, #12162e 100%);
+            border: 1px solid #2a3150;
+            border-radius: 12px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #d4a574;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group label span {
+            color: #ff6b6b;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            background: #0f1324;
+            border: 1px solid #2a3150;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #d4a574;
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: #5a6175;
+        }
+
+        .sectors-group {
+            margin-top: 30px;
+        }
+
+        .sectors-title {
+            color: #d4a574;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .sectors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .sector-checkbox {
+            display: flex;
+            align-items: center;
+        }
+
+        .sector-checkbox input {
+            margin-right: 10px;
+            accent-color: #d4a574;
+        }
+
+        .sector-checkbox label {
+            color: #b8c1d3;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #d4a574 0%, #b8935f 100%);
+            color: #0a0e27;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            box-shadow: 0 4px 20px rgba(212, 165, 116, 0.3);
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(135deg, #f5c992 0%, #d4a574 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 165, 116, 0.4);
+        }
+
+        .submit-button:disabled {
+            background: #2a3150;
+            color: #8b92a8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(212, 165, 116, 0.3);
+            border-radius: 50%;
+            border-top-color: #d4a574;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #1a3a1f 0%, #122e16 100%);
+            border: 1px solid #2a5030;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .success-message h3 {
+            color: #74d485;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: #b8d3c1;
+            margin-bottom: 10px;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: #74d485;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, #3a1a1a 0%, #2e1212 100%);
+            border: 1px solid #50302a;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            color: #ff6b6b;
+            display: none;
+        }
+
+        /* Methodology Section */
+        .methodology-section {
+            margin-bottom: 80px;
+        }
+
+        .methodology-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .methodology-section h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #d4a574 0%, #b8935f 100%);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .methodology-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .methodology-card {
+            background: linear-gradient(135deg, #1a1f3a 0%, #12162e 100%);
+            border: 1px solid #2a3150;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .methodology-card:hover {
+            border-color: #d4a574;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
+        }
+
+        .methodology-card h3 {
+            color: #d4a574;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .methodology-card h3 span {
+            background: linear-gradient(135deg, #d4a574 0%, #b8935f 100%);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0a0e27;
+        }
+
+        .methodology-card ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+
+        .methodology-card li {
+            color: #b8c1d3;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .methodology-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #d4a574;
+        }
+
+        /* How ACI Works Section */
+        .how-it-works {
+            margin-bottom: 80px;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .how-it-works h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #d4a574 0%, #b8935f 100%);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, #1a1f3a 0%, #12162e 100%);
+            border: 1px solid #2a3150;
+            border-radius: 12px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step-card:hover {
+            border-color: #d4a574;
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #d4a574 0%, #b8935f 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #0a0e27;
+            border: 3px solid #0a0e27;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #d4a574;
+        }
+
+        .step-card h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-card p {
+            color: #8b92a8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Real-time Signals & Advisory Board */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #1a1f3a 0%, #12162e 100%);
+            border: 1px solid #2a3150;
+            border-radius: 12px;
+            padding: 35px;
+        }
+
+        .feature-card h3 {
+            color: #d4a574;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-card h3 i {
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+
+        .feature-card p {
+            color: #b8c1d3;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .advisors-list {
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .advisors-list li {
+            color: #b8c1d3;
+            padding: 10px 0;
+            border-bottom: 1px solid #2a3150;
+            display: flex;
+            align-items: center;
+        }
+
+        .advisors-list li:last-child {
+            border-bottom: none;
+        }
+
+        .advisor-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1a1f3a 0%, #2a3150 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #d4a574;
+            font-size: 1.2rem;
+        }
+
+        /* Data Sources Section */
+        .data-sources-section {
+            margin-top: 40px;
+        }
+
+        .data-categories {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #1a1f3a 0%, #12162e 100%);
+            border: 1px solid #2a3150;
+            border-radius: 12px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            border-color: #d4a574;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 165, 116, 0.15);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2a3150;
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #d4a574 0%, #b8935f 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 20px;
+        }
+
+        .category-header h3 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .source-group {
+            background: #0f1324;
+            border: 1px solid #1f2642;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .source-group h4 {
+            color: #d4a574;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .source-list {
+            list-style: none;
+        }
+
+        .source-list li {
+            color: #8b92a8;
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .source-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #d4a574;
+        }
+
+        .highlight-stat {
+            background: #0f1324;
+            border-left: 3px solid #d4a574;
+            padding: 15px 20px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .highlight-stat strong {
+            color: #d4a574;
+        }
+
+        /* Data Quality Section */
+        .data-quality-section {
+            background: linear-gradient(135deg, #1a1f3a 0%, #0f1629 100%);
+            border: 1px solid #2a3150;
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .data-quality-section h2 {
+            color: #d4a574;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .quality-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .quality-item h3 {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .quality-item p {
+            color: #8b92a8;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #2a3150;
+            color: #8b92a8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .section-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .methodology-section h2, .how-it-works h2, .demo-header h2 {
+                font-size: 2rem;
+            }
+            
+            .methodology-cards, .steps-container, .features-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .sources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-form {
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .sectors-grid {
+                grid-template-columns: 1fr;
+            }
+        }    
  </style>
 </head>
 <body>
@@ -5167,8 +5903,391 @@ toggle() {
             <div class="insight-card"><h4>Regional GDP Comparison</h4><div class="chart-container" id="gdpChartContainer"><canvas id="gdpChart"></canvas></div></div>
         </div>
     </section>
+  <!-- Platform Demo Section -->
+        <div class="demo-section" id="platform-demo">
+            <div class="demo-container">
+                <div class="demo-header">
+                    <h2>INSTITUTIONAL ACCESS</h2>
+                    <p>Request Platform Demo</p>
+                    <p>Join institutional investors accessing real-time governance intelligence across Africa's highest-growth sectors.</p>
+                </div>
+                
+                <!-- FORMSPREE FORM - This will use your existing Formspree setup -->
+                <form 
+                    class="demo-form" 
+                    id="demoForm"
+                    action="https://formspree.io/f/xgegwrzz" 
+                    method="POST"
+                >
+                    <!-- Formspree hidden fields for configuration -->
+                    <input type="hidden" name="_subject" value="New ACI Platform Demo Request - Institutional Investor">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_language" value="en">
+                    <input type="hidden" name="_cc" value="kwasi.ndlela@algo-economics.org">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">FIRST NAME</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">LAST NAME <span>*</span></label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">WORK EMAIL <span>*</span></label>
+                        <input type="email" id="email" name="_replyto" placeholder="john.smith@institution.com" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">INSTITUTION / COMPANY <span>*</span></label>
+                            <input type="text" id="company" name="company" placeholder="e.g., BlackRock, CDC Group" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">ROLE / TITLE <span>*</span></label>
+                            <input type="text" id="role" name="role" placeholder="e.g., Investment Director" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="investorType">INVESTOR TYPE <span>*</span></label>
+                            <select id="investorType" name="investorType" required>
+                                <option value="" disabled selected>Select type</option>
+                                <option value="institutional">Institutional Investor</option>
+                                <option value="private-equity">Private Equity</option>
+                                <option value="venture-capital">Venture Capital</option>
+                                <option value="hedge-fund">Hedge Fund</option>
+                                <option value="family-office">Family Office</option>
+                                <option value="development-finance">Development Finance Institution</option>
+                                <option value="corporate">Corporate Investor</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="sectors-group">
+                        <div class="sectors-title">SECTORS OF INTEREST</div>
+                        <div class="sectors-grid">
+                            <div class="sector-checkbox">
+                                <input type="checkbox" id="sector-mining" name="Mining & Extractives" value="selected">
+                                <label for="sector-mining">Mining & Extractives</label>
+                            </div>
+                            <div class="sector-checkbox">
+                                <input type="checkbox" id="sector-agriculture" name="Agriculture & Food Security" value="selected">
+                                <label for="sector-agriculture">Agriculture & Food Security</label>
+                            </div>
+                            <div class="sector-checkbox">
+                                <input type="checkbox" id="sector-fintech" name="Fintech & Financial Services" value="selected">
+                                <label for="sector-fintech">Fintech & Financial Services</label>
+                            </div>
+                            <div class="sector-checkbox">
+                                <input type="checkbox" id="sector-energy" name="Energy & Infrastructure" value="selected">
+                                <label for="sector-energy">Energy & Infrastructure</label>
+                            </div>
+                            <div class="sector-checkbox">
+                                <input type="checkbox" id="sector-aviation" name="Aviation & Transport" value="selected">
+                                <label for="sector-aviation">Aviation & Transport</label>
+                            </div>
+                            <div class="sector-checkbox">
+                                <input type="checkbox" id="sector-tourism" name="Tourism & Hospitality" value="selected">
+                                <label for="sector-tourism">Tourism & Hospitality</label>
+                            </div>
+                            <div class="sector-checkbox">
+                                <input type="checkbox" id="sector-healthcare" name="Healthcare & Pharmaceuticals" value="selected">
+                                <label for="sector-healthcare">Healthcare & Pharmaceuticals</label>
+                            </div>
+                            <div class="sector-checkbox">
+                                <input type="checkbox" id="sector-all" name="All Sectors" value="selected">
+                                <label for="sector-all">All Sectors</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Formspree bot protection -->
+                    <input type="text" name="_gotcha" style="display:none">
+                    
+                    <button type="submit" class="submit-button" id="submitButton">
+                        <span id="buttonText">REQUEST DEMO</span>
+                    </button>
+                    
+                    <div class="error-message" id="errorMessage"></div>
+                    
+                    <div class="success-message" id="successMessage">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Demo Request Submitted Successfully!</h3>
+                        <p>Thank you for your interest in the AI Corruption Index.</p>
+                        <p>Our team will contact you within 24 hours to schedule your platform demo.</p>
+                        <p>In the meantime, feel free to explore our data sources and methodology above.</p>
+                        <button class="action-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="margin-top: 20px;">
+                            Back to Top <i class="fas fa-arrow-up"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-    <section id="features" class="section features">
+        <!-- Data Collection Methodology -->
+        <div class="aci-overview">
+            <h2>Data Collection Methodology</h2>
+            <p>The ACI aggregates structured and unstructured data from verified institutional sources, applying machine learning models to identify patterns, anomalies, and governance trends. Each data point is validated, timestamped, and weighted according to source reliability and market relevance.</p>
+            <p>Our three-layer scoring system (Institutional Risk, Sector Risk, Execution Risk) processes data across regulatory compliance, operational transparency, and market stability indicators—delivering actionable intelligence that traditional indices cannot provide.</p>
+        </div>
+
+        <!-- ACI Data Sources -->
+        <div class="data-sources-section">
+            <div class="section-header">
+                <h1>ACI Data Sources</h1>
+                <p>The AI Corruption Index draws from 200+ institutional data sources across multilateral organizations, regulatory bodies, and sector-specific authorities. Our methodology ensures comprehensive, real-time governance intelligence across all seven investment sectors.</p>
+            </div>
+
+            <div class="data-categories">
+                <!-- Core Multilateral & Development Finance -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">🌍</div>
+                        <h3>Multilateral & Development Finance</h3>
+                    </div>
+                    <div class="sources-grid">
+                        <div class="source-group">
+                            <h4>Primary Institutions</h4>
+                            <ul class="source-list">
+                                <li>World Bank Open Data Portal</li>
+                                <li>International Monetary Fund (IMF)</li>
+                                <li>African Development Bank (AfDB)</li>
+                                <li>UN Economic Commission for Africa (UNECA)</li>
+                            </ul>
+                        </div>
+                        <div class="source-group">
+                            <h4>National Statistical Offices</h4>
+                            <ul class="source-list">
+                                <li>Kenya National Bureau of Statistics</li>
+                                <li>Statistics South Africa (Stats SA)</li>
+                                <li>Ghana Statistical Service</li>
+                                <li>Tanzania National Bureau of Statistics</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight-stat">
+                        <strong>Coverage:</strong> 54 African countries with quarterly economic indicators, governance metrics, and institutional stability data
+                    </div>
+                </div>
+
+                <!-- Mining & Extractives -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">⛏️</div>
+                        <h3>Mining & Extractives</h3>
+                    </div>
+                    <div class="sources-grid">
+                        <div class="source-group">
+                            <h4>Regulatory & Transparency</h4>
+                            <ul class="source-list">
+                                <li>Extractive Industries Transparency Initiative (EITI)</li>
+                                <li>National mining cadastres</li>
+                                <li>Mineral production reports</li>
+                                <li>Export licensing databases</li>
+                            </ul>
+                        </div>
+                        <div class="source-group">
+                            <h4>Operational Data</h4>
+                            <ul class="source-list">
+                                <li>Artisanal mining registries</li>
+                                <li>Environmental compliance filings</li>
+                                <li>Concession contract disclosures</li>
+                                <li>Revenue collection reports</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight-stat">
+                        <strong>Key Insight:</strong> Tracks licensing delays, revenue transparency gaps, and operational compliance across gold, copper, cobalt, and rare earth projects
+                    </div>
+                </div>
+
+                <!-- Tourism & Hospitality -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">✈️</div>
+                        <h3>Tourism & Hospitality</h3>
+                    </div>
+                    <div class="sources-grid">
+                        <div class="source-group">
+                            <h4>International Bodies</h4>
+                            <ul class="source-list">
+                                <li>UN World Tourism Organization (UNWTO)</li>
+                                <li>World Travel & Tourism Council (WTTC)</li>
+                                <li>National tourism boards</li>
+                                <li>Ministry of Tourism publications</li>
+                            </ul>
+                        </div>
+                        <div class="source-group">
+                            <h4>Market Intelligence</h4>
+                            <ul class="source-list">
+                                <li>Hotel occupancy and ADR data</li>
+                                <li>Visa processing statistics</li>
+                                <li>Tourism FDI tracking</li>
+                                <li>Safari and eco-tourism permits</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight-stat">
+                        <strong>Coverage:</strong> Real-time monitoring of licensing requirements, environmental clearances, and revenue reporting for hospitality investments
+                    </div>
+                </div>
+
+                <!-- Agriculture & Food Security -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">🌾</div>
+                        <h3>Agriculture & Food Security</h3>
+                    </div>
+                    <div class="sources-grid">
+                        <div class="source-group">
+                            <h4>UN Agencies</h4>
+                            <ul class="source-list">
+                                <li>Food and Agriculture Organization (FAO)</li>
+                                <li>International Fund for Agricultural Development (IFAD)</li>
+                                <li>World Food Programme (WFP)</li>
+                                <li>FAOSTAT databases</li>
+                            </ul>
+                        </div>
+                        <div class="source-group">
+                            <h4>National & Trade Data</h4>
+                            <ul class="source-list">
+                                <li>Agricultural ministry publications</li>
+                                <li>Land registry and tenure systems</li>
+                                <li>Crop production and yield data</li>
+                                <li>Export/import statistics</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight-stat">
+                        <strong>Key Metrics:</strong> Land acquisition transparency, subsidy distribution efficiency, and supply chain governance across agribusiness investments
+                    </div>
+                </div>
+
+                <!-- Fintech & Financial Services -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">💳</div>
+                        <h3>Fintech & Financial Services</h3>
+                    </div>
+                    <div class="sources-grid">
+                        <div class="source-group">
+                            <h4>Regulatory Oversight</h4>
+                            <ul class="source-list">
+                                <li>Central bank supervision reports</li>
+                                <li>Banking sector stability indicators</li>
+                                <li>Mobile money regulatory filings</li>
+                                <li>Payment system oversight data</li>
+                            </ul>
+                        </div>
+                        <div class="source-group">
+                            <h4>Market Activity</h4>
+                            <ul class="source-list">
+                                <li>Mobile money transaction volumes</li>
+                                <li>Digital lending compliance reports</li>
+                                <li>Fintech licensing databases</li>
+                                <li>Cross-border payment flows</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight-stat">
+                        <strong>Focus:</strong> AML/CFT compliance, regulatory licensing efficiency, and operational transparency for digital financial services
+                    </div>
+                </div>
+
+                <!-- Energy & Infrastructure -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">⚡</div>
+                        <h3>Energy & Infrastructure</h3>
+                    </div>
+                    <div class="sources-grid">
+                        <div class="source-group">
+                            <h4>Energy Authorities</h4>
+                            <ul class="source-list">
+                                <li>National utility regulators</li>
+                                <li>International Renewable Energy Agency (IRENA)</li>
+                                <li>Power generation and distribution data</li>
+                                <li>Grid stability reports</li>
+                            </ul>
+                        </div>
+                        <div class="source-group">
+                            <h4>Project Tracking</h4>
+                            <ul class="source-list">
+                                <li>Renewable energy project databases</li>
+                                <li>PPP contract disclosures</li>
+                                <li>Infrastructure procurement data</li>
+                                <li>Tariff and subsidy reporting</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight-stat">
+                        <strong>Intelligence:</strong> Monitors procurement transparency, tariff manipulation risks, and regulatory capture across power and renewable projects
+                    </div>
+                </div>
+
+                <!-- Aviation & Transport -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">🛫</div>
+                        <h3>Aviation & Transport</h3>
+                    </div>
+                    <div class="sources-grid">
+                        <div class="source-group">
+                            <h4>Aviation Authorities</h4>
+                            <ul class="source-list">
+                                <li>International Civil Aviation Organization (ICAO)</li>
+                                <li>National civil aviation authorities</li>
+                                <li>Airport operations data</li>
+                                <li>Air traffic safety records</li>
+                            </ul>
+                        </div>
+                        <div class="source-group">
+                            <h4>Infrastructure & Compliance</h4>
+                            <ul class="source-list">
+                                <li>Airport concession agreements</li>
+                                <li>Airline licensing and safety audits</li>
+                                <li>Ground handling service permits</li>
+                                <li>Infrastructure investment tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight-stat">
+                        <strong>Coverage:</strong> Safety compliance, licensing transparency, and operational governance across aviation and airport infrastructure investments
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-quality-section">
+                <h2>Data Quality & Coverage</h2>
+                <div class="quality-grid">
+                    <div class="quality-item">
+                        <h3>200+</h3>
+                        <p>Institutional data sources across all seven sectors</p>
+                    </div>
+                    <div class="quality-item">
+                        <h3>54</h3>
+                        <p>African countries with comprehensive governance tracking</p>
+                    </div>
+                    <div class="quality-item">
+                        <h3>Real-Time</h3>
+                        <p>Continuous data ingestion with automated validation</p>
+                    </div>
+                    <div class="quality-item">
+                        <h3>Verified</h3>
+                        <p>All sources cross-referenced with regulatory filings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+ <section id="features" class="section features">
         <div class="container">
             <div class="section-header"><h2>Platform Features</h2><p>Everything you need for comprehensive market intelligence</p></div>
             <div class="features-grid">
@@ -6355,6 +7474,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
