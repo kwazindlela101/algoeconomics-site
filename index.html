@@ -3525,8 +3525,187 @@ h4 {
   font-size: 0.85rem;
   color: #777;
 }
-</style>
-        
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+.algo-section {
+  font-family: 'Inter', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 30px;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  color: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+}
+
+.algo-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.gold-text {
+  background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header .subtitle {
+  color: #b0b0b0;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.data-badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.badge {
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 16px;
+  padding: 25px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.badge:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: #ffd700;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+}
+
+.badge-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.badge h3 {
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.disclaimer {
+  text-align: center;
+  background: rgba(255, 215, 0, 0.05);
+  border-left: 4px solid #ffd700;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 40px auto;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.disclaimer p {
+  color: #ffed4e;
+  font-size: 0.95rem;
+}
+
+.learn-link {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border: 1px solid #ffd700;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.learn-link:hover {
+  background: #ffd700;
+  color: #000;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  border-radius: 16px;
+  padding: 30px;
+  transition: all 0.4s ease;
+}
+
+.feature-card:hover {
+  border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.05);
+  transform: translateY(-8px);
+}
+
+.feature-icon {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: #ffd700;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.feature-card p {
+  color: #cccccc;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header h2 {
+    font-size: 2.2rem;
+  }
+  
+  .data-badges {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .disclaimer {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+</style>      
  </style>
 </head>
 <body>
@@ -5160,38 +5339,61 @@ toggle() {
     <p style="max-width: 250px; line-height: 1.6;">Platform updates and market intelligence insights delivered to institutional subscribers.</p>
     <a href="/client-portal">Already a client? Access your dashboard →</a>
 </div>
-    <div class="algoeconomics-section">
-  <div class="data-sources">
-    <h3>Data Sources</h3>
-    <p>AlgoEconomics uses publicly available governance datasets from trusted institutions including:</p>
-    <ul class="institutions">
-      <li>World Bank</li>
-      <li>IMF</li>
-      <li>African Development Bank</li>
-      <li>UN ECFA</li>
-      <li>National statistics offices</li>
-    </ul>
-    <p class="disclaimer"><em>Market data is simulated for demonstration purposes</em> | <a href="#" class="learn-more">Learn more</a></p>
+    <div class="algo-section">
+  <div class="header">
+    <h2><span class="gold-text">Trusted Data Sources</span></h2>
+    <p class="subtitle">Powered by globally recognized institutions</p>
   </div>
 
-  <div class="features">
-    <div class="feature">
-      <h4>Innovative FinTech Tool</h4>
-      <p>Cutting-edge technology for real-time governance insights.</p>
+  <div class="data-badges">
+    <div class="badge gold-badge">
+      <div class="badge-icon">🌍</div>
+      <h3>World Bank</h3>
     </div>
-    <div class="feature">
-      <h4>Robust Data Analytics</h4>
-      <p>Auditable, validated data aligned with our scoring methodology.</p>
+    <div class="badge gold-badge">
+      <div class="badge-icon">💼</div>
+      <h3>IMF</h3>
     </div>
-    <div class="feature">
-      <h4>African Market Expertise</h4>
-      <p>Deep regional knowledge and applicability.</p>
+    <div class="badge gold-badge">
+      <div class="badge-icon">🏦</div>
+      <h3>African Development Bank</h3>
     </div>
-    <div class="feature">
-      <h4>Committed to Regulatory Compliance</h4>
-      <p>Regulatory alignment in progress.</p>
+    <div class="badge gold-badge">
+      <div class="badge-icon">🌐</div>
+      <h3>UN ECFA</h3>
+    </div>
+    <div class="badge gold-badge">
+      <div class="badge-icon">📈</div>
+      <h3>National Statistics Offices</h3>
     </div>
   </div>
+
+  <div class="disclaimer">
+    <p>⚠️ <em>Market data is simulated for demonstration purposes</em></p>
+    <a href="#" class="learn-link">Learn more →</a>
+  </div>
+ <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3 class="gold-text">Innovative FinTech Tool</h3>
+      <p>Cutting-edge technology for real-time governance insights.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3 class="gold-text">Robust Data Analytics</h3>
+      <p>Auditable, validated data aligned with our scoring methodology.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🤝</div>
+      <h3 class="gold-text">African Market Expertise</h3>
+      <p>Deep regional knowledge with actionable local insights.</p>
+    </div>
+  </div>
+</div>
+
+ 
 
   <div class="legal-links">
     <a href="#">Privacy Policy</a>
@@ -6183,6 +6385,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 });
 </script>
   
+
 
 
 
