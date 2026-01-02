@@ -5957,7 +5957,15 @@ p {
                 grid-template-columns: 1fr;
             }
         }
-        
+        .sparkline-container {
+    height: 40px;
+    margin: 15px 0;
+}
+
+.chart-container {
+    height: 300px;
+    margin-top: 15px;
+}
         /* ========== END NEW STYLES ========== */
     </style>
     
@@ -8523,8 +8531,88 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
                 }
             });
         });
+    
+document.addEventListener('DOMContentLoaded', function() {
+    // Sparkline data for each city (simulated growth trend)
+    const sparklineData = {
+        lagos: [3.0, 3.1, 3.2, 3.2, 3.2, 3.1, 3.2],
+        nairobi: [4.8, 4.9, 5.0, 5.1, 5.1, 5.0, 5.1],
+        johannesburg: [1.8, 1.9, 1.9, 1.9, 2.0, 1.9, 1.9]
+    };
+
+    // Render sparkline charts
+    function renderSparkline(ctxId, data, color) {
+        const ctx = document.getElementById(ctxId).getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['', '', '', '', '', '', ''],
+                datasets: [{
+                    data: data,
+                    borderColor: color,
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: { display: false }
+                }
+            }
+        });
+    }
+
+    // Render main GDP comparison bar chart
+    function renderGDPChart() {
+        const ctx = document.getElementById('gdpChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Lagos', 'Nairobi', 'Johannesburg'],
+                datasets: [{
+                    label: 'GDP (in billions USD)',
+                    data: [136, 110, 405],
+                    backgroundColor: ['#34a853', '#4285f4', '#ea4335'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `GDP: $${context.raw}B`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: value => '$' + value + 'B' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Initialize charts
+    renderSparkline('lagosChart', sparklineData.lagos, '#34a853');
+    renderSparkline('nairobiChart', sparklineData.nairobi, '#4285f4');
+    renderSparkline('johannesburgChart', sparklineData.johannesburg, '#ea4335');
+    renderGDPChart();
+});
 </script>
   
+
 
 
 
