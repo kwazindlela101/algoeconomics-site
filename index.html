@@ -4443,6 +4443,281 @@ h4 {
                 grid-template-columns: 1fr;
             }
         }    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .consultation-section {
+            background: linear-gradient(135deg, #1a3a52 0%, #0d1f2d 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 100px 20px;
+        }
+
+        /* Subtle geometric pattern overlay */
+        .consultation-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(30deg, rgba(255, 255, 255, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.02) 87.5%, rgba(255, 255, 255, 0.02)),
+                linear-gradient(150deg, rgba(255, 255, 255, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.02) 87.5%, rgba(255, 255, 255, 0.02)),
+                linear-gradient(30deg, rgba(255, 255, 255, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.02) 87.5%, rgba(255, 255, 255, 0.02)),
+                linear-gradient(150deg, rgba(255, 255, 255, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.02) 87.5%, rgba(255, 255, 255, 0.02));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .consultation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .trust-indicator {
+            font-size: 14px;
+            color: #b8c5d0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .consultation-headline {
+            font-size: 56px;
+            font-weight: 700;
+            color: #f4b942;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .consultation-subhead {
+            font-size: 20px;
+            color: #e8eef3;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #f4b942;
+            color: #0d1f2d;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 18px 45px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(244, 185, 66, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #ffca5d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 185, 66, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(13, 31, 45, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a3a52 0%, #0d1f2d 100%);
+            margin: 5% auto;
+            padding: 0;
+            border: 1px solid #2a4a62;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 30px 40px 20px;
+            border-bottom: 1px solid #2a4a62;
+        }
+
+        .modal-header h2 {
+            color: #f4b942;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            color: #b8c5d0;
+            font-size: 15px;
+        }
+
+        .close {
+            color: #b8c5d0;
+            float: right;
+            font-size: 32px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #f4b942;
+        }
+
+        .modal-body {
+            padding: 30px 40px 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: #e8eef3;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #2a4a62;
+            border-radius: 6px;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e8eef3;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #f4b942;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #0d1f2d;
+            color: #e8eef3;
+        }
+
+        .required {
+            color: #f4b942;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: #f4b942;
+            color: #0d1f2d;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background: #ffca5d;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .consultation-section {
+                padding: 60px 20px;
+            }
+
+            .consultation-headline {
+                font-size: 36px;
+            }
+
+            .consultation-subhead {
+                font-size: 18px;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding: 25px 25px;
+            }
+
+            .modal-header h2 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .consultation-headline {
+                font-size: 28px;
+            }
+
+            .consultation-subhead {
+                font-size: 16px;
+            }
+
+            .cta-button {
+                font-size: 16px;
+                padding: 16px 35px;
+            }
+        }
  </style>
 </head>
 <body>
@@ -6549,7 +6824,7 @@ toggle() {
                 <h3 style="font-size: 1.3rem; font-weight: 600; color: #1a1f3a; margin-bottom: 12px; font-family: 'IBM Plex Sans', sans-serif;">Institutional Quality Metrics</h3>
                 <p style="color: #4a5568; line-height: 1.7; font-size: 0.95rem;">Quantified assessment of legal enforcement capacity and institutional stability. Move beyond perception-based indices to data-driven governance analysis.</p>
             </div>
-             <!-- Feature 4 -->
+             <!-- Feature 4 --> 
             <div style="background: #f8fafc; padding: 40px; border-radius: 8px; border-left: 4px solid #d4af37; transition: all 0.3s ease; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
                 <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #d4af37 0%, #e8c766 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: white; font-size: 1.5rem;">🎯</div>
                 <h3 style="font-size: 1.3rem; font-weight: 600; color: #1a1f3a; margin-bottom: 12px; font-family: 'IBM Plex Sans', sans-serif;">Sector-Specific Analysis</h3>
@@ -6573,15 +6848,67 @@ toggle() {
         </div>
     </div>
 </section>
-   
-    <section class="brief-cta">
-        <div class="container">
-            <h2>Get Today's Market Brief</h2>
-            <p>Receive our curated daily intelligence report delivered to your inbox every morning.</p>
-            <button class="brief-btn">Send Me Today's Brief</button>
+     <div id="consultationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Schedule Your Consultation</h2>
+                <p>Connect with our team to explore how AlgoEconomics can enhance your African investment strategy.</p>
+            </div>
+            <div class="modal-body">
+                <form id="consultationForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organization">Organization <span class="required">*</span></label>
+                        <input type="text" id="organization" name="organization" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Role / Title <span class="required">*</span></label>
+                        <input type="text" id="role" name="role" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="investment_focus">Investment Focus <span class="required">*</span></label>
+                        <select id="investment_focus" name="investment_focus" required>
+                            <option value="">Select sector...</option>
+                            <option value="mining">Mining & Extractives</option>
+                            <option value="energy">Energy & Renewables</option>
+                            <option value="agriculture">Agriculture & Food Security</option>
+                            <option value="fintech">Fintech & Financial Services</option>
+                            <option value="aviation">Aviation & Transport</option>
+                            <option value="healthcare">Healthcare & Pharmaceuticals</option>
+                            <option value="tourism">Tourism & Hospitality</option>
+                            <option value="multiple">Multiple Sectors</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Additional Information (Optional)</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your specific governance intelligence needs..."></textarea>
+                    </div>
+
+                    <input type="hidden" name="_subject" value="New Consultation Request - AlgoEconomics">
+                    <input type="hidden" name="_next" value="https://www.algoeconomics.com/thank-you">
+
+                    <button type="submit" class="submit-button">
+                        Submit Request
+                    </button>
+                </form>
+            </div>
         </div>
-    </section>
-<section id="speakers" class="section speakers">
+    </div>
+   <section id="speakers" class="section speakers">
         <div class="container">
             <div class="section-header"><h2>Expert Contributors</h2><p>Learn from leading voices in African economics</p></div>
             <div class="speaker-grid">
@@ -8611,8 +8938,42 @@ document.addEventListener('DOMContentLoaded', function() {
     renderSparkline('johannesburgChart', sparklineData.johannesburg, '#ea4335');
     renderGDPChart();
 });
+         // Modal functionality
+        const modal = document.getElementById('consultationModal');
+
+        function openModal() {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Form submission handling (optional - for tracking)
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            // You can add analytics tracking here
+            console.log('Consultation form submitted');
+            // The form will still submit to Formspree
+        });
 </script>
   
+
 
 
 
