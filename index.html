@@ -7190,7 +7190,7 @@ toggle() {
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="investorType">INVESTOR TYPE <span>*</span></label>
-                            <select id="investorType" name="investorType" required>
+                            <select id="investorType" name="investorType" required onchange="console.log('Selected:', this.value)">
                                 <option value="" disabled selected>Select type</option>
                                 <option value="institutional">Institutional Investor</option>
                                 <option value="private-equity">Private Equity</option>
@@ -9038,6 +9038,7 @@ document.getElementById('consultationForm').addEventListener('submit', function(
 });
 </script>
   
+
 
 
 
