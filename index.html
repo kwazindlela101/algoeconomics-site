@@ -8339,8 +8339,193 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
+    // Scroll to demo form function
+        function scrollToDemo() {
+            const demoSection = document.getElementById('platform-demo');
+            demoSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Add a visual highlight effect
+            demoSection.style.backgroundColor = '#1a1f3a';
+            setTimeout(() => {
+                demoSection.style.backgroundColor = '';
+            }, 1000);
+        }
+
+        // Form submission handling with Formspree
+        document.getElementById('demoForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form elements
+            const submitButton = document.getElementById('submitButton');
+            const buttonText = document.getElementById('buttonText');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const form = e.target;
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Get form values for validation
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const role = document.getElementById('role').value.trim();
+            const investorType = document.getElementById('investorType').value;
+            
+            // Check if at least one sector is selected
+            const sectorCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const hasSelectedSectors = sectorCheckboxes.length > 0;
+            
+            // Validate form
+            if (!firstName || !lastName || !email || !company || !role || !investorType || !hasSelectedSectors) {
+                showError('Please fill in all required fields and select at least one sector of interest.');
+                return;
+            }
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address.');
+                return;
+            }
+            
+            // Disable submit button and show loading state
+            submitButton.disabled = true;
+            buttonText.innerHTML = '<div class="loading-spinner"></div> Submitting Request...';
+            
+            try {
+                // Prepare Formspree submission
+                const formData = new FormData(form);
+                
+                // Submit to Formspree
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    form.reset();
+                    
+                    // Reset checkbox states
+                    const otherSectorsCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#sector-all)');
+                    otherSectorsCheckboxes.forEach(checkbox => {
+                        checkbox.disabled = false;
+                    });
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Optional: Send data to analytics or CRM
+                    logToAnalytics({
+                        firstName,
+                        lastName,
+                        email,
+                        company,
+                        role,
+                        investorType,
+                        timestamp: new Date().toISOString(),
+                        source: 'ACI Platform Demo Request'
+                    });
+                    
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `Form submission failed with status ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                showError('Unable to submit form. Please try again or contact us directly.');
+            } finally {
+                // Re-enable submit button
+                submitButton.disabled = false;
+                buttonText.textContent = 'REQUEST DEMO';
+            }
+        });
+
+        // Helper function to show error messages
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Optional: Log to analytics or CRM
+        function logToAnalytics(data) {
+            // This is where you can add tracking to Google Analytics, CRM, etc.
+            console.log('Demo request logged for analytics:', data);
+            
+            // Example: Send to Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'demo_request', {
+                    'event_category': 'engagement',
+                    'event_label': 'ACI Platform Demo',
+                    'value': 1
+                });
+            }
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effect to methodology cards
+            const cards = document.querySelectorAll('.methodology-card, .step-card, .category-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.3s ease';
+                });
+            });
+            
+            // Simple animation on page load
+            const header = document.querySelector('.section-header h1');
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                header.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+            }, 300);
+            
+            // Add click effect to step cards
+            const stepCards = document.querySelectorAll('.step-card');
+            stepCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-8px)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-5px)';
+                    }, 150);
+                });
+            });
+            
+            // Highlight the "All Sectors" checkbox when clicked
+            const allSectorsCheckbox = document.getElementById('sector-all');
+            const otherSectorsCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#sector-all)');
+            
+            allSectorsCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    otherSectorsCheckboxes.forEach(checkbox => {
+                        checkbox.checked = true;
+                        checkbox.disabled = true;
+                    });
+                } else {
+                    otherSectorsCheckboxes.forEach(checkbox => {
+                        checkbox.disabled = false;
+                    });
+                }
+            });
+        });
 </script>
   
+
 
 
 
