@@ -8990,8 +8990,42 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Consultation form submitted');
             // The form will still submit to Formspree
         });
+    // ==================== CONSULTATION MODAL FUNCTIONALITY ====================
+const consultationModal = document.getElementById('consultationModal');
+
+function openConsultationModal() {
+    consultationModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeConsultationModal() {
+    consultationModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside of it
+window.addEventListener('click', function(event) {
+    if (event.target == consultationModal) {
+        closeConsultationModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && consultationModal.style.display === 'block') {
+        closeConsultationModal();
+    }
+});
+
+// Form submission handling (optional - for tracking)
+document.getElementById('consultationForm').addEventListener('submit', function(e) {
+    // You can add analytics tracking here
+    console.log('Consultation form submitted');
+    // The form will still submit to Formspree
+});
 </script>
   
+
 
 
 
