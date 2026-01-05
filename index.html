@@ -7218,7 +7218,7 @@ toggle() {
 
         <!-- See ACI in Action Button -->
         <div class="action-button-container">
-         <button class="action-button" onclick="document.getElementById('how-aci-works').scrollIntoView({behavior: 'smooth', block: 'start'}); event.preventDefault();">
+     <button class="action-button" onclick="scrollToDemo()">
                 See ACI in Action <i class="fas fa-arrow-right"></i>
             </button>
         </div>
@@ -9386,8 +9386,20 @@ document.getElementById('consultationForm').addEventListener('submit', function(
     
     console.log('✅ Guaranteed simulator loaded and ready');
 })();
+    // Smooth scroll to How ACI Works section
+function scrollToDemo() {
+    const target = document.getElementById('how-aci-works');
+    if (target) {
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+}
 </script>
   
+
 
 
 
