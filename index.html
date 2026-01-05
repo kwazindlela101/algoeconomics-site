@@ -9305,9 +9305,63 @@ window.simAnalytics = new SimulationAnalytics();
     window.marketSimulator.start();
     console.log('Simulation manually started');
 }
-</script> 
+    <script>
+// Update simulation status every second
+setInterval(() => {
+    const status = document.getElementById('simStatus');
+    if (status && window.marketSimulator) {
+        status.textContent = window.marketSimulator.isLive ? 'Simulation: LIVE' : 'Simulation: PAUSED';
+        status.style.color = window.marketSimulator.isLive ? '#00ff88' : '#ff9900';
+    }
+}, 1000);
+
+// SIMULATION ANALYTICS & PERFORMANCE
+class SimulationAnalytics {
+    constructor() {
+        this.startTime = Date.now();
+        this.updateCount = 0;
+        this.errorCount = 0; // Fixed: errorCount not error$Count
+        this.userInteractions = 0;
+        this.lastFrameTime = Date.now();
+    }
+
+    logUpdate() {
+        this.updateCount++; // Fixed: updateCount not update$Count
+        if (this.updateCount % 100 === 0) { // Fixed: % 100 === 0
+            console.log(`Simulation Stats: ${this.updateCount} updates, ${this.errorCount} errors, ${Math.round((Date.now() - this.startTime)/1000)}s runtime`);
+            this.logPerformance();
+        }
+    }
+
+    logError(error) {
+        this.errorCount++;
+        console.warn(`Simulation Error #${this.errorCount}:`, error.message || error);
+    }
+
+    logPerformance() {
+        if (window.performance && window.performance.memory) {
+            const fps = Math.round(1000 / (Date.now() - this.lastFrameTime));
+            console.log('Performance:', {
+                usedJSHeapSize: Math.round(window.performance.memory.usedJSHeapSize / 1024 / 1024) + 'MB',
+                totalJSHeapSize: Math.round(window.performance.memory.totalJSHeapSize / 1024 / 1024) + 'MB',
+                fps: fps > 0 ? fps + ' FPS' : 'Calculating...'
+            });
+            this.lastFrameTime = Date.now();
+        }
+    }
+
+    logInteraction(type) {
+        this.userInteractions++;
+        console.log(`User Interaction #${this.userInteractions}: ${type}`);
+    }
+}
+
+// Initialize analytics
+window.simAnalytics = new SimulationAnalytics();
+</script>
 
   
+
 
 
 
