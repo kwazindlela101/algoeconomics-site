@@ -8955,18 +8955,18 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
             // Hide previous messages
             successMessage.style.display = 'none';
             errorMessage.style.display = 'none';
-            
             // Get form values for validation
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const company = document.getElementById('company').value.trim();
-            const role = document.getElementById('role').value.trim();
-            const investorType = document.getElementById('investorType').value;
+const firstName = document.getElementById('firstName').value.trim();
+const lastName = document.getElementById('lastName').value.trim();
+const email = document.getElementById('email').value.trim();
+const company = document.getElementById('company').value.trim();
+const role = document.getElementById('role').value.trim();
+const investorType = document.getElementById('investorType').value;
+
 // Check if at least one sector is selected
 const sectorCheckboxes = form.querySelectorAll('input[type="checkbox"]:checked');
 const hasSelectedSectors = sectorCheckboxes.length > 0;
-            const hasSelectedSectors = sectorCheckboxes.length > 0;
+
 // TEMPORARY DEBUG - ADD THIS
 console.log('Form:', form);
 console.log('Sector checkboxes found:', sectorCheckboxes.length);
@@ -8975,15 +8975,21 @@ console.log('Checkboxes:', sectorCheckboxes);
 // END DEBUG
 
 // Validate form
-
-// Validate form
 if (!firstName || !lastName || !email || !company || !role || !investorType || !hasSelectedSectors) {
     showError('Please fill in all required fields and select at least one sector of interest.');
     return;
 }
-            
-           
-            // Validate email format
+
+// Validate email format
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(email)) {
+    showError('Please enter a valid email address.');
+    return;
+}
+// Disable submit button and show loading state
+submitButton.disabled = true;
+buttonText.innerHTML = '<div class="loading-spinner"></div> Submitting Request...';
+          // Validate email format
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showError('Please enter a valid email address.');
@@ -9194,6 +9200,7 @@ document.getElementById('consultationForm').addEventListener('submit', function(
 });
 </script>
   
+
 
 
 
