@@ -8747,6 +8747,15 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 // Check if at least one sector is selected
 const sectorCheckboxes = form.querySelectorAll('input[type="checkbox"]:checked');
 const hasSelectedSectors = sectorCheckboxes.length > 0;
+            const hasSelectedSectors = sectorCheckboxes.length > 0;
+// TEMPORARY DEBUG - ADD THIS
+console.log('Form:', form);
+console.log('Sector checkboxes found:', sectorCheckboxes.length);
+console.log('Has selected sectors:', hasSelectedSectors);
+console.log('Checkboxes:', sectorCheckboxes);
+// END DEBUG
+
+// Validate form
 
 // Validate form
 if (!firstName || !lastName || !email || !company || !role || !investorType || !hasSelectedSectors) {
@@ -9038,6 +9047,7 @@ document.getElementById('consultationForm').addEventListener('submit', function(
 });
 </script>
   
+
 
 
 
