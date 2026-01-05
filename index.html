@@ -6451,22 +6451,6 @@ p {
     height: 300px;
     margin-top: 15px;
 }
-        #emergencyRestart {
-    background: linear-gradient(135deg, #ff4757, #ff6b81);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin: 10px auto;
-    display: block;
-}
-#emergencyRestart:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
-}
         /* ========== END NEW STYLES ========== */
     </style>
     
@@ -6492,7 +6476,58 @@ p {
 
 <!-- SIMULATION STATUS SCRIPT -->
 <script>
-}
+// Show emergency restart button after 5 seconds
+setTimeout(() => {
+    const restartBtn = document.getElementById('emergencyRestart');
+    if (restartBtn) {
+        restartBtn.style.display = 'block';
+        
+        restartBtn.addEventListener('click', function() {
+            if (window.marketSimulator) {
+                window.marketSimulator.stop();
+                setTimeout(() => {
+                    window.marketSimulator.start();
+                    this.textContent = '✅ Restarted';
+                    this.style.background = '#00b894';
+                    setTimeout(() => {
+                        this.textContent = '🔄 Restart Simulation';
+                        this.style.background = '#ff4757';
+                    }, 2000);
+                }, 500);
+            }
+        });
+    }
+}, 5000);
+
+// Update simulation status every second
+setInterval(() => {
+    const status = document.getElementById('simStatus');
+    if (status && window.marketSimulator) {
+        status.textContent = window.marketSimulator.isLive ? 
+            '✅ Simulation: LIVE' : '⏸️ Simulation: PAUSED';
+        status.style.color = window.marketSimulator.isLive ? '#00ff88' : '#ff9900';
+    }
+}, 1000);
+    // =============================================
+// SIMULATION ANALYTICS & PERFORMANCE
+// =============================================
+class SimulationAnalytics {
+    constructor() {
+        this.startTime = Date.now();
+        this.updatesCount = 0;
+        this.errorsCount = 0;
+        this.userInteractions = 0;
+        this.lastFrameTime = Date.now();
+    }
+    
+    logUpdate() {
+        this.updatesCount++;
+        // Log every 100 updates
+        if (this.updatesCount % 100 === 0) {
+            console.log(`📊 Simulation Stats: ${this.updatesCount} updates, ${this.errorsCount} errors, ${Math.round((Date.now() - this.startTime)/1000)}s runtime`);
+            this.logPerformance();
+        }
+    }
     
     logError(error) {
         this.errorsCount++;
@@ -6554,6 +6589,9 @@ toggle() {
 </body>
 </html>
 
+ 
+    <!-- NEW: BACKEND ENGINEERING SECTION ADDED HERE -->
+    <!-- Anchor for scrolling -->
     <span id="backend-programme"></span>
 
     <section id="backend-engineering" class="section backend-engineering">
@@ -9154,151 +9192,8 @@ document.getElementById('consultationForm').addEventListener('submit', function(
     console.log('Consultation form submitted');
     // The form will still submit to Formspree
 });
-    <script>
-// Update simulation status every second
-setInterval(() => {
-    const status = document.getElementById('simStatus');
-    if (status && window.marketSimulator) {
-        status.textContent = window.marketSimulator.isLive ? 'Simulation: LIVE' : 'Simulation: PAUSED';
-        status.style.color = window.marketSimulator.isLive ? '#00ff88' : '#ff9900';
-    }
-}, 1000);
-
-// SIMULATION ANALYTICS & PERFORMANCE
-class SimulationAnalytics {
-    constructor() {
-        this.startTime = Date.now();
-        this.updateCount = 0;
-        this.errorCount = 0; // Fixed: errorCount not error$Count
-        this.userInteractions = 0;
-        this.lastFrameTime = Date.now();
-    }
-
-    logUpdate() {
-        this.updateCount++; // Fixed: updateCount not update$Count
-        if (this.updateCount % 100 === 0) { // Fixed: % 100 === 0
-            console.log(`Simulation Stats: ${this.updateCount} updates, ${this.errorCount} errors, ${Math.round((Date.now() - this.startTime)/1000)}s runtime`);
-            this.logPerformance();
-        }
-    }
-
-    logError(error) {
-        this.errorCount++;
-        console.warn(`Simulation Error #${this.errorCount}:`, error.message || error);
-    }
-
-    logPerformance() {
-        if (window.performance && window.performance.memory) {
-            const fps = Math.round(1000 / (Date.now() - this.lastFrameTime));
-            console.log('Performance:', {
-                usedJSHeapSize: Math.round(window.performance.memory.usedJSHeapSize / 1024 / 1024) + 'MB',
-                totalJSHeapSize: Math.round(window.performance.memory.totalJSHeapSize / 1024 / 1024) + 'MB',
-                fps: fps > 0 ? fps + ' FPS' : 'Calculating...'
-            });
-            this.lastFrameTime = Date.now();
-        }
-    }
-
-    logInteraction(type) {
-        this.userInteractions++;
-        console.log(`User Interaction #${this.userInteractions}: ${type}`);
-    }
-}
-
-// Initialize analytics
-window.simAnalytics = new SimulationAnalytics();
-   <script>
-// WORKING SIMULATION - SIMPLE VERSION
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Starting clean simulation...');
-    
-    // Simple Market Simulator
-    class SimpleMarketSimulator {
-        constructor() {
-            this.isLive = true;
-            this.markets = [
-                { name: "FTSE 100", value: "7,842.32", change: "+0.8%" },
-                { name: "JSE All Share", value: "73,451.89", change: "-0.3%" },
-                { name: "NGN/USD", value: "1,450.75", change: "+1.2%" },
-                { name: "GHS/USD", value: "11.85", change: "-0.5%" },
-                { name: "KES/USD", value: "157.30", change: "+0.9%" },
-                { name: "ZAR/USD", value: "18.42", change: "-0.2%" }
-            ];
-            this.interval = null;
-        }
-        
-        start() {
-            if (this.isLive) return;
-            this.isLive = true;
-            this.updateTicker();
-            this.interval = setInterval(() => this.updateTicker(), 5000);
-            console.log('Simulation started');
-        }
-        
-        stop() {
-            this.isLive = false;
-            if (this.interval) clearInterval(this.interval);
-            console.log('Simulation stopped');
-        }
-        
-        updateTicker() {
-            const tickerTrack = document.getElementById('smartTickerTrack');
-            const lastUpdateTime = document.getElementById('lastUpdateTime');
-            const liveIndicator = document.getElementById('liveIndicator');
-            
-            if (!tickerTrack) {
-                console.error('smartTickerTrack element not found!');
-                return;
-            }
-            
-            // Update market values slightly
-            this.markets.forEach(market => {
-                const change = Math.random() > 0.5 ? '+' : '-';
-                const amount = (Math.random() * 1.5).toFixed(1);
-                market.change = `${change}${amount}%`;
-            });
-            
-            // Build ticker content (duplicate for seamless scrolling)
-            let html = '';
-            for (let i = 0; i < 2; i++) {
-                this.markets.forEach(market => {
-                    const changeClass = market.change.startsWith('+') ? 'up' : 'down';
-                    html += `
-                        <div class="ticker-item">
-                            <span class="market-name">${market.name}</span>
-                            <span class="market-value">${market.value}</span>
-                            <span class="market-change ${changeClass}">${market.change}</span>
-                        </div>
-                    `;
-                });
-            }
-            
-            tickerTrack.innerHTML = html;
-            
-            // Update status
-            if (lastUpdateTime) {
-                lastUpdateTime.textContent = new Date().toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-            }
-            
-            if (liveIndicator) {
-                liveIndicator.style.background = '#4CAF50';
-            }
-            
-            console.log('Ticker updated:', new Date().toLocaleTimeString());
-        }
-    }
-    
-    // Create and start simulator
-    window.marketSimulator = new SimpleMarketSimulator();
-    window.marketSimulator.start();
-    
-    console.log('Clean simulation system ready');
-});
-</script> 
-      <!-- GUARANTEED WORKING TICKER - ADD THIS BEFORE </body> -->
+</script>
+<!-- GUARANTEED WORKING TICKER - ADD THIS BEFORE </body> -->
 <script>
 (function() {
     console.log('🚀 Loading guaranteed ticker...');
@@ -9487,177 +9382,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 2000);
     
     console.log('✅ Guaranteed simulator loaded and ready');
-})()
-    <!-- PRESENTATION STABILIZER - ADD THIS AFTER YOUR WORKING CODE -->
-<script>
-(function() {
-    console.log('🔒 Loading presentation stabilizer...');
-    
-    // 1. BACKUP THE WORKING SIMULATOR
-    const originalSimulator = window.guaranteedSimulator;
-    
-    // 2. CREATE FAIL-SAFE MONITOR
-    const stabilizer = {
-        checks: 0,
-        lastUpdate: Date.now(),
-        
-        monitor: function() {
-            this.checks++;
-            
-            // Check every 30 seconds
-            if (this.checks % 6 === 0) {
-                console.log('🔍 Stability check #' + this.checks);
-                
-                // Check 1: Is simulator still running?
-                if (window.guaranteedSimulator && !window.guaranteedSimulator.isLive) {
-                    console.warn('⚠️ Simulator stopped! Auto-restarting...');
-                    window.guaranteedSimulator.start();
-                }
-                
-                // Check 2: Is ticker element still there?
-                const tickerTrack = document.getElementById('smartTickerTrack');
-                if (!tickerTrack || tickerTrack.innerHTML.trim() === '') {
-                    console.warn('⚠️ Ticker empty! Rebuilding...');
-                    if (window.guaranteedSimulator) {
-                        window.guaranteedSimulator.updateDisplay();
-                    }
-                }
-                
-                // Check 3: Force animation if paused
-                if (tickerTrack) {
-                    const computedStyle = window.getComputedStyle(tickerTrack);
-                    if (computedStyle.animationPlayState === 'paused') {
-                        console.warn('⚠️ Animation paused! Resuming...');
-                        tickerTrack.style.animationPlayState = 'running';
-                    }
-                }
-                
-                // Update status timestamp
-                const statusTime = document.getElementById('lastUpdateTime');
-                if (statusTime) {
-                    const now = new Date();
-                    statusTime.textContent = `Live: ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-                }
-            }
-        },
-        
-        // 3. EMERGENCY RECOVERY
-        emergencyRecovery: function() {
-            console.log('🚨 EMERGENCY RECOVERY INITIATED');
-            
-            // Step 1: Create new simulator if needed
-            if (!window.guaranteedSimulator) {
-                console.log('🔄 Recreating simulator...');
-                // Recreate from your working code
-                window.guaranteedSimulator = originalSimulator || new GuaranteedSimulator();
-            }
-            
-            // Step 2: Force start
-            if (window.guaranteedSimulator) {
-                window.guaranteedSimulator.stop();
-                setTimeout(() => {
-                    window.guaranteedSimulator.start();
-                    console.log('✅ Emergency recovery complete');
-                }, 100);
-            }
-            
-            // Step 3: Update UI
-            const liveIndicator = document.getElementById('liveIndicator');
-            if (liveIndicator) liveIndicator.style.background = '#4CAF50';
-        }
-    };
-    
-    // 4. START MONITORING
-    setInterval(() => stabilizer.monitor(), 5000); // Check every 5 seconds
-    
-    // 5. PAGE VISIBILITY PROTECTION
-    document.addEventListener('visibilitychange', function() {
-        if (!document.hidden && window.guaranteedSimulator) {
-            console.log('📱 Page visible again, ensuring simulation runs');
-            setTimeout(() => {
-                if (!window.guaranteedSimulator.isLive) {
-                    window.guaranteedSimulator.start();
-                }
-            }, 500);
-        }
-    });
-    
-    // 6. ADD MANUAL OVERRIDE BUTTON (Hidden but accessible)
-    setTimeout(() => {
-        const overrideBtn = document.createElement('button');
-        overrideBtn.id = 'presentationOverride';
-        overrideBtn.innerHTML = '🔄';
-        overrideBtn.title = 'Emergency Restart (Presenter Only)';
-        overrideBtn.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff4757, #ff6b81);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 9999;
-            opacity: 0.3;
-            transition: opacity 0.3s;
-            display: none; /* Hidden by default */
-        `;
-        overrideBtn.addEventListener('mouseenter', () => {
-            overrideBtn.style.opacity = '1';
-        });
-        overrideBtn.addEventListener('mouseleave', () => {
-            overrideBtn.style.opacity = '0.3';
-        });
-        overrideBtn.addEventListener('click', stabilizer.emergencyRecovery);
-        document.body.appendChild(overrideBtn);
-        
-        // Show on Alt+R keypress (presenter shortcut)
-        document.addEventListener('keydown', function(e) {
-            if (e.altKey && e.key === 'r') {
-                overrideBtn.style.display = 'block';
-                setTimeout(() => {
-                    overrideBtn.style.display = 'none';
-                }, 3000);
-                stabilizer.emergencyRecovery();
-            }
-        });
-    }, 3000);
-    
-    // 7. PRE-PRESENTATION CHECKLIST
-    window.presentationChecklist = function() {
-        console.group('🎤 PRE-PRESENTATION CHECKLIST');
-        console.log('1. ✅ Simulator exists:', !!window.guaranteedSimulator);
-        console.log('2. ✅ Simulator is live:', window.guaranteedSimulator ? window.guaranteedSimulator.isLive : 'N/A');
-        console.log('3. ✅ Ticker element found:', !!document.getElementById('smartTickerTrack'));
-        console.log('4. ✅ Status element found:', !!document.getElementById('lastUpdateTime'));
-        console.log('5. ✅ CSS animation running:', document.getElementById('smartTickerTrack') ? 
-            window.getComputedStyle(document.getElementById('smartTickerTrack')).animationPlayState === 'running' : 'N/A');
-        console.groupEnd();
-        
-        // Auto-fix any issues
-        if (window.guaranteedSimulator && !window.guaranteedSimulator.isLive) {
-            window.guaranteedSimulator.start();
-        }
-    };
-    
-    // Run checklist on load
-    setTimeout(window.presentationChecklist, 2000);
-    
-    console.log('✅ Presentation stabilizer loaded');
 })();
 </script>
-</script>
-
-
   
-
-
-
-
-
 
 
 
