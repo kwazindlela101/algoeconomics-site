@@ -9282,9 +9282,201 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Clean simulation system ready');
 });
 </script> 
+      <!-- GUARANTEED WORKING TICKER - ADD THIS BEFORE </body> -->
+<script>
+(function() {
+    console.log('🚀 Loading guaranteed ticker...');
+    
+    // 1. CREATE SIMPLE, RELIABLE SIMULATOR
+    class GuaranteedSimulator {
+        constructor() {
+            console.log('📊 Creating new simulator');
+            this.isLive = false;
+            this.markets = [
+                { name: "FTSE 100", value: 7842.32, change: 0.8, trend: "up" },
+                { name: "JSE All Share", value: 73451.89, change: -0.3, trend: "down" },
+                { name: "NGN/USD", value: 1450.75, change: 1.2, trend: "up" },
+                { name: "GHS/USD", value: 11.85, change: -0.5, trend: "down" },
+                { name: "KES/USD", value: 157.30, change: 0.9, trend: "up" },
+                { name: "ZAR/USD", value: 18.42, change: -0.2, trend: "down" },
+                { name: "BRENT CRUDE", value: 85.42, change: 1.5, trend: "up" },
+                { name: "GOLD", value: 2345.60, change: 0.7, trend: "up" }
+            ];
+            this.interval = null;
+        }
+        
+        start() {
+            console.log('▶️ Starting simulator');
+            if (this.isLive) return;
+            
+            this.isLive = true;
+            
+            // Update immediately
+            this.updateDisplay();
+            
+            // Update every 5 seconds
+            this.interval = setInterval(() => {
+                this.simulateChanges();
+                this.updateDisplay();
+                console.log('🔄 Ticker updated at:', new Date().toLocaleTimeString());
+            }, 5000);
+            
+            // Force ticker animation to run
+            this.forceAnimation();
+            
+            // Update status
+            this.updateStatus();
+        }
+        
+        stop() {
+            console.log('⏸️ Stopping simulator');
+            this.isLive = false;
+            if (this.interval) {
+                clearInterval(this.interval);
+                this.interval = null;
+            }
+            this.updateStatus();
+        }
+        
+        simulateChanges() {
+            // Small, realistic random changes
+            this.markets.forEach(market => {
+                const randomChange = (Math.random() - 0.5) * 1.5; // -0.75 to +0.75
+                market.value = market.value * (1 + randomChange/100);
+                market.change = randomChange;
+                market.trend = randomChange >= 0 ? "up" : "down";
+            });
+        }
+        
+        updateDisplay() {
+            const tickerTrack = document.getElementById('smartTickerTrack');
+            if (!tickerTrack) {
+                console.error('❌ smartTickerTrack element not found!');
+                return;
+            }
+            
+            let html = '';
+            
+            // Create TWO identical sets for seamless scrolling
+            for (let set = 0; set < 2; set++) {
+                this.markets.forEach(market => {
+                    // Format numbers
+                    let formattedValue;
+                    if (market.name.includes('USD') || market.name === 'GOLD') {
+                        formattedValue = market.value.toFixed(2);
+                        if (market.name === 'GOLD') formattedValue = '$' + formattedValue;
+                    } else if (market.value > 1000) {
+                        formattedValue = market.value.toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    } else {
+                        formattedValue = market.value.toFixed(2);
+                    }
+                    
+                    const changeText = market.change >= 0 ? 
+                        `+${market.change.toFixed(1)}%` : 
+                        `${market.change.toFixed(1)}%`;
+                    
+                    html += `
+                        <div class="ticker-item trend-${market.trend}">
+                            <span class="market-name">${market.name}</span>
+                            <span class="market-value ${market.trend === 'up' ? 'ticker-value-up' : 'ticker-value-down'}">
+                                ${formattedValue}
+                            </span>
+                            <span class="market-change ${market.trend}">${changeText}</span>
+                        </div>
+                    `;
+                });
+            }
+            
+            tickerTrack.innerHTML = html;
+            console.log('✅ Display updated');
+        }
+        
+        updateStatus() {
+            const lastUpdateTime = document.getElementById('lastUpdateTime');
+            const liveIndicator = document.getElementById('liveIndicator');
+            
+            if (lastUpdateTime) {
+                lastUpdateTime.textContent = this.isLive ? 
+                    `Live: ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}` : 
+                    'Simulation paused';
+            }
+            
+            if (liveIndicator) {
+                liveIndicator.style.background = this.isLive ? '#4CAF50' : '#ff9900';
+                liveIndicator.style.boxShadow = this.isLive ? '0 0 10px #4CAF50' : 'none';
+            }
+            
+            // Update any status text
+            const statusElements = document.querySelectorAll('[id*="status"], [class*="status"]');
+            statusElements.forEach(el => {
+                if (el.textContent.includes('Simulation')) {
+                    el.textContent = this.isLive ? 'Simulation: LIVE' : 'Simulation: PAUSED';
+                    el.style.color = this.isLive ? '#00ff88' : '#ff9900';
+                }
+            });
+        }
+        
+        forceAnimation() {
+            // Force the CSS animation to restart
+            const tickerTrack = document.getElementById('smartTickerTrack');
+            if (tickerTrack) {
+                tickerTrack.style.animation = 'none';
+                setTimeout(() => {
+                    tickerTrack.style.animation = 'ticker-scroll 40s linear infinite';
+                    tickerTrack.style.animationPlayState = 'running';
+                }, 10);
+            }
+        }
+    }
+    
+    // 2. INITIALIZE AND START
+    window.guaranteedSimulator = new GuaranteedSimulator();
+    
+    // Wait for page to load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM loaded, starting simulation in 1 second...');
+            setTimeout(() => {
+                window.guaranteedSimulator.start();
+            }, 1000);
+        });
+    } else {
+        console.log('📄 DOM already loaded, starting simulation...');
+        setTimeout(() => {
+            window.guaranteedSimulator.start();
+        }, 500);
+    }
+    
+    // 3. EMERGENCY BUTTON (optional)
+    setTimeout(() => {
+        const existingBtn = document.getElementById('emergencyRestart');
+        if (existingBtn) {
+            existingBtn.addEventListener('click', function() {
+                window.guaranteedSimulator.stop();
+                setTimeout(() => {
+                    window.guaranteedSimulator.start();
+                    this.textContent = '✅ Restarted';
+                    this.style.background = '#00b894';
+                    setTimeout(() => {
+                        this.textContent = '🔄 Restart Simulation';
+                        this.style.background = '#ff4757';
+                    }, 2000);
+                }, 500);
+            });
+            existingBtn.style.display = 'block';
+        }
+    }, 2000);
+    
+    console.log('✅ Guaranteed simulator loaded and ready');
+})();
 </script>
 
+
   
+
 
 
 
