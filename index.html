@@ -8745,7 +8745,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
             const role = document.getElementById('role').value.trim();
             const investorType = document.getElementById('investorType').value;
 // Check if at least one sector is selected
-const sectorCheckboxes = document.querySelectorAll('#demoForm input[type="checkbox"]:checked');
+const sectorCheckboxes = form.querySelectorAll('input[type="checkbox"]:checked');
 const hasSelectedSectors = sectorCheckboxes.length > 0;
 
 // Validate form
@@ -9038,6 +9038,7 @@ document.getElementById('consultationForm').addEventListener('submit', function(
 });
 </script>
   
+
 
 
 
