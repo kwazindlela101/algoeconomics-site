@@ -4750,7 +4750,7 @@ h4 {
                 <!-- Tagline -->
                 <p style="font-size: 0.95rem; line-height: 1.6; color: #a0aec0; margin-bottom: 25px;">
                     AI-Powered Economic Intelligence for UK-Africa Markets
-                </p>
+                </p> 
                 
                 <!-- Company Info -->
                 <div style="font-size: 0.85rem; color: #718096; line-height: 1.8; margin-bottom: 20px;">
@@ -4926,6 +4926,9 @@ footer input:focus {
     outline: none !important;
     border-color: #d4af37 !important;
     background: rgba(255, 255, 255, 0.08) !important;
+}
+        html {
+  scroll-behavior: smooth;
 }
 </style>
 </head>
@@ -7215,7 +7218,7 @@ toggle() {
 
         <!-- See ACI in Action Button -->
         <div class="action-button-container">
-          <button class="action-button" onclick="document.getElementById('how-aci-works').scrollIntoView({behavior: 'smooth', block: 'start'})">
+         <button class="action-button" onclick="document.getElementById('how-aci-works').scrollIntoView({behavior: 'smooth', block: 'start'}); event.preventDefault();">
                 See ACI in Action <i class="fas fa-arrow-right"></i>
             </button>
         </div>
@@ -9385,6 +9388,7 @@ document.getElementById('consultationForm').addEventListener('submit', function(
 })();
 </script>
   
+
 
 
 
