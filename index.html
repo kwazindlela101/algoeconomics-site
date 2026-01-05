@@ -9301,9 +9301,14 @@ window.simAnalytics = new SimulationAnalytics();
 //         this.start();
 //     }
 // }
+    if (window.marketSimulator && !window.marketSimulator.isLive) {
+    window.marketSimulator.start();
+    console.log('Simulation manually started');
+}
 </script> 
 
   
+
 
 
 
