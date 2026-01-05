@@ -8744,17 +8744,17 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
             const company = document.getElementById('company').value.trim();
             const role = document.getElementById('role').value.trim();
             const investorType = document.getElementById('investorType').value;
+// Check if at least one sector is selected
+const sectorCheckboxes = document.querySelectorAll('#demoForm input[type="checkbox"]:checked');
+const hasSelectedSectors = sectorCheckboxes.length > 0;
+
+// Validate form
+if (!firstName || !lastName || !email || !company || !role || !investorType || !hasSelectedSectors) {
+    showError('Please fill in all required fields and select at least one sector of interest.');
+    return;
+}
             
-            // Check if at least one sector is selected
-            const sectorCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            const hasSelectedSectors = sectorCheckboxes.length > 0;
-            
-            // Validate form
-            if (!firstName || !lastName || !email || !company || !role || !investorType || !hasSelectedSectors) {
-                showError('Please fill in all required fields and select at least one sector of interest.');
-                return;
-            }
-            
+           
             // Validate email format
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
@@ -9038,6 +9038,7 @@ document.getElementById('consultationForm').addEventListener('submit', function(
 });
 </script>
   
+
 
 
 
