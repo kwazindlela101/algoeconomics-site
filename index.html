@@ -7154,13 +7154,7 @@ toggle() {
                   action="https://algoeconomics.us9.list-manage.com/subscribe/post?u=7f33efbbec31ffdd7dd87bce1&id=fddc7c24c3&f_id=007442e1f0"
                     method="POST"
                 >
-                    <!-- Formspree hidden fields for configuration -->
-                    <input type="hidden" name="_subject" value="New ACI Platform Demo Request - Institutional Investor">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_language" value="en">
-                    <input type="hidden" name="_cc" value="kwazi.ndlela@algo-economics.org">
-                    
-                    <div class="form-row">
+                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">FIRST NAME</label>
                          <input type="text" id="firstName" name="FNAME" placeholder="John" required>
@@ -7183,7 +7177,7 @@ toggle() {
                         </div>
                         <div class="form-group">
                             <label for="role">ROLE / TITLE <span>*</span></label>
-                            <input type="text" id="role" name="role" placeholder="e.g., Investment Director" required>
+                        <input type="text" id="role" name="ROLE" placeholder="e.g., Investment Director" required>
                         </div>
                     </div>
                     
@@ -8774,60 +8768,33 @@ if (!firstName || !lastName || !email || !company || !role || !investorType || !
             // Disable submit button and show loading state
             submitButton.disabled = true;
             buttonText.innerHTML = '<div class="loading-spinner"></div> Submitting Request...';
-            
             try {
-                // Prepare Formspree submission
-                const formData = new FormData(form);
-                
-                // Submit to Formspree
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    // Show success message
-                    successMessage.style.display = 'block';
-                    form.reset();
-                    
-                    // Reset checkbox states
-                    const otherSectorsCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#sector-all)');
-                    otherSectorsCheckboxes.forEach(checkbox => {
-                        checkbox.disabled = false;
-                    });
-                    
-                    // Scroll to success message
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    // Optional: Send data to analytics or CRM
-                    logToAnalytics({
-                        firstName,
-                        lastName,
-                        email,
-                        company,
-                        role,
-                        investorType,
-                        timestamp: new Date().toISOString(),
-                        source: 'ACI Platform Demo Request'
-                    });
-                    
-                } else {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || `Form submission failed with status ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Form submission error:', error);
-                showError('Unable to submit form. Please try again or contact us directly.');
-            } finally {
-                // Re-enable submit button
-                submitButton.disabled = false;
-                buttonText.textContent = 'REQUEST DEMO';
-            }
+        // Prepare form data for Mailchimp
+        const formData = new FormData(form);
+        
+        // Submit to Mailchimp using fetch with no-cors mode
+        await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors' // This prevents CORS errors but means we can't read the response
         });
-
+        
+        // Since we can't read the response in no-cors mode, we assume success
+        // Show success message
+        successMessage.style.display = 'block';
+        
+        // Reset form
+        form.reset();
+        
+        // Reset checkbox states
+        const otherSectorsCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#sector-all)');
+        otherSectorsCheckboxes.forEach(checkbox => {
+            checkbox.disabled = false;
+        });
+        
+        // Scroll to success message
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          
         // Helper function to show error messages
         function showError(message) {
             const errorMessage = document.getElementById('errorMessage');
@@ -9047,6 +9014,7 @@ document.getElementById('consultationForm').addEventListener('submit', function(
 });
 </script>
   
+
 
 
 
