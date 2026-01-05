@@ -9487,11 +9487,173 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 2000);
     
     console.log('✅ Guaranteed simulator loaded and ready');
+})()
+    <!-- PRESENTATION STABILIZER - ADD THIS AFTER YOUR WORKING CODE -->
+<script>
+(function() {
+    console.log('🔒 Loading presentation stabilizer...');
+    
+    // 1. BACKUP THE WORKING SIMULATOR
+    const originalSimulator = window.guaranteedSimulator;
+    
+    // 2. CREATE FAIL-SAFE MONITOR
+    const stabilizer = {
+        checks: 0,
+        lastUpdate: Date.now(),
+        
+        monitor: function() {
+            this.checks++;
+            
+            // Check every 30 seconds
+            if (this.checks % 6 === 0) {
+                console.log('🔍 Stability check #' + this.checks);
+                
+                // Check 1: Is simulator still running?
+                if (window.guaranteedSimulator && !window.guaranteedSimulator.isLive) {
+                    console.warn('⚠️ Simulator stopped! Auto-restarting...');
+                    window.guaranteedSimulator.start();
+                }
+                
+                // Check 2: Is ticker element still there?
+                const tickerTrack = document.getElementById('smartTickerTrack');
+                if (!tickerTrack || tickerTrack.innerHTML.trim() === '') {
+                    console.warn('⚠️ Ticker empty! Rebuilding...');
+                    if (window.guaranteedSimulator) {
+                        window.guaranteedSimulator.updateDisplay();
+                    }
+                }
+                
+                // Check 3: Force animation if paused
+                if (tickerTrack) {
+                    const computedStyle = window.getComputedStyle(tickerTrack);
+                    if (computedStyle.animationPlayState === 'paused') {
+                        console.warn('⚠️ Animation paused! Resuming...');
+                        tickerTrack.style.animationPlayState = 'running';
+                    }
+                }
+                
+                // Update status timestamp
+                const statusTime = document.getElementById('lastUpdateTime');
+                if (statusTime) {
+                    const now = new Date();
+                    statusTime.textContent = `Live: ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+                }
+            }
+        },
+        
+        // 3. EMERGENCY RECOVERY
+        emergencyRecovery: function() {
+            console.log('🚨 EMERGENCY RECOVERY INITIATED');
+            
+            // Step 1: Create new simulator if needed
+            if (!window.guaranteedSimulator) {
+                console.log('🔄 Recreating simulator...');
+                // Recreate from your working code
+                window.guaranteedSimulator = originalSimulator || new GuaranteedSimulator();
+            }
+            
+            // Step 2: Force start
+            if (window.guaranteedSimulator) {
+                window.guaranteedSimulator.stop();
+                setTimeout(() => {
+                    window.guaranteedSimulator.start();
+                    console.log('✅ Emergency recovery complete');
+                }, 100);
+            }
+            
+            // Step 3: Update UI
+            const liveIndicator = document.getElementById('liveIndicator');
+            if (liveIndicator) liveIndicator.style.background = '#4CAF50';
+        }
+    };
+    
+    // 4. START MONITORING
+    setInterval(() => stabilizer.monitor(), 5000); // Check every 5 seconds
+    
+    // 5. PAGE VISIBILITY PROTECTION
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden && window.guaranteedSimulator) {
+            console.log('📱 Page visible again, ensuring simulation runs');
+            setTimeout(() => {
+                if (!window.guaranteedSimulator.isLive) {
+                    window.guaranteedSimulator.start();
+                }
+            }, 500);
+        }
+    });
+    
+    // 6. ADD MANUAL OVERRIDE BUTTON (Hidden but accessible)
+    setTimeout(() => {
+        const overrideBtn = document.createElement('button');
+        overrideBtn.id = 'presentationOverride';
+        overrideBtn.innerHTML = '🔄';
+        overrideBtn.title = 'Emergency Restart (Presenter Only)';
+        overrideBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff4757, #ff6b81);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 9999;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+            display: none; /* Hidden by default */
+        `;
+        overrideBtn.addEventListener('mouseenter', () => {
+            overrideBtn.style.opacity = '1';
+        });
+        overrideBtn.addEventListener('mouseleave', () => {
+            overrideBtn.style.opacity = '0.3';
+        });
+        overrideBtn.addEventListener('click', stabilizer.emergencyRecovery);
+        document.body.appendChild(overrideBtn);
+        
+        // Show on Alt+R keypress (presenter shortcut)
+        document.addEventListener('keydown', function(e) {
+            if (e.altKey && e.key === 'r') {
+                overrideBtn.style.display = 'block';
+                setTimeout(() => {
+                    overrideBtn.style.display = 'none';
+                }, 3000);
+                stabilizer.emergencyRecovery();
+            }
+        });
+    }, 3000);
+    
+    // 7. PRE-PRESENTATION CHECKLIST
+    window.presentationChecklist = function() {
+        console.group('🎤 PRE-PRESENTATION CHECKLIST');
+        console.log('1. ✅ Simulator exists:', !!window.guaranteedSimulator);
+        console.log('2. ✅ Simulator is live:', window.guaranteedSimulator ? window.guaranteedSimulator.isLive : 'N/A');
+        console.log('3. ✅ Ticker element found:', !!document.getElementById('smartTickerTrack'));
+        console.log('4. ✅ Status element found:', !!document.getElementById('lastUpdateTime'));
+        console.log('5. ✅ CSS animation running:', document.getElementById('smartTickerTrack') ? 
+            window.getComputedStyle(document.getElementById('smartTickerTrack')).animationPlayState === 'running' : 'N/A');
+        console.groupEnd();
+        
+        // Auto-fix any issues
+        if (window.guaranteedSimulator && !window.guaranteedSimulator.isLive) {
+            window.guaranteedSimulator.start();
+        }
+    };
+    
+    // Run checklist on load
+    setTimeout(window.presentationChecklist, 2000);
+    
+    console.log('✅ Presentation stabilizer loaded');
 })();
+</script>
 </script>
 
 
   
+
 
 
 
