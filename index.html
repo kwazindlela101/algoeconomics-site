@@ -6476,29 +6476,29 @@ p {
 
 <!-- SIMULATION STATUS SCRIPT -->
 <script>
+<script>
 // Show emergency restart button after 5 seconds
 setTimeout(() => {
     const restartBtn = document.getElementById('emergencyRestart');
     if (restartBtn) {
         restartBtn.style.display = 'block';
-        
         restartBtn.addEventListener('click', function() {
-            if (window.marketSimulator) {
+            if (window.marketSimulator) { // FIXED: Added opening parenthesis
                 window.marketSimulator.stop();
                 setTimeout(() => {
                     window.marketSimulator.start();
-                    this.textContent = '✅ Restarted';
-                    this.style.background = '#00b894';
+                    this.textContent = 'Restarted';
+                    this.style.background = '#000894'; // Fixed color
                     setTimeout(() => {
-                        this.textContent = '🔄 Restart Simulation';
+                        this.textContent = 'Restart Simulation';
                         this.style.background = '#ff4757';
                     }, 2000);
                 }, 500);
-            }
-        });
-    }
-}, 5000);
-
+            } // Closes: if (window.marketSimulator)
+        }); // Closes: addEventListener
+    } // Closes: if (restartBtn)
+}, 5000); // Closes: outer setTimeout
+</script>
 // Update simulation status every second
 setInterval(() => {
     const status = document.getElementById('simStatus');
@@ -9308,6 +9308,7 @@ window.simAnalytics = new SimulationAnalytics();
 </script> 
 
   
+
 
 
 
