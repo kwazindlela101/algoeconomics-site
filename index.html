@@ -9198,8 +9198,113 @@ document.getElementById('consultationForm').addEventListener('submit', function(
     console.log('Consultation form submitted');
     // The form will still submit to Formspree
 });
-</script>
+  <!-- SIMULATION STATUS SCRIPT -->
+<script>
+// Show emergency restart button after 5 seconds
+setTimeout(() => {
+    const restartBtn = document.getElementById('emergencyRestart');
+    if (restartBtn) {
+        restartBtn.style.display = 'block';
+        restartBtn.addEventListener('click', function() {
+            if (window.marketSimulator) {
+                window.marketSimulator.stop();
+                setTimeout(() => {
+                    window.marketSimulator.start();
+                    this.textContent = 'Restarted';
+                    this.style.background = '#000894';
+                    setTimeout(() => {
+                        this.textContent = 'Restart Simulation';
+                        this.style.background = '#ff4757';
+                    }, 2000);
+                }, 500);
+            }
+        });
+    }
+}, 5000);
+
+// Update simulation status every second
+setInterval(() => {
+    const status = document.getElementById('simStatus');
+    if (status && window.marketSimulator) {
+        status.textContent = window.marketSimulator.isLive ? 'Simulation: LIVE' : 'Simulation: PAUSED';
+        status.style.color = window.marketSimulator.isLive ? '#80ff88' : '#ff9900';
+    }
+}, 1000);
+
+// ---
+// SIMULATION ANALYTICS & PERFORMANCE
+// ---
+class SimulationAnalytics {
+    constructor() {
+        this.startTime = Date.now();
+        this.updateCount = 0;
+        this.errorCount = 0;
+        this.userInteractions = 0;
+        this.lastFrameTime = Date.now();
+    }
+
+    logUpdate() {
+        this.updateCount++;
+        // Log every 100 updates
+        if (this.updateCount % 100 === 0) {
+            console.log(`Simulation Stats: ${this.updateCount} updates, ${this.errorCount} errors, ${Math.round((Date.now() - this.startTime)/1000)}s runtime`);
+            this.logPerformance();
+        }
+    }
+
+    logError(error) {
+        this.errorCount++;
+        console.warn(`▲ Simulation Error #${this.errorCount}:`, error.message || error);
+    }
+
+    logPerformance() {
+        if (window.performance && window.performance.memory) {
+            const fps = Math.round(1000 / (Date.now() - this.lastFrameTime));
+            console.log('♦ Performance:', {
+                usedJSHeapSize: Math.round(window.performance.memory.usedJSHeapSize / 1024 / 1024) + 'MB',
+                totalJSHeapSize: Math.round(window.performance.memory.totalJSHeapSize / 1024 / 1024) + 'MB',
+                fps: fps > 0 ? fps + ' FPS' : 'Calculating...'
+            });
+            this.lastFrameTime = Date.now();
+        }
+    }
+
+    logInteraction(type) {
+        this.userInteractions++;
+        console.log(`♦ User interaction #${this.userInteractions}: ${type}`);
+    }
+}
+
+// Initialize analytics
+window.simAnalytics = new SimulationAnalytics();
+
+// In your updateAllMarkets() method, add this line:
+// updateAllMarkets() {
+//     try {
+//         // ... your existing code ...
+//     }
+//     // Add this line at the end:
+//     if (window.simAnalytics) window.simAnalytics.logUpdate();
+// }
+// catch (error) {
+//     console.error('Error updating markets:', error);
+//     if (window.simAnalytics) window.simAnalytics.logError(error);
+//     this.updateStatus(false);
+// }
+
+// In your toggle() method, add:
+// toggle() {
+//     if (window.simAnalytics) window.simAnalytics.logInteraction('toggle_simulation');
+//     if (this.isLive) {
+//         this.stop();
+//     } else {
+//         this.start();
+//     }
+// }
+</script> 
+
   
+
 
 
 
