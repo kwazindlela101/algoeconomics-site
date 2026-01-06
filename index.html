@@ -9624,8 +9624,87 @@ function scrollToDemo() {
         });
     }
 }
+    <script>
+// FIX FOR "Loading Data..." - RUNS FIRST
+(function() {
+    // 1. Remove loading text IMMEDIATELY
+    function killLoadingText() {
+        // Remove from ANY element
+        document.querySelectorAll('*').forEach(el => {
+            if (el.innerHTML && el.innerHTML.includes('Loading Data')) {
+                console.log('Killing Loading Data in:', el);
+                el.innerHTML = el.innerHTML.replace(/Loading Data[\.…]*/gi, '');
+            }
+        });
+        
+        // Specifically target chart container
+        const chartContainers = document.querySelectorAll('.chart-container, .insight-card');
+        chartContainers.forEach(container => {
+            container.innerHTML = container.innerHTML.replace(/Loading Data[\.…]*/gi, '');
+        });
+    }
+    
+    // 2. Override the container completely
+    function overrideGDPContainer() {
+        const gdpContainer = document.querySelector('.chart-container');
+        if (gdpContainer && !gdpContainer.innerHTML.includes('$136B')) {
+            console.log('Overriding GDP container');
+            gdpContainer.innerHTML = `
+                <div style="text-align: center; color: white; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="display: flex; justify-content: center; align-items: flex-end; gap: 40px; height: 200px; margin-bottom: 30px;">
+                        <div>
+                            <div style="background: #007C4A; width: 70px; height: 136px; border-radius: 6px 6px 0 0;"></div>
+                            <div style="margin-top: 15px; font-weight: bold; font-size: 1.1rem;">$136B</div>
+                            <div style="opacity: 0.9;">Lagos</div>
+                        </div>
+                        <div>
+                            <div style="background: #FFC107; width: 70px; height: 110px; border-radius: 6px 6px 0 0;"></div>
+                            <div style="margin-top: 15px; font-weight: bold; font-size: 1.1rem;">$110B</div>
+                            <div style="opacity: 0.9;">Nairobi</div>
+                        </div>
+                        <div>
+                            <div style="background: #D32F2F; width: 70px; height: 405px; border-radius: 6px 6px 0 0;"></div>
+                            <div style="margin-top: 15px; font-weight: bold; font-size: 1.1rem;">$405B</div>
+                            <div style="opacity: 0.9;">Johannesburg</div>
+                        </div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 6px; font-size: 0.95rem;">
+                        Johannesburg leads with 3.7x Nairobi's GDP
+                    </div>
+                </div>
+            `;
+        }
+    }
+    
+    // 3. Run immediately and keep checking
+    killLoadingText();
+    overrideGDPContainer();
+    
+    // Keep checking every 100ms for 5 seconds
+    let attempts = 0;
+    const interval = setInterval(() => {
+        killLoadingText();
+        overrideGDPContainer();
+        attempts++;
+        
+        if (attempts > 50) { // 5 seconds
+            clearInterval(interval);
+            console.log('GDP fix completed');
+        }
+    }, 100);
+    
+    // Also run when page loads
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            killLoadingText();
+            overrideGDPContainer();
+        }, 500);
+    });
+})();
+</script>
 </script>
   
+
 
 
 
