@@ -115,21 +115,21 @@
             min-width: min-content;
         }
         
-        .nav-link { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 500; 
-            transition: var(--transition); 
-            padding: 0.8rem 1rem; 
-            border-radius: 5px; 
-            border: 1px solid transparent; 
-            font-size: 0.85rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
+     .nav-link { 
+    color: white; 
+    text-decoration: none; 
+    font-weight: 600; 
+    transition: var(--transition); 
+    padding: 0.8rem 1.2rem;  /* ← NEW: Increased to 1.2rem horizontal padding */
+    border-radius: 6px; 
+    border: 1px solid transparent; 
+    font-size: 0.9rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.05);
+}
         
         .nav-link:hover, .nav-link.active { background: rgba(212, 175, 55, 0.1); border: 1px solid var(--gold); }
         
@@ -9399,6 +9399,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
