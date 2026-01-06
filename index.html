@@ -6587,7 +6587,120 @@ toggle() {
     }
 }
 </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// SIMPLE FIX - Removes all complexity
+window.onload = function() {
+    console.log("Page loaded - starting chart creation");
     
+    // 1. CREATE LAGOS CHART
+    const lagosCanvas = document.getElementById('lagosChart');
+    if (lagosCanvas) {
+        console.log("Found Lagos canvas");
+        new Chart(lagosCanvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['2021', '2022', '2023'],
+                datasets: [{
+                    data: [120, 130, 136],
+                    borderColor: 'green',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+        console.log("Lagos chart created");
+    }
+    
+    // 2. CREATE NAIROBI CHART
+    const nairobiCanvas = document.getElementById('nairobiChart');
+    if (nairobiCanvas) {
+        console.log("Found Nairobi canvas");
+        new Chart(nairobiCanvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['2021', '2022', '2023'],
+                datasets: [{
+                    data: [100, 105, 110],
+                    borderColor: 'orange',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+        console.log("Nairobi chart created");
+    }
+    
+    // 3. CREATE JOHANNESBURG CHART
+    const johannesburgCanvas = document.getElementById('johannesburgChart');
+    if (johannesburgCanvas) {
+        console.log("Found Johannesburg canvas");
+        new Chart(johannesburgCanvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['2021', '2022', '2023'],
+                datasets: [{
+                    data: [390, 398, 405],
+                    borderColor: 'red',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+        console.log("Johannesburg chart created");
+    }
+    
+    // 4. CREATE GDP COMPARISON CHART
+    const gdpCanvas = document.getElementById('gdpChart');
+    if (gdpCanvas) {
+        console.log("Found GDP canvas");
+        new Chart(gdpCanvas.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Lagos', 'Nairobi', 'Johannesburg'],
+                datasets: [{
+                    label: 'GDP ($B)',
+                    data: [136, 110, 405],
+                    backgroundColor: ['green', 'orange', 'red']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + 'B';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        console.log("GDP chart created");
+    }
+    
+    // 5. REMOVE "LOADING DATA..." TEXT
+    const containers = document.querySelectorAll('.chart-container, .sparkline-container');
+    containers.forEach(container => {
+        if (container.textContent.includes('Loading') || container.textContent.includes('Data')) {
+            container.innerHTML = container.innerHTML.replace(/Loading Data\.\.\./g, '');
+        }
+    });
+    
+    console.log("ALL CHARTS CREATED - Check your browser!");
+};
+</script>
     
 </body>
 </html>
@@ -9399,6 +9512,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
