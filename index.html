@@ -7280,47 +7280,72 @@ window.onload = function() {
             </div>
         </div>
     </section>
- <section id="african-markets" class="section african-markets">
-        <div class="container">
-            <div class="african-header"><span class="african-flag">🌍</span><h2>African Market Intelligence</h2><span class="african-flag">📊</span></div>
-            <div class="cities-grid">
-                <div class="city-card">
-                    <div class="city-icon">🇳🇬</div>
-                    <h3 class="city-name">Lagos</h3>
-                    <p class="city-economy">Nigeria's commercial hub driving West African growth</p>
-                    <div class="sparkline-container"><canvas id="lagosChart"></canvas></div>
-                    <div class="city-stats">
-                        <div class="stat"><span class="stat-value">$136B</span><span class="stat-label">GDP</span></div>
-                        <div class="stat"><span class="stat-value">+3.2%</span><span class="stat-label">Growth</span></div>
-                        <div class="stat"><span class="stat-value">21M</span><span class="stat-label">Population</span></div>
-                    </div>
+<section id="african-markets" class="section african-markets">
+    <div class="container">
+        <div class="african-header">
+            <span class="african-flag">🌍</span>
+            <h2>African Market Intelligence</h2>
+            <span class="african-flag">📊</span>
+        </div>
+        
+        <!-- SIMPLE VERSION - NO CHARTS -->
+        <div class="cities-grid">
+            <div class="city-card">
+                <div class="city-icon">🇳🇬</div>
+                <h3 class="city-name">Lagos</h3>
+                <p class="city-economy">Nigeria's commercial hub driving West African growth</p>
+                <div class="sparkline-container" style="height: 80px; background: linear-gradient(90deg, #007C4A 20%, #007C4A 40%, #007C4A 60%); border-radius: 4px;"></div>
+                <div class="city-stats">
+                    <div class="stat"><span class="stat-value">$136B</span><span class="stat-label">GDP</span></div>
+                    <div class="stat"><span class="stat-value">+3.2%</span><span class="stat-label">Growth</span></div>
+                    <div class="stat"><span class="stat-value">21M</span><span class="stat-label">Population</span></div>
                 </div>
-                <div class="city-card">
-                    <div class="city-icon">🇰🇪</div>
-                    <h3 class="city-name">Nairobi</h3>
-                    <p class="city-economy">East Africa's fintech and innovation capital</p>
-                    <div class="sparkline-container"><canvas id="nairobiChart"></canvas></div>
-                    <div class="city-stats">
-                        <div class="stat"><span class="stat-value">$110B</span><span class="stat-label">GDP</span></div>
-                        <div class="stat"><span class="stat-value">+5.1%</span><span class="stat-label">Growth</span></div>
-                        <div class="stat"><span class="stat-value">4.4M</span><span class="stat-label">Population</span></div>
-                    </div>
+            </div>
+            
+            <div class="city-card">
+                <div class="city-icon">🇰🇪</div>
+                <h3 class="city-name">Nairobi</h3>
+                <p class="city-economy">East Africa's fintech and innovation capital</p>
+                <div class="sparkline-container" style="height: 80px; background: linear-gradient(90deg, #FFC107 30%, #FFC107 50%, #FFC107 70%); border-radius: 4px;"></div>
+                <div class="city-stats">
+                    <div class="stat"><span class="stat-value">$110B</span><span class="stat-label">GDP</span></div>
+                    <div class="stat"><span class="stat-value">+5.1%</span><span class="stat-label">Growth</span></div>
+                    <div class="stat"><span class="stat-value">4.4M</span><span class="stat-label">Population</span></div>
                 </div>
-                <div class="city-card">
-                    <div class="city-icon">🇿🇦</div>
-                    <h3 class="city-name">Johannesburg</h3>
-                    <p class="city-economy">Africa's financial services powerhouse</p>
-                    <div class="sparkline-container"><canvas id="johannesburgChart"></canvas></div>
-                    <div class="city-stats">
-                        <div class="stat"><span class="stat-value">$405B</span><span class="stat-label">GDP</span></div>
-                        <div class="stat"><span class="stat-value">+1.9%</span><span class="stat-label">Growth</span></div>
-                        <div class="stat"><span class="stat-value">5.6M</span><span class="stat-label">Population</span></div>
+            </div>
+            
+            <div class="city-card">
+                <div class="city-icon">🇿🇦</div>
+                <h3 class="city-name">Johannesburg</h3>
+                <p class="city-economy">Africa's financial services powerhouse</p>
+                <div class="sparkline-container" style="height: 80px; background: linear-gradient(90deg, #D32F2F 25%, #D32F2F 45%, #D32F2F 65%); border-radius: 4px;"></div>
+                <div class="city-stats">
+                    <div class="stat"><span class="stat-value">$405B</span><span class="stat-label">GDP</span></div>
+                    <div class="stat"><span class="stat-value">+1.9%</span><span class="stat-label">Growth</span></div>
+                    <div class="stat"><span class="stat-value">5.6M</span><span class="stat-label">Population</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="insight-card">
+            <h4>Regional GDP Comparison</h4>
+            <div class="chart-container" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+                <div style="width: 100%; text-align: center;">
+                    <div style="display: flex; justify-content: space-around; align-items: flex-end; height: 200px;">
+                        <div style="background: #007C4A; width: 60px; height: 136px; border-radius: 4px 4px 0 0;"></div>
+                        <div style="background: #FFC107; width: 60px; height: 110px; border-radius: 4px 4px 0 0;"></div>
+                        <div style="background: #D32F2F; width: 60px; height: 405px; border-radius: 4px 4px 0 0;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+                        <span>Lagos</span>
+                        <span>Nairobi</span>
+                        <span>Johannesburg</span>
                     </div>
                 </div>
             </div>
-            <div class="insight-card"><h4>Regional GDP Comparison</h4><div class="chart-container" id="gdpChartContainer"><canvas id="gdpChart"></canvas></div></div>
         </div>
-    </section>
+    </div>
+</section>
 <div class="container" id="index-section" data-section="how-aci-works">
         <!-- AI Corruption Index Header -->
         <div class="section-header">
@@ -9522,6 +9547,7 @@ window.onload = function() {
 // Safety check - monitors charts and alerts if any disappear
 </script>
   
+
 
 
 
