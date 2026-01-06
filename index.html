@@ -14,32 +14,32 @@
     <meta name="description" content="AI-powered economic intelligence platform providing real-time insights, predictive analytics, and actionable intelligence for UK-Africa markets.">
     <style>
         /* ALL YOUR EXISTING CSS CODE REMAINS EXACTLY THE SAME */
-        :root {
-            --primary: #1a365d;
-            --secondary: #2d3748;
-            --accent: #3182ce;
-            --gold: #d4af37;
-            --silver: #c0c0c0;
-            --light: #f8f9fa;
-            --dark: #1a202c;
-            --success: #38a169;
-            --danger: #e53e3e;
-            --africa-green: #2d5016;
-            --africa-gold: #ffd700;
-            --transition: all 0.3s ease;
-            --sectors-bg: #0b0d12;
-            --sectors-card: #121522;
-            --sectors-text: #e6e8ef;
-            --sectors-muted: #a9afc7;
-            --sectors-accent: #3fb7ff;
-            --sectors-highlight: #7cf2a5;
-            --sectors-border: #1e2336;
-            --font-heading: 'Segoe UI', system-ui, sans-serif;
-            --font-body: 'Segoe UI', system-ui, sans-serif;
-            --header-height: 105px;
-            --ticker-height: 52px;
-            --total-fixed-height: 157px;
-        }
+      :root {
+    --primary: #1a365d;
+    --secondary: #2d3748;
+    --accent: #3182ce;
+    --gold: #d4af37;
+    --silver: #c0c0c0;
+    --light: #f8f9fa;
+    --dark: #1a202c;
+    --success: #38a169;
+    --danger: #e53e3e;
+    --africa-green: #2d5016;
+    --africa-gold: #ffd700;
+    --transition: all 0.3s ease;
+    --sectors-bg: #0b0d12;
+    --sectors-card: #121522;
+    --sectors-text: #e6e8ef;
+    --sectors-muted: #a9afc7;
+    --sectors-accent: #3fb7ff;
+    --sectors-highlight: #7cf2a5;
+    --sectors-border: #1e2336;
+    --font-heading: 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'Segoe UI', system-ui, sans-serif;
+    --header-height: 105px;
+    --ticker-height: 40px;  /* ← CHANGE FROM 52px TO 40px */
+    --total-fixed-height: 145px;  /* ← CHANGE FROM 157px TO 145px */
+} 
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: var(--total-fixed-height); overflow-x: hidden; }
@@ -224,26 +224,23 @@
             color: var(--gold);
             font-size: 1rem;
         }
-
-        /* ENHANCED TICKER */
-        .market-indicators { 
-            background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%); 
-            color: white; 
-            padding: 0; 
-            border-bottom: 2px solid var(--gold); 
-            overflow: hidden; 
-            position: fixed; 
-            top: var(--header-height); 
-            left: 0; 
-            right: 0; 
-            width: 100%; 
-            z-index: 999; 
-            height: var(--ticker-height);
-            display: flex;
-            align-items: center;
-        }
-        
-        .ticker-container { 
+.market-indicators { 
+    background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%); 
+    color: white; 
+    padding: 0; 
+    border-bottom: 2px solid var(--gold); 
+    overflow: hidden; 
+    position: fixed; 
+    top: var(--header-height); 
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    z-index: 999; 
+    height: 40px;  /* ← CHANGE FROM var(--ticker-height) TO 40px */
+    display: flex;
+    align-items: center;
+}
+       .ticker-container { 
             width: 100%; 
             height: 100%;
             position: relative;
@@ -9399,6 +9396,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
