@@ -4930,6 +4930,49 @@ footer input:focus {
         html {
   scroll-behavior: smooth;
 }
+   /* MOBILE RESPONSIVE FOR HTML VERSION */
+@media (max-width: 768px) {
+    .cities-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+    
+    .city-card {
+        width: 100% !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .sparkline-container {
+        height: 50px !important;
+        margin: 15px 0 !important;
+    }
+    
+    .city-stats {
+        display: flex !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .stat {
+        flex: 1 !important;
+        min-width: 100px !important;
+        text-align: center !important;
+    }
+    
+    .chart-container {
+        height: 250px !important;
+    }
+    
+    /* Adjust bar chart for mobile */
+    .chart-container > div:first-child > div {
+        width: 50px !important;
+    }
+    
+    .chart-container > div:first-child > div > div:first-child {
+        width: 40px !important;
+    }
+}     
 </style>
 </head>
 <body>
@@ -7288,58 +7331,224 @@ window.onload = function() {
             <span class="african-flag">📊</span>
         </div>
         
-        <!-- SIMPLE VERSION - NO CHARTS -->
         <div class="cities-grid">
+            <!-- LAGOS CARD -->
             <div class="city-card">
                 <div class="city-icon">🇳🇬</div>
                 <h3 class="city-name">Lagos</h3>
                 <p class="city-economy">Nigeria's commercial hub driving West African growth</p>
-                <div class="sparkline-container" style="height: 80px; background: linear-gradient(90deg, #007C4A 20%, #007C4A 40%, #007C4A 60%); border-radius: 4px;"></div>
+                
+                <!-- SIMPLE SPARKLINE (green) -->
+                <div class="sparkline-container" style="
+                    height: 60px;
+                    margin: 20px 0;
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    <div style="
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: flex-end;
+                        gap: 15%;
+                        padding: 0 10%;
+                    ">
+                        <div style="background: #007C4A; height: 40%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #007C4A; height: 60%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #007C4A; height: 70%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #007C4A; height: 80%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #007C4A; height: 90%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                    </div>
+                </div>
+                
                 <div class="city-stats">
-                    <div class="stat"><span class="stat-value">$136B</span><span class="stat-label">GDP</span></div>
-                    <div class="stat"><span class="stat-value">+3.2%</span><span class="stat-label">Growth</span></div>
-                    <div class="stat"><span class="stat-value">21M</span><span class="stat-label">Population</span></div>
+                    <div class="stat">
+                        <span class="stat-value">$136B</span>
+                        <span class="stat-label">GDP</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" style="color: #28a745; font-weight: bold;">+3.2%</span>
+                        <span class="stat-label">Growth</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">21M</span>
+                        <span class="stat-label">Population</span>
+                    </div>
                 </div>
             </div>
             
+            <!-- NAIROBI CARD -->
             <div class="city-card">
                 <div class="city-icon">🇰🇪</div>
                 <h3 class="city-name">Nairobi</h3>
                 <p class="city-economy">East Africa's fintech and innovation capital</p>
-                <div class="sparkline-container" style="height: 80px; background: linear-gradient(90deg, #FFC107 30%, #FFC107 50%, #FFC107 70%); border-radius: 4px;"></div>
+                
+                <!-- SIMPLE SPARKLINE (orange) -->
+                <div class="sparkline-container" style="
+                    height: 60px;
+                    margin: 20px 0;
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    <div style="
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: flex-end;
+                        gap: 15%;
+                        padding: 0 10%;
+                    ">
+                        <div style="background: #FFC107; height: 45%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #FFC107; height: 55%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #FFC107; height: 65%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #FFC107; height: 75%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #FFC107; height: 85%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                    </div>
+                </div>
+                
                 <div class="city-stats">
-                    <div class="stat"><span class="stat-value">$110B</span><span class="stat-label">GDP</span></div>
-                    <div class="stat"><span class="stat-value">+5.1%</span><span class="stat-label">Growth</span></div>
-                    <div class="stat"><span class="stat-value">4.4M</span><span class="stat-label">Population</span></div>
+                    <div class="stat"> 
+                        <span class="stat-value">$110B</span>
+                        <span class="stat-label">GDP</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" style="color: #28a745; font-weight: bold;">+5.1%</span>
+                        <span class="stat-label">Growth</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">4.4M</span>
+                        <span class="stat-label">Population</span>
+                    </div>
                 </div>
             </div>
             
+            <!-- JOHANNESBURG CARD -->
             <div class="city-card">
                 <div class="city-icon">🇿🇦</div>
                 <h3 class="city-name">Johannesburg</h3>
                 <p class="city-economy">Africa's financial services powerhouse</p>
-                <div class="sparkline-container" style="height: 80px; background: linear-gradient(90deg, #D32F2F 25%, #D32F2F 45%, #D32F2F 65%); border-radius: 4px;"></div>
+                
+                <!-- SIMPLE SPARKLINE (red) -->
+                <div class="sparkline-container" style="
+                    height: 60px;
+                    margin: 20px 0;
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    <div style="
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: flex-end;
+                        gap: 15%;
+                        padding: 0 10%;
+                    ">
+                        <div style="background: #D32F2F; height: 80%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #D32F2F; height: 82%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #D32F2F; height: 85%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #D32F2F; height: 87%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                        <div style="background: #D32F2F; height: 90%; width: 15%; border-radius: 3px 3px 0 0;"></div>
+                    </div>
+                </div>
+                
                 <div class="city-stats">
-                    <div class="stat"><span class="stat-value">$405B</span><span class="stat-label">GDP</span></div>
-                    <div class="stat"><span class="stat-value">+1.9%</span><span class="stat-label">Growth</span></div>
-                    <div class="stat"><span class="stat-value">5.6M</span><span class="stat-label">Population</span></div>
+                    <div class="stat">
+                        <span class="stat-value">$405B</span>
+                        <span class="stat-label">GDP</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" style="color: #28a745; font-weight: bold;">+1.9%</span>
+                        <span class="stat-label">Growth</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">5.6M</span>
+                        <span class="stat-label">Population</span>
+                    </div>
                 </div>
             </div>
         </div>
         
+        <!-- GDP COMPARISON -->
         <div class="insight-card">
             <h4>Regional GDP Comparison</h4>
-            <div class="chart-container" style="height: 300px; display: flex; align-items: center; justify-content: center;">
-                <div style="width: 100%; text-align: center;">
-                    <div style="display: flex; justify-content: space-around; align-items: flex-end; height: 200px;">
-                        <div style="background: #007C4A; width: 60px; height: 136px; border-radius: 4px 4px 0 0;"></div>
-                        <div style="background: #FFC107; width: 60px; height: 110px; border-radius: 4px 4px 0 0;"></div>
-                        <div style="background: #D32F2F; width: 60px; height: 405px; border-radius: 4px 4px 0 0;"></div>
+            <div class="chart-container" style="
+                height: 300px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            ">
+                <!-- BAR CHART VISUALIZATION -->
+                <div style="
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: flex-end;
+                    height: 200px;
+                    margin-bottom: 20px;
+                ">
+                    <!-- Lagos Bar -->
+                    <div style="text-align: center;">
+                        <div style="
+                            background: #007C4A;
+                            width: 60px;
+                            height: 136px;
+                            border-radius: 4px 4px 0 0;
+                            margin: 0 auto;
+                        "></div>
+                        <div style="margin-top: 10px; color: white; font-weight: bold;">$136B</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Lagos</div>
                     </div>
-                    <div style="display: flex; justify-content: space-around; margin-top: 10px;">
-                        <span>Lagos</span>
-                        <span>Nairobi</span>
-                        <span>Johannesburg</span>
+                    
+                    <!-- Nairobi Bar -->
+                    <div style="text-align: center;">
+                        <div style="
+                            background: #FFC107;
+                            width: 60px;
+                            height: 110px;
+                            border-radius: 4px 4px 0 0;
+                            margin: 0 auto;
+                        "></div>
+                        <div style="margin-top: 10px; color: white; font-weight: bold;">$110B</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Nairobi</div>
+                    </div>
+                    
+                    <!-- Johannesburg Bar -->
+                    <div style="text-align: center;">
+                        <div style="
+                            background: #D32F2F;
+                            width: 60px;
+                            height: 405px;
+                            border-radius: 4px 4px 0 0;
+                            margin: 0 auto;
+                        "></div>
+                        <div style="margin-top: 10px; color: white; font-weight: bold;">$405B</div>
+                        <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Johannesburg</div>
+                    </div>
+                </div>
+                 <!-- LEGEND -->
+                <div style="
+                    display: flex;
+                    justify-content: center;
+                    gap: 30px;
+                    margin-top: 20px;
+                ">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 12px; height: 12px; background: #007C4A; border-radius: 2px;"></div>
+                        <span style="color: white; font-size: 0.9rem;">West Africa</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 12px; height: 12px; background: #FFC107; border-radius: 2px;"></div>
+                        <span style="color: white; font-size: 0.9rem;">East Africa</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 12px; height: 12px; background: #D32F2F; border-radius: 2px;"></div>
+                        <span style="color: white; font-size: 0.9rem;">Southern Africa</span>
                     </div>
                 </div>
             </div>
@@ -9547,6 +9756,7 @@ window.onload = function() {
 // Safety check - monitors charts and alerts if any disappear
 </script>
   
+
 
 
 
