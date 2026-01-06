@@ -14,32 +14,32 @@
     <meta name="description" content="AI-powered economic intelligence platform providing real-time insights, predictive analytics, and actionable intelligence for UK-Africa markets.">
     <style>
         /* ALL YOUR EXISTING CSS CODE REMAINS EXACTLY THE SAME */
-      :root {
-    --primary: #1a365d;
-    --secondary: #2d3748;
-    --accent: #3182ce;
-    --gold: #d4af37;
-    --silver: #c0c0c0;
-    --light: #f8f9fa;
-    --dark: #1a202c;
-    --success: #38a169;
-    --danger: #e53e3e;
-    --africa-green: #2d5016;
-    --africa-gold: #ffd700;
-    --transition: all 0.3s ease;
-    --sectors-bg: #0b0d12;
-    --sectors-card: #121522;
-    --sectors-text: #e6e8ef;
-    --sectors-muted: #a9afc7;
-    --sectors-accent: #3fb7ff;
-    --sectors-highlight: #7cf2a5;
-    --sectors-border: #1e2336;
-    --font-heading: 'Segoe UI', system-ui, sans-serif;
-    --font-body: 'Segoe UI', system-ui, sans-serif;
-    --header-height: 105px;
-    --ticker-height: 40px;  /* ← CHANGE FROM 52px TO 40px */
-    --total-fixed-height: 145px;  /* ← CHANGE FROM 157px TO 145px */
-} 
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d3748;
+            --accent: #3182ce;
+            --gold: #d4af37;
+            --silver: #c0c0c0;
+            --light: #f8f9fa;
+            --dark: #1a202c;
+            --success: #38a169;
+            --danger: #e53e3e;
+            --africa-green: #2d5016;
+            --africa-gold: #ffd700;
+            --transition: all 0.3s ease;
+            --sectors-bg: #0b0d12;
+            --sectors-card: #121522;
+            --sectors-text: #e6e8ef;
+            --sectors-muted: #a9afc7;
+            --sectors-accent: #3fb7ff;
+            --sectors-highlight: #7cf2a5;
+            --sectors-border: #1e2336;
+            --font-heading: 'Segoe UI', system-ui, sans-serif;
+            --font-body: 'Segoe UI', system-ui, sans-serif;
+            --header-height: 105px;
+            --ticker-height: 52px;
+            --total-fixed-height: 157px;
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: var(--total-fixed-height); overflow-x: hidden; }
@@ -115,21 +115,21 @@
             min-width: min-content;
         }
         
-     .nav-link { 
-    color: white; 
-    text-decoration: none; 
-    font-weight: 600; 
-    transition: var(--transition); 
-    padding: 0.8rem 1.2rem;  /* ← NEW: Increased to 1.2rem horizontal padding */
-    border-radius: 6px; 
-    border: 1px solid transparent; 
-    font-size: 0.9rem; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-    white-space: nowrap;
-    background: rgba(255, 255, 255, 0.05);
-}
+        .nav-link { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 500; 
+            transition: var(--transition); 
+            padding: 0.8rem 1rem; 
+            border-radius: 5px; 
+            border: 1px solid transparent; 
+            font-size: 0.85rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
         
         .nav-link:hover, .nav-link.active { background: rgba(212, 175, 55, 0.1); border: 1px solid var(--gold); }
         
@@ -224,23 +224,26 @@
             color: var(--gold);
             font-size: 1rem;
         }
-.market-indicators { 
-    background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%); 
-    color: white; 
-    padding: 0; 
-    border-bottom: 2px solid var(--gold); 
-    overflow: hidden; 
-    position: fixed; 
-    top: var(--header-height); 
-    left: 0; 
-    right: 0; 
-    width: 100%; 
-    z-index: 999; 
-    height: 40px;  /* ← CHANGE FROM var(--ticker-height) TO 40px */
-    display: flex;
-    align-items: center;
-}
-       .ticker-container { 
+
+        /* ENHANCED TICKER */
+        .market-indicators { 
+            background: linear-gradient(135deg, #0f1f38 0%, var(--primary) 100%); 
+            color: white; 
+            padding: 0; 
+            border-bottom: 2px solid var(--gold); 
+            overflow: hidden; 
+            position: fixed; 
+            top: var(--header-height); 
+            left: 0; 
+            right: 0; 
+            width: 100%; 
+            z-index: 999; 
+            height: var(--ticker-height);
+            display: flex;
+            align-items: center;
+        }
+        
+        .ticker-container { 
             width: 100%; 
             height: 100%;
             position: relative;
@@ -4927,9 +4930,6 @@ footer input:focus {
         html {
   scroll-behavior: smooth;
 }
-        .sparkline-container, .chart-container {
-    height: 60px;
-   
 </style>
 </head>
 <body>
@@ -9397,206 +9397,13 @@ function scrollToDemo() {
         });
     }
 }
-   <script>
-        // Wait for the page to fully load
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("Loading African Market Intelligence Charts...");
-            
-            // Check if canvas elements exist
-            if (!document.getElementById('lagosChart')) {
-                console.error("Canvas element 'lagosChart' not found!");
-                return;
-            }
+</script>
+  
 
-            // Remove any "Loading Data..." messages
-            const loadingElements = document.querySelectorAll('[id*="gdpChart"], .chart-container');
-            loadingElements.forEach(el => {
-                if (el.textContent.includes('Loading')) {
-                    el.textContent = '';
-                }
-            });
 
-            // Sparkline for Lagos (2021-2025)
-            try {
-                const lagosCtx = document.getElementById('lagosChart').getContext('2d');
-                new Chart(lagosCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['2021', '2022', '2023', '2024', '2025'],
-                        datasets: [{
-                            data: [125, 130, 136, 142, 148],
-                            borderColor: '#007C4A',
-                            backgroundColor: 'rgba(0, 124, 74, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#007C4A',
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { 
-                            legend: { display: false }
-                        },
-                        scales: {
-                            x: { display: false },
-                            y: { display: false }
-                        }
-                    }
-                });
-                console.log("Lagos chart loaded successfully");
-            } catch (e) {
-                console.error("Error loading Lagos chart:", e);
-            }
 
-            // Sparkline for Nairobi (2021-2025)
-            try {
-                const nairobiCtx = document.getElementById('nairobiChart').getContext('2d');
-                new Chart(nairobiCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['2021', '2022', '2023', '2024', '2025'],
-                        datasets: [{
-                            data: [102, 107, 110, 116, 122],
-                            borderColor: '#FFC107',
-                            backgroundColor: 'rgba(255, 193, 7, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#FFC107',
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { 
-                            legend: { display: false }
-                        },
-                        scales: {
-                            x: { display: false },
-                            y: { display: false }
-                        }
-                    }
-                });
-                console.log("Nairobi chart loaded successfully");
-            } catch (e) {
-                console.error("Error loading Nairobi chart:", e);
-            }
 
-            // Sparkline for Johannesburg (2021-2025)
-            try {
-                const johannesburgCtx = document.getElementById('johannesburgChart').getContext('2d');
-                new Chart(johannesburgCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['2021', '2022', '2023', '2024', '2025'],
-                        datasets: [{
-                            data: [395, 400, 405, 410, 418],
-                            borderColor: '#D32F2F',
-                            backgroundColor: 'rgba(211, 47, 47, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#D32F2F',
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { 
-                            legend: { display: false }
-                        },
-                        scales: {
-                            x: { display: false },
-                            y: { display: false }
-                        }
-                    }
-                });
-                console.log("Johannesburg chart loaded successfully");
-            } catch (e) {
-                console.error("Error loading Johannesburg chart:", e);
-            }
 
-            // Regional GDP Comparison Bar Chart
-            try {
-                const gdpCtx = document.getElementById('gdpChart').getContext('2d');
-                new Chart(gdpCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Lagos', 'Nairobi', 'Johannesburg'],
-                        datasets: [{
-                            label: '2023 GDP ($B)',
-                            data: [136, 110, 405],
-                            backgroundColor: [
-                                'rgba(0, 124, 74, 0.8)',
-                                'rgba(255, 193, 7, 0.8)',
-                                'rgba(211, 47, 47, 0.8)'
-                            ],
-                            borderColor: [
-                                'rgb(0, 124, 74)',
-                                'rgb(255, 193, 7)',
-                                'rgb(211, 47, 47)'
-                            ],
-                            borderWidth: 2,
-                            borderRadius: 8
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { 
-                                display: true,
-                                position: 'top',
-                                labels: { 
-                                    color: 'white',
-                                    font: { size: 14 },
-                                    padding: 20
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                titleColor: 'white',
-                                bodyColor: 'white'
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: { 
-                                    color: 'white',
-                                    callback: function(value) {
-                                        return '$' + value + 'B';
-                                    }
-                                },
-                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
-                            },
-                            x: {
-                                ticks: { color: 'white', font: { size: 14 } },
-                                grid: { display: false }
-                            }
-                        }
-                    }
-                });
-                console.log("GDP Comparison chart loaded successfully");
-            } catch (e) {
-                console.error("Error loading GDP Comparison chart:", e);
-                document.getElementById('gdpChartContainer').innerHTML = 
-                    '<div style="color: white; text-align: center; padding: 50px;">' +
-                    '<h3>GDP Comparison Data</h3>' +
-                    '<p>Lagos: $136B | Nairobi: $110B | Johannesburg: $405B</p>' +
-                    '</div>';
-            }
-
-            console.log("All charts loaded successfully!");
-        });
-    </script>
-</body>
-</html>
 
 
 
