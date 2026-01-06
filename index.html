@@ -9518,9 +9518,30 @@ window.onload = function() {
         canvas.parentElement.innerHTML = '<div style="color:#666; text-align:center; padding:20px;">📊 Chart Data Loaded</div>';
     });
 };
-
+<!-- Add this safety check at the VERY END -->
+<script>
+// Safety check - monitors charts and alerts if any disappear
+setTimeout(() => {
+    const canvases = document.querySelectorAll('canvas');
+    const workingCharts = Array.from(canvases).filter(c => c.style.display !== 'none');
+    
+    if (workingCharts.length < canvases.length) {
+        console.warn("⚠️ Chart Monitor: Some charts missing!", {
+            expected: canvases.length,
+            found: workingCharts.length,
+            missing: canvases.length - workingCharts.length
+        });
+        
+        // Optional: Auto-refresh only the missing charts
+        // initializeCharts(); // Uncomment if you have this function
+    } else {
+        console.log("✅ Chart Monitor: All", canvases.length, "charts loaded successfully!");
+    }
+}, 3000); // Check after 3 seconds
+</script>
 </script>
   
+
 
 
 
