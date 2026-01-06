@@ -7396,45 +7396,42 @@ window.onload = function() {
         </div>
         
         <!-- REGIONAL GDP COMPARISON -->
-        <div class="insight-card">
-            <h4>Regional GDP Comparison</h4>
-            <div class="chart-container" style="height: 350px; padding: 20px;">
-                <div style="text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;">
-                    <!-- Bars -->
-                    <div style="display: flex; justify-content: center; align-items: flex-end; height: 200px; gap: 40px; margin-bottom: 30px;">
-                        <div style="text-align: center;">
-                            <div style="background: linear-gradient(to top, #007C4A, #00a86b); width: 70px; height: 136px; border-radius: 6px 6px 0 0; margin: 0 auto;"></div>
-                            <div style="color: white; font-weight: bold; margin-top: 10px; font-size: 1.1rem;">$136B</div>
-                            <div style="color: rgba(255,255,255,0.9);">Lagos</div>
-                        </div>
-                        
-                        <div style="text-align: center;">
-                            <div style="background: linear-gradient(to top, #FFC107, #ffd54f); width: 70px; height: 110px; border-radius: 6px 6px 0 0; margin: 0 auto;"></div>
-                            <div style="color: white; font-weight: bold; margin-top: 10px; font-size: 1.1rem;">$110B</div>
-                            <div style="color: rgba(255,255,255,0.9);">Nairobi</div>
-                        </div>
-                        
-                        <div style="text-align: center;">
-                            <div style="background: linear-gradient(to top, #D32F2F, #f44336); width: 70px; height: 405px; border-radius: 6px 6px 0 0; margin: 0 auto;"></div>
-                            <div style="color: white; font-weight: bold; margin-top: 10px; font-size: 1.1rem;">$405B</div>
-                            <div style="color: rgba(255,255,255,0.9);">Johannesburg</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Insight -->
-                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-top: 20px;">
-                        <div style="color: white; font-weight: bold; margin-bottom: 5px;">Key Economic Insight</div>
-                        <div style="color: rgba(255,255,255,0.9);">
-                            Johannesburg leads with <span style="color: #ff6b6b; font-weight: bold;">$405B GDP</span>, 
-                            while Nairobi shows strongest growth at 
-                            <span style="color: #4cd964; font-weight: bold;">+5.1% annually</span>
-                        </div>
-                    </div>
+     <div class="insight-card">
+    <h4>Regional GDP Comparison</h4>
+    <div class="chart-container" style="height: 300px; padding: 20px;">
+        <!-- This clean HTML will replace everything -->
+        <div style="color: white; text-align: center;">
+            
+            <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0;">
+                <!-- Lagos -->
+                <div>
+                    <div style="background: #007C4A; width: 60px; height: 136px; margin: 0 auto;"></div>
+                    <div style="margin-top: 10px;">$136B</div>
+                    <div>Lagos</div>
+                </div>
+                
+                <!-- Nairobi -->
+                <div>
+                    <div style="background: #FFC107; width: 60px; height: 110px; margin: 0 auto;"></div>
+                    <div style="margin-top: 10px;">$110B</div>
+                    <div>Nairobi</div>
+                </div>
+                
+                <!-- Johannesburg -->
+                <div>
+                    <div style="background: #D32F2F; width: 60px; height: 405px; margin: 0 auto;"></div>
+                    <div style="margin-top: 10px;">$405B</div>
+                    <div>Johannesburg</div>
                 </div>
             </div>
+            
+            <div style="font-size: 0.9rem; opacity: 0.8;">
+                Johannesburg GDP is 3.7x larger than Nairobi
+            </div>
+            
         </div>
     </div>
-</section>
+</div>   
 <div class="container" id="index-section" data-section="how-aci-works">
         <!-- AI Corruption Index Header -->
         <div class="section-header">
@@ -9624,8 +9621,64 @@ function scrollToDemo() {
         });
     }
 }
+    <script>
+// SAFE VERSION - Only touches GDP section, doesn't interfere with simulation
+(function() {
+    // Wait for simulation to initialize
+    setTimeout(function() {
+        console.log('GDP Fix: Starting safe cleanup...');
+        
+        // ONLY target the GDP comparison section
+        const gdpSection = document.querySelector('.insight-card, [class*="gdp"], [class*="GDP"]');
+        
+        if (gdpSection) {
+            console.log('GDP Fix: Found GDP section');
+            
+            // Remove ONLY "Loading Data..." from this section
+            gdpSection.innerHTML = gdpSection.innerHTML.replace(/Loading Data[\.…]*/gi, '');
+            
+            // If still showing loading, replace with clean HTML
+            if (gdpSection.textContent.includes('Loading')) {
+                console.log('GDP Fix: Replacing with clean HTML');
+                
+                // Clean HTML-only GDP comparison
+                gdpSection.innerHTML = `
+                    <h4>Regional GDP Comparison</h4>
+                    <div class="chart-container" style="height: 300px; padding: 20px; color: white;">
+                        <div style="text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                            <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0;">
+                                <div>
+                                    <div style="background: #007C4A; width: 60px; height: 136px; margin: 0 auto;"></div>
+                                    <div style="margin-top: 10px;"><strong>$136B</strong></div>
+                                    <div>Lagos</div>
+                                </div>
+                                <div>
+                                    <div style="background: #FFC107; width: 60px; height: 110px; margin: 0 auto;"></div>
+                                    <div style="margin-top: 10px;"><strong>$110B</strong></div>
+                                    <div>Nairobi</div>
+                                </div>
+                                <div>
+                                    <div style="background: #D32F2F; width: 60px; height: 405px; margin: 0 auto;"></div>
+                                    <div style="margin-top: 10px;"><strong>$405B</strong></div>
+                                    <div>Johannesburg</div>
+                                </div>
+                            </div>
+                            <div style="opacity: 0.8; font-size: 0.9rem;">
+                                Johannesburg leads with 3.7x Nairobi's GDP
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        console.log('GDP Fix: Cleanup complete');
+    }, 2000); // Wait 2 seconds to ensure simulation is loaded
+})();
+</script>
    </script>
   
+
 
 
 
