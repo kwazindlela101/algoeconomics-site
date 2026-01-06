@@ -4927,6 +4927,9 @@ footer input:focus {
         html {
   scroll-behavior: smooth;
 }
+        .sparkline-container, .chart-container {
+    height: 60px;
+   
 </style>
 </head>
 <body>
@@ -9394,8 +9397,160 @@ function scrollToDemo() {
         });
     }
 }
-</script>
+   <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Sparkline for Lagos (2021-2025)
+    const lagosCtx = document.getElementById('lagosChart').getContext('2d');
+    new Chart(lagosCtx, {
+        type: 'line',
+        data: {
+            labels: ['2021', '2022', '2023', '2024', '2025'],
+            datasets: [{
+                data: [125, 130, 136, 142, 148],
+                borderColor: '#007C4A',
+                backgroundColor: 'rgba(0, 124, 74, 0.1)',
+                borderWidth: 3,
+                tension: 0.4,
+                pointRadius: 4,
+                pointBackgroundColor: '#007C4A',
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { 
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => `GDP: $${ctx.raw}B` } }
+            },
+            scales: {
+                x: { display: false },
+                y: { display: false }
+            }
+        }
+    });
+
+    // Sparkline for Nairobi (2021-2025)
+    const nairobiCtx = document.getElementById('nairobiChart').getContext('2d');
+    new Chart(nairobiCtx, {
+        type: 'line',
+        data: {
+            labels: ['2021', '2022', '2023', '2024', '2025'],
+            datasets: [{
+                data: [102, 107, 110, 116, 122],
+                borderColor: '#FFC107',
+                backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                borderWidth: 3,
+                tension: 0.4,
+                pointRadius: 4,
+                pointBackgroundColor: '#FFC107',
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { 
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => `GDP: $${ctx.raw}B` } }
+            },
+            scales: {
+                x: { display: false },
+                y: { display: false }
+            }
+        }
+    });
+
+    // Sparkline for Johannesburg (2021-2025)
+    const johannesburgCtx = document.getElementById('johannesburgChart').getContext('2d');
+    new Chart(johannesburgCtx, {
+        type: 'line',
+        data: {
+            labels: ['2021', '2022', '2023', '2024', '2025'],
+            datasets: [{
+                data: [395, 400, 405, 410, 418],
+                borderColor: '#D32F2F',
+                backgroundColor: 'rgba(211, 47, 47, 0.1)',
+                borderWidth: 3,
+                tension: 0.4,
+                pointRadius: 4,
+                pointBackgroundColor: '#D32F2F',
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { 
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => `GDP: $${ctx.raw}B` } }
+            },
+            scales: {
+                x: { display: false },
+                y: { display: false }
+            }
+        }
+    });
+
+    // Regional GDP Comparison Bar Chart (2025 Projections)
+    const gdpCtx = document.getElementById('gdpChart').getContext('2d');
+    new Chart(gdpCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Lagos (NG)', 'Nairobi (KE)', 'Johannesburg (ZA)'],
+            datasets: [{
+                label: '2025 Projected GDP ($B)',
+                data: [148, 122, 418],
+                backgroundColor: ['#007C4A', '#FFC107', '#D32F2F'],
+                borderColor: ['#005C35', '#E0A800', '#B71C1C'],
+                borderWidth: 2,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { 
+                    display: true,
+                    position: 'top',
+                    labels: { padding: 20, usePointStyle: true }
+                },
+                tooltip: { 
+                    callbacks: { 
+                        label: ctx => `2025 Projection: $${ctx.raw}B`,
+                        afterLabel: ctx => {
+                            const trends = {
+                                'Lagos (NG)': '+4.2% annual growth',
+                                'Nairobi (KE)': '+5.3% annual growth', 
+                                'Johannesburg (ZA)': '+2.1% annual growth'
+                            };
+                            return trends[ctx.label];
+                        }
+                    } 
+                }
+            },
+            scales: {
+                y: { 
+                    beginAtZero: true, 
+                    title: { 
+                        display: true, 
+                        text: 'GDP ($B)',
+                        font: { size: 14, weight: 'bold' }
+                    },
+                    grid: { color: 'rgba(0,0,0,0.05)' }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            }
+        }
+    });
+});
+</script> 
+
   
+
 
 
 
