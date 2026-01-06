@@ -6487,10 +6487,10 @@ setTimeout(() => {
         
         restartBtn.addEventListener('click', function() {
             if (window.marketSimulator) {
-                window.marketSimulator.stop();
+              // window.marketSimulator.stop(); // Disabled - causing ticker to pause
                 setTimeout(() => {
                     window.marketSimulator.start();
-                    this.textContent = '✅ Restarted';
+                  
                     this.style.background = '#00b894';
                     setTimeout(() => {
                         this.textContent = '🔄 Restart Simulation';
@@ -8529,7 +8529,7 @@ document.addEventListener('DOMContentLoaded', function() {
             corruption: "55/100",
             business: "38/190"
         },
-        ethiopia: {
+        ethiopia: {                       
             name: "Ethiopia",
             gdp: "6.8%",
             inflation: "28.9%",
@@ -9193,7 +9193,7 @@ document.addEventListener('keydown', function(event) {
         
         start() {
             console.log('▶️ Starting simulator');
-            if (this.isLive) return;
+           if (this.isLive) return;          
             
             this.isLive = true;
             
@@ -9216,7 +9216,7 @@ document.addEventListener('keydown', function(event) {
         
         stop() {
             console.log('⏸️ Stopping simulator');
-            this.isLive = false;
+            this.isLive = false;                       
             if (this.interval) {
                 clearInterval(this.interval);
                 this.interval = null;
@@ -9327,7 +9327,7 @@ document.addEventListener('keydown', function(event) {
             console.log('📄 DOM loaded, starting simulation in 1 second...');
             setTimeout(() => {
                 window.guaranteedSimulator.start();
-            }, 1000);
+            }, }, 2000);
         });
     } else {
         console.log('📄 DOM already loaded, starting simulation...');
@@ -9371,6 +9371,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
