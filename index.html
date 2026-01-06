@@ -9822,7 +9822,108 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+     <!-- Simple Chart.js Implementation -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Wait for page to load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing charts...');
+            
+            // Remove loading messages
+            document.querySelectorAll('.loading').forEach(el => el.style.display = 'none');
+            
+            // Create GDP Bar Chart
+            const gdpCtx = document.getElementById('gdpChart');
+            if (gdpCtx) {
+                try {
+                    new Chart(gdpCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Lagos', 'Nairobi', 'Johannesburg'],
+                            datasets: [{
+                                label: 'GDP (Billions USD)',
+                                data: [136, 110, 405],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.8)',
+                                    'rgba(54, 162, 235, 0.8)',
+                                    'rgba(255, 206, 86, 0.8)'
+                                ],
+                                borderColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(255, 206, 86)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top'
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'GDP ($ Billions)'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    console.log('GDP chart created successfully');
+                } catch (error) {
+                    console.error('Error creating GDP chart:', error);
+                    // Show CSS fallback if JavaScript chart fails
+                    document.getElementById('gdpFallback').style.display = 'block';
+                    document.getElementById('gdpChart').style.display = 'none';
+                }
+            }
+            
+            // Create sparkline charts for each city (simple line charts)
+            createSparkline('lagosChart', [130, 132, 134, 136], '#ff6b6b');
+            createSparkline('nairobiChart', [105, 107, 109, 110], '#4ecdc4');
+            createSparkline('johannesburgChart', [400, 402, 404, 405], '#45b7d1');
+            
+            function createSparkline(canvasId, data, color) {
+                const ctx = document.getElementById(canvasId);
+                if (ctx) {
+                    try {
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                                datasets: [{
+                                    data: data,
+                                    borderColor: color,
+                                    borderWidth: 3,
+                                    fill: false,
+                                    tension: 0.4,
+                                    pointRadius: 0
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: { legend: { display: false } },
+                                scales: { 
+                                    x: { display: false }, 
+                                    y: { display: false }
+                                }
+                            }
+                        });
+                    } catch (error) {
+                        console.error('Error creating sparkline:', error);
+                    }
+                }
+            }
+        });
 </script>
+
 
 
 
