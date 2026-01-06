@@ -7081,7 +7081,7 @@ toggle() {
      <div id="consultationModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-               <span class="close" onclick="document.getElementById('consultationModal').style.display='none'; document.body.style.overflow='auto';">&times;</span>
+             <span class="close" onclick="document.getElementById('consultationModal').style.display='none'; document.body.style.overflow='auto'; document.getElementById('consultationForm').reset();">&times;</span>
                 <h2>Schedule Your Consultation</h2>
                 <p>Connect with our team to explore how AlgoEconomics can enhance your African investment strategy.</p>
             </div>
@@ -9166,14 +9166,10 @@ document.addEventListener('keydown', function(event) {
 });
 
 // Form submission handling (optional - for tracking)
-document.getElementById('consultationForm').addEventListener('submit', function(e) {
-    // You can add analytics tracking here
-    console.log('Consultation form submitted');
-    // The form will still submit to Formspree
-});
+
 </script>
 <!-- GUARANTEED WORKING TICKER - ADD THIS BEFORE </body> -->
-<script>
+// The form will still submit to Mailchimp
 (function() {
     console.log('🚀 Loading guaranteed ticker...');
     
@@ -9375,6 +9371,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
