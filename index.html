@@ -42,27 +42,36 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: var(--total-fixed-height); overflow-x: hidden; }
-       body { font-family: var(--font-body); line-height: 1.6; color: var(--dark); background-color: var(--light); overflow-x: hidden; padding-top: 80px; }
-        body {
-            /* FORCE FIX - Hero Section Spacing Override */
-body {
-    padding-top: 80px !important;
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { 
+    scroll-behavior: smooth; 
+    scroll-padding-top: var(--total-fixed-height); 
+    overflow-x: hidden; 
 }
 
-#home {
-    margin-top: 0 !important;
-    padding-top: 30px !important;
-}
-    font-family: var(--font-body); line-height: 1.6; color: var(--dark); background-color: var(--light); overflow-x: hidden; padding-top: 80px; }
-
-/* FORCE HERO SPACING FIX - ADD THIS */
-body {
+body { 
+    font-family: var(--font-body); 
+    line-height: 1.6; 
+    color: var(--dark); 
+    background-color: var(--light); 
+    overflow-x: hidden; 
     padding-top: 80px !important;
     margin-top: 0 !important;
 }
 
 #home {
+    padding-top: 20px !important;
+    margin-top: 0 !important;
+}
+
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 1rem; 
+    width: 100%; 
+    overflow-x: hidden; 
+}
     padding-top: 20px !important;
     margin-top: 0 !important;
 }
@@ -9421,6 +9430,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
