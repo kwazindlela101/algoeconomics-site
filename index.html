@@ -9383,8 +9383,64 @@ setTimeout(() => {
         console.log('✅ Ticker force-started');
     }
 }, 3000);
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('gdpChart').getContext('2d');
+    
+    // Sample data for GDP comparison
+    const gdpData = {
+        labels: ['Lagos', 'Nairobi', 'Johannesburg'],
+        datasets: [{
+            label: 'GDP (in $B)',
+            data: [136, 110, 405],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(255, 99, 132, 0.5)'
+            ],
+            borderColor: [
+                'rgb(54, 162, 235)',
+                'rgb(75, 192, 192)',
+                'rgb(255, 99, 132)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const gdpChart = new Chart(ctx, {
+        type: 'bar', // or 'pie', 'doughnut', etc.
+        data: gdpData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `GDP: $${context.raw}B`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'GDP ($B)'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
 </script>
   
+
 
 
 
