@@ -8859,7 +8859,7 @@ function createGDPChart() {
     const container = document.getElementById('gdpChartContainer');
     if (ctx) {
         setTimeout(() => {
-            new Chart(ctx, {
+            new Chart(ctx, { 
                 type: 'bar',
                 data: {
                     labels: ['Nigeria', 'Kenya', 'South Africa', 'Ghana', 'Egypt'],
@@ -9177,7 +9177,7 @@ document.addEventListener('keydown', function(event) {
     class GuaranteedSimulator {
         constructor() {
             console.log('📊 Creating new simulator');
-            this.isLive = false;
+           this.isLive = true;
             this.markets = [
                 { name: "FTSE 100", value: 7842.32, change: 0.8, trend: "up" },
                 { name: "JSE All Share", value: 73451.89, change: -0.3, trend: "down" },
@@ -9371,6 +9371,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
