@@ -9782,7 +9782,7 @@ document.getElementById('consultationForm').addEventListener('submit', function(
     setTimeout(() => {
         const existingBtn = document.getElementById('emergencyRestart');
         if (existingBtn) {
-            existingBtn.addEventListener('click', function() {
+            existingBtn.addEventListener('click', function() { 
                 window.guaranteedSimulator.stop();
                 setTimeout(() => {
                     window.guaranteedSimulator.start();
@@ -9811,36 +9811,9 @@ function scrollToDemo() {
         });
     }
 }
- 
-// If charts fail, show data as text
-window.onload = function() {
-    const canvases = document.querySelectorAll('canvas');
-    canvases.forEach(canvas => {
-        canvas.parentElement.innerHTML = '<div style="color:#666; text-align:center; padding:20px;">📊 Chart Data Loaded</div>';
-    });
-};
-<!-- Add this safety check at the VERY END -->
-// Safety check - monitors charts and alerts if any disappear
-    <script>
-// Debug script - Add this at the bottom
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Checking Regional GDP Comparison...');
-    
-    const chartContainer = document.querySelector('.chart-container');
-    if (chartContainer) {
-        console.log('Chart container found:', chartContainer);
-        console.log('Chart container content:', chartContainer.innerHTML);
-        
-        // Remove any "Loading Data..." text
-        if (chartContainer.textContent.includes('Loading Data')) {
-            console.log('Removing "Loading Data..." text');
-            chartContainer.innerHTML = chartContainer.innerHTML.replace(/Loading Data\.\.\./g, '');
-        }
-    }
-});
-
 </script>
   
+
 
 
 
