@@ -6637,7 +6637,7 @@ toggle() {
             Replace outdated country rankings with sector-specific, real-time corruption risk intelligence trusted by institutional investors navigating the £42bn UK-Africa investment corridor.
         </p>
         
-      <button class="cta-button" onclick="openModal()">
+    <button class="cta-button" onclick="openConsultationModal()">
             Schedule a Consultation
         </button>
     </div>
@@ -9131,32 +9131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
          // Modal functionality
         const modal = document.getElementById('consultationModal');
-
-        function openModal() {
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Form submission handling (optional - for tracking)
+  // Form submission handling (optional - for tracking)
         document.getElementById('consultationForm').addEventListener('submit', function(e) {
             // You can add analytics tracking here
             console.log('Consultation form submitted');
@@ -9399,6 +9374,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
