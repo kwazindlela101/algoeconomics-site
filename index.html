@@ -9140,7 +9140,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==================== CONSULTATION MODAL FUNCTIONALITY ====================
 const consultationModal = document.getElementById('consultationModal');
 
-function openConsultationModal() {
+window.openConsultationModal = function() {
     consultationModal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
@@ -9374,6 +9374,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
