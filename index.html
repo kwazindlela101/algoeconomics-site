@@ -4973,12 +4973,35 @@ footer input:focus {
         width: 40px !important;
     }
 }     
+        
 </style>
 </head>
 <body>
     <!-- Mobile menu overlay -->
     <div class="nav-overlay" id="navOverlay"></div>
+/* Fix for Regional GDP Comparison */
+.insight-card h4 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 1.5rem;
+}
 
+.chart-container {
+    position: relative;
+}
+
+/* Remove any leftover "Loading Data..." text */
+.chart-container:empty::before,
+.chart-container:contains("Loading Data") {
+    content: none !important;
+}
+
+/* Ensure bars are visible */
+.chart-container > div {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
     <header>
         <div class="container">
             <div class="header-inner">
@@ -7473,64 +7496,108 @@ window.onload = function() {
                 </div>
             </div>
         </div>
-        
-        <!-- GDP COMPARISON -->
-        <div class="insight-card">
-            <h4>Regional GDP Comparison</h4>
-            <div class="chart-container" style="
-                height: 300px;
-                padding: 20px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            ">
-                <!-- BAR CHART VISUALIZATION -->
+        <!-- REPLACE YOUR ENTIRE insight-card div with this: -->
+<div class="insight-card">
+    <h4>Regional GDP Comparison</h4>
+    <div class="chart-container" style="
+        height: 320px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+    ">
+        <!-- Bar Chart Visualization -->
+        <div style="
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 200px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        ">
+            <!-- Lagos Bar -->
+            <div style="text-align: center; flex: 1; padding: 0 10px;">
                 <div style="
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: flex-end;
-                    height: 200px;
-                    margin-bottom: 20px;
-                ">
-                    <!-- Lagos Bar -->
-                    <div style="text-align: center;">
-                        <div style="
-                            background: #007C4A;
-                            width: 60px;
-                            height: 136px;
-                            border-radius: 4px 4px 0 0;
-                            margin: 0 auto;
-                        "></div>
-                        <div style="margin-top: 10px; color: white; font-weight: bold;">$136B</div>
-                        <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Lagos</div>
-                    </div>
-                    
-                    <!-- Nairobi Bar -->
-                    <div style="text-align: center;">
-                        <div style="
-                            background: #FFC107;
-                            width: 60px;
-                            height: 110px;
-                            border-radius: 4px 4px 0 0;
-                            margin: 0 auto;
-                        "></div>
-                        <div style="margin-top: 10px; color: white; font-weight: bold;">$110B</div>
-                        <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Nairobi</div>
-                    </div>
-                    
-                    <!-- Johannesburg Bar -->
-                    <div style="text-align: center;">
-                        <div style="
-                            background: #D32F2F;
-                            width: 60px;
-                            height: 405px;
-                            border-radius: 4px 4px 0 0;
-                            margin: 0 auto;
-                        "></div>
-                        <div style="margin-top: 10px; color: white; font-weight: bold;">$405B</div>
-                        <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Johannesburg</div>
-                    </div>
-                </div>
+                    background: linear-gradient(to top, #007C4A, #00a86b);
+                    width: 100%;
+                    max-width: 70px;
+                    height: 136px;
+                    border-radius: 6px 6px 0 0;
+                    margin: 0 auto;
+                    box-shadow: 0 4px 12px rgba(0, 124, 74, 0.3);
+                "></div>
+                <div style="margin-top: 15px; color: white; font-weight: bold; font-size: 1.1rem;">$136B</div>
+                <div style="color: rgba(255,255,255,0.9); font-size: 0.95rem; margin-top: 5px;">Lagos</div>
+            </div>
+            
+            <!-- Nairobi Bar -->
+            <div style="text-align: center; flex: 1; padding: 0 10px;">
+                <div style="
+                    background: linear-gradient(to top, #FFC107, #ffd54f);
+                    width: 100%;
+                    max-width: 70px;
+                    height: 110px;
+                    border-radius: 6px 6px 0 0;
+                    margin: 0 auto;
+                    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+                "></div>
+                <div style="margin-top: 15px; color: white; font-weight: bold; font-size: 1.1rem;">$110B</div>
+                <div style="color: rgba(255,255,255,0.9); font-size: 0.95rem; margin-top: 5px;">Nairobi</div>
+            </div>
+            
+            <!-- Johannesburg Bar -->
+            <div style="text-align: center; flex: 1; padding: 0 10px;">
+                <div style="
+                    background: linear-gradient(to top, #D32F2F, #f44336);
+                    width: 100%;
+                    max-width: 70px;
+                    height: 405px;
+                    border-radius: 6px 6px 0 0;
+                    margin: 0 auto;
+                    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+                "></div>
+                <div style="margin-top: 15px; color: white; font-weight: bold; font-size: 1.1rem;">$405B</div>
+                <div style="color: rgba(255,255,255,0.9); font-size: 0.95rem; margin-top: 5px;">Johannesburg</div>
+            </div>
+        </div>
+        
+        <!-- Y-Axis Labels -->
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            padding: 0 25px;
+            margin-top: 10px;
+        ">
+            <div>$0B</div>
+            <div>$100B</div>
+            <div>$200B</div>
+            <div>$300B</div>
+            <div>$400B</div>
+        </div>
+        
+        <!-- Regional Comparison Summary -->
+        <div style="
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        ">
+            <div style="color: white; font-weight: bold; margin-bottom: 8px;">Key Insight</div>
+            <div style="color: rgba(255,255,255,0.9); font-size: 0.95rem;">
+                Johannesburg leads with <span style="color: #ff6b6b; font-weight: bold;">$405B GDP</span>, 
+                while Lagos shows strongest growth at 
+                <span style="color: #4cd964; font-weight: bold;">+3.2% annually</span>
+            </div>
+        </div>
+    </div>
+</div>
+        
                  <!-- LEGEND -->
                 <div style="
                     display: flex;
@@ -9754,8 +9821,27 @@ window.onload = function() {
 };
 <!-- Add this safety check at the VERY END -->
 // Safety check - monitors charts and alerts if any disappear
+    <script>
+// Debug script - Add this at the bottom
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Checking Regional GDP Comparison...');
+    
+    const chartContainer = document.querySelector('.chart-container');
+    if (chartContainer) {
+        console.log('Chart container found:', chartContainer);
+        console.log('Chart container content:', chartContainer.innerHTML);
+        
+        // Remove any "Loading Data..." text
+        if (chartContainer.textContent.includes('Loading Data')) {
+            console.log('Removing "Loading Data..." text');
+            chartContainer.innerHTML = chartContainer.innerHTML.replace(/Loading Data\.\.\./g, '');
+        }
+    }
+});
+</script>
 </script>
   
+
 
 
 
