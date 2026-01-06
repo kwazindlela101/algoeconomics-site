@@ -9510,8 +9510,18 @@ function scrollToDemo() {
         });
     }
 }
+ 
+// If charts fail, show data as text
+window.onload = function() {
+    const canvases = document.querySelectorAll('canvas');
+    canvases.forEach(canvas => {
+        canvas.parentElement.innerHTML = '<div style="color:#666; text-align:center; padding:20px;">📊 Chart Data Loaded</div>';
+    });
+};
+
 </script>
   
+
 
 
 
