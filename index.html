@@ -40,13 +40,13 @@
             --ticker-height: 52px;
             --total-fixed-height: 80px;  /* CHANGE from 157px to 80px */
         }
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { 
     scroll-behavior: smooth; 
-    scroll-padding-top: var(--total-fixed-height); 
+    scroll-padding-top: 80px; 
     overflow-x: hidden; 
 }
 
@@ -72,9 +72,10 @@ body {
     width: 100%; 
     overflow-x: hidden; 
 }
-    padding-top: 20px !important;
-    margin-top: 0 !important;
-}
+
+/* HEADER - FIXED */
+header {
+      
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; width: 100%; overflow-x: hidden; }
 
         /* HEADER - FIXED */
@@ -9430,6 +9431,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
