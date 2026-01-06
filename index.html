@@ -8269,7 +8269,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearInterval(this.simulationTimer);
                 this.simulationTimer = null;
             }
-            this.isLive = false;
+           // this.isLive = false;
             this.updateStatus(false);
         }
 
@@ -9214,13 +9214,15 @@ document.addEventListener('keydown', function(event) {
             this.updateStatus();
         }
         
-        stop() {
-            console.log('⏸️ Stopping simulator');
-            this.isLive = false;                       
-            if (this.interval) {
-                clearInterval(this.interval);
-                this.interval = null;
-            }
+       stop() {
+    // console.log('🛑 Stopping simulator');
+    // this.isLive = false;
+    // if (this.interval) {
+    //     clearInterval(this.interval);
+    //     this.interval = null;
+    // }
+    // this.updateStatus();
+}
             this.updateStatus(); 
         }
         
@@ -9369,8 +9371,16 @@ function scrollToDemo() {
         });
     }
 }
+    // Force start ticker after 3 seconds
+setTimeout(() => {
+    if (window.guaranteedSimulator) {
+        window.guaranteedSimulator.start();
+        console.log('✅ Ticker force-started');
+    }
+}, 3000);
 </script>
   
+
 
 
 
