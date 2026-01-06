@@ -2,7 +2,7 @@
 <html lang="en">  
 <head>      
     <meta charset="UTF-8">  
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AlgoEconomics | AI-Powered Economic Intelligence for UK-Africa Markets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -46,7 +46,7 @@
         body { font-family: var(--font-body); line-height: 1.6; color: var(--dark); background-color: var(--light); overflow-x: hidden; padding-top: var(--total-fixed-height); }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; width: 100%; overflow-x: hidden; }
 
-        /* HEADER - FIXED */
+        /* HEADER - FIXED & IMPROVED */
         header { 
             background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%); 
             color: white; 
@@ -64,35 +64,65 @@
             overflow-x: hidden; 
             visibility: visible !important; 
         }
-        
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
         .header-inner { 
             display: flex; 
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center; 
             width: 100%; 
             position: relative;
-            overflow-x: auto;
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch;
+            min-height: 85px;
             padding: 0.5rem 0;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
         }
-        
-        .header-inner::-webkit-scrollbar {
-            height: 6px;
+
+        .logo-container {
+            flex-shrink: 0;
+            margin-right: 2rem;
         }
-        .header-inner::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
+
+        .logo-link { 
+            display: flex !important; 
+            align-items: center;
+            background: linear-gradient(135deg, var(--gold), #f7ef8a); 
+            border-radius: 8px; 
+            padding: 0.5rem 0.8rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
+            visibility: visible !important; 
+            opacity: 1 !important;
+            border: none;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
-        .header-inner::-webkit-scrollbar-thumb {
-            background: rgba(212, 175, 55, 0.5);
-            border-radius: 3px;
+
+        .logo-link:hover { 
+            background: linear-gradient(135deg, #f7ef8a, var(--gold)); 
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5); 
+            transform: translateY(-2px); 
         }
-        .header-inner::-webkit-scrollbar-thumb:hover {
-            background: rgba(212, 175, 55, 0.7);
+
+        .logo-link img { 
+            height: 70px;
+            width: auto; 
+            display: block !important; 
+            visibility: visible !important; 
+            opacity: 1 !important; 
         }
-        
+
+        .nav-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
         .menu-toggle { 
             display: none; 
             font-size: 1.5rem; 
@@ -100,77 +130,159 @@
             color: white; 
             background: none; 
             border: none; 
-            position: absolute; 
-            right: 1rem; 
+            padding: 0.5rem;
+            margin-left: 1rem;
             z-index: 1001;
         }
-        
+
         .nav-links { 
             display: flex; 
             list-style: none; 
-            gap: 0.8rem; 
+            gap: 1.5rem; 
             flex-wrap: nowrap;
             margin: 0;
-            padding: 0 1rem;
-            min-width: min-content;
+            padding: 0;
+            align-items: center;
         }
-        
+
+        .nav-item {
+            position: relative;
+        }
+
         .nav-link { 
             color: white; 
             text-decoration: none; 
-            font-weight: 500; 
+            font-weight: 600; 
             transition: var(--transition); 
-            padding: 0.8rem 1rem; 
-            border-radius: 5px; 
+            padding: 0.8rem 1.2rem; 
+            border-radius: 6px; 
             border: 1px solid transparent; 
-            font-size: 0.85rem; 
+            font-size: 0.9rem; 
             display: flex; 
             align-items: center; 
             gap: 8px; 
             white-space: nowrap;
-            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.05);
         }
-        
-        .nav-link:hover, .nav-link.active { background: rgba(212, 175, 55, 0.1); border: 1px solid var(--gold); }
-        
-        .nav-link.logo-link { 
-            padding: 0.3rem 0.6rem; 
-            border: none; 
-            background: linear-gradient(135deg, var(--gold), #f7ef8a); 
-            border-radius: 8px; 
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
-            display: inline-flex !important; 
-            visibility: visible !important; 
-            opacity: 1 !important;
-            position: sticky;
-            left: 0;
-            z-index: 10;
-        }
-        
-        .nav-link.logo-link img { 
-            height: 85px;
-            width: auto; 
-            display: block !important; 
-            visibility: visible !important; 
-            opacity: 1 !important; 
-        }
-        
-        .nav-link.logo-link:hover { background: linear-gradient(135deg, #f7ef8a, var(--gold)); box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5); transform: translateY(-1px); }
 
-        /* Mobile menu overlay */
-        .nav-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 998;
+        .nav-link:hover, .nav-link.active { 
+            background: rgba(212, 175, 55, 0.15); 
+            border: 1px solid var(--gold); 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
         }
-        
-        .nav-overlay.active {
-            display: block;
+
+        .nav-link i {
+            font-size: 0.9rem;
+        }
+
+        /* SCROLLBAR FOR WIDE HEADER */
+        .header-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .header-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .header-container::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.5);
+            border-radius: 3px;
+        }
+        .header-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.7);
+        }
+
+        /* MOBILE MENU STYLES */
+        @media (max-width: 992px) {
+            .header-inner {
+                justify-content: space-between;
+            }
+            
+            .logo-container {
+                margin-right: 1rem;
+            }
+            
+            .logo-link {
+                padding: 0.4rem 0.6rem;
+            }
+            
+            .logo-link img {
+                height: 60px;
+            }
+            
+            .nav-container {
+                justify-content: center;
+            }
+            
+            .nav-links {
+                gap: 0.8rem;
+            }
+            
+            .nav-link {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                height: 90px;
+                --header-height: 90px;
+            }
+            
+            .header-inner {
+                justify-content: space-between;
+                min-height: 70px;
+            }
+            
+            .menu-toggle {
+                display: block;
+                order: 2;
+            }
+            
+            .nav-container {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
+                padding: 1rem;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                border-top: 2px solid var(--gold);
+                z-index: 999;
+            }
+            
+            .nav-container.active {
+                display: block;
+                animation: slideDown 0.3s ease;
+            }
+            
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: stretch;
+            }
+            
+            .nav-link {
+                padding: 1rem;
+                justify-content: center;
+                border-radius: 8px;
+                font-size: 1rem;
+            }
+            
+            .logo-container {
+                order: 1;
+                margin-right: 0;
+            }
+            
+            .logo-link img {
+                height: 55px;
+            }
         }
 
         /* MOBILE QUICK LINKS - ADDED */
@@ -187,11 +299,6 @@
         .mobile-quick-links.active {
             display: block;
             animation: slideDown 0.3s ease;
-        }
-        
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
         
         .mobile-quick-grid {
@@ -249,13 +356,14 @@
             position: relative;
         }
         .ticker-track {
-    display: inline-flex;
-    animation: ticker-scroll 40s linear infinite !important;
-    animation-play-state: running !important;
-    will-change: transform;
-    padding: 0.75rem 0;
-}
-           .ticker-item { 
+            display: inline-flex;
+            animation: ticker-scroll 40s linear infinite !important;
+            animation-play-state: running !important;
+            will-change: transform;
+            padding: 0.75rem 0;
+        }
+        
+        .ticker-item { 
             display: flex; 
             align-items: center; 
             gap: 15px; 
@@ -300,7 +408,8 @@
             0% { transform: translateX(0); } 
             100% { transform: translateX(-50%); } 
         }
-         /* Smart Ticker Enhancements - ADDED */
+        
+        /* Smart Ticker Enhancements - ADDED */
         .ticker-item.trend-up .market-change { background: var(--success); }
         .ticker-item.trend-down .market-change { background: var(--danger); }
         .ticker-item.trend-neutral .market-change { background: #666; }
@@ -320,8 +429,6 @@
             gap: 5px;
             z-index: 1000;
         }
-
-        /* REMOVED: .data-transparency CSS */
 
         /* ENHANCED HERO SECTION - FIXED FOR MOBILE */
         .hero { 
@@ -684,7 +791,7 @@
             font-size: 0.95rem; 
             color: var(--secondary); 
         }
-<li><a href="#about-us">About Us</a></li>
+
         /* ENHANCED SECTORS SECTION */
         .sectors { 
             background: var(--sectors-bg); 
@@ -999,6 +1106,120 @@
             transition: all 0.3s ease;
         }
         
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+        
+        .country-card h3 { 
+            color: var(--primary); 
+            margin-bottom: 1rem; 
+        }
+        
+        .country-card p { 
+            color: var(--secondary); 
+            font-size: 0.95rem; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-inner">
+                <div class="logo-container">
+                    <a href="#" class="logo-link">
+                        <img src="path/to/your/logo.png" alt="AlgoEconomics Logo">
+                    </a>
+                </div>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="nav-container" id="navContainer">
+                    <ul class="nav-links">
+                        <li class="nav-item"><a href="#sectors" class="nav-link"><i class="fas fa-chart-pie"></i> Sectors</a></li>
+                        <li class="nav-item"><a href="#regions" class="nav-link"><i class="fas fa-globe-africa"></i> Regions</a></li>
+                        <li class="nav-item"><a href="#markets" class="nav-link"><i class="fas fa-chart-line"></i> Markets</a></li>
+                        <li class="nav-item"><a href="#tools" class="nav-link"><i class="fas fa-tools"></i> Tools</a></li>
+                        <li class="nav-item"><a href="#ai-models" class="nav-link"><i class="fas fa-brain"></i> AI Models</a></li>
+                        <li class="nav-item"><a href="#index" class="nav-link"><i class="fas fa-database"></i> Index</a></li>
+                        <li class="nav-item"><a href="#backend" class="nav-link"><i class="fas fa-server"></i> Backend</a></li>
+                        <li class="nav-item"><a href="#programme" class="nav-link"><i class="fas fa-code"></i> Programme</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="market-indicators">
+        <div class="ticker-container">
+            <div class="ticker-track" id="tickerTrack">
+                <!-- Ticker items will be populated by JavaScript -->
+            </div>
+            <div id="tickerStatus">
+                <i class="fas fa-circle"></i> Live Markets
+            </div>
+        </div>
+    </div>
+
+    <!-- Rest of your HTML content continues here... -->
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const navContainer = document.getElementById('navContainer');
+            navContainer.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navContainer = document.getElementById('navContainer');
+            const menuToggle = document.getElementById('menuToggle');
+            
+            if (!navContainer.contains(event.target) && !menuToggle.contains(event.target)) {
+                navContainer.classList.remove('active');
+            }
+        });
+
+        // Ticker functionality
+        const tickerData = [
+            { name: "KES/USD", value: "164.99", change: "+0.5%", trend: "up" },
+            { name: "ZAR/USD", value: "18.43", change: "-0.2%", trend: "down" },
+            { name: "BRENT CRUDE", value: "89.09", change: "+1.2%", trend: "up" },
+            { name: "NIGERIA STOCK", value: "65,432", change: "+2.1%", trend: "up" },
+            { name: "GOLD", value: "2,345", change: "+0.8%", trend: "up" },
+            { name: "BITCOIN", value: "68,500", change: "-1.5%", trend: "down" },
+            { name: "ETHIOPIA BIRR", value: "56.78", change: "0.0%", trend: "neutral" },
+            { name: "SOUTH AFRICA 10Y", value: "12.34%", change: "-0.3%", trend: "down" }
+        ];
+
+        const tickerTrack = document.getElementById('tickerTrack');
+        
+        // Create duplicate items for seamless scrolling
+        tickerData.forEach(item => {
+            const tickerItem = document.createElement('div');
+            tickerItem.className = `ticker-item trend-${item.trend}`;
+            tickerItem.innerHTML = `
+                <span class="market-name">${item.name}</span>
+                <span class="market-value ${item.trend === 'up' ? 'ticker-value-up' : item.trend === 'down' ? 'ticker-value-down' : 'ticker-value-neutral'}">${item.value}</span>
+                <span class="market-change ${item.trend}">${item.change}</span>
+            `;
+            tickerTrack.appendChild(tickerItem);
+        });
+
+        // Duplicate for seamless loop
+        tickerData.forEach(item => {
+            const tickerItem = document.createElement('div');
+            tickerItem.className = `ticker-item trend-${item.trend}`;
+            tickerItem.innerHTML = `
+                <span class="market-name">${item.name}</span>
+                <span class="market-value ${item.trend === 'up' ? 'ticker-value-up' : item.trend === 'down' ? 'ticker-value-down' : 'ticker-value-neutral'}">${item.value}</span>
+                <span class="market-change ${item.trend}">${item.change}</span>
+            `;
+            tickerTrack.appendChild(tickerItem);
+        });
+  
         .country-card:hover { 
             transform: translateY(-5px); 
             box-shadow: 0 8px 25px rgba(0,0,0,0.12); 
@@ -9399,6 +9620,7 @@ function scrollToDemo() {
 }
 </script>
   
+
 
 
 
