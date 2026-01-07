@@ -8596,25 +8596,69 @@ toggle() {
                     </li>
                 </ul>
             </div>
-            
-            <!-- Newsletter Column -->
-            <div>
-                <h4 style="color: #d4af37; font-size: 1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Stay Informed</h4>
-                <p style="color: #a0aec0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
-                    Get platform updates and market intelligence insights delivered to institutional subscribers.
-                </p>
-                
-                <!-- Newsletter Form -->
-                <form style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
-                    <input type="email" placeholder="your.email@institution.com" required 
-                           style="padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; color: white; font-size: 0.95rem; width: 100%;">
-                    <button type="submit" 
-                            style="padding: 12px 20px; background: linear-gradient(135deg, #d4af37, #f7ef8a); color: #1a365d; border: none; border-radius: 5px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease;">
-                        Subscribe
-                    </button>
-                </form>
-                
-                <!-- Social Links -->
+            <!-- REPLACE lines 8600-8615 in your HTML file with this code -->
+
+<!-- Newsletter Column -->
+<div>
+    <h4 style="color: #d4af37; font-size: 1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Stay Informed</h4>
+    <p style="color: #a0aec0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+        Get platform updates and market intelligence insights delivered to institutional subscribers.
+    </p>
+
+    <!-- Newsletter Form -->
+    <form id="mc-embedded-subscribe-form" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
+        <input 
+            type="email" 
+            id="mce-EMAIL"
+            name="EMAIL"
+            placeholder="your.email@institution.com" 
+            required
+            style="padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; color: white; font-size: 0.95rem; width: 100%;"
+        />
+        <button 
+            type="submit"
+            id="mc-subscribe-button"
+            style="padding: 12px 20px; background: linear-gradient(135deg, #d4af37, #f7ef8a); color: #1a365d; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%;"
+        >
+            Subscribe
+        </button>
+        
+        <!-- Honeypot for spam prevention -->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+            <input type="text" name="b_7f33efbbec31ffdd7dd87bce1_fddc7c24c3" tabindex="-1" value="">
+        </div>
+    </form>
+
+    <!-- Response Messages -->
+    <div id="mce-response" style="margin-bottom: 15px; display: none;">
+        <p id="mce-message" style="padding: 10px; border-radius: 5px; font-size: 0.9rem; margin: 0;"></p>
+    </div>
+
+    <!-- Social Links -->
+    <div style="display: flex; gap: 15px; margin-top: 20px;">
+        <a href="https://linkedin.com/company/algoeconomics" target="_blank"
+            style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;"
+            aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://twitter.com/algoeconomics" target="_blank"
+            style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;"
+            aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://youtube.com/@algoeconomics" target="_blank"
+            style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;"
+            aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://github.com/algoeconomics" target="_blank"
+            style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;"
+            aria-label="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+</div>
+            <!-- Social Links -->
                 <div style="display: flex; gap: 15px; margin-top: 20px;">
                     <a href="https://linkedin.com/company/algoeconomics" target="_blank" 
                        style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;"
@@ -10192,7 +10236,133 @@ setTimeout(() => {
                 }
             }
         });
-    </script>
+        <!-- ADD THIS JAVASCRIPT AT THE BOTTOM OF YOUR HTML FILE, BEFORE THE CLOSING </body> TAG -->
+<script>
+(function() {
+    'use strict';
+    
+    const form = document.getElementById('mc-embedded-subscribe-form');
+    const emailInput = document.getElementById('mce-EMAIL');
+    const submitButton = document.getElementById('mc-subscribe-button');
+    const responseDiv = document.getElementById('mce-response');
+    const messageEl = document.getElementById('mce-message');
+    
+    // Mailchimp JSONP endpoint (avoids CORS issues)
+    const MAILCHIMP_URL = 'https://algoeconomics.us9.list-manage.com/subscribe/post-json?u=7f33efbbec31ffdd7dd87bce1&id=fddc7c24c3&f_id=007a42e1f0';
+    
+    function showMessage(message, isSuccess) {
+        responseDiv.style.display = 'block';
+        messageEl.textContent = message;
+        messageEl.style.backgroundColor = isSuccess ? 'rgba(72, 187, 120, 0.2)' : 'rgba(245, 101, 101, 0.2)';
+        messageEl.style.color = isSuccess ? '#48bb78' : '#f56565';
+        messageEl.style.border = isSuccess ? '1px solid #48bb78' : '1px solid #f56565';
+        
+        // Auto-hide success message after 5 seconds
+        if (isSuccess) {
+            setTimeout(() => {
+                responseDiv.style.display = 'none';
+            }, 5000);
+        }
+    }
+    
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    function submitToMailchimp(email) {
+        // Create JSONP callback
+        const callbackName = 'mcCallback' + Date.now();
+        
+        window[callbackName] = function(data) {
+            // Clean up
+            delete window[callbackName];
+            document.body.removeChild(script);
+            
+            // Re-enable button
+            submitButton.disabled = false;
+            submitButton.textContent = 'Subscribe';
+            submitButton.style.opacity = '1';
+            submitButton.style.cursor = 'pointer';
+            
+            if (data.result === 'success') {
+                showMessage('Thanks for subscribing! Check your email to confirm.', true);
+                emailInput.value = ''; // Clear the input
+            } else {
+                // Handle error messages
+                let errorMessage = data.msg || 'An error occurred. Please try again.';
+                // Remove HTML tags from Mailchimp error messages
+                errorMessage = errorMessage.replace(/<[^>]*>/g, '');
+                showMessage(errorMessage, false);
+            }
+        };
+        
+        // Create script element for JSONP
+        const script = document.createElement('script');
+        const params = new URLSearchParams({
+            EMAIL: email,
+            c: callbackName
+        });
+        script.src = MAILCHIMP_URL + '&' + params.toString();
+        document.body.appendChild(script);
+        
+        // Handle script loading errors
+        script.onerror = function() {
+            delete window[callbackName];
+            document.body.removeChild(script);
+            submitButton.disabled = false;
+            submitButton.textContent = 'Subscribe';
+            submitButton.style.opacity = '1';
+            submitButton.style.cursor = 'pointer';
+            showMessage('Network error. Please check your connection and try again.', false);
+        };
+    }
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = emailInput.value.trim();
+        
+        // Validate email
+        if (!email) {
+            showMessage('Please enter your email address.', false);
+            return;
+        }
+        
+        if (!validateEmail(email)) {
+            showMessage('Please enter a valid email address.', false);
+            return;
+        }
+        
+        // Disable button during submission
+        submitButton.disabled = true;
+        submitButton.textContent = 'Subscribing...';
+        submitButton.style.opacity = '0.7';
+        submitButton.style.cursor = 'not-allowed';
+        
+        // Hide any previous messages
+        responseDiv.style.display = 'none';
+        
+        // Submit to Mailchimp
+        submitToMailchimp(email);
+    });
+    
+    // Add hover effect to button
+    submitButton.addEventListener('mouseenter', function() {
+        if (!this.disabled) {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 4px 12px rgba(212, 175, 55, 0.3)';
+        }
+    });
+    
+    submitButton.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = 'none';
+    });
+})();
+</script>
+
+
 
 
 
