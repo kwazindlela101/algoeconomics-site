@@ -6886,7 +6886,14 @@ class SimulationAnalytics {
         console.log(`👆 User interaction #${this.userInteractions}: ${type}`);
     }
 }
-
+// Line 6897
+// In your updateAllMarkets() method, add this line:
+// Line 6898
+updateAllMarkets() {
+// Line 6899
+    try {
+// Line 6900
+        // ... your existing code ...
 // Initialize analytics 
 window.simAnalytics = new SimulationAnalytics();
 
@@ -6895,7 +6902,7 @@ window.simAnalytics = new SimulationAnalytics();
 // =============================================
 
 // In your updateAllMarkets() method, add this line:
-updateAllMarkets() {
+
     try {
         // ... your existing code ...
         
@@ -9717,7 +9724,7 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
 // Check if at least one sector is selected
 const sectorCheckboxes = form.querySelectorAll('input[type="checkbox"]:checked');
 const hasSelectedSectors = sectorCheckboxes.length > 0;
-            const hasSelectedSectors = sectorCheckboxes.length > 0;
+            
 // TEMPORARY DEBUG - ADD THIS
 console.log('Form:', form);
 console.log('Sector checkboxes found:', sectorCheckboxes.length);
@@ -9779,7 +9786,7 @@ if (!firstName || !lastName || !email || !company || !role || !investorType || !
         // Re-enable submit button
         submitButton.disabled = false;
         buttonText.textContent = 'REQUEST DEMO';
-    }
+    
 });
             // Highlight the "All Sectors" checkbox when clicked
             const allSectorsCheckbox = document.getElementById('sector-all');
@@ -10364,6 +10371,7 @@ setTimeout(() => {
     });
 })();
 </script>
+
 
 
 
