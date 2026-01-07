@@ -4930,6 +4930,338 @@ footer input:focus {
         html {
   scroll-behavior: smooth;
 }
+ /* === BASE STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--navy);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        /* === AFRICAN MARKETS SECTION === */
+        .african-markets {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--navy) 0%, #0d1229 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* === HEADER STYLES === */
+        .african-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .african-flag {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+        }
+        
+        .african-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 0 2px 20px rgba(0, 212, 255, 0.2);
+            letter-spacing: -0.5px;
+        }
+        
+        /* === CITIES GRID === */
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .city-card {
+            background: var(--gray-dark);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(66, 153, 225, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .city-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--electric-blue);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
+        }
+        
+        .city-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--soft-blue));
+        }
+        
+        .city-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.3));
+        }
+        
+        .city-name {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .city-economy {
+            color: var(--gray-light);
+            margin-bottom: 25px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* === SPARKLINE CONTAINERS === */
+        .sparkline-container {
+            height: 50px;
+            margin: 25px 0;
+            background: var(--navy-light);
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sparkline-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        /* === CITY STATS === */
+        .city-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 20px 15px;
+            background: var(--navy-light);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .stat:hover {
+            background: var(--navy);
+            border-color: var(--electric-blue);
+            transform: translateY(-2px);
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+        
+        .stat-value:first-child {
+            color: var(--electric-blue);
+        }
+        
+        .stat-value:nth-child(2) {
+            color: var(--gold);
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--gray-light);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* === GDP COMPARISON SECTION === */
+        .insight-card {
+            background: var(--gray-dark);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--gold));
+        }
+        
+        .insight-card h4 {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .chart-container {
+            height: 400px;
+            position: relative;
+            width: 100%;
+            background: var(--navy-light);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        #gdpChart {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        /* === LOADING STATES === */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 1rem;
+            color: var(--gray-light);
+        }
+        
+        .loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--electric-blue);
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 768px) {
+            .african-markets {
+                padding: 40px 20px;
+            }
+            
+            .african-header h2 {
+                font-size: 2rem;
+            }
+            
+            .cities-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .city-card {
+                padding: 25px;
+            }
+            
+            .city-stats {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .insight-card {
+                padding: 25px;
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+        }
+        
+        /* === ELECTRIC BLUE GLOW EFFECTS === */
+        .glow {
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+        
+        .border-glow {
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+        
+        /* === GOLD ACCENTS === */
+        .gold-text {
+            color: var(--gold);
+        }
+        
+        .gold-border {
+            border-color: var(--gold);
+        }
+        
+        /* === HOVER STATES === */
+        .hover-electric:hover {
+            color: var(--electric-blue);
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* === BUTTON STYLES (for reference) === */
+        .btn-electric {
+            background: var(--electric-blue);
+            color: var(--navy);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-electric:hover {
+            background: var(--electric-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+        
+        .btn-gold {
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 179, 71, 0.3);
+        }       
 </style>
 </head>
 <body>
@@ -7168,45 +7500,412 @@ toggle() {
             </div>
         </div>
     </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>African Market Intelligence</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* African Markets Section */
+        .african-markets {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .african-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        
+        .african-flag {
+            font-size: 2.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .african-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffd700, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Cities Grid */
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .city-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .city-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+        }
+        
+        .city-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .city-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .city-name {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .city-economy {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .sparkline-container {
+            height: 60px;
+            margin: 20px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sparkline-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        /* City Stats */
+        .city-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 15px 10px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat:hover {
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            transform: scale(1.05);
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.95rem;
+            color: #6c757d;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Insight Card - GDP Comparison */
+        .insight-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #36d1dc, #5b86e5);
+        }
+        
+        .insight-card h4 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .chart-container {
+            height: 400px;
+            position: relative;
+            width: 100%;
+        }
+        
+        #gdpChart {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        /* GDP Comparison - CSS FALLBACK */
+        .gdp-fallback {
+            display: none;
+            height: 400px;
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .gdp-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 100%;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .gdp-bar {
+            width: 80px;
+            background: linear-gradient(to top, #667eea, #764ba2);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            margin: 0 20px;
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        /* Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .city-stats {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .african-header h2 {
+                font-size: 2rem;
+            }
+            
+            .city-card {
+                padding: 20px;
+            }
+            
+            .insight-card {
+                padding: 25px;
+            }
+        }
+        
+        /* Loading State */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+        
+        .loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
  <section id="african-markets" class="section african-markets">
         <div class="container">
-            <div class="african-header"><span class="african-flag">🌍</span><h2>African Market Intelligence</h2><span class="african-flag">📊</span></div>
+            <div class="african-header">
+                <span class="african-flag">🌍</span>
+                <h2>African Market Intelligence</h2>
+                <span class="african-flag">📊</span>
+            </div>
+            
             <div class="cities-grid">
+                <!-- Lagos Card -->
                 <div class="city-card">
                     <div class="city-icon">🇳🇬</div>
                     <h3 class="city-name">Lagos</h3>
                     <p class="city-economy">Nigeria's commercial hub driving West African growth</p>
-                    <div class="sparkline-container"><canvas id="lagosChart"></canvas></div>
+                    <div class="sparkline-container">
+                        <div class="loading">Loading trend...</div>
+                        <canvas id="lagosChart"></canvas>
+                    </div>
                     <div class="city-stats">
-                        <div class="stat"><span class="stat-value">$136B</span><span class="stat-label">GDP</span></div>
-                        <div class="stat"><span class="stat-value">+3.2%</span><span class="stat-label">Growth</span></div>
-                        <div class="stat"><span class="stat-value">21M</span><span class="stat-label">Population</span></div>
+                        <div class="stat">
+                            <span class="stat-value gold-text">$136B</span>
+                            <span class="stat-label">GDP</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" style="color: var(--electric-blue);">+3.2%</span>
+                            <span class="stat-label">Growth</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">21M</span>
+                            <span class="stat-label">Population</span>
+                        </div>
                     </div>
                 </div>
+                
+                <!-- Nairobi Card -->
                 <div class="city-card">
                     <div class="city-icon">🇰🇪</div>
                     <h3 class="city-name">Nairobi</h3>
                     <p class="city-economy">East Africa's fintech and innovation capital</p>
-                    <div class="sparkline-container"><canvas id="nairobiChart"></canvas></div>
+                    <div class="sparkline-container">
+                        <div class="loading">Loading trend...</div>
+                        <canvas id="nairobiChart"></canvas>
+                    </div>
                     <div class="city-stats">
-                        <div class="stat"><span class="stat-value">$110B</span><span class="stat-label">GDP</span></div>
-                        <div class="stat"><span class="stat-value">+5.1%</span><span class="stat-label">Growth</span></div>
-                        <div class="stat"><span class="stat-value">4.4M</span><span class="stat-label">Population</span></div>
+                        <div class="stat">
+                            <span class="stat-value gold-text">$110B</span>
+                            <span class="stat-label">GDP</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" style="color: var(--electric-blue);">+5.1%</span>
+                            <span class="stat-label">Growth</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">4.4M</span>
+                            <span class="stat-label">Population</span>
+                        </div>
                     </div>
                 </div>
+                
+                <!-- Johannesburg Card -->
                 <div class="city-card">
                     <div class="city-icon">🇿🇦</div>
                     <h3 class="city-name">Johannesburg</h3>
                     <p class="city-economy">Africa's financial services powerhouse</p>
-                    <div class="sparkline-container"><canvas id="johannesburgChart"></canvas></div>
+                    <div class="sparkline-container">
+                        <div class="loading">Loading trend...</div>
+                        <canvas id="johannesburgChart"></canvas>
+                    </div>
                     <div class="city-stats">
-                        <div class="stat"><span class="stat-value">$405B</span><span class="stat-label">GDP</span></div>
-                        <div class="stat"><span class="stat-value">+1.9%</span><span class="stat-label">Growth</span></div>
-                        <div class="stat"><span class="stat-value">5.6M</span><span class="stat-label">Population</span></div>
+                        <div class="stat">
+                            <span class="stat-value gold-text">$405B</span>
+                            <span class="stat-label">GDP</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" style="color: var(--electric-blue);">+1.9%</span>
+                            <span class="stat-label">Growth</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">5.6M</span>
+                            <span class="stat-label">Population</span>
+                        </div>
                     </div>
                 </div>
+                </div>
+            
+            <!-- GDP Comparison -->
+            <div class="insight-card">
+                <h4>Regional GDP Comparison</h4>
+                <div class="chart-container" id="gdpChartContainer">
+                    <div class="loading">Loading chart data...</div>
+                    <canvas id="gdpChart"></canvas>
+                </div>
             </div>
-            <div class="insight-card"><h4>Regional GDP Comparison</h4><div class="chart-container" id="gdpChartContainer"><canvas id="gdpChart"></canvas></div></div>
         </div>
     </section>
 <div class="container" id="index-section" data-section="how-aci-works">
@@ -9384,60 +10083,121 @@ setTimeout(() => {
     }
 }, 3000);
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const ctx = document.getElementById('gdpChart').getContext('2d');
-    
-    // Sample data for GDP comparison
-    const gdpData = {
-        labels: ['Lagos', 'Nairobi', 'Johannesburg'],
-        datasets: [{
-            label: 'GDP (in $B)',
-            data: [136, 110, 405],
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(255, 99, 132, 0.5)'
-            ],
-            borderColor: [
-                'rgb(54, 162, 235)',
-                'rgb(75, 192, 192)',
-                'rgb(255, 99, 132)'
-            ],
-            borderWidth: 1
-        }]
-    };
-
-    const gdpChart = new Chart(ctx, {
-        type: 'bar', // or 'pie', 'doughnut', etc.
-        data: gdpData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `GDP: $${context.raw}B`;
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove loading messages
+            setTimeout(() => {
+                document.querySelectorAll('.loading').forEach(el => el.style.display = 'none');
+            }, 1000);
+            
+            // Create GDP Chart
+            const gdpCtx = document.getElementById('gdpChart');
+            if (gdpCtx) {
+                try {
+                    new Chart(gdpCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Lagos', 'Nairobi', 'Johannesburg'],
+                            datasets: [{
+                                label: 'GDP (Billions USD)',
+                                data: [136, 110, 405],
+                                backgroundColor: [
+                                    'rgba(0, 212, 255, 0.8)',
+                                    'rgba(255, 179, 71, 0.8)',
+                                    'rgba(66, 153, 225, 0.8)'
+                                ],
+                                borderColor: [
+                                    'rgb(0, 212, 255)',
+                                    'rgb(255, 179, 71)',
+                                    'rgb(66, 153, 225)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: {
+                                        color: '#fff'
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: 'rgba(255, 255, 255, 0.1)'
+                                    },
+                                    ticks: {
+                                        color: '#fff'
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'GDP ($ Billions)',
+                                        color: '#fff'
+                                    }
+                                },
+                                x: {
+                                    grid: {
+                                        color: 'rgba(255, 255, 255, 0.1)'
+                                    },
+                                    ticks: {
+                                        color: '#fff'
+                                    }
+                                }
+                            }
                         }
-                    }
+                    });
+                } catch (error) {
+                    console.error('Chart error:', error);
                 }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'GDP ($B)'
+            }
+            
+            // Create sparklines
+            createSparkline('lagosChart', [130, 132, 134, 136], '#00d4ff');
+            createSparkline('nairobiChart', [105, 107, 109, 110], '#ffb347');
+            createSparkline('johannesburgChart', [400, 402, 404, 405], '#4299e1');
+               function createSparkline(canvasId, data, color) {
+                const ctx = document.getElementById(canvasId);
+                if (ctx) {
+                    try {
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                                datasets: [{
+                                    data: data,
+                                    borderColor: color,
+                                    borderWidth: 2,
+                                    fill: false,
+                                    tension: 0.4,
+                                    pointRadius: 0
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: { legend: { display: false } },
+                                scales: { 
+                                    x: { display: false }, 
+                                    y: { display: false }
+                                }
+                            }
+                        });
+                    } catch (error) {
+                        console.error('Sparkline error:', error);
                     }
                 }
             }
-        }
-    });
-});
-</script>
+        });
+    </script>
+
+
+
+
+
 
 
 
