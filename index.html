@@ -1564,29 +1564,7 @@
             font-size: 0.9rem; 
         }
 
-        /* SLA SECTION */
-        .sla-section { 
-            background-color: #0a1f44; 
-            color: white; 
-            padding: 60px 1rem; 
-            text-align: center; 
-            border-bottom: 2px solid var(--gold); 
-        }
-        
-        .sla-section h2 { 
-            font-size: clamp(1.8rem, 4vw, 2.5rem); 
-            margin-bottom: 20px; 
-            color: var(--gold); 
-        }
-        
-        .sla-section > p { 
-            font-size: 1rem; 
-            margin-bottom: 40px; 
-            max-width: 100%; 
-            margin-left: auto; 
-            margin-right: auto; 
-        }
-        
+       
         .sla-table { 
             display: flex; 
             flex-wrap: wrap; 
@@ -8432,15 +8410,274 @@ toggle() {
             </div>
         </div>
     </section>
+<div class="sla-container">
+        <div class="sla-header">
+   <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <section id="sla-comparison" class="sla-section">
-        <h2>Service Level Commitments</h2>
-        <p>Choose the support level that matches your needs</p>
-        <div class="sla-table">
-            <div class="sla-column"><h3>Standard</h3><ul><li><strong>Response Time:</strong> Within 24 hours</li><li><strong>Support Hours:</strong> Mon-Fri, 9am-5pm GMT</li><li><strong>Channels:</strong> Email support</li><li><strong>Updates:</strong> Weekly market digest</li><li><strong>Data Refresh:</strong> Daily updates</li></ul></div>
-            <div class="sla-column enterprise"><h3>Enterprise</h3><ul><li><strong>Response Time:</strong> Within 2 hours</li><li><strong>Support Hours:</strong> 24/7 availability</li><li><strong>Channels:</strong> Phone, Email, Slack</li><li><strong>Updates:</strong> Real-time alerts</li><li><strong>Data Refresh:</strong> Live streaming</li><li><strong>Dedicated Manager:</strong> Named account lead</li></ul></div>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(180deg, #0a1628 0%, #1a2942 100%);
+            color: #ffffff;
+            padding: 60px 20px;
+        }
+
+        .sla-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sla-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .sla-header h1 {
+            font-size: 3rem;
+            color: #F5B800;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .sla-header p {
+            font-size: 1.25rem;
+            color: #b8c5d6;
+            font-weight: 300;
+        }
+
+        .tiers-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .tier-card {
+            background: rgba(26, 41, 66, 0.6);
+            border: 2px solid #2d4a6f;
+            border-radius: 16px;
+            padding: 40px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .tier-card.premium {
+            border-color: #F5B800;
+            background: rgba(26, 41, 66, 0.8);
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: linear-gradient(135deg, #F5B800 0%, #d69e00 100%);
+            color: #0a1628;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(245, 184, 0, 0.3);
+        }
+
+        .tier-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(245, 184, 0, 0.2);
+        }
+
+        .tier-name {
+            font-size: 2rem;
+            color: #F5B800;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .tier-subtitle {
+            font-size: 1rem;
+            color: #b8c5d6;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .tier-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.6;
+        }
+
+        .detail-label {
+            color: #F5B800;
+            font-weight: 700;
+            min-width: 180px;
+            font-size: 0.95rem;
+        }
+
+        .detail-value {
+            color: #e8eef5;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .detail-value-highlight {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .tiers-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .tier-card {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sla-header h1 {
+                font-size: 2rem;
+            }
+
+            .tier-card {
+                padding: 30px 20px;
+            }
+
+            .tier-name {
+                font-size: 1.5rem;
+            }
+
+            .detail-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .detail-label {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sla-container">
+        <div class="sla-header">
+            <h1>Service Level Commitments</h1>
+            <p>Choose the support infrastructure that matches your operational requirements</p>
         </div>
-    </section>
+
+        <div class="tiers-container">
+            <!-- AlgoTerminal Professional Tier -->
+            <div class="tier-card">
+                <div class="tier-header">
+                    <h2 class="tier-name">AlgoTerminal</h2>
+                    <p class="tier-subtitle">The Standard for Professional Market Intelligence</p>
+                </div>
+                <div class="tier-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Support Structure:</span>
+                        <span class="detail-value">Dedicated Support Triad (Account, Customer Success, Adoption Managers)</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Response Time:</span>
+                        <span class="detail-value"><span class="detail-value-highlight">48 hours</span> for standard queries; same-day for critical issues</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Support Hours:</span>
+                        <span class="detail-value">Mon-Fri, 9am-5pm GMT</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Onboarding:</span>
+                        <span class="detail-value">Deal-specific configuration aligned to project governance requirements</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Data Refresh:</span>
+                        <span class="detail-value"><span class="detail-value-highlight">Daily</span> ACI score updates</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Priority Alerts:</span>
+                        <span class="detail-value">Material governance flag changes within <span class="detail-value-highlight">24 hours</span> via email</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Platform Access:</span>
+                        <span class="detail-value">4 core sectors, 10 countries, up to 5 user seats</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Availability:</span>
+                        <span class="detail-value">Guaranteed continuous terminal uptime for daily research</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AlgoIntelligence Enterprise Tier -->
+            <div class="tier-card premium">
+                <div class="premium-badge">Premium</div>
+                <div class="tier-header">
+                    <h2 class="tier-name">AlgoIntelligence</h2>
+                    <p class="tier-subtitle">The Infrastructure for Mission-Critical Operations</p>
+                </div>
+                <div class="tier-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Support Structure:</span>
+                        <span class="detail-value">Senior Manager Support + Direct Engineering Liaison</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Response Time:</span>
+                        <span class="detail-value"><span class="detail-value-highlight">4 hours</span> for critical issues; 24 hours for standard queries</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Support Hours:</span>
+                        <span class="detail-value"><span class="detail-value-highlight">24/7</span> emergency support; business hours standard support</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Strategic Continuity:</span>
+                        <span class="detail-value">Manager redundancy protocol for organizational transitions</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Data Refresh:</span>
+                        <span class="detail-value"><span class="detail-value-highlight">Bi-weekly</span> ACI updates with monthly governance flag reviews</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Priority Alerts:</span>
+                        <span class="detail-value">Material governance flag changes within <span class="detail-value-highlight">2 hours</span> via email/Slack</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Strategic Reviews:</span>
+                        <span class="detail-value">Quarterly alignment sessions with account leadership</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Customization:</span>
+                        <span class="detail-value">Sector-specific scoring parameters, bespoke country coverage</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Integration:</span>
+                        <span class="detail-value">White-glove API implementation and data feed support</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Platform Access:</span>
+                        <span class="detail-value"><span class="detail-value-highlight">All 7 sectors</span>, custom country selection, unlimited seats</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
 
     <section id="pricing" class="section pricing">
         <div class="container">
@@ -10371,6 +10608,7 @@ setTimeout(() => {
     });
 })();
 </script>
+
 
 
 
