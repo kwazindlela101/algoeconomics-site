@@ -330,8 +330,10 @@
             background-size: cover;
             background-position: center;
             color: white; 
-            padding: 2rem 1rem !important; 
-            min-height: 100vh;
+            /* Auto spacing/height across screens */
+            padding-block: clamp(1rem, 3vh, 2rem) !important;
+            padding-inline: clamp(0.75rem, 2vw, 1rem) !important;
+            min-height: clamp(70vh, calc(100vh - var(--total-fixed-height)), 82vh);
             text-align: center; 
             border-bottom: 3px solid var(--gold); 
             position: relative; 
@@ -623,6 +625,16 @@
             margin: 0 auto; 
             color: var(--secondary); 
             font-size: clamp(1rem, 2vw, 1.1rem); 
+            padding: 0 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--secondary);
+            max-width: 900px;
+            margin: 1rem auto 0;
+            line-height: 1.7;
+            font-weight: 400;
             padding: 0 1rem;
         }
 
@@ -1041,7 +1053,211 @@
 
         /* NEW FEATURES: Market Comparison Tool & Executive Brief Generator */
         .new-features {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-top: 1px solid rgba(26, 54, 93, 0.08);
+        }
+
+        /* Professional Intelligence Infrastructure Metrics */
+        .intelligence-metrics {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .intelligence-metrics {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .metric-card {
+            background: #ffffff;
+            border: 1px solid rgba(26, 54, 93, 0.1);
+            border-radius: 8px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .metric-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .metric-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.1) 0%, rgba(26, 54, 93, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .metric-card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .metric-card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .metric-card-gauge-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 1.5rem 0;
+            min-height: 140px;
+        }
+
+        .live-risk-gauge {
+            position: relative;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .gauge-background {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #f59e0b 50%, #ef4444 100%);
+            border-radius: 4px;
+            position: relative;
+            width: 72%;
+            animation: gaugeProgress 3s ease-in-out infinite;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .gauge-fill::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes gaugeProgress {
+            0%, 100% { width: 68%; }
+            50% { width: 75%; }
+        }
+
+        .gauge-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .gauge-value-container {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .gauge-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            animation: valuePulse 3s ease-in-out infinite;
+        }
+
+        .gauge-value-unit {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            opacity: 0.7;
+        }
+
+        .gauge-status {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-weight: 500;
+            text-align: center;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes valuePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.02); }
+        }
+
+        .metric-card-description {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .data-freshness-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 200, 83, 0.08);
+            border: 1px solid rgba(0, 200, 83, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #00a855;
+            margin-top: 1.5rem;
+        }
+
+        .freshness-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00c853;
+            box-shadow: 0 0 0 2px rgba(0, 200, 83, 0.2);
+            animation: subtlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
         
         .features-grid-2col {
@@ -1639,26 +1855,185 @@
 
         /* AFRICAN MARKETS */
         .african-markets { 
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-top: 1px solid rgba(26, 54, 93, 0.1);
+            padding: 60px 20px;
+        }
+        
+        .african-markets .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .african-header { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 1rem; 
-            margin-bottom: 2rem; 
+            text-align: center;
+            margin-bottom: 1.5rem; 
             padding: 0 1rem;
         }
         
         .african-header h2 { 
             font-size: clamp(1.8rem, 4vw, 2.5rem); 
-            color: var(--africa-green); 
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .african-subtitle {
+            font-size: 1.05rem;
+            color: var(--secondary);
+            max-width: 900px;
+            margin: 0 auto 1rem;
+            line-height: 1.7;
+        }
+
+        .intelligence-stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            margin-bottom: 0;
+        }
+
+        .stat-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #ffffff;
+            border: 1px solid rgba(26, 54, 93, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-badge:hover {
+            border-color: var(--gold);
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .stat-badge i {
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .african-markets .sectors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+            padding: 0;
+            width: 100%;
+        }
+
+        .african-markets .sector-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 1.75rem;
+            box-shadow: 0 2px 8px rgba(26, 54, 93, 0.08);
+            border: 1px solid rgba(26, 54, 93, 0.15);
+            border-top: 3px solid var(--primary);
             text-align: center; 
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 1;
+            transform: translateY(0);
         }
         
-        .african-flag { 
-            font-size: 2rem; 
+        .african-markets .sector-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .african-markets .sector-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(26, 54, 93, 0.15);
+            border-color: var(--gold);
+            border-top-color: var(--gold);
+        }
+
+        .african-markets .sector-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.25rem;
+            background: rgba(26, 54, 93, 0.08);
+            border: 1px solid rgba(26, 54, 93, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .african-markets .sector-card:hover .sector-icon {
+            background: var(--primary);
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        .african-markets .sector-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .african-markets .sector-description {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .african-markets .sector-stats-hover {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 1.25rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            border-radius: 0 0 10px 10px;
+            border-top: 2px solid var(--gold);
+        }
+
+        .african-markets .sector-card:hover .sector-stats-hover {
+            transform: translateY(0);
+        }
+
+        .hover-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .hover-stat:last-child {
+            border-bottom: none;
+        }
+
+        .hover-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hover-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gold);
         }
         
         .cities-grid { 
@@ -1670,31 +2045,34 @@
         }
         
         .city-card { 
-            background: white; 
+            background: #ffffff; 
             border-radius: 10px; 
             padding: 1.5rem; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
-            border-top: 4px solid var(--africa-green); 
+            box-shadow: 0 2px 8px rgba(26, 54, 93, 0.08); 
+            border: 1px solid rgba(26, 54, 93, 0.15);
+            border-top: 3px solid var(--primary);
             text-align: center; 
             transition: all 0.3s ease;
         }
         
         .city-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(26, 54, 93, 0.12);
+            border-top-color: var(--gold);
+            border-color: var(--gold);
         }
         
         .city-icon { 
             font-size: 2rem; 
-            color: var(--africa-green); 
+            color: var(--primary); 
             margin-bottom: 1rem; 
         }
         
         .city-name { 
             font-size: 1.3rem; 
-            color: var(--africa-green); 
+            color: var(--primary); 
             margin-bottom: 1rem; 
-            font-weight: bold; 
+            font-weight: 700; 
         }
         
         .city-economy { 
@@ -1706,6 +2084,8 @@
         .sparkline-container { 
             height: 60px; 
             margin: 1.5rem 0; 
+            background: rgba(26, 54, 93, 0.03);
+            border-radius: 6px;
         }
         
         .city-stats { 
@@ -1721,9 +2101,13 @@
         }
         
         .stat-value { 
-            font-weight: bold; 
-            color: var(--africa-green); 
+            font-weight: 700; 
+            color: var(--primary); 
             font-size: 1rem; 
+        }
+        
+        .stat-value.gold-text {
+            color: var(--gold);
         }
         
         .stat-label { 
@@ -1732,23 +2116,25 @@
         }
         
         .insight-card { 
-            background: white; 
-            padding: 1.5rem; 
+            background: #ffffff; 
+            padding: 2rem; 
             border-radius: 10px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
+            box-shadow: 0 2px 8px rgba(26, 54, 93, 0.08);
+            border: 1px solid rgba(26, 54, 93, 0.15);
             transition: all 0.3s ease;
             margin: 0 1rem;
         }
         
         .insight-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            box-shadow: 0 6px 20px rgba(26, 54, 93, 0.12);
+            border-color: var(--gold);
         }
         
         .insight-card h4 { 
-            font-size: 1.3rem; 
+            font-size: 1.5rem; 
             margin-bottom: 1.5rem; 
             color: var(--primary); 
+            font-weight: 700;
         }
         
         .chart-container { 
@@ -2469,8 +2855,10 @@
             } 
             
             .hero { 
-                padding: 0 !important; 
-                min-height: 100vh;
+                /* Slightly tighter on smaller screens */
+                padding-block: clamp(0.75rem, 2.5vh, 1.5rem) !important;
+                padding-inline: clamp(0.75rem, 2vw, 1rem) !important;
+                min-height: clamp(62vh, calc(100vh - var(--total-fixed-height)), 80vh);
                 display: flex !important; 
                 align-items: center;
             } 
@@ -4578,6 +4966,114 @@ h4 {
 
         .modal-body {
             padding: 30px 40px 40px;
+        }
+
+        /* === ACI DEMO MODAL (dialog) === */
+        dialog#aciDemoModal {
+            border: none;
+            padding: 0;
+            background: transparent;
+            width: min(1100px, 94vw);
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        dialog#aciDemoModal::backdrop {
+            background-color: rgba(13, 31, 45, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .aci-demo-dialog-content {
+            background: linear-gradient(135deg, #1a3a52 0%, #0d1f2d 100%);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 12px;
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .aci-demo-dialog-header {
+            padding: 22px 24px 14px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+            position: relative;
+        }
+
+        .aci-demo-dialog-header h2 {
+            color: #d4af37;
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .aci-demo-dialog-header p {
+            color: #b8c5d0;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .aci-demo-dialog-body {
+            padding: 14px 14px 16px;
+        }
+
+        .aci-demo-embed {
+            width: 100%;
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #0d1f2d;
+        }
+
+        .aci-demo-embed iframe {
+            width: 100%;
+            height: min(72vh, 720px);
+            border: 0;
+            display: block;
+            background: #0d1f2d;
+        }
+
+        .aci-demo-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 12px;
+        }
+
+        .aci-demo-open-new {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        .aci-demo-open-new:hover {
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        .aci-demo-close-btn {
+            all: unset;
+            cursor: pointer;
+            position: absolute;
+            right: 14px;
+            top: 10px;
+            color: #b8c5d0;
+            font-size: 32px;
+            font-weight: 300;
+            line-height: 1;
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+
+        .aci-demo-close-btn:hover {
+            color: #d4af37;
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        @media (max-width: 600px) {
+            .aci-demo-dialog-header { padding: 18px 16px 12px; }
+            .aci-demo-dialog-body { padding: 12px; }
+            .aci-demo-embed iframe { height: 70vh; }
         }
 
         .form-group {
@@ -7109,15 +7605,71 @@ toggle() {
     <section id="new-features" class="section new-features">
         <div class="container">
             <div class="section-header">
-                <h2>Advanced Intelligence Tools</h2>
-                <p>Powerful features to enhance your market analysis and decision-making</p>
+                <h2>Real-Time Intelligence Infrastructure</h2>
+                <p class="section-subtitle">Governance Risk Engine delivering live scoring, decision-grade analytics, and real-time monitoring across African regulatory signals.</p>
+
+                <div class="intelligence-metrics">
+                    <div class="metric-card">
+                        <div class="metric-card-header">
+                            <div class="metric-card-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3 class="metric-card-title">Data Sources</h3>
+                        </div>
+                        <div class="metric-card-value">47+</div>
+                        <p class="metric-card-description">AI-powered regulatory sources continuously monitored across African markets</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-card-header">
+                            <div class="metric-card-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="metric-card-title">Sector Coverage</h3>
+                        </div>
+                        <div class="metric-card-value">7</div>
+                        <p class="metric-card-description">Industries with live risk scoring: Mining, Agriculture, Fintech, Energy, Healthcare, Tourism, Aviation</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-card-header">
+                            <div class="metric-card-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <h3 class="metric-card-title">Live Monitoring</h3>
+                        </div>
+                        <div class="metric-card-gauge-container">
+                            <div class="live-risk-gauge" aria-label="Live risk monitoring gauge">
+                                <div class="gauge-labels">
+                                    <span>Low</span>
+                                    <span>Medium</span>
+                                    <span>High</span>
+                                </div>
+                                <div class="gauge-background">
+                                    <div class="gauge-fill"></div>
+                                </div>
+                                <div class="gauge-value-container">
+                                    <span class="gauge-value">72</span>
+                                    <span class="gauge-value-unit">%</span>
+                                </div>
+                                <div class="gauge-status">Active Monitoring</div>
+                            </div>
+                        </div>
+                        <p class="metric-card-description">Continuous monitoring and instant alerts on regulatory changes and governance signals</p>
+                    </div>
+                </div>
+
+                <div class="data-freshness-indicator">
+                    <span class="freshness-dot" aria-hidden="true"></span>
+                    <span>Data updated in real-time</span>
+                </div>
             </div>
             
             <div class="features-grid-2col">
                 <!-- Market Comparison Tool -->
                 <div class="feature-tool-card">
                     <h3><i class="fas fa-balance-scale"></i> Market Comparison Tool</h3>
-                    <p>Compare key economic metrics across multiple African countries to identify investment opportunities and risks.</p>
+                    <p>Benchmark macro + governance indicators across countries with consistent scoring, so investment committees can compare like-for-like.</p>
                     
                     <div class="comparison-tool">
                         <div class="comparison-controls">
@@ -7205,7 +7757,7 @@ toggle() {
                 <!-- Executive Brief Generator -->
                 <div class="feature-tool-card">
                     <h3><i class="fas fa-file-alt"></i> Executive Brief Generator</h3>
-                    <p>Create custom intelligence reports tailored to your specific interests and requirements.</p>
+                    <p>Generate decision-ready briefs that synthesize market indicators with governance risk flags and sector context.</p>
                     
                     <div class="brief-generator">
                         <form class="brief-form" id="briefForm">
@@ -7276,7 +7828,7 @@ toggle() {
   <div class="cta-content">
     <h2 class="cta-headline">Ready for Institutional-Grade Africa Intelligence?</h2>
     <p class="cta-subheadline">Join fund managers and corporates using AlgoEconomics for market entry decisions.</p>
-    <button class="cta-button">Request Platform Access</button>
+    <a class="cta-button" href="#platform-demo">Request Platform Access</a>
   </div>
 </section>
      <section id="ai-demo" class="section signals-section">
@@ -7457,6 +8009,45 @@ toggle() {
             </div>
         </div>
     </div>
+
+    <!-- ACI Demo Modal (Streamlit embed) -->
+    <dialog
+        id="aciDemoModal"
+        aria-label="ACI Demo"
+        onclose="document.body.style.overflow='auto';"
+        oncancel="this.close(); document.body.style.overflow='auto';"
+        onkeydown="if(event.key==='Escape'){ this.close(); document.body.style.overflow='auto'; }"
+        onclick="if(event.target===this){ this.close(); document.body.style.overflow='auto'; }"
+    >
+        <div class="aci-demo-dialog-content">
+            <div class="aci-demo-dialog-header">
+                <form method="dialog">
+                    <button class="aci-demo-close-btn" aria-label="Close modal" title="Close">&times;</button>
+                </form>
+                <h2>AI Corruption Index (ACI) — Live Demo</h2>
+                <p>Interactive demo embedded from Streamlit.</p>
+            </div>
+            <div class="aci-demo-dialog-body">
+                <div class="aci-demo-embed">
+                    <iframe
+                        src="https://hilarious99-streamlit-app-kignhd.streamlit.app/?embed=true"
+                        title="ACI Streamlit Demo"
+                        loading="lazy"
+                        referrerpolicy="no-referrer"
+                        allow="fullscreen"
+                    ></iframe>
+                </div>
+                <div class="aci-demo-footer">
+                    <a class="aci-demo-open-new" href="https://hilarious99-streamlit-app-kignhd.streamlit.app/" target="_blank" rel="noopener noreferrer">
+                        Open in new tab
+                    </a>
+                </div>
+                <p style="margin-top:10px;color:#b8c5d0;font-size:0.85rem;">
+                    If the embed shows a redirect loop, your browser may be blocking Streamlit inside an iframe — use “Open in new tab”.
+                </p>
+            </div>
+        </div>
+    </dialog>
    <section id="speakers" class="section speakers">
         <div class="container">
             <div class="section-header"><h2>Expert Contributors</h2><p>Learn from leading voices in African economics</p></div>
@@ -7506,12 +8097,7 @@ toggle() {
             line-height: 1.6;
         }
         
-        /* African Markets Section */
-        .african-markets {
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
+        /* African Markets Section - REMOVED CONFLICTING STYLES */
         
         .container {
             max-width: 1200px;
@@ -7801,9 +8387,107 @@ toggle() {
  <section id="african-markets" class="section african-markets">
         <div class="container">
             <div class="african-header">
-                <span class="african-flag">🌍</span>
                 <h2>African Market Intelligence</h2>
-                <span class="african-flag">📊</span>
+                <p class="african-subtitle">Governance signals in minutes, not weeks. Real-time intelligence across 47 regulatory sources, 7 sectors, and 54 countries.</p>
+                <div class="intelligence-stats-bar">
+                    <span class="stat-badge"><i class="fas fa-database"></i> 47 Regulatory Sources</span>
+                    <span class="stat-badge"><i class="fas fa-industry"></i> 7 Sectors</span>
+                    <span class="stat-badge"><i class="fas fa-globe-africa"></i> 54 Countries</span>
+                </div>
+            </div>
+
+            <!-- Sector Cards Grid -->
+            <div class="sectors-grid">
+                <div class="sector-card" data-sector="mining">
+                    <div class="sector-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h3 class="sector-name">Mining</h3>
+                    <p class="sector-description">Licensing transparency, procurement practices, and regulatory compliance monitoring</p>
+                    <div class="sector-stats-hover">
+                        <div class="hover-stat"><span class="hover-label">Risk Score:</span> <span class="hover-value">68/100</span></div>
+                        <div class="hover-stat"><span class="hover-label">Active Projects:</span> <span class="hover-value">1,247</span></div>
+                        <div class="hover-stat"><span class="hover-label">Regulatory Updates:</span> <span class="hover-value">23 this month</span></div>
+                    </div>
+                </div>
+
+                <div class="sector-card" data-sector="fintech">
+                    <div class="sector-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="sector-name">Fintech</h3>
+                    <p class="sector-description">Regulatory framework analysis, licensing transparency, and market competition indicators</p>
+                    <div class="sector-stats-hover">
+                        <div class="hover-stat"><span class="hover-label">Risk Score:</span> <span class="hover-value">52/100</span></div>
+                        <div class="hover-stat"><span class="hover-label">Active Projects:</span> <span class="hover-value">892</span></div>
+                        <div class="hover-stat"><span class="hover-label">Regulatory Updates:</span> <span class="hover-value">41 this month</span></div>
+                    </div>
+                </div>
+
+                <div class="sector-card" data-sector="energy">
+                    <div class="sector-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="sector-name">Energy</h3>
+                    <p class="sector-description">Project delays monitoring, cost overrun analysis, and contract compliance assessment</p>
+                    <div class="sector-stats-hover">
+                        <div class="hover-stat"><span class="hover-label">Risk Score:</span> <span class="hover-value">74/100</span></div>
+                        <div class="hover-stat"><span class="hover-label">Active Projects:</span> <span class="hover-value">2,156</span></div>
+                        <div class="hover-stat"><span class="hover-label">Regulatory Updates:</span> <span class="hover-value">18 this month</span></div>
+                    </div>
+                </div>
+
+                <div class="sector-card" data-sector="agriculture">
+                    <div class="sector-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="sector-name">Agriculture</h3>
+                    <p class="sector-description">Land rights transparency, subsidy program monitoring, and export regulation tracking</p>
+                    <div class="sector-stats-hover">
+                        <div class="hover-stat"><span class="hover-label">Risk Score:</span> <span class="hover-value">61/100</span></div>
+                        <div class="hover-stat"><span class="hover-label">Active Projects:</span> <span class="hover-value">3,421</span></div>
+                        <div class="hover-stat"><span class="hover-label">Regulatory Updates:</span> <span class="hover-value">29 this month</span></div>
+                    </div>
+                </div>
+
+                <div class="sector-card" data-sector="aviation">
+                    <div class="sector-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3 class="sector-name">Aviation</h3>
+                    <p class="sector-description">Route licensing, safety compliance, and infrastructure development monitoring</p>
+                    <div class="sector-stats-hover">
+                        <div class="hover-stat"><span class="hover-label">Risk Score:</span> <span class="hover-value">55/100</span></div>
+                        <div class="hover-stat"><span class="hover-label">Active Projects:</span> <span class="hover-value">187</span></div>
+                        <div class="hover-stat"><span class="hover-label">Regulatory Updates:</span> <span class="hover-value">12 this month</span></div>
+                    </div>
+                </div>
+
+                <div class="sector-card" data-sector="healthcare">
+                    <div class="sector-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="sector-name">Healthcare</h3>
+                    <p class="sector-description">Pharmaceutical regulation, procurement transparency, and public health policy tracking</p>
+                    <div class="sector-stats-hover">
+                        <div class="hover-stat"><span class="hover-label">Risk Score:</span> <span class="hover-value">58/100</span></div>
+                        <div class="hover-stat"><span class="hover-label">Active Projects:</span> <span class="hover-value">1,089</span></div>
+                        <div class="hover-stat"><span class="hover-label">Regulatory Updates:</span> <span class="hover-value">35 this month</span></div>
+                    </div>
+                </div>
+
+                <div class="sector-card" data-sector="tourism">
+                    <div class="sector-icon">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <h3 class="sector-name">Tourism</h3>
+                    <p class="sector-description">Licensing transparency, infrastructure development, and regulatory compliance monitoring</p>
+                    <div class="sector-stats-hover">
+                        <div class="hover-stat"><span class="hover-label">Risk Score:</span> <span class="hover-value">49/100</span></div>
+                        <div class="hover-stat"><span class="hover-label">Active Projects:</span> <span class="hover-value">634</span></div>
+                        <div class="hover-stat"><span class="hover-label">Regulatory Updates:</span> <span class="hover-value">15 this month</span></div>
+                    </div>
+                </div>
             </div>
             
             <div class="cities-grid">
@@ -7903,7 +8587,7 @@ toggle() {
 
         <!-- See ACI in Action Button -->
         <div class="action-button-container">
-     <button class="action-button" onclick="scrollToDemo()">
+     <button class="action-button" onclick="document.getElementById('aciDemoModal')?.showModal(); document.body.style.overflow='hidden';">
                 See ACI in Action <i class="fas fa-arrow-right"></i>
             </button>
         </div>
@@ -10044,6 +10728,28 @@ if (!firstName || !lastName || !email || !company || !role || !investorType || !
         });
     
 document.addEventListener('DOMContentLoaded', function() {
+    // Scroll animation for sector cards
+    const sectorCards = document.querySelectorAll('.sector-card');
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const sectorObserver = new IntersectionObserver(function(entries) {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('animate-in');
+                }, index * 100); // Stagger animation
+                sectorObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    sectorCards.forEach(card => {
+        sectorObserver.observe(card);
+    });
+
     // Sparkline data for each city (simulated growth trend)
     const sparklineData = {
         lagos: [3.0, 3.1, 3.2, 3.2, 3.2, 3.1, 3.2],
