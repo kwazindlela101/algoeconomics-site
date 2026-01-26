@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoEconomics - Market Tickers Example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            padding: 40px 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #4a90e2;
+            font-size: 28px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #8b9dc3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Ticker Container */
+        .ticker-container {
+            background: linear-gradient(135deg, #1a1f3a 0%, #0f1224 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        /* Ticker Wrapper for scrolling */
+        .ticker-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker-wrapper::before,
+        .ticker-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .ticker-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, #1a1f3a, transparent);
+        }
+
+        .ticker-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, #1a1f3a, transparent);
+        }
+
+        /* Ticker Track */
+        .ticker-track {
+            display: flex;
+            animation: scroll 5s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Ticker Item */
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 15px 30px;
+            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            min-width: 280px;
+            transition: all 0.3s ease;
+        }
+
+        .ticker-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: scale(1.02);
+            border-color: rgba(74, 144, 226, 0.3);
+        }
+
+        .ticker-symbol {
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 15px;
+            color: #fff;
+            min-width: 90px;
+        }
+
+        .ticker-flag {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .ticker-value {
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 15px;
+            color: #e0e6ed;
+        }
+
+        .ticker-change {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .ticker-change.positive {
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .ticker-change.negative {
+            color: #ff4757;
+            background: rgba(255, 71, 87, 0.1);
+        }
+
+        .ticker-change::before {
+            content: '▲';
+            margin-right: 5px;
+            font-size: 10px;
+        }
+
+        .ticker-change.negative::before {
+            content: '▼';
+        }
+
+        .ticker-volume {
+            margin-left: 15px;
+            font-size: 12px;
+            color: #8b9dc3;
+        }
+
+        /* Stock specific styling */
+        .stock-ticker-item {
+            min-width: 320px;
+        }
+
+        .exchange-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+            min-width: 140px;
+        }
+
+        .country-badge {
+            background: rgba(74, 144, 226, 0.2);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            margin-left: 8px;
+            color: #4a90e2;
+            font-weight: 600;
+        }
+
+        /* Info box */
+        .info-box {
+            background: rgba(74, 144, 226, 0.1);
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .info-box h3 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #8b9dc3;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .info-box code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #00ff88;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AlgoEconomics Market Data Tickers</h1>
+
+        <!-- Exchange Rates Ticker -->
+        <div class="section-title">Live Exchange Rates - GBP Base</div>
+        <div class="ticker-container">
+            <div class="ticker-wrapper">
+                <div class="ticker-track" id="exchangeTrack">
+                    <!-- JavaScript will populate this -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Stock Exchanges Ticker -->
+        <div class="section-title">African & UK Stock Exchanges</div>
+        <div class="ticker-container">
+            <div class="ticker-wrapper">
+                <div class="ticker-track" id="stockTrack">
+                    <!-- JavaScript will populate this -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Box -->
+        <div class="info-box">
+            <h3>Implementation Notes for Tino</h3>
+            <p><strong>Animation:</strong> The ticker scrolls continuously using CSS <code>@keyframes</code>. Speed can be adjusted in the animation duration (currently 30s).</p>
+            <p><strong>Data Updates:</strong> Use JavaScript to update values every 3-5 seconds. The <code>updateTickerData()</code> function shows how to do this.</p>
+            <p><strong>Color Coding:</strong> Positive changes show in green (#00ff88), negative in red (#ff4757).</p>
+            <p><strong>Responsive:</strong> The ticker adapts to different screen sizes. Gradient fade effects on edges prevent jarring cuts.</p>
+            <p><strong>Hover Effect:</strong> Animation pauses on hover for better readability.</p>
+            <p><strong>Data Structure:</strong> All data is in JavaScript arrays - easy to connect to your backend API later.</p>
+        </div>
+    </div>
+
+    <script>
+        // Exchange Rate Data
+        const exchangeRateData = [
+            { pair: "GBP/NGN", flag: "🇳🇬", rate: 2087.45, change: +12.34, changePercent: +0.59 },
+            { pair: "GBP/KES", flag: "🇰🇪", rate: 163.28, change: -0.87, changePercent: -0.53 },
+            { pair: "GBP/ZAR", flag: "🇿🇦", rate: 23.41, change: +0.15, changePercent: +0.64 },
+            { pair: "GBP/GHS", flag: "🇬🇭", rate: 19.87, change: -0.23, changePercent: -1.14 },
+            { pair: "GBP/EGP", flag: "🇪🇬", rate: 63.15, change: +0.42, changePercent: +0.67 },
+            { pair: "GBP/TZS", flag: "🇹🇿", rate: 3234.56, change: +45.23, changePercent: +1.42 },
+            { pair: "GBP/UGX", flag: "🇺🇬", rate: 4678.90, change: -12.34, changePercent: -0.26 },
+            { pair: "GBP/ZMW", flag: "🇿🇲", rate: 32.45, change: +0.78, changePercent: +2.46 }
+        ];
+
+        // Stock Exchange Data
+        const stockExchangeData = [
+            { exchange: "JSE All Share", country: "ZA", value: 76234.58, change: +342.67, changePercent: +0.45, volume: "2.3B" },
+            { exchange: "NSE All Share", country: "NG", value: 102458.23, change: -876.12, changePercent: -0.85, volume: "1.1B" },
+            { exchange: "NSE 20", country: "KE", value: 1847.92, change: +12.45, changePercent: +0.68, volume: "456M" },
+            { exchange: "FTSE 100", country: "GB", value: 8456.73, change: +23.89, changePercent: +0.28, volume: "4.7B" },
+            { exchange: "EGX 30", country: "EG", value: 28934.12, change: +187.34, changePercent: +0.65, volume: "892M" },
+            { exchange: "GSE Composite", country: "GH", value: 3245.67, change: -8.23, changePercent: -0.25, volume: "178M" },
+            { exchange: "MASI", country: "MA", value: 13567.89, change: +56.12, changePercent: +0.42, volume: "234M" },
+            { exchange: "TUNINDEX", country: "TN", value: 8923.45, change: -23.67, changePercent: -0.26, volume: "89M" }
+        ];
+
+        // Function to create exchange rate ticker items
+        function createExchangeItem(data) {
+            const changeClass = data.change >= 0 ? 'positive' : 'negative';
+            return `
+                <div class="ticker-item">
+                    <span class="ticker-flag">${data.flag}</span>
+                    <span class="ticker-symbol">${data.pair}</span>
+                    <span class="ticker-value">${data.rate.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <span class="ticker-change ${changeClass}">
+                        ${data.changePercent > 0 ? '+' : ''}${data.changePercent.toFixed(2)}%
+                    </span>
+                </div>
+            `;
+        }
+
+        // Function to create stock ticker items
+        function createStockItem(data) {
+            const changeClass = data.change >= 0 ? 'positive' : 'negative';
+            return `
+                <div class="ticker-item stock-ticker-item">
+                    <span class="exchange-name">
+                        ${data.exchange}
+                        <span class="country-badge">${data.country}</span>
+                    </span>
+                    <span class="ticker-value">${data.value.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <span class="ticker-change ${changeClass}">
+                        ${data.changePercent > 0 ? '+' : ''}${data.changePercent.toFixed(2)}%
+                    </span>
+                    <span class="ticker-volume">Vol: ${data.volume}</span>
+                </div>
+            `;
+        }
+
+        // Populate tickers
+        function populateTickers() {
+            const exchangeTrack = document.getElementById('exchangeTrack');
+            const stockTrack = document.getElementById('stockTrack');
+
+            // Create two sets for seamless loop
+            let exchangeHTML = '';
+            let stockHTML = '';
+
+            // First set
+            exchangeRateData.forEach(item => {
+                exchangeHTML += createExchangeItem(item);
+            });
+            stockExchangeData.forEach(item => {
+                stockHTML += createStockItem(item);
+            });
+
+            // Duplicate for seamless scrolling
+            exchangeTrack.innerHTML = exchangeHTML + exchangeHTML;
+            stockTrack.innerHTML = stockHTML + stockHTML;
+        }
+
+        // Simulate live updates (optional - shows how to update data)
+        function updateTickerData() {
+            // Randomly update some values to simulate live data
+            exchangeRateData.forEach(item => {
+                const randomChange = (Math.random() - 0.5) * 2;
+                item.rate += randomChange;
+                item.change = randomChange;
+                item.changePercent = (randomChange / item.rate) * 100;
+            });
+
+            stockExchangeData.forEach(item => {
+                const randomChange = (Math.random() - 0.5) * 100;
+                item.value += randomChange;
+                item.change = randomChange;
+                item.changePercent = (randomChange / item.value) * 100;
+            });
+
+            populateTickers();
+        }
+
+        // Initialize
+        populateTickers();
+
+        // Update every 5 seconds (optional - for live feel)
+        setInterval(updateTickerData, 5000);
+    </script>
+</body>
+</html>

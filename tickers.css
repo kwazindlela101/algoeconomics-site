@@ -1,0 +1,127 @@
+/* Market tickers (scoped to the header ticker bar) */
+.market-indicators .ticker-container {
+    overflow: hidden;
+}
+
+.market-indicators .ticker-wrapper {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+.market-indicators .ticker-wrapper::before,
+.market-indicators .ticker-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.market-indicators .ticker-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #0f1f38, transparent);
+}
+
+.market-indicators .ticker-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #0f1f38, transparent);
+}
+
+.market-indicators .ticker-track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: ticker-scroll 40s linear infinite;
+}
+
+.market-indicators .ticker-container:hover .ticker-track,
+.market-indicators .ticker-track:hover {
+    animation-play-state: paused !important;
+}
+
+.market-indicators .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 22px;
+    height: 100%;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    flex-shrink: 0;
+}
+
+.market-indicators .ticker-symbol {
+    font-weight: 700;
+    font-size: 0.9rem;
+    min-width: 80px;
+    color: #fff;
+}
+
+.market-indicators .ticker-flag {
+    margin-right: 4px;
+    font-size: 1rem;
+}
+
+.market-indicators .ticker-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e0e6ed;
+}
+
+.market-indicators .ticker-change {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.market-indicators .ticker-change.positive {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.12);
+}
+
+.market-indicators .ticker-change.negative {
+    color: #ff4757;
+    background: rgba(255, 71, 87, 0.12);
+}
+
+.market-indicators .ticker-change::before {
+    content: '▲';
+    margin-right: 4px;
+    font-size: 9px;
+}
+
+.market-indicators .ticker-change.negative::before {
+    content: '▼';
+}
+
+.market-indicators .ticker-volume {
+    margin-left: 8px;
+    font-size: 0.7rem;
+    color: #8b9dc3;
+}
+
+.market-indicators .stock-ticker-item {
+    min-width: 0;
+}
+
+.market-indicators .exchange-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #fff;
+    min-width: 110px;
+}
+
+.market-indicators .country-badge {
+    background: rgba(74, 144, 226, 0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    margin-left: 6px;
+    color: #4a90e2;
+    font-weight: 600;
+}
+
