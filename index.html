@@ -3230,9 +3230,6 @@ h4 {
     padding-left: 0;
 }
         /* Fix for Stay Informed alignment */
-.footer-column {
-    /* This should already be in your CSS from other sections */
-}
 
 .client-portal-link {
     display: inline-flex;
@@ -6249,44 +6246,6 @@ p {
             color: #555;
         }
 
-        /* Simulation status indicator */
-        .simulation-status {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            z-index: 10000;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Emergency restart button */
-        #emergencyRestart {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 9999;
-            font-size: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        #emergencyRestart:hover {
-            background: #ff3742;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
         /* YOUR EXISTING CSS HERE... */
         
         /* ========== ADD THESE NEW STYLES ========== */
@@ -6332,11 +6291,6 @@ p {
                 font-size: 14px;
             }
             
-            #emergencyRestart {
-                padding: 12px 20px;
-                font-size: 14px;
-                bottom: 80px;
-            }
         }
 /* ========== ACI STYLES ========== */
           * {
@@ -7214,56 +7168,9 @@ p {
     </div>
 </div>
 
-<div id="simStatus" style="position: fixed; bottom: 10px; right: 10px; 
-     background: rgba(0,0,0,0.8); color: #00ff88; padding: 5px 10px; 
-     border-radius: 3px; font-size: 11px; font-family: monospace; z-index: 10000;
-     backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
-    ✅ Simulation: LIVE
-</div>
-
-<!-- Emergency Restart Button -->
-<button id="emergencyRestart" style="position: fixed; bottom: 20px; left: 20px; 
-       background: #ff4757; color: white; border: none; padding: 10px 15px; 
-       border-radius: 5px; cursor: pointer; z-index: 9999; font-size: 12px;
-       display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-   🔄 Restart Simulation
-</button>
-
-<!-- SIMULATION STATUS SCRIPT -->
+<!-- SIMULATION ANALYTICS & PERFORMANCE -->
 <script>
-// Show emergency restart button after 5 seconds
-setTimeout(() => {
-    const restartBtn = document.getElementById('emergencyRestart');
-    if (restartBtn) {
-        restartBtn.style.display = 'block';
-        
-        restartBtn.addEventListener('click', function() {
-            if (window.marketSimulator) {
-              // window.marketSimulator.stop(); // Disabled - causing ticker to pause
-                setTimeout(() => {
-                    window.marketSimulator.start();
-                  
-                    this.style.background = '#00b894';
-                    setTimeout(() => {
-                        this.textContent = '🔄 Restart Simulation';
-                        this.style.background = '#ff4757';
-                    }, 2000);
-                }, 500);
-            }
-        });
-    }
-}, 5000);
-
-// Update simulation status every second
-setInterval(() => {
-    const status = document.getElementById('simStatus');
-    if (status && window.marketSimulator) {
-        status.textContent = window.marketSimulator.isLive ? 
-            '✅ Simulation: LIVE' : '⏸️ Simulation: PAUSED';
-        status.style.color = window.marketSimulator.isLive ? '#00ff88' : '#ff9900';
-    }
-}, 1000);
-    // =============================================
+// =============================================
 // SIMULATION ANALYTICS & PERFORMANCE
 // =============================================
 class SimulationAnalytics {
@@ -11023,14 +10930,6 @@ document.addEventListener('keydown', function(event) {
                 liveIndicator.style.boxShadow = this.isLive ? '0 0 10px #4CAF50' : 'none';
             }
             
-            // Update any status text
-            const statusElements = document.querySelectorAll('[id*="status"], [class*="status"]');
-            statusElements.forEach(el => {
-                if (el.textContent.includes('Simulation')) {
-                    el.textContent = this.isLive ? 'Simulation: LIVE' : 'Simulation: PAUSED';
-                    el.style.color = this.isLive ? '#00ff88' : '#ff9900';
-                }
-            });
         }
         
         forceAnimation() {
@@ -11063,26 +10962,6 @@ document.addEventListener('keydown', function(event) {
             window.guaranteedSimulator.start();
         }, 500);
     }
-    
-    // 3. EMERGENCY BUTTON (optional)
-    setTimeout(() => {
-        const existingBtn = document.getElementById('emergencyRestart');
-        if (existingBtn) {
-            existingBtn.addEventListener('click', function() {
-                window.guaranteedSimulator.stop();
-                setTimeout(() => {
-                    window.guaranteedSimulator.start();
-                    this.textContent = '✅ Restarted';
-                    this.style.background = '#00b894';
-                    setTimeout(() => {
-                        this.textContent = '🔄 Restart Simulation';
-                        this.style.background = '#ff4757';
-                    }, 2000);
-                }, 500);
-            });
-            existingBtn.style.display = 'block';
-        }
-    }, 2000);
     
     console.log('✅ Guaranteed simulator loaded and ready');
 })();
