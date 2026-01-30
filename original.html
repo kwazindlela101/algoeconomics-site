@@ -5,6 +5,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AlgoEconomics | AI-Powered Economic Intelligence for UK-Africa Markets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tickers.css">
+    <link rel="stylesheet" href="modal.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- <link rel="stylesheet" href="SECTORS-VISIBILITY-FIX.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script> 
@@ -62,6 +64,7 @@
             display: flex !important; 
             align-items: center; 
             overflow-x: hidden; 
+            overflow-y: hidden;
             visibility: visible !important; 
         }
         
@@ -72,7 +75,7 @@
             width: 100%; 
             position: relative;
             overflow-x: auto;
-            overflow-y: hidden;
+            
             -webkit-overflow-scrolling: touch;
             padding: 0.5rem 0;
             scrollbar-width: thin;
@@ -81,6 +84,9 @@
         
         .header-inner::-webkit-scrollbar {
             height: 6px;
+        }
+        .header-inner::-webkit-scrollbar:vertical {
+            width: 0;
         }
         .header-inner::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.1);
@@ -697,7 +703,6 @@
             font-size: 0.95rem; 
             color: var(--secondary); 
         }
-<li><a href="#about-us">About Us</a></li>
         /* ENHANCED SECTORS SECTION */
         .sectors { 
             background: var(--sectors-bg); 
@@ -1569,6 +1574,24 @@
 
             .speaker img[alt="Chido Munyati"] {
                 object-position: center 20%;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1023px) {
+            .speaker img[alt="Dr Peter Robinson"] {
+                object-position: center 0%;
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .speaker img {
+                image-rendering: auto;
+            }
+
+            .speaker img[alt="Dr Peter Robinson"] {
+                object-position: center top;
+                height: 220px;
             }
         }
         
@@ -3218,9 +3241,6 @@ h4 {
     padding-left: 0;
 }
         /* Fix for Stay Informed alignment */
-.footer-column {
-    /* This should already be in your CSS from other sections */
-}
 
 .client-portal-link {
     display: inline-flex;
@@ -3425,7 +3445,6 @@ h4 {
     border-bottom-color: #f4c542;
     transform: translateX(5px);
 }
-<style>
 .algoeconomics-section {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 1200px;
@@ -3525,7 +3544,6 @@ h4 {
   font-size: 0.85rem;
   color: #777;
 }
-  <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 .algo-section {
@@ -4730,160 +4748,7 @@ h4 {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     animation: slideDown 0.3s ease;
 }
-        <!-- FOOTER -->
-<footer style="background: linear-gradient(135deg, #0a1628 0%, #1a365d 50%, #0f1f38 100%); color: white; padding: 60px 0 0; border-top: 3px solid #d4af37;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-        <!-- Footer Main Content -->
-        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px;">
-            
-            <!-- Company Column -->
-            <div style="padding-right: 20px;">
-                <!-- Logo -->
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #d4af37, #f7ef8a); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #1a365d; font-weight: bold;">
-                        A
-                    </div>
-                    <span style="font-size: 1.4rem; font-weight: 700; color: white;">AlgoEconomics</span>
-                </div>
-                
-                <!-- Tagline -->
-                <p style="font-size: 0.95rem; line-height: 1.6; color: #a0aec0; margin-bottom: 25px;">
-                    AI-Powered Economic Intelligence for UK-Africa Markets
-                </p> 
-                
-                <!-- Company Info -->
-                <div style="font-size: 0.85rem; color: #718096; line-height: 1.8; margin-bottom: 20px;">
-                    AlgoEconomics Ltd<br>
-                    Registered in England and Wales<br>
-                    Company No. Pending Registration<br>
-                    London, United Kingdom
-                </div>
-                
-                <!-- Compliance Badges -->
-                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
-                    <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; font-size: 0.8rem; color: #d4af37; font-weight: 600;">
-                        <i class="fas fa-shield-alt"></i> GDPR Compliant
-                    </span>
-                    <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; font-size: 0.8rem; color: #d4af37; font-weight: 600;">
-                        <i class="fas fa-lock"></i> 256-bit SSL
-                    </span>
-                    <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; font-size: 0.8rem; color: #d4af37; font-weight: 600;">
-                        <i class="fas fa-check-circle"></i> ISO 27001
-                    </span>
-                </div>
-            </div>
-            
-            <!-- Platform Column -->
-            <div>
-                <h4 style="color: #d4af37; font-size: 1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Platform</h4>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 12px;">
-                        <a href="#why-us" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Why AlgoEconomics</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#sectors" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Sectors</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#regions" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Regions</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#features" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Features</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#pricing" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Pricing</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#corruption-index" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">AI Corruption Index</a>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Resources Column -->
-            <div>
-                <h4 style="color: #d4af37; font-size: 1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Resources</h4>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 12px;">
-                        <a href="#documentation" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">API Documentation</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#research" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Research Reports</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#case-studies" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Case Studies</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#blog" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Market Blog</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#help" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Help Centre</a>
-                    </li>
-                    <li style="margin-bottom: 12px;">
-                        <a href="#contact" style="color: #a0aec0; text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: inline-block;">Contact Us</a>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Newsletter Column -->
-            <div>
-                <h4 style="color: #d4af37; font-size: 1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Stay Informed</h4>
-                <p style="color: #a0aec0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
-                    Get platform updates and market intelligence insights delivered to institutional subscribers.
-                </p>
-                
-                <!-- Newsletter Form -->
-                <form style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
-                    <input type="email" placeholder="your.email@institution.com" required 
-                           style="padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; color: white; font-size: 0.95rem; width: 100%;">
-                    <button type="submit" 
-                            style="padding: 12px 20px; background: linear-gradient(135deg, #d4af37, #f7ef8a); color: #1a365d; border: none; border-radius: 5px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease;">
-                        Subscribe
-                    </button>
-                </form>
-                
-                <!-- Social Links -->
-                <div style="display: flex; gap: 15px; margin-top: 20px;">
-                    <a href="https://linkedin.com/company/algoeconomics" target="_blank" 
-                       style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;"
-                       aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://twitter.com/algoeconomics" target="_blank" 
-                       style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;"
-                       aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://youtube.com/@algoeconomics" target="_blank" 
-                       style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;"
-                       aria-label="YouTube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="https://github.com/algoeconomics" target="_blank" 
-                       style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;"
-                       aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Footer Bottom -->
-        <div style="border-top: 1px solid rgba(212, 175, 55, 0.2); padding: 30px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-            <div style="font-size: 0.9rem; color: #718096;">
-                © 2025 AlgoEconomics Ltd. All rights reserved.
-            </div>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                <a href="#privacy" style="color: #a0aec0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Privacy Policy</a>
-                <span style="color: #4a5568;">|</span>
-                <a href="#terms" style="color: #a0aec0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Terms of Service</a>
-                <span style="color: #4a5568;">|</span>
-                <a href="#cookies" style="color: #a0aec0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Cookie Policy</a>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- Add Mobile Responsive Styles -->
-<style>
+/* Add Mobile Responsive Styles */
 @media (max-width: 968px) {
     footer > div > div:first-child {
         grid-template-columns: 1fr 1fr !important;
@@ -5078,27 +4943,38 @@ footer input:focus {
         
         .stat-value {
             display: block;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            color: var(--white);
+            color: #ffffff;
+            opacity: 1;
             margin-bottom: 5px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
         }
         
-        .stat-value:first-child {
-            color: var(--electric-blue);
-        }
-        
+        .stat-value:first-child,
         .stat-value:nth-child(2) {
-            color: var(--gold);
+            color: #ffffff;
         }
         
         .stat-label {
             display: block;
-            font-size: 0.85rem;
-            color: var(--gray-light);
-            font-weight: 500;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            opacity: 1;
+        }
+
+        .city-stats .gold-text {
+            color: #ffffff;
+            background: none;
+            -webkit-text-fill-color: #ffffff;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+        }
+
+        .sparkline-container .loading {
+            display: none;
         }
         
         /* === GDP COMPARISON SECTION === */
@@ -5766,13 +5642,10 @@ footer input:focus {
     <!-- MODIFIED: Smart Ticker with Live Status -->
     <div class="market-indicators">
         <div class="ticker-container">
-            <div class="ticker-track" id="smartTickerTrack">
-                <!-- Dynamic content will be injected here by JavaScript -->
-            </div>
-            <!-- MODIFIED: Changed to show "Simulation paused" -->
-            <div id="tickerStatus" style="position: absolute; right: 20px; bottom: 5px; font-size: 0.7rem; color: var(--gold); display: flex; align-items: center; gap: 5px; cursor: pointer;">
-                <div id="liveIndicator" style="width: 8px; height: 8px; background: #ff9900; border-radius: 50%;"></div>
-                <span id="lastUpdateTime">Simulation paused</span>
+            <div class="ticker-wrapper">
+                <div class="ticker-track" id="smartTickerTrack" data-external-tickers="true">
+                    <!-- Dynamic content will be injected here by JavaScript -->
+                </div>
             </div>
         </div>
     </div>
@@ -6329,6 +6202,9 @@ p {
 <script>
 // Fix 484 errors - Resource retry system
 (function() {
+    if (window.externalTickersLoaded) {
+        return;
+    }
   // Store original fetch
   const originalFetch = window.fetch;
   
@@ -6392,47 +6268,6 @@ p {
             color: #555;
         }
 
-        /* Simulation status indicator */
-        .simulation-status {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            z-index: 10000;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Emergency restart button */
-        #emergencyRestart {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 9999;
-            font-size: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        #emergencyRestart:hover {
-            background: #ff3742;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-    <!-- Your existing head content... -->
-    
-    <style>
         /* YOUR EXISTING CSS HERE... */
         
         /* ========== ADD THESE NEW STYLES ========== */
@@ -6478,11 +6313,6 @@ p {
                 font-size: 14px;
             }
             
-            #emergencyRestart {
-                padding: 12px 20px;
-                font-size: 14px;
-                bottom: 80px;
-            }
         }
 /* ========== ACI STYLES ========== */
           * {
@@ -7231,6 +7061,7 @@ p {
     height: 300px;
     margin-top: 15px;
 }
+
         /* ========== END NEW STYLES ========== */
     </style>
     
@@ -7239,56 +7070,129 @@ p {
         
 
 <!-- Add this RIGHT BEFORE CLOSING </body> tag -->
-<div id="simStatus" style="position: fixed; bottom: 10px; right: 10px; 
-     background: rgba(0,0,0,0.8); color: #00ff88; padding: 5px 10px; 
-     border-radius: 3px; font-size: 11px; font-family: monospace; z-index: 10000;
-     backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
-    ✅ Simulation: LIVE
+<div id="aciMethodologyModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+        <button class="close-modal" type="button" data-aci-close aria-label="Close">×</button>
+        
+        <div class="modal-header">
+            <h2>ACI in Action</h2>
+            <span class="sample-tag">Sample Assessment</span>
+        </div>
+
+        <!-- Score Overview -->
+        <div class="score-overview">
+            <div class="country-sector">
+                <strong>Kenya - Mining Sector</strong>
+            </div>
+            <div class="overall-score">
+                <div class="score-circle">
+                    <span class="score-value">70</span>
+                </div>
+                <div>
+                    <div class="score-label">Corruption Risk Score</div>
+                    <div class="risk-level">⚠️ High Risk</div>
+                </div>
+            </div>
+            <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.95em; margin-top: 15px;">
+                Scale: 0 (Lowest Risk) - 100 (Highest Risk)
+            </p>
+        </div>
+
+        <!-- Three Methodology Layers -->
+        <div class="methodology-layers">
+            <!-- Layer 1: Institutional Integrity -->
+            <div class="layer-card">
+                <div class="layer-header">
+                    <span class="layer-name">1. Institutional Integrity</span>
+                    <span class="layer-score">65/100</span>
+                </div>
+                <p class="layer-description">
+                    Assessment of governance quality, regulatory frameworks, and anti-corruption mechanisms at national and sectoral levels.
+                </p>
+                <div class="indicators">
+                    <div class="indicator">
+                        <span class="indicator-name">Government Effectiveness</span>
+                        <span class="indicator-value">58/100</span>
+                    </div>
+                    <div class="indicator">
+                        <span class="indicator-name">Regulatory Quality</span>
+                        <span class="indicator-value">62/100</span>
+                    </div>
+                    <div class="indicator">
+                        <span class="indicator-name">Control of Corruption</span>
+                        <span class="indicator-value">72/100</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 2: Sector Exposure -->
+            <div class="layer-card">
+                <div class="layer-header">
+                    <span class="layer-name">2. Sector Exposure</span>
+                    <span class="layer-score">78/100</span>
+                </div>
+                <p class="layer-description">
+                    Sector-specific corruption vulnerabilities including licensing complexity, resource rents, and regulatory capture risk.
+                </p>
+                <div class="indicators">
+                    <div class="indicator">
+                        <span class="indicator-name">Licensing Complexity</span>
+                        <span class="indicator-value">82/100</span>
+                    </div>
+                    <div class="indicator">
+                        <span class="indicator-name">Resource Rent Dependency</span>
+                        <span class="indicator-value">75/100</span>
+                    </div>
+                    <div class="indicator">
+                        <span class="indicator-name">Regulatory Capture Risk</span>
+                        <span class="indicator-value">77/100</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 3: Execution Risk -->
+            <div class="layer-card">
+                <div class="layer-header">
+                    <span class="layer-name">3. Execution Risk</span>
+                    <span class="layer-score">67/100</span>
+                </div>
+                <p class="layer-description">
+                    Real-time signals from contract transparency, enforcement actions, and recent corruption incidents in the sector.
+                </p>
+                <div class="indicators">
+                    <div class="indicator">
+                        <span class="indicator-name">Contract Transparency</span>
+                        <span class="indicator-value">64/100</span>
+                    </div>
+                    <div class="indicator">
+                        <span class="indicator-name">Enforcement Track Record</span>
+                        <span class="indicator-value">71/100</span>
+                    </div>
+                    <div class="indicator">
+                        <span class="indicator-name">Recent Incident Severity</span>
+                        <span class="indicator-value">66/100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="modal-cta">
+            <h3>See Full ACI Analysis for Your Portfolio</h3>
+            <p>
+                Get real-time corruption risk assessments across 54 African countries and 7 key sectors, 
+                with actionable intelligence for your investment decisions.
+            </p>
+            <button class="consultation-button" type="button" onclick="openConsultationFromACI()">
+                Book a Consultation →
+            </button>
+        </div>
+    </div>
 </div>
 
-<!-- Emergency Restart Button -->
-<button id="emergencyRestart" style="position: fixed; bottom: 20px; left: 20px; 
-       background: #ff4757; color: white; border: none; padding: 10px 15px; 
-       border-radius: 5px; cursor: pointer; z-index: 9999; font-size: 12px;
-       display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-   🔄 Restart Simulation
-</button>
-
-<!-- SIMULATION STATUS SCRIPT -->
+<!-- SIMULATION ANALYTICS & PERFORMANCE -->
 <script>
-// Show emergency restart button after 5 seconds
-setTimeout(() => {
-    const restartBtn = document.getElementById('emergencyRestart');
-    if (restartBtn) {
-        restartBtn.style.display = 'block';
-        
-        restartBtn.addEventListener('click', function() {
-            if (window.marketSimulator) {
-              // window.marketSimulator.stop(); // Disabled - causing ticker to pause
-                setTimeout(() => {
-                    window.marketSimulator.start();
-                  
-                    this.style.background = '#00b894';
-                    setTimeout(() => {
-                        this.textContent = '🔄 Restart Simulation';
-                        this.style.background = '#ff4757';
-                    }, 2000);
-                }, 500);
-            }
-        });
-    }
-}, 5000);
-
-// Update simulation status every second
-setInterval(() => {
-    const status = document.getElementById('simStatus');
-    if (status && window.marketSimulator) {
-        status.textContent = window.marketSimulator.isLive ? 
-            '✅ Simulation: LIVE' : '⏸️ Simulation: PAUSED';
-        status.style.color = window.marketSimulator.isLive ? '#00ff88' : '#ff9900';
-    }
-}, 1000);
-    // =============================================
+// =============================================
 // SIMULATION ANALYTICS & PERFORMANCE
 // =============================================
 class SimulationAnalytics {
@@ -8164,8 +8068,15 @@ toggle() {
         }
 
         #gdpChartContainer {
-            overflow: hidden;
+            overflow: visible;
             max-width: 100%;
+            height: 420px;
+            padding: 18px 20px 36px;
+        }
+
+        #gdpChartContainer #gdpChart {
+            min-width: 0;
+            min-height: 100%;
         }
 
         #gdpChartContainer::before {
@@ -8175,15 +8086,27 @@ toggle() {
 
         @media (max-width: 768px) {
             #gdpChartContainer {
-                height: 280px;
-                padding: 12px 12px 18px;
+                height: 320px;
+                min-height: 320px;
+                padding: 12px 12px 28px;
+                overflow: visible;
+            }
+
+            #gdpChartContainer #gdpChart {
+                min-height: 260px;
             }
         }
 
         @media (max-width: 480px) {
             #gdpChartContainer {
-                height: 240px;
-                padding: 10px;
+                height: 300px;
+                min-height: 300px;
+                padding: 10px 10px 26px;
+                overflow: visible;
+            }
+
+            #gdpChartContainer #gdpChart {
+                min-height: 240px;
             }
         }
 
@@ -8282,7 +8205,7 @@ toggle() {
             }
 
             #gdpChart {
-                min-width: 520px;
+                min-width: 0;
             }
         }
 
@@ -8293,7 +8216,7 @@ toggle() {
             }
 
             #gdpChart {
-                min-width: 440px;
+                min-width: 0;
             }
         }
         
@@ -8437,6 +8360,11 @@ toggle() {
                             ];
                             const labels = mockGDPData.map(item => item.country);
                             const values = mockGDPData.map(item => item.gdp);
+                            const isSmall = window.matchMedia('(max-width: 600px)').matches;
+                            const isTiny = window.matchMedia('(max-width: 420px)').matches;
+                            const xTickFontSize = isTiny ? 10 : isSmall ? 11 : 12;
+                            const yTickFontSize = isTiny ? 10 : isSmall ? 11 : 12;
+                            const xTickRotation = isSmall ? 35 : 15;
                             new Chart(canvas, {
                                 type: 'bar',
                                 data: {
@@ -8469,6 +8397,14 @@ toggle() {
                                     responsive: true,
                                     maintainAspectRatio: false,
                                     animation: false,
+                                    layout: {
+                                        padding: {
+                                            top: 8,
+                                            right: 10,
+                                            bottom: isSmall ? 28 : 22,
+                                            left: 12
+                                        }
+                                    },
                                     plugins: {
                                         legend: { display: false }
                                     },
@@ -8476,19 +8412,27 @@ toggle() {
                                         y: {
                                             beginAtZero: true,
                                             grid: { color: 'rgba(0, 0, 0, 0.08)' },
-                                            ticks: { color: '#2c3e50' },
+                                            ticks: {
+                                                color: '#2c3e50',
+                                                font: { size: yTickFontSize },
+                                                padding: 6
+                                            },
                                             title: {
                                                 display: true,
                                                 text: 'GDP (Billions USD)',
-                                                color: '#2c3e50'
+                                                color: '#2c3e50',
+                                                font: { size: isSmall ? 11 : 12 }
                                             }
                                         },
                                         x: {
                                             grid: { color: 'rgba(0, 0, 0, 0.05)' },
                                             ticks: {
                                                 color: '#2c3e50',
-                                                maxRotation: 0,
-                                                autoSkip: false
+                                                maxRotation: xTickRotation,
+                                                minRotation: xTickRotation,
+                                                autoSkip: false,
+                                                font: { size: xTickFontSize },
+                                                padding: 8
                                             }
                                         }
                                     }
@@ -8520,7 +8464,7 @@ toggle() {
 
         <!-- See ACI in Action Button -->
         <div class="action-button-container">
-     <button class="action-button" onclick="scrollToDemo()">
+     <button class="action-button" type="button" onclick="showACIModal()">
                 See ACI in Action <i class="fas fa-arrow-right"></i>
             </button>
         </div>
@@ -9374,9 +9318,9 @@ toggle() {
             <div style="padding-right: 20px;">
                 <!-- Logo -->
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #d4af37, #f7ef8a); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #1a365d; font-weight: bold;">
-                        A
-                    </div>
+                    <a href="#home" class="nav-link logo-link">
+                        <img src="logo.png" alt="Home" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--primary);font-weight:bold;font-size:1.2rem;\'>AE</span>';">
+                    </a>
                     <span style="font-size: 1.4rem; font-weight: 700; color: white;">AlgoEconomics</span>
                 </div>
                 
@@ -9749,7 +9693,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateDisplay() {
             try {
                 const tickerTrack = document.getElementById('smartTickerTrack');
-                if (!tickerTrack) return;
+                if (!tickerTrack || tickerTrack.dataset.externalTickers === 'true') return;
 
                 let html = '';
                 
@@ -10000,57 +9944,40 @@ document.addEventListener('DOMContentLoaded', function() {
     // Run the nuclear fix
     setTimeout(applyNuclearEmailFix, 100);
 
-    // Mobile menu toggle
+    // ===== MOBILE MENU & SMOOTH SCROLL FIX =====
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const navOverlay = document.getElementById('navOverlay');
     const mobileQuickLinks = document.getElementById('mobileQuickLinks');
-    
+
+    // Toggle mobile menu
     if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            if (navOverlay) navOverlay.classList.toggle('active');
-            // Toggle mobile quick links visibility
-            if (mobileQuickLinks) {
-                mobileQuickLinks.classList.toggle('active');
-            }
-        });
-        
-        // Close menu when clicking overlay
-        if (navOverlay) {
-            navOverlay.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                navOverlay.classList.remove('active');
-                if (mobileQuickLinks) {
-                    mobileQuickLinks.classList.remove('active');
-                }
-            });
-        }
-        
-        // Close menu on link click (mobile)
-        document.querySelectorAll('.nav-link, .mobile-quick-link, .hero-nav-item').forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                if (navOverlay) navOverlay.classList.remove('active');
-                if (mobileQuickLinks) {
-                    mobileQuickLinks.classList.remove('active');
-                }
-            });
+            navOverlay?.classList.toggle('active');
         });
     }
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
+    // Close menu & smooth scroll on link click (mobile only)
+    [...document.querySelectorAll('.nav-links a, #mobileQuickLinks a')].forEach(link => {
+        link.addEventListener('click', e => {
+            const menuIsActive = navLinks?.classList.contains('active');
+            if (menuIsActive) {
+                e.preventDefault();
+                navLinks.classList.remove('active');
+                navOverlay?.classList.remove('active');
+                const targetId = link.getAttribute('href');
+                setTimeout(() => {
+                    document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth' });
+                }, 300); // matches CSS transition
             }
         });
+    });
+
+    // Overlay click closes menu
+    navOverlay?.addEventListener('click', () => {
+        navLinks?.classList.remove('active');
+        navOverlay?.classList.remove('active');
     });
 
     // Brief button
@@ -10476,6 +10403,11 @@ function createGDPChart() {
             ];
             const labels = mockGDPData.map(item => item.country);
             const values = mockGDPData.map(item => item.gdp);
+            const isSmall = window.matchMedia('(max-width: 600px)').matches;
+            const isTiny = window.matchMedia('(max-width: 420px)').matches;
+            const xTickFontSize = isTiny ? 10 : isSmall ? 11 : 12;
+            const yTickFontSize = isTiny ? 10 : isSmall ? 11 : 12;
+            const xTickRotation = isSmall ? 35 : 15;
             new Chart(ctx, { 
                 type: 'bar',
                 data: {
@@ -10500,6 +10432,14 @@ function createGDPChart() {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            top: 8,
+                            right: 10,
+                            bottom: isSmall ? 28 : 22,
+                            left: 12
+                        }
+                    },
                     plugins: {
                         legend: { display: false },
                         tooltip: {
@@ -10514,8 +10454,10 @@ function createGDPChart() {
                         x: {
                             ticks: {
                                 autoSkip: false,
-                                maxRotation: 35,
-                                minRotation: 35
+                                maxRotation: xTickRotation,
+                                minRotation: xTickRotation,
+                                font: { size: xTickFontSize },
+                                padding: 8
                             },
                             grid: {
                                 display: false
@@ -10525,7 +10467,7 @@ function createGDPChart() {
                                 text: 'Country',
                                 color: '#2c3e50',
                                 font: {
-                                    size: 14,
+                                    size: isSmall ? 11 : 14,
                                     weight: '600'
                                 },
                                 padding: { top: 12 }
@@ -10536,7 +10478,9 @@ function createGDPChart() {
                             ticks: {
                                 callback: function(value) {
                                     return '$' + value + 'B';
-                                }
+                                },
+                                font: { size: yTickFontSize },
+                                padding: 6
                             },
                             grid: {
                                 color: 'rgba(0, 0, 0, 0.08)'
@@ -10546,7 +10490,7 @@ function createGDPChart() {
                                 text: 'GDP (Billions USD)',
                                 color: '#2c3e50',
                                 font: {
-                                    size: 14,
+                                    size: isSmall ? 11 : 14,
                                     weight: '600'
                                 },
                                 padding: { bottom: 10 }
@@ -10595,21 +10539,6 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
-    // Scroll to demo form function
-        function scrollToDemo() {
-            const demoSection = document.getElementById('platform-demo');
-            demoSection.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-            
-            // Add a visual highlight effect
-            demoSection.style.backgroundColor = '#1a1f3a';
-            setTimeout(() => {
-                demoSection.style.backgroundColor = '';
-            }, 1000);
-        }
-
         // Form submission handling with Formspree
         document.getElementById('demoForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -10697,7 +10626,7 @@ if (!firstName || !lastName || !email || !company || !role || !investorType || !
         // Re-enable submit button
         submitButton.disabled = false;
         buttonText.textContent = 'REQUEST DEMO';
-    
+    }
 });
             // Highlight the "All Sectors" checkbox when clicked
             const allSectorsCheckbox = document.getElementById('sector-all');
@@ -10715,8 +10644,6 @@ if (!firstName || !lastName || !email || !company || !role || !investorType || !
                     });
                 }
             });
-        });
-    
 document.addEventListener('DOMContentLoaded', function() {
     // Sparkline data for each city (simulated growth trend)
     const sparklineData = {
@@ -10877,14 +10804,10 @@ document.addEventListener('keydown', function(event) {
 });
 
 // Form submission handling (optional - for tracking)
-
-});
 </script>
+<script src="modal.js"></script>
+<script src="tickers.js"></script>
 <script>
-<!-- GUARANTEED WORKING TICKER - ADD THIS BEFORE </body> -->
-// The form will still submit to Mailchimp
-(function() {
-<!-- GUARANTEED WORKING TICKER - ADD THIS BEFORE </body> -->
 // The form will still submit to Mailchimp
 (function() {
     console.log('🚀 Loading guaranteed ticker...');
@@ -10930,16 +10853,15 @@ document.addEventListener('keydown', function(event) {
             this.updateStatus();
         }
         
-       stop() {
-    // console.log('🛑 Stopping simulator');
-    // this.isLive = false;
-    // if (this.interval) {
-    //     clearInterval(this.interval);
-    //     this.interval = null;
-    // }
-    // this.updateStatus();
-}
-            this.updateStatus(); 
+        stop() {
+            // console.log('🛑 Stopping simulator');
+            // this.isLive = false;
+            // if (this.interval) {
+            //     clearInterval(this.interval);
+            //     this.interval = null;
+            // }
+            // this.updateStatus();
+            this.updateStatus();
         }
         
         simulateChanges() {
@@ -11013,14 +10935,6 @@ document.addEventListener('keydown', function(event) {
                 liveIndicator.style.boxShadow = this.isLive ? '0 0 10px #4CAF50' : 'none';
             }
             
-            // Update any status text
-            const statusElements = document.querySelectorAll('[id*="status"], [class*="status"]');
-            statusElements.forEach(el => {
-                if (el.textContent.includes('Simulation')) {
-                    el.textContent = this.isLive ? 'Simulation: LIVE' : 'Simulation: PAUSED';
-                    el.style.color = this.isLive ? '#00ff88' : '#ff9900';
-                }
-            });
         }
         
         forceAnimation() {
@@ -11045,7 +10959,7 @@ document.addEventListener('keydown', function(event) {
             console.log('📄 DOM loaded, starting simulation in 1 second...');
             setTimeout(() => {
                 window.guaranteedSimulator.start();
-            }, }, 2000);
+            }, 2000);
         });
     } else {
         console.log('📄 DOM already loaded, starting simulation...');
@@ -11054,39 +10968,8 @@ document.addEventListener('keydown', function(event) {
         }, 500);
     }
     
-    // 3. EMERGENCY BUTTON (optional)
-    setTimeout(() => {
-        const existingBtn = document.getElementById('emergencyRestart');
-        if (existingBtn) {
-            existingBtn.addEventListener('click', function() {
-                window.guaranteedSimulator.stop();
-                setTimeout(() => {
-                    window.guaranteedSimulator.start();
-                    this.textContent = '✅ Restarted';
-                    this.style.background = '#00b894';
-                    setTimeout(() => {
-                        this.textContent = '🔄 Restart Simulation';
-                        this.style.background = '#ff4757';
-                    }, 2000);
-                }, 500);
-            });
-            existingBtn.style.display = 'block';
-        }
-    }, 2000);
-    
     console.log('✅ Guaranteed simulator loaded and ready');
 })();
-    // Smooth scroll to How ACI Works section
-function scrollToDemo() {
-    const target = document.getElementById('how-aci-works');
-    if (target) {
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 100;
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-    }
-}
     // Force start ticker after 3 seconds
 setTimeout(() => {
     if (window.guaranteedSimulator) {
@@ -11094,9 +10977,6 @@ setTimeout(() => {
         console.log('✅ Ticker force-started');
     }
 }, 3000);
-    <script>
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Remove loading messages
             setTimeout(() => {
@@ -11204,7 +11084,6 @@ setTimeout(() => {
                 }
             }
         });
-        <!-- ADD THIS JAVASCRIPT AT THE BOTTOM OF YOUR HTML FILE, BEFORE THE CLOSING </body> TAG -->
 (function() {
     'use strict';
     

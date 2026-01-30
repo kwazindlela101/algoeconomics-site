@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="tickers.css">
     <link rel="stylesheet" href="modal.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <link rel="stylesheet" href="SECTORS-VISIBILITY-FIX.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script> 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">                            
@@ -1580,6 +1579,17 @@
         @media (min-width: 769px) and (max-width: 1023px) {
             .speaker img[alt="Dr Peter Robinson"] {
                 object-position: center 0%;
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .speaker img {
+                image-rendering: auto;
+            }
+
+            .speaker img[alt="Dr Peter Robinson"] {
+                object-position: center top;
                 height: 220px;
             }
         }
@@ -4932,27 +4942,38 @@ footer input:focus {
         
         .stat-value {
             display: block;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            color: var(--white);
+            color: #ffffff;
+            opacity: 1;
             margin-bottom: 5px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
         }
         
-        .stat-value:first-child {
-            color: var(--electric-blue);
-        }
-        
+        .stat-value:first-child,
         .stat-value:nth-child(2) {
-            color: var(--gold);
+            color: #ffffff;
         }
         
         .stat-label {
             display: block;
-            font-size: 0.85rem;
-            color: var(--gray-light);
-            font-weight: 500;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            opacity: 1;
+        }
+
+        .city-stats .gold-text {
+            color: #ffffff;
+            background: none;
+            -webkit-text-fill-color: #ffffff;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+        }
+
+        .sparkline-container .loading {
+            display: none;
         }
         
         /* === GDP COMPARISON SECTION === */
@@ -5573,7 +5594,7 @@ footer input:focus {
         }
 </style>
 </head>
-<body>
+<body id="top">
     <!-- Mobile menu overlay -->
     <div class="nav-overlay" id="navOverlay"></div>
 
@@ -5590,7 +5611,7 @@ footer input:focus {
                         <li><a href="#african-markets" class="nav-link"><i class="fas fa-city"></i><span>Markets</span></a></li>
                         <li><a href="#new-features" class="nav-link"><i class="fas fa-tools"></i><span>Tools</span></a></li>
                         <li><a href="#ai-demo" class="nav-link"><i class="fas fa-robot"></i><span>AI Demo</span></a></li>
-                      <li><a href="#index-section" class="nav-link"><i class="fas fa-shield-alt"></i><span>Index</span></a></li>
+                      <li><a href="#top" class="nav-link"><i class="fas fa-shield-alt"></i><span>Index</span></a></li>
                         <li><a href="#backend-programme" class="nav-link"><i class="fas fa-code"></i><span>Backend Programme</span></a></li>
                         <li><a href="#speakers" class="nav-link"><i class="fas fa-users"></i><span>Speakers</span></a></li>
                         <li><a href="#features" class="nav-link"><i class="fas fa-cogs"></i><span>Platform</span></a></li>
@@ -5699,7 +5720,6 @@ footer input:focus {
         </div>
     </section>
 
-    <!-- Rest of your HTML sections remain exactly the same -->
    <section id="why-us" class="section">
   <div class="container">
     <div class="section-header">
@@ -6212,11 +6232,6 @@ p {
 })();
 </script>
 
-    <!-- Your existing head content... -->
-    
-    <!-- Other CSS files and styles... -->
-    
-    <!-- ADD THIS RIGHT BEFORE CLOSING HEAD TAG -->
     <style>
         /* WebGL fallback styling */
         .webgl-fallback {
@@ -7043,11 +7058,6 @@ p {
         /* ========== END NEW STYLES ========== */
     </style>
     
-    <!-- Your other head content... -->
-
-        
-
-<!-- Add this RIGHT BEFORE CLOSING </body> tag -->
 <div id="aciMethodologyModal" class="modal" aria-hidden="true">
     <div class="modal-content">
         <button class="close-modal" type="button" data-aci-close aria-label="Close">×</button>
@@ -7259,8 +7269,6 @@ toggle() {
     
 
  
-    <!-- NEW: BACKEND ENGINEERING SECTION ADDED HERE -->
-    <!-- Anchor for scrolling -->
     <span id="backend-programme"></span>
 
     <section id="backend-engineering" class="section backend-engineering">
@@ -9217,46 +9225,199 @@ toggle() {
         </div>
     </div>        
 
-    <section id="pricing" class="section pricing">
-        <div class="container">
-            <div class="section-header"><h2>Pricing Plans</h2><p>Flexible options for every organization size</p></div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header"><h3>Starter</h3><div class="price">£49<span>/month</span></div></div>
-                    <ul class="pricing-features">
-                        <li>Daily market brief</li>
-                        <li>5 custom alerts</li>
-                        <li>Basic analytics dashboard</li>
-                        <li>Email support</li>
-                    </ul>
-                    <a href="#newsletter" class="btn">Get Started</a>
-                </div>
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Most Popular</div>
-                    <div class="pricing-header"><h3>Professional</h3><div class="price">£149<span>/month</span></div></div>
-                    <ul class="pricing-features">
-                        <li>Everything in Starter</li>
-                        <li>Unlimited alerts</li>
-                        <li>Advanced analytics</li>
-                        <li>API access</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <a href="#newsletter" class="btn">Get Started</a>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-header"><h3>Enterprise</h3><div class="price">Custom</div></div>
-                    <ul class="pricing-features">
-                        <li>Everything in Professional</li>
-                        <li>Dedicated account manager</li>
-                        <li>Custom integrations</li>
-                        <li>On-site training</li>
-                        <li>24/7 support</li>
-                    </ul>
-                    <a href="#newsletter" class="btn">Contact Sales</a>
-                </div>
-            </div>
+
+<section id="pricing" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-navy-900 mb-4">Infrastructure Licensing</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Enterprise governance intelligence for institutional investors deploying capital across African infrastructure markets
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      
+      <!-- Infrastructure Tier -->
+      <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-gray-200 hover:border-gold-500 transition-all">
+        <h3 class="text-2xl font-bold text-navy-900 mb-4">Infrastructure</h3>
+        <p class="text-gray-600 mb-6">For single-market deployment and sector-specific risk assessment</p>
+        
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Single market coverage</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Up to 3 sector modules</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Real-time ACI monitoring</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Quarterly governance reports</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">API access (1,000 calls/month)</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Up to 5 user seats</span>
+          </li>
+        </ul>
+
+        <a href="#consultation" class="block w-full text-center bg-gold-500 hover:bg-gold-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+          Schedule Assessment
+        </a>
+      </div>
+
+      <!-- Enterprise Tier (Most Popular) -->
+      <div class="bg-white rounded-lg shadow-xl p-8 border-2 border-gold-500 transform scale-105 relative">
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <span class="bg-gold-500 text-white px-4 py-1 rounded-full text-sm font-semibold">Most Popular</span>
         </div>
-    </section>
+        
+        <h3 class="text-2xl font-bold text-navy-900 mb-4">Enterprise</h3>
+        <p class="text-gray-600 mb-6">For multi-market portfolio governance and cross-sector risk intelligence</p>
+        
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Up to 5 markets coverage</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">All 7 sector modules</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Real-time ACI monitoring + alerts</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Monthly governance reports</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">API access (10,000 calls/month)</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Up to 20 user seats</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Dedicated account manager</span>
+          </li>
+        </ul>
+
+        <a href="#consultation" class="block w-full text-center bg-gold-500 hover:bg-gold-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+          Schedule Assessment
+        </a>
+      </div>
+
+      <!-- Institutional Tier -->
+      <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-gray-200 hover:border-gold-500 transition-all">
+        <h3 class="text-2xl font-bold text-navy-900 mb-4">Institutional</h3>
+        <p class="text-gray-600 mb-6">For sovereign wealth funds, DFIs, and institutional asset managers</p>
+        
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Full continental coverage</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">All 7 sector modules + custom sectors</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Real-time ACI + custom risk models</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Weekly governance intelligence briefings</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Unlimited API access</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">Unlimited user seats</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">White-label integration options</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="text-gray-700">24/7 priority support</span>
+          </li>
+        </ul>
+
+        <a href="#consultation" class="block w-full text-center bg-gold-500 hover:bg-gold-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+          Contact Sales
+        </a>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="text-gray-600 text-lg">
+        All licensing includes quarterly strategy sessions and regulatory compliance support.
+      </p>
+      <p class="text-gray-500 mt-2">
+        Annual licensing starting from £30,000. Custom configurations available for multi-institutional partnerships.
+      </p>
+    </div>
+  </div>
+</section>
 
     <section id="testimonials" class="section testimonials">
         <div class="container">
@@ -9296,9 +9457,9 @@ toggle() {
             <div style="padding-right: 20px;">
                 <!-- Logo -->
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                    <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #d4af37, #f7ef8a); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #1a365d; font-weight: bold;">
-                        A
-                    </div>
+                    <a href="#home" class="nav-link logo-link">
+                        <img src="logo.png" alt="Home" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--primary);font-weight:bold;font-size:1.2rem;\'>AE</span>';">
+                    </a>
                     <span style="font-size: 1.4rem; font-weight: 700; color: white;">AlgoEconomics</span>
                 </div>
                 
@@ -9378,7 +9539,6 @@ toggle() {
                     </li>
                 </ul>
             </div>
-            <!-- REPLACE lines 8600-8615 in your HTML file with this code -->
 
 <!-- Newsletter Column -->
 <div>
@@ -9415,11 +9575,6 @@ toggle() {
         </div>
     </form>
 
-    <!-- Response Messages -->
-    <div id="mce-response" style="margin-bottom: 15px; display: none;">
-        <p id="mce-message" style="padding: 10px; border-radius: 5px; font-size: 0.9rem; margin: 0;"></p>
-    </div>
-
     <!-- Social Links -->
     <div style="display: flex; gap: 15px; margin-top: 20px;">
         <a href="https://linkedin.com/company/algoeconomics" target="_blank"
@@ -9444,31 +9599,6 @@ toggle() {
         </a>
     </div>
 </div>
-            <!-- Social Links -->
-                <div style="display: flex; gap: 15px; margin-top: 20px;">
-                    <a href="https://linkedin.com/company/algoeconomics" target="_blank" 
-                       style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;"
-                       aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://twitter.com/algoeconomics" target="_blank" 
-                       style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;"
-                       aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://youtube.com/@algoeconomics" target="_blank" 
-                       style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;"
-                       aria-label="YouTube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="https://github.com/algoeconomics" target="_blank" 
-                       style="width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;"
-                       aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
         
         <!-- Footer Bottom -->
         <div style="border-top: 1px solid rgba(212, 175, 55, 0.2); padding: 30px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
@@ -9490,7 +9620,6 @@ toggle() {
 
 
   
-<!-- Your existing JavaScript code remains exactly the same -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // =============================================
@@ -9922,57 +10051,52 @@ document.addEventListener('DOMContentLoaded', function() {
     // Run the nuclear fix
     setTimeout(applyNuclearEmailFix, 100);
 
-    // Mobile menu toggle
+    // ===== MOBILE MENU & SMOOTH SCROLL FIX =====
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const navOverlay = document.getElementById('navOverlay');
     const mobileQuickLinks = document.getElementById('mobileQuickLinks');
-    
+
+    // Toggle mobile menu
     if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            if (navOverlay) navOverlay.classList.toggle('active');
-            // Toggle mobile quick links visibility
-            if (mobileQuickLinks) {
-                mobileQuickLinks.classList.toggle('active');
-            }
-        });
-        
-        // Close menu when clicking overlay
-        if (navOverlay) {
-            navOverlay.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                navOverlay.classList.remove('active');
-                if (mobileQuickLinks) {
-                    mobileQuickLinks.classList.remove('active');
-                }
-            });
-        }
-        
-        // Close menu on link click (mobile)
-        document.querySelectorAll('.nav-link, .mobile-quick-link, .hero-nav-item').forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                if (navOverlay) navOverlay.classList.remove('active');
-                if (mobileQuickLinks) {
-                    mobileQuickLinks.classList.remove('active');
-                }
-            });
+            navOverlay?.classList.toggle('active');
         });
     }
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
+    // Close menu & smooth scroll on link click (mobile only)
+    [...document.querySelectorAll('.nav-links a, #mobileQuickLinks a')].forEach(link => {
+        link.addEventListener('click', e => {
+            const menuIsActive = navLinks?.classList.contains('active');
+            if (menuIsActive) {
+                const targetId = link.getAttribute('href');
+                if (!targetId || targetId === '#') {
+                    return;
+                }
+                e.preventDefault();
+                navLinks.classList.remove('active');
+                navOverlay?.classList.remove('active');
+                setTimeout(() => {
+                    if (targetId === '#top') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        return;
+                    }
+                    const target = targetId.startsWith('#') ? document.querySelector(targetId) : null;
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        return;
+                    }
+                    window.location.href = targetId;
+                }, 300); // matches CSS transition
             }
         });
+    });
+
+    // Overlay click closes menu
+    navOverlay?.addEventListener('click', () => {
+        navLinks?.classList.remove('active');
+        navOverlay?.classList.remove('active');
     });
 
     // Brief button
