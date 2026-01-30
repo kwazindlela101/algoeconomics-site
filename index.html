@@ -108,6 +108,8 @@
             position: absolute; 
             right: 1rem; 
             z-index: 1001;
+            pointer-events: auto;
+            touch-action: manipulation;
         }
         
         .nav-links { 
@@ -5601,7 +5603,7 @@ footer input:focus {
     <header>
         <div class="container">
             <div class="header-inner">
-                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" onclick="var nav=document.querySelector('.nav-links');var overlay=document.getElementById('navOverlay');if(nav){nav.classList.toggle('active');}if(overlay){overlay.classList.toggle('active');}"><i class="fas fa-bars"></i></button>
                 <nav id="nav-menu">
                     <ul class="nav-links">
                         <li><a href="#home" class="nav-link logo-link active"><img src="logo.png" alt="Home" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--primary);font-weight:bold;font-size:1.2rem;\'>AE</span>';"></a></li>
@@ -10678,8 +10680,7 @@ if (demoForm) demoForm.addEventListener('submit', function(e) {
     .catch(error => console.error('Error:', error));
 });
         // Form submission handling with Formspree
-        if (!demoForm) return;
-        demoForm.addEventListener('submit', async function(e) {
+        if (demoForm) demoForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form elements
