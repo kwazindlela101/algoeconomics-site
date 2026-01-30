@@ -10796,6 +10796,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById(ctxId);
         if (!canvas || !canvas.getContext) return;
         const ctx = canvas.getContext('2d');
+        const existing = Chart.getChart(canvas);
+        if (existing) {
+            existing.destroy();
+        }
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -10826,6 +10830,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('gdpChart');
         const container = document.getElementById('gdpChartContainer');
         if (!canvas || !canvas.getContext || typeof Chart === 'undefined') return;
+        const existing = Chart.getChart(canvas);
+        if (existing) {
+            existing.destroy();
+        }
         const ctx = canvas.getContext('2d');
         const mockGDPData = [
             { country: "South Africa", gdp: 380.9, growth: 1.9, population: 59.4 },
@@ -11133,6 +11141,10 @@ setTimeout(() => {
             const gdpCtx = document.getElementById('gdpChart');
             if (gdpCtx) {
                 try {
+                    const existingChart = Chart.getChart(gdpCtx);
+                    if (existingChart) {
+                        existingChart.destroy();
+                    }
                     new Chart(gdpCtx, {
                         type: 'bar',
                         data: {
@@ -11198,10 +11210,14 @@ setTimeout(() => {
             createSparkline('lagosChart', [130, 132, 134, 136], '#00d4ff');
             createSparkline('nairobiChart', [105, 107, 109, 110], '#ffb347');
             createSparkline('johannesburgChart', [400, 402, 404, 405], '#4299e1');
-               function createSparkline(canvasId, data, color) {
+            function createSparkline(canvasId, data, color) {
                 const ctx = document.getElementById(canvasId);
                 if (ctx) {
                     try {
+                        const existingSparkline = Chart.getChart(ctx);
+                        if (existingSparkline) {
+                            existingSparkline.destroy();
+                        }
                         new Chart(ctx, {
                             type: 'line',
                             data: {
@@ -11230,124 +11246,108 @@ setTimeout(() => {
                 }
             }
         });
-(function() {
+;(function() {
     'use strict';
-    
+
     const form = document.getElementById('mc-embedded-subscribe-form');
     const emailInput = document.getElementById('mce-EMAIL');
     const submitButton = document.getElementById('mc-subscribe-button');
     const responseDiv = document.getElementById('mce-response');
     const messageEl = document.getElementById('mce-message');
     if (!form || !emailInput || !submitButton || !responseDiv || !messageEl) return;
-    
-    // Mailchimp JSONP endpoint (avoids CORS issues)
+
     const MAILCHIMP_URL = 'https://algoeconomics.us9.list-manage.com/subscribe/post-json?u=7f33efbbec31ffdd7dd87bce1&id=fddc7c24c3&f_id=007a42e1f0';
-    
+
     function showMessage(message, isSuccess) {
         responseDiv.style.display = 'block';
         messageEl.textContent = message;
         messageEl.style.backgroundColor = isSuccess ? 'rgba(72, 187, 120, 0.2)' : 'rgba(245, 101, 101, 0.2)';
         messageEl.style.color = isSuccess ? '#48bb78' : '#f56565';
         messageEl.style.border = isSuccess ? '1px solid #48bb78' : '1px solid #f56565';
-        
-        // Auto-hide success message after 5 seconds
+
         if (isSuccess) {
             setTimeout(() => {
                 responseDiv.style.display = 'none';
             }, 5000);
         }
     }
-    
+
     function validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
-    
+
     function submitToMailchimp(email) {
-        // Create JSONP callback
         const callbackName = 'mcCallback' + Date.now();
-        
+        const script = document.createElement('script');
+
         window[callbackName] = function(data) {
-            // Clean up
             delete window[callbackName];
-            document.body.removeChild(script);
-            
-            // Re-enable button
+            script.remove();
+
             submitButton.disabled = false;
             submitButton.textContent = 'Subscribe';
             submitButton.style.opacity = '1';
             submitButton.style.cursor = 'pointer';
-            
+
             if (data.result === 'success') {
                 showMessage('Thanks for subscribing! Check your email to confirm.', true);
-                emailInput.value = ''; // Clear the input
-            } else {
-                // Handle error messages
-                let errorMessage = data.msg || 'An error occurred. Please try again.';
-                // Remove HTML tags from Mailchimp error messages
-                errorMessage = errorMessage.replace(/<[^>]*>/g, '');
-                showMessage(errorMessage, false);
+                emailInput.value = '';
+                return;
             }
+
+            let errorMessage = data.msg || 'An error occurred. Please try again.';
+            errorMessage = errorMessage.replace(/<[^>]*>/g, '');
+            showMessage(errorMessage, false);
         };
-        
-        // Create script element for JSONP
-        const script = document.createElement('script');
+
         const params = new URLSearchParams({
             EMAIL: email,
             c: callbackName
         });
         script.src = MAILCHIMP_URL + '&' + params.toString();
-        document.body.appendChild(script);
-        
-        // Handle script loading errors
         script.onerror = function() {
             delete window[callbackName];
-            document.body.removeChild(script);
+            script.remove();
             submitButton.disabled = false;
             submitButton.textContent = 'Subscribe';
             submitButton.style.opacity = '1';
             submitButton.style.cursor = 'pointer';
             showMessage('Network error. Please check your connection and try again.', false);
         };
+        document.body.appendChild(script);
     }
-    
+
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         const email = emailInput.value.trim();
-        
-        // Validate email
         if (!email) {
             showMessage('Please enter your email address.', false);
             return;
         }
-        
+
         if (!validateEmail(email)) {
             showMessage('Please enter a valid email address.', false);
             return;
         }
-        
-        // Disable button during submission
+
         submitButton.disabled = true;
         submitButton.textContent = 'Subscribing...';
         submitButton.style.opacity = '0.7';
         submitButton.style.cursor = 'not-allowed';
-        
-        // Hide any previous messages
         responseDiv.style.display = 'none';
-        
-        // Submit to Mailchimp
+
         submitToMailchimp(email);
     });
-    
-    // Add hover effect to button
+
     submitButton.addEventListener('mouseenter', function() {
         if (!this.disabled) {
             this.style.transform = 'translateY(-2px)';
             this.style.boxShadow = '0 4px 12px rgba(212, 175, 55, 0.3)';
         }
     });
-    
+
     submitButton.addEventListener('mouseleave', function() {
         this.style.transform = 'translateY(0)';
         this.style.boxShadow = 'none';
