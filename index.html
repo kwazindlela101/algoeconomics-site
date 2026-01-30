@@ -5726,7 +5726,7 @@ footer input:focus {
   <div class="container">
     <div class="section-header">
       <h2>Why Choose Us</h2>
-      <p>At AlgoEconomics, we decode the signals shaping £1.5 trillion in UK–Africa infrastructure opportunity with governance intelligence, institutional clarity, and real-time precision.</p>
+      <p>At AlgoEconomics, we decode the signals that shape UK–Africa markets with governance, nuance, and real-time clarity.</p>
     </div>
 
     <div class="intro-text">
@@ -11211,49 +11211,14 @@ setTimeout(() => {
             createSparkline('lagosChart', [130, 132, 134, 136], '#00d4ff');
             createSparkline('nairobiChart', [105, 107, 109, 110], '#ffb347');
             createSparkline('johannesburgChart', [400, 402, 404, 405], '#4299e1');
-              function createSparkline(canvasId, data, color) {
-    const ctx = document.getElementById(canvasId);
-    if (ctx) {
-        try {
-            // Destroy existing chart if it exists
-            if (window.chartInstances && window.chartInstances[canvasId]) {
-                window.chartInstances[canvasId].destroy();
-            }
-            
-            // Initialize chartInstances object if it doesn't exist
-            if (!window.chartInstances) {
-                window.chartInstances = {};
-            }
-            
-            // Create new chart
-            window.chartInstances[canvasId] = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.map((_, i) => i),
-                    datasets: [{
-                        data: data,
-                        borderColor: color,
-                        borderWidth: 2,
-                        fill: false,
-                        pointRadius: 0,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { display: false },
-                        y: { display: false }
-                    }
-                }
-            });
-        } catch (error) {
-            console.error(`Error creating sparkline for ${canvasId}:`, error);
-        }
-    }
-}
+            function createSparkline(canvasId, data, color) {
+                const ctx = document.getElementById(canvasId);
+                if (ctx) {
+                    try {
+                        const existingSparkline = Chart.getChart(ctx);
+                        if (existingSparkline) {
+                            existingSparkline.destroy();
+                        }
                         new Chart(ctx, {
                             type: 'line',
                             data: {
@@ -11390,3 +11355,101 @@ setTimeout(() => {
     });
 })();
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
