@@ -9678,8 +9678,9 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         function showWebGLFallback() {
-            const container = document.getElementById('simulation-container') || 
-                             document.getElementById('smartTickerTrack')?.parentElement;
+            const smartTickerTrack = document.getElementById('smartTickerTrack');
+            const container = document.getElementById('simulation-container') ||
+                             (smartTickerTrack ? smartTickerTrack.parentElement : null);
             if (container) {
                 container.innerHTML = `
                     <div style="padding: 20px; text-align: center; background: #f5f5f5; border-radius: 8px;">
@@ -10061,14 +10062,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            navOverlay?.classList.toggle('active');
+    if (navOverlay) {
+        navOverlay.classList.toggle('active');
+    }
         });
     }
 
     // Close menu & smooth scroll on link click (mobile only)
     [...document.querySelectorAll('.nav-links a, #mobileQuickLinks a')].forEach(link => {
         link.addEventListener('click', e => {
-            const menuIsActive = navLinks?.classList.contains('active');
+            const menuIsActive = navLinks ? navLinks.classList.contains('active') : false;
             if (menuIsActive) {
                 const targetId = link.getAttribute('href');
                 if (!targetId || targetId === '#') {
@@ -10076,7 +10079,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 e.preventDefault();
                 navLinks.classList.remove('active');
-                navOverlay?.classList.remove('active');
+                if (navOverlay) {
+                    navOverlay.classList.remove('active');
+                }
                 setTimeout(() => {
                     if (targetId === '#top') {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -10094,10 +10099,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Overlay click closes menu
-    navOverlay?.addEventListener('click', () => {
-        navLinks?.classList.remove('active');
-        navOverlay?.classList.remove('active');
-    });
+    if (navOverlay) {
+        navOverlay.addEventListener('click', () => {
+            if (navLinks) {
+                navLinks.classList.remove('active');
+            }
+            navOverlay.classList.remove('active');
+        });
+    }
 
     // Brief button
     const briefBtn = document.querySelector('.brief-btn');
@@ -10628,7 +10637,17 @@ function createGDPChart() {
 }
 
 // Demo Request Form Handler
-document.getElementById('demoForm')?.addEventListener('submit', function(e) {
+function showError(message) {
+    const errorMessage = document.getElementById('errorMessage');
+    if (!errorMessage) {
+        alert(message);
+        return;
+    }
+    errorMessage.textContent = message;
+    errorMessage.style.display = 'block';
+}
+const demoForm = document.getElementById('demoForm');
+if (demoForm) demoForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
     const formData = new FormData(this);
@@ -10659,7 +10678,8 @@ document.getElementById('demoForm')?.addEventListener('submit', function(e) {
     .catch(error => console.error('Error:', error));
 });
         // Form submission handling with Formspree
-        document.getElementById('demoForm').addEventListener('submit', async function(e) {
+        if (!demoForm) return;
+        demoForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form elements
@@ -10695,7 +10715,7 @@ console.log('Checkboxes:', sectorCheckboxes);
 
 // Validate form
 if (!firstName || !lastName || !email || !company || !role || !investorType || !hasSelectedSectors) {
-    showError('Please fill in all required fields and select at least one sector of interest.');
+                showError('Please fill in all required fields and select at least one sector of interest.');
     return;
 }
             
@@ -10751,7 +10771,7 @@ if (!firstName || !lastName || !email || !company || !role || !investorType || !
             const allSectorsCheckbox = document.getElementById('sector-all');
             const otherSectorsCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#sector-all)');
             
-            allSectorsCheckbox.addEventListener('change', function() {
+            if (allSectorsCheckbox) allSectorsCheckbox.addEventListener('change', function() {
                 if (this.checked) {
                     otherSectorsCheckboxes.forEach(checkbox => {
                         checkbox.checked = true;
@@ -10773,7 +10793,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Render sparkline charts
     function renderSparkline(ctxId, data, color) {
-        const ctx = document.getElementById(ctxId).getContext('2d');
+        const canvas = document.getElementById(ctxId);
+        if (!canvas || !canvas.getContext) return;
+        const ctx = canvas.getContext('2d');
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -10890,7 +10912,8 @@ document.addEventListener('DOMContentLoaded', function() {
          // Modal functionality
         const modal = document.getElementById('consultationModal');
   // Form submission handling (optional - for tracking)
-        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+        const consultationForm = document.getElementById('consultationForm');
+        if (consultationForm) consultationForm.addEventListener('submit', function(e) {
             // You can add analytics tracking here
             console.log('Consultation form submitted');
             // The form will still submit to Formspree
@@ -10899,25 +10922,29 @@ document.addEventListener('DOMContentLoaded', function() {
 const consultationModal = document.getElementById('consultationModal');
 
 window.openConsultationModal = function() {
+    if (!consultationModal) return;
     consultationModal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
 
 function closeConsultationModal() {
+    if (!consultationModal) return;
     consultationModal.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
 
 // Close modal when clicking outside of it
-window.addEventListener('click', function(event) {
-    if (event.target == consultationModal) {
-        closeConsultationModal();
-    }
-});
+if (consultationModal) {
+    window.addEventListener('click', function(event) {
+        if (event.target == consultationModal) {
+            closeConsultationModal();
+        }
+    });
+}
 
 // Close modal with Escape key
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' && consultationModal.style.display === 'block') {
+    if (consultationModal && event.key === 'Escape' && consultationModal.style.display === 'block') {
         closeConsultationModal();
     }
 });
@@ -11211,6 +11238,7 @@ setTimeout(() => {
     const submitButton = document.getElementById('mc-subscribe-button');
     const responseDiv = document.getElementById('mce-response');
     const messageEl = document.getElementById('mce-message');
+    if (!form || !emailInput || !submitButton || !responseDiv || !messageEl) return;
     
     // Mailchimp JSONP endpoint (avoids CORS issues)
     const MAILCHIMP_URL = 'https://algoeconomics.us9.list-manage.com/subscribe/post-json?u=7f33efbbec31ffdd7dd87bce1&id=fddc7c24c3&f_id=007a42e1f0';
