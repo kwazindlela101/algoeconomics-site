@@ -8324,114 +8324,6 @@ toggle() {
                 <h4>Regional GDP Comparison</h4>
                 <div class="chart-container" id="gdpChartContainer">
                     <canvas id="gdpChart"></canvas>
-                    <script>
-                        (function() {
-                            const canvas = document.getElementById('gdpChart');
-                            const container = document.getElementById('gdpChartContainer');
-                            if (!canvas || typeof Chart === 'undefined') {
-                                return;
-                            }
-                            if (canvas.dataset.gdpChartReady === 'true') {
-                                return;
-                            }
-                            const existing = Chart.getChart(canvas);
-                            if (existing) {
-                                existing.destroy();
-                            }
-                            const mockGDPData = [
-                                { country: "South Africa", gdp: 380.9, growth: 1.9, population: 59.4 },
-                                { country: "Nigeria", gdp: 362.8, growth: 3.2, population: 223.8 },
-                                { country: "Egypt", gdp: 347.6, growth: 4.5, population: 110.1 },
-                                { country: "Kenya", gdp: 113.4, growth: 5.5, population: 54.0 },
-                                { country: "Morocco", gdp: 134.2, growth: 3.1, population: 37.8 },
-                                { country: "Ghana", gdp: 76.4, growth: 4.8, population: 33.5 }
-                            ];
-                            const labels = mockGDPData.map(item => item.country);
-                            const values = mockGDPData.map(item => item.gdp);
-                            const isSmall = window.matchMedia('(max-width: 600px)').matches;
-                            const isTiny = window.matchMedia('(max-width: 420px)').matches;
-                            const xTickFontSize = isTiny ? 10 : isSmall ? 11 : 12;
-                            const yTickFontSize = isTiny ? 10 : isSmall ? 11 : 12;
-                            const xTickRotation = isSmall ? 35 : 15;
-                            new Chart(canvas, {
-                                type: 'bar',
-                                data: {
-                                    labels,
-                                    datasets: [{
-                                        label: 'GDP (Billions USD)',
-                                        data: values,
-                                        backgroundColor: [
-                                            'rgba(212, 175, 55, 0.8)',
-                                            'rgba(66, 153, 225, 0.8)',
-                                            'rgba(72, 187, 120, 0.8)',
-                                            'rgba(155, 89, 182, 0.8)',
-                                            'rgba(245, 101, 101, 0.8)',
-                                            'rgba(237, 137, 54, 0.8)'
-                                        ],
-                                        borderColor: [
-                                            'rgb(212, 175, 55)',
-                                            'rgb(66, 153, 225)',
-                                            'rgb(72, 187, 120)',
-                                            'rgb(155, 89, 182)',
-                                            'rgb(245, 101, 101)',
-                                            'rgb(237, 137, 54)'
-                                        ],
-                                        borderWidth: 1,
-                                        barPercentage: 0.7,
-                                        categoryPercentage: 0.8
-                                    }]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    animation: false,
-                                    layout: {
-                                        padding: {
-                                            top: 8,
-                                            right: 10,
-                                            bottom: isSmall ? 28 : 22,
-                                            left: 12
-                                        }
-                                    },
-                                    plugins: {
-                                        legend: { display: false }
-                                    },
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            grid: { color: 'rgba(0, 0, 0, 0.08)' },
-                                            ticks: {
-                                                color: '#2c3e50',
-                                                font: { size: yTickFontSize },
-                                                padding: 6
-                                            },
-                                            title: {
-                                                display: true,
-                                                text: 'GDP (Billions USD)',
-                                                color: '#2c3e50',
-                                                font: { size: isSmall ? 11 : 12 }
-                                            }
-                                        },
-                                        x: {
-                                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
-                                            ticks: {
-                                                color: '#2c3e50',
-                                                maxRotation: xTickRotation,
-                                                minRotation: xTickRotation,
-                                                autoSkip: false,
-                                                font: { size: xTickFontSize },
-                                                padding: 8
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                            if (container) {
-                                container.classList.add('loaded');
-                            }
-                            canvas.dataset.gdpChartReady = 'true';
-                        })();
-                    </script>
                     <style>
                         #gdpChartContainer::before {
                             content: none !important;
@@ -9623,6 +9515,19 @@ toggle() {
 
   
 <script>
+// DESTROY BEFORE CREATE - CRITICAL FOR MOBILE
+window.safeCreateChart = function(canvasId, config) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return null;
+    
+    // DESTROY EXISTING CHART (fixes "canvas already in use")
+    const existing = Chart.getChart(canvas);
+    if (existing) existing.destroy();
+    
+    // CREATE NEW CHART
+    return new Chart(canvas, config);
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     // =============================================
     // WEBGL & THREE.JS SAFETY CHECKS
@@ -10382,9 +10287,22 @@ document.addEventListener('DOMContentLoaded', function() {
         return overviews[country] || `<h5>Market Overview</h5><p>General overview of the ${getCountryName(country)} market environment.</p>`;
     }
 
-    // Charts
-    createSparklineCharts();
-    createGDPChart();
+    // Charts (mobile-safe init with debounce)
+    let chartInitTimer;
+    function initializeChartsSafely() {
+        if (typeof Chart === 'undefined') return;
+        if (chartInitTimer) {
+            clearTimeout(chartInitTimer);
+        }
+        chartInitTimer = setTimeout(() => {
+            createSparklineCharts();
+            createGDPChart();
+        }, 0);
+    }
+
+    initializeChartsSafely();
+    window.addEventListener('resize', initializeChartsSafely);
+    window.addEventListener('orientationchange', initializeChartsSafely);
 
     // Active nav highlight on scroll
     window.addEventListener('scroll', function() {
@@ -10436,16 +10354,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add touch events for mobile
         economicCube.addEventListener('touchstart', function(e) {
-            e.preventDefault();
             this.style.animationPlayState = 'paused';
-        });
+        }, { passive: true });
         
         economicCube.addEventListener('touchend', function(e) {
-            e.preventDefault();
             setTimeout(() => {
                 this.style.animationPlayState = 'running';
             }, 2000); // Resume after 2 seconds
-        });
+        }, { passive: true });
     }
     
     // =============================================
@@ -10477,6 +10393,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function createSparklineCharts() {
+    if (typeof Chart === 'undefined') return;
     const cities = [
         { id: 'lagosChart', data: [65, 59, 80, 81, 76, 75, 80] },
         { id: 'nairobiChart', data: [45, 55, 65, 75, 80, 85, 90] },
@@ -10484,44 +10401,40 @@ function createSparklineCharts() {
     ];
 
     cities.forEach(city => {
-        const ctxEl = document.getElementById(city.id);
-        if (ctxEl && ctxEl.getContext) {
-            const ctx = ctxEl.getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                    datasets: [{
-                        data: city.data,
-                        borderColor: 'rgba(45, 80, 22, 1)',
-                        backgroundColor: 'rgba(45, 80, 22, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 0
-                    }]
+        safeCreateChart(city.id, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    data: city.data,
+                    borderColor: 'rgba(45, 80, 22, 1)',
+                    backgroundColor: 'rgba(45, 80, 22, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: false }
-                    },
-                    scales: {
-                        x: { display: false },
-                        y: { display: false }
-                    }
+                scales: {
+                    x: { display: false },
+                    y: { display: false }
                 }
-            });
-        }
+            }
+        });
     });
 }
 
 function createGDPChart() {
-    const ctx = document.getElementById('gdpChart');
     const container = document.getElementById('gdpChartContainer');
-    if (ctx) {
+    if (typeof Chart === 'undefined') return;
+    if (document.getElementById('gdpChart')) {
         setTimeout(() => {
             const mockGDPData = [
                 { country: "South Africa", gdp: 380.9, growth: 1.9, population: 59.4 },
@@ -10538,7 +10451,7 @@ function createGDPChart() {
             const xTickFontSize = isTiny ? 10 : isSmall ? 11 : 12;
             const yTickFontSize = isTiny ? 10 : isSmall ? 11 : 12;
             const xTickRotation = isSmall ? 35 : 15;
-            new Chart(ctx, { 
+            const chart = safeCreateChart('gdpChart', { 
                 type: 'bar',
                 data: {
                     labels,
@@ -10633,7 +10546,7 @@ function createGDPChart() {
                     }
                 }
             });
-            if (container) container.classList.add('loaded');
+            if (container && chart) container.classList.add('loaded');
         }, 1000);
     }
 }
@@ -10784,140 +10697,6 @@ if (!firstName || !lastName || !email || !company || !role || !investorType || !
                     });
                 }
             });
-document.addEventListener('DOMContentLoaded', function() {
-    // Sparkline data for each city (simulated growth trend)
-    const sparklineData = {
-        lagos: [3.0, 3.1, 3.2, 3.2, 3.2, 3.1, 3.2],
-        nairobi: [4.8, 4.9, 5.0, 5.1, 5.1, 5.0, 5.1],
-        johannesburg: [1.8, 1.9, 1.9, 1.9, 2.0, 1.9, 1.9]
-    };
-
-    // Render sparkline charts
-    function renderSparkline(ctxId, data, color) {
-        const canvas = document.getElementById(ctxId);
-        if (!canvas || !canvas.getContext) return;
-        const ctx = canvas.getContext('2d');
-        const existing = Chart.getChart(canvas);
-        if (existing) {
-            existing.destroy();
-        }
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['', '', '', '', '', '', ''],
-                datasets: [{
-                    data: data,
-                    borderColor: color,
-                    backgroundColor: 'transparent',
-                    borderWidth: 2,
-                    tension: 0.4,
-                    pointRadius: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { display: false },
-                    y: { display: false }
-                }
-            }
-        });
-    }
-
-    // Render main GDP comparison bar chart
-    function renderGDPChart() {
-        const canvas = document.getElementById('gdpChart');
-        const container = document.getElementById('gdpChartContainer');
-        if (!canvas || !canvas.getContext || typeof Chart === 'undefined') return;
-        const existing = Chart.getChart(canvas);
-        if (existing) {
-            existing.destroy();
-        }
-        const ctx = canvas.getContext('2d');
-        const mockGDPData = [
-            { country: "South Africa", gdp: 380.9, growth: 1.9, population: 59.4 },
-            { country: "Nigeria", gdp: 362.8, growth: 3.2, population: 223.8 },
-            { country: "Egypt", gdp: 347.6, growth: 4.5, population: 110.1 },
-            { country: "Kenya", gdp: 113.4, growth: 5.5, population: 54.0 },
-            { country: "Morocco", gdp: 134.2, growth: 3.1, population: 37.8 },
-            { country: "Ghana", gdp: 76.4, growth: 4.8, population: 33.5 }
-        ];
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: mockGDPData.map(item => item.country),
-                datasets: [{
-                    label: 'GDP (Billions USD)',
-                    data: mockGDPData.map(item => item.gdp),
-                    backgroundColor: [
-                        'rgba(212, 175, 55, 0.8)',
-                        'rgba(56, 161, 105, 0.8)',
-                        'rgba(49, 130, 206, 0.8)',
-                        'rgba(147, 51, 234, 0.8)',
-                        'rgba(236, 72, 153, 0.8)',
-                        'rgba(251, 146, 60, 0.8)'
-                    ],
-                    borderWidth: 1,
-                    borderRadius: 4,
-                    barPercentage: 0.8,
-                    categoryPercentage: 0.7
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return `GDP: $${context.parsed.y}B`;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            autoSkip: false,
-                            maxRotation: 35,
-                            minRotation: 35
-                        },
-                        grid: { display: false },
-                        title: {
-                            display: true,
-                            text: 'Country',
-                            color: '#2c3e50',
-                            font: { size: 14, weight: '600' },
-                            padding: { top: 12 }
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: { callback: value => '$' + value + 'B' },
-                        grid: { color: 'rgba(0, 0, 0, 0.08)' },
-                        title: {
-                            display: true,
-                            text: 'GDP (Billions USD)',
-                            color: '#2c3e50',
-                            font: { size: 14, weight: '600' },
-                            padding: { bottom: 10 }
-                        }
-                    }
-                }
-            }
-        });
-        if (container) container.classList.add('loaded');
-    }
-
-    // Initialize charts
-    renderSparkline('lagosChart', sparklineData.lagos, '#34a853');
-    renderSparkline('nairobiChart', sparklineData.nairobi, '#4285f4');
-    renderSparkline('johannesburgChart', sparklineData.johannesburg, '#ea4335');
-    renderGDPChart();
-});
          // Modal functionality
         const modal = document.getElementById('consultationModal');
   // Form submission handling (optional - for tracking)
@@ -10986,6 +10765,11 @@ document.addEventListener('keydown', function(event) {
         }
         
         start() {
+            if (window.simulatorAlreadyStarted) {
+                console.warn('⚠️ Simulator already running - skipping duplicate init');
+                return;
+            }
+            window.simulatorAlreadyStarted = true;
             console.log('▶️ Starting simulator');
            if (this.isLive) return;          
             
@@ -11125,13 +10909,6 @@ document.addEventListener('keydown', function(event) {
     
     console.log('✅ Guaranteed simulator loaded and ready');
 })();
-    // Force start ticker after 3 seconds
-setTimeout(() => {
-    if (window.guaranteedSimulator) {
-        window.guaranteedSimulator.start();
-        console.log('✅ Ticker force-started');
-    }
-}, 3000);
         document.addEventListener('DOMContentLoaded', function() {
             // Remove loading messages
             setTimeout(() => {
