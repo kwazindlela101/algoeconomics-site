@@ -180,6 +180,18 @@
             display: block;
         }
 
+        .nav-overlay,
+        .modal,
+        #aciMethodologyModal {
+            pointer-events: none;
+        }
+
+        .nav-overlay.active,
+        .modal.active,
+        #aciMethodologyModal.active {
+            pointer-events: auto;
+        }
+
         /* MOBILE QUICK LINKS - ADDED */
         .mobile-quick-links {
             display: none;
