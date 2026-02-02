@@ -108,7 +108,7 @@
             position: absolute; 
             right: 1rem; 
             z-index: 1001;
-            pointer-events: auto;
+            pointer-events: auto !important;
             touch-action: manipulation;
         }
         
@@ -2579,6 +2579,10 @@
                 opacity: 1;
                 visibility: visible;
                 pointer-events: auto;
+            }
+
+            .nav-links:not(.active) .logo-link {
+                display: none;
             }
 
             /* CSS-only fallback if JS fails: show menu while toggle is focused */
@@ -5614,7 +5618,7 @@ footer input:focus {
     <header>
         <div class="container">
             <div class="header-inner">
-                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" onclick="var nav=document.querySelector('.nav-links');var overlay=document.getElementById('navOverlay');if(nav){nav.classList.toggle('active');}if(overlay){overlay.classList.toggle('active');}"><i class="fas fa-bars"></i></button>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
                 <nav id="nav-menu">
                     <ul class="nav-links">
                         <li><a href="#home" class="nav-link logo-link active"><img src="logo.png" alt="Home" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--primary);font-weight:bold;font-size:1.2rem;\'>AE</span>';"></a></li>
@@ -9971,19 +9975,32 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(applyNuclearEmailFix, 100);
 
     // ===== MOBILE MENU & SMOOTH SCROLL FIX =====
-    const menuToggle = document.getElementById('menu-toggle');
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        if (!navLinks) return;
+        navLinks.classList.toggle('active');
+        const navOverlay = document.getElementById('navOverlay');
+        if (navOverlay) {
+            navOverlay.classList.toggle('active', navLinks.classList.contains('active'));
+        }
+    }
+
+    const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const navOverlay = document.getElementById('navOverlay');
     const mobileQuickLinks = document.getElementById('mobileQuickLinks');
 
-    // Toggle mobile menu
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-    if (navOverlay) {
-        navOverlay.classList.toggle('active');
-    }
-        });
+    if (menuToggle) {
+        // Remove any existing listeners first to avoid duplicates
+        menuToggle.replaceWith(menuToggle.cloneNode(true));
+        const newMenuToggle = document.querySelector('.menu-toggle');
+        if (newMenuToggle) {
+            newMenuToggle.addEventListener('click', toggleMenu);
+            newMenuToggle.addEventListener('touchstart', function(e) {
+                e.preventDefault(); // prevent double trigger on mobile
+                toggleMenu();
+            });
+        }
     }
 
     // Close menu & smooth scroll on link click (mobile only)
