@@ -67,19 +67,6 @@
             visibility: visible !important; 
         }
         
-        #nav-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--header-height);
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            will-change: transform, opacity;
-            isolation: isolate;
-        }
-
         .header-inner { 
             display: flex; 
             justify-content: flex-start;
@@ -133,8 +120,6 @@
             margin: 0;
             padding: 0 1rem;
             min-width: min-content;
-            will-change: transform, opacity;
-            isolation: isolate;
         }
         
         .nav-link { 
@@ -2573,26 +2558,25 @@
             .nav-links {
                 position: fixed;
                 top: 0;
-                left: 0;
+                left: -100%;
                 width: 80%;
                 max-width: 300px;
                 height: 100vh;
-                background-color: #0f1f38;
                 background: linear-gradient(135deg, var(--primary) 0%, #0f1f38 100%);
                 flex-direction: column;
                 padding: 6rem 2rem 2rem;
-                transform: translateX(-110%);
-                transition: transform 0.3s ease;
+                transition: left 0.3s ease;
                 z-index: 1101;
                 overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
                 box-shadow: 5px 0 25px rgba(0,0,0,0.2);
+                opacity: 0;
                 visibility: hidden;
                 pointer-events: none;
             }
             
             .nav-links.active {
-                transform: translateX(0);
+                left: 0;
+                opacity: 1;
                 visibility: visible;
                 pointer-events: auto;
             }
@@ -2602,8 +2586,9 @@
             }
 
             /* CSS-only fallback if JS fails: show menu while toggle is focused */
-            #nav-menu:focus-within .nav-links {
-                transform: translateX(0);
+            header:focus-within .nav-links {
+                left: 0;
+                opacity: 1;
                 visibility: visible;
                 pointer-events: auto;
             }
@@ -5629,30 +5614,31 @@ footer input:focus {
 <body id="top">
     <!-- Mobile menu overlay -->
     <div class="nav-overlay" id="navOverlay"></div>
-    <nav id="nav-menu">
+
+    <header>
         <div class="container">
             <div class="header-inner">
                 <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
-                <ul class="nav-links">
-                    <li><a href="#home" class="nav-link logo-link active"><img src="logo.png" alt="Home" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--primary);font-weight:bold;font-size:1.2rem;\'>AE</span>';"></a></li>
-                    <li><a href="#why-us" class="nav-link"><i class="fas fa-star"></i><span>Why Us</span></a></li>
-                    <li><a href="#sectors" class="nav-link"><i class="fas fa-chart-pie"></i><span>Sectors</span></a></li>
-                    <li><a href="#regional-analysis" class="nav-link"><i class="fas fa-globe-africa"></i><span>Regions</span></a></li>
-                    <li><a href="#african-markets" class="nav-link"><i class="fas fa-city"></i><span>Markets</span></a></li>
-                    <li><a href="#new-features" class="nav-link"><i class="fas fa-tools"></i><span>Tools</span></a></li>
-                    <li><a href="#ai-demo" class="nav-link"><i class="fas fa-robot"></i><span>AI Demo</span></a></li>
-                    <li><a href="#top" class="nav-link"><i class="fas fa-shield-alt"></i><span>Index</span></a></li>
-                    <li><a href="#backend-programme" class="nav-link"><i class="fas fa-code"></i><span>Backend Programme</span></a></li>
-                    <li><a href="#speakers" class="nav-link"><i class="fas fa-users"></i><span>Speakers</span></a></li>
-                    <li><a href="#features" class="nav-link"><i class="fas fa-cogs"></i><span>Platform</span></a></li>
-                    <li><a href="#sla" class="nav-link"><i class="fas fa-handshake"></i><span>SLA</span></a></li>
-                    <li><a href="#pricing" class="nav-link"><i class="fas fa-tag"></i><span>Pricing</span></a></li>
-                </ul>
+                <nav id="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="#home" class="nav-link logo-link active"><img src="logo.png" alt="Home" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:var(--primary);font-weight:bold;font-size:1.2rem;\'>AE</span>';"></a></li>
+                        <li><a href="#why-us" class="nav-link"><i class="fas fa-star"></i><span>Why Us</span></a></li>
+                        <li><a href="#sectors" class="nav-link"><i class="fas fa-chart-pie"></i><span>Sectors</span></a></li>
+                        <li><a href="#regional-analysis" class="nav-link"><i class="fas fa-globe-africa"></i><span>Regions</span></a></li>
+                        <li><a href="#african-markets" class="nav-link"><i class="fas fa-city"></i><span>Markets</span></a></li>
+                        <li><a href="#new-features" class="nav-link"><i class="fas fa-tools"></i><span>Tools</span></a></li>
+                        <li><a href="#ai-demo" class="nav-link"><i class="fas fa-robot"></i><span>AI Demo</span></a></li>
+                      <li><a href="#top" class="nav-link"><i class="fas fa-shield-alt"></i><span>Index</span></a></li>
+                        <li><a href="#backend-programme" class="nav-link"><i class="fas fa-code"></i><span>Backend Programme</span></a></li>
+                        <li><a href="#speakers" class="nav-link"><i class="fas fa-users"></i><span>Speakers</span></a></li>
+                        <li><a href="#features" class="nav-link"><i class="fas fa-cogs"></i><span>Platform</span></a></li>
+                       <li><a href="#sla" class="nav-link"><i class="fas fa-handshake"></i><span>SLA</span></a></li>
+                        <li><a href="#pricing" class="nav-link"><i class="fas fa-tag"></i><span>Pricing</span></a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
-    </nav>
-
-    <header></header>
+    </header>
 
     <!-- Mobile Quick Links - Added -->
     <div class="mobile-quick-links" id="mobileQuickLinks">
