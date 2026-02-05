@@ -4586,16 +4586,18 @@ h4 {
         }
 
         .modal-content {
-            background: linear-gradient(135deg, #1a3a52 0%, #0d1f2d 100%);
-            margin: 5% auto;
-            padding: 0;
-            border: 1px solid #2a4a62;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            animation: slideDown 0.3s ease;
-        }
+    background: linear-gradient(135deg, #1a3a52 0%, #0d1f2d 100%);
+    margin: 5% auto;
+    padding: 0;
+    border: 1px solid #2a4a62;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.3s ease;
+}
 
         @keyframes slideDown {
             from {
@@ -4623,19 +4625,21 @@ h4 {
             color: #b8c5d0;
             font-size: 15px;
         }
-
-        .close {
-            color: #b8c5d0;
-            float: right;
-            font-size: 32px;
-            font-weight: 300;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
+.close {
+    color: #b8c5d0;
+    float: right;
+    font-size: 32px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 10000;
+}
+         .close:hover {
             color: #f4b942;
         }
+        .modal-body {
+    padding: 30px 40px 40px;
+}
 
  .modal-content {
     background: linear-gradient(135deg, #1a3a52 0%, #0d1f2d 100%);
