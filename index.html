@@ -9969,7 +9969,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                      href.includes('live.com') ||
                                      href.includes('sharepoint') ||
                                      href.includes('file://') ||
-                                     (href.includes('mailto:') && !href.includes('contact@algoeconomics.org'));
+                                     (href.includes('mailto:') && !href.includes('kwazi.ndlela@algo-economics.org'));
             
             if (isApplyButton || hasWrongReference) {
                 console.log('⚠️ Fixing link:', href, 'Text:', text);
@@ -9979,10 +9979,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Set the CORRECT email for Apply buttons
                 if (isApplyButton) {
-                    newLink.href = 'mailto:contact@algoeconomics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme&body=Dear%20AlgoEconomics%20Team,%0A%0AI%20am%20interested%20in%20applying%20for%20the%20Student%20Backend%20Engineering%20Programme.%0A%0APlease%20find%20my%20details%20below:%0A%0AName:%0AUniversity:%0ACourse:%0AYear%20of%20Study:%0A%0AThank%20you,%0A[Your%20Name]';
+                    newLink.href = 'mailto:kwazi.ndlela@algo-economics.org?subject=Student%20Developer%20Application%20-%20Backend%20Engineering%20Programme&body=Dear%20AlgoEconomics%20Team,%0A%0AI%20am%20interested%20in%20applying%20for%20the%20Student%20Backend%20Engineering%20Programme.%0A%0APlease%20find%20my%20details%20below:%0A%0AName:%0AUniversity:%0ACourse:%0AYear%20of%20Study:%0A%0AThank%20you,%0A[Your%20Name]';
                     newLink.className = 'backend-cta';
                 } else {
-                    newLink.href = 'mailto:contact@algoeconomics.org';
+                    newLink.href = 'mailto:kwazi.ndlela@algo-economics.org';
                 }
                 
                 newLink.target = '_blank';
