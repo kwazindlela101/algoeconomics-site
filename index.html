@@ -11308,3 +11308,21 @@ submitButton.addEventListener('mouseleave', function() {
     this.style.boxShadow = 'none';
 });
 </script>
+            <script>
+  const aciModal = document.getElementById("aciModal");
+  const openAciModal = document.getElementById("openAciModal");
+  const closeAciModal = document.getElementById("closeAciModal");
+
+  if (openAciModal) {
+      openAciModal.onclick = () => aciModal.style.display = "flex";
+  }
+
+  if (closeAciModal) {
+      closeAciModal.onclick = () => aciModal.style.display = "none";
+  }
+
+  window.onclick = (e) => {
+    if (e.target === aciModal) aciModal.style.display = "none";
+  };
+</script>
+
