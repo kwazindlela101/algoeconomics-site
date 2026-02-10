@@ -4,7 +4,7 @@
     <meta charset="UTF-8">  
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AlgoEconomics | AI-Powered Economic Intelligence for UK-Africa Markets</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
     <link rel="stylesheet" href="tickers.css">
     <link rel="stylesheet" href="modal.css"> 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -5670,52 +5670,7 @@ footer input:focus {
             transform: translateX(0);
         }
         }
-        * ── HOW IT WORKS ─────────────────────────────────────────── */
-.how-it-works {
-  background: #0D1F36;
-  padding: 80px 0;
-}
-.how-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 28px;
-  margin-top: 48px;
-}
-.how-step {
-  background: #112240;
-  border: 1px solid #1A3A5C;
-  border-radius: 8px;
-  padding: 32px 28px;
-  transition: border-color 0.2s ease;
-}
-.how-step:hover {
-  border-color: #C9A84C;
-}
-.how-number {
-  font-family: Arial, sans-serif;
-  font-size: 40px;
-  font-weight: 700;
-  color: #1A3A5C;
-  line-height: 1;
-  margin-bottom: 16px;
-}
-.how-step h4 {
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 12px 0;
-}
-.how-step p {
-  font-size: 14px;
-  color: #8A9BB0;
-  margin: 0;
-  line-height: 1.7;
-}
-
-
-
-</style>
+ 
 </head>
 <body id="top">
     <!-- Mobile menu overlay -->
@@ -6200,6 +6155,140 @@ p {
     font-size: 1rem; /* 16px */
     padding: 14px 32px;
   }
+}
+/* ── SECTION BACKGROUNDS ───────────────────────────────────── */
+#what-we-deliver  { background: #0D1F36 !important; padding: 80px 0 !important; }
+#who-we-work-with { background: #091629 !important; padding: 80px 0 !important; }
+#how-it-works     { background: #0D1F36 !important; padding: 80px 0 !important; }
+
+/* ── WHAT WE DELIVER GRID ──────────────────────────────────── */
+#deliver-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px !important;
+  margin-top: 48px !important;
+  text-align: left !important;
+}
+@media (max-width: 768px) {
+  #deliver-grid { grid-template-columns: 1fr !important; }
+}
+#what-we-deliver .d-card {
+  display: block !important;
+  background: #112240 !important;
+  border-top: 3px solid #C9A84C !important;
+  border-radius: 8px !important;
+  padding: 28px 24px !important;
+  text-align: left !important;
+}
+#what-we-deliver .d-icon {
+  display: block !important;
+  color: #C9A84C !important;
+  font-size: 14px !important;
+  margin-bottom: 14px !important;
+}
+#what-we-deliver .d-card h4 {
+  font-family: Arial, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  margin: 0 0 10px 0 !important;
+  text-align: left !important;
+}
+#what-we-deliver .d-card p {
+  font-size: 14px !important;
+  color: #8A9BB0 !important;
+  margin: 0 !important;
+  line-height: 1.6 !important;
+  text-align: left !important;
+  font-style: normal !important;
+}
+
+/* ── WHO WE WORK WITH GRID ─────────────────────────────────── */
+#audience-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 16px !important;
+  margin-top: 48px !important;
+}
+@media (max-width: 900px) {
+  #audience-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 500px) {
+  #audience-grid { grid-template-columns: 1fr !important; }
+}
+#who-we-work-with .a-card {
+  display: block !important;
+  background: #0D1F36 !important;
+  border: 1px solid #1A3A5C !important;
+  border-radius: 8px !important;
+  padding: 24px 16px !important;
+  text-align: center !important;
+}
+#who-we-work-with .a-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #C9A84C !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 8px !important;
+}
+#who-we-work-with .a-card p {
+  font-size: 13px !important;
+  color: #8A9BB0 !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+  font-style: normal !important;
+}
+#audience-footer {
+  text-align: center !important;
+  color: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  margin-top: 40px !important;
+}
+
+/* ── HOW IT WORKS GRID ─────────────────────────────────────── */
+#how-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 28px !important;
+  margin-top: 48px !important;
+}
+@media (max-width: 768px) {
+  #how-grid { grid-template-columns: 1fr !important; }
+}
+#how-it-works .h-step {
+  display: block !important;
+  background: #112240 !important;
+  border: 1px solid #1A3A5C !important;
+  border-radius: 8px !important;
+  padding: 32px 28px !important;
+  text-align: left !important;
+}
+#how-it-works .h-num {
+  font-family: Arial, sans-serif !important;
+  font-size: 40px !important;
+  font-weight: 700 !important;
+  color: #1A3A5C !important;
+  line-height: 1 !important;
+  margin-bottom: 16px !important;
+}
+#how-it-works .h-step h4 {
+  font-family: Arial, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  margin: 0 0 12px 0 !important;
+  text-align: left !important;
+}
+#how-it-works .h-step p {
+  font-size: 14px !important;
+  color: #8A9BB0 !important;
+  margin: 0 !important;
+  line-height: 1.7 !important;
+  text-align: left !important;
+  font-style: normal !important;
 }
 </style>
 
@@ -9415,131 +9504,110 @@ toggle() {
     </div>
   </div>
 </section>
-<!-- WHAT WE DELIVER -->
-<section id="what-we-deliver" class="section what-we-deliver">
-  <div class="container">
 
+Replace testimonials v3 · HTML
+Copy
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- REPLACE lines 9375–9402 (the entire testimonials section)  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<!-- WHAT WE DELIVER -->
+<section id="what-we-deliver" class="section">
+  <div class="container">
     <div class="section-header">
       <h2>What We Deliver</h2>
       <p>Real intelligence for teams navigating UK–Africa markets</p>
     </div>
-
-    <div class="deliver-grid">
-
-      <div class="deliver-card">
-        <div class="deliver-icon">&#9654;</div>
+    <div id="deliver-grid">
+      <div class="d-card">
+        <span class="d-icon">&#9654;</span>
         <h4>Faster Market Scanning</h4>
         <p>Spot opportunities and risks quickly — without the manual hunt.</p>
       </div>
-
-      <div class="deliver-card">
-        <div class="deliver-icon">&#9654;</div>
+      <div class="d-card">
+        <span class="d-icon">&#9654;</span>
         <h4>Clearer Governance Signals</h4>
         <p>Know what matters, in real time. No noise, no lag.</p>
       </div>
-
-      <div class="deliver-card">
-        <div class="deliver-icon">&#9654;</div>
+      <div class="d-card">
+        <span class="d-icon">&#9654;</span>
         <h4>Daily Intelligence Across Sectors</h4>
         <p>Aviation, energy, tourism, health, agriculture — tracked every day.</p>
       </div>
-
-      <div class="deliver-card">
-        <div class="deliver-icon">&#9654;</div>
+      <div class="d-card">
+        <span class="d-icon">&#9654;</span>
         <h4>Explainable AI Scoring</h4>
         <p>Insights you can defend in a boardroom — not black-box outputs.</p>
       </div>
-
-      <div class="deliver-card">
-        <div class="deliver-icon">&#9654;</div>
+      <div class="d-card">
+        <span class="d-icon">&#9654;</span>
         <h4>UK–Africa Context Built-In</h4>
-        <p>Designed specifically for this corridor. Not retrofitted from somewhere else.</p>
+        <p>Designed specifically for this corridor. Not retrofitted from elsewhere.</p>
       </div>
-
     </div>
-
   </div>
 </section>
 
 <!-- WHO WE WORK WITH -->
-<section id="who-we-work-with" class="section who-we-work-with">
+<section id="who-we-work-with" class="section">
   <div class="container">
-
     <div class="section-header">
       <h2>Who We Work With</h2>
       <p>Trusted by teams navigating UK–Africa markets</p>
     </div>
-
-    <div class="audience-grid">
-
-      <div class="audience-card">
-        <div class="audience-label">Trade</div>
+    <div id="audience-grid">
+      <div class="a-card">
+        <div class="a-label">Trade</div>
         <p>UK–Africa trade advisors</p>
       </div>
-
-      <div class="audience-card">
-        <div class="audience-label">Investment</div>
+      <div class="a-card">
+        <div class="a-label">Investment</div>
         <p>Frontier-market investment teams</p>
       </div>
-
-      <div class="audience-card">
-        <div class="audience-label">Consulting</div>
+      <div class="a-card">
+        <div class="a-label">Consulting</div>
         <p>Africa-focused consultancies</p>
       </div>
-
-      <div class="audience-card">
-        <div class="audience-label">Policy</div>
+      <div class="a-card">
+        <div class="a-label">Policy</div>
         <p>Policy &amp; regulatory analysts</p>
       </div>
-
-      <div class="audience-card">
-        <div class="audience-label">Expansion</div>
+      <div class="a-card">
+        <div class="a-label">Expansion</div>
         <p>Multinational expansion teams</p>
       </div>
-
     </div>
-
-    <p class="audience-footer">We help them make faster, evidence-based decisions.</p>
-
+    <p id="audience-footer">We help them make faster, evidence-based decisions.</p>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section id="how-it-works" class="section how-it-works">
+<section id="how-it-works" class="section">
   <div class="container">
-
     <div class="section-header">
       <h2>How It Works</h2>
       <p>Real-time intelligence for UK–Africa decisions</p>
     </div>
-
-    <div class="how-grid">
-
-      <div class="how-step">
-        <div class="how-number">01</div>
+    <div id="how-grid">
+      <div class="h-step">
+        <div class="h-num">01</div>
         <h4>Market Scanning &rarr; Faster Visibility</h4>
         <p>Get a single view of governance, economic, and sector signals. See where risk is rising or momentum is building — without the manual hunt.</p>
       </div>
-
-      <div class="how-step">
-        <div class="how-number">02</div>
+      <div class="h-step">
+        <div class="h-num">02</div>
         <h4>Decision Clarity &rarr; Explainable Signals</h4>
         <p>We turn scattered public data into structured indicators — so you can brief stakeholders, frame risk, and back decisions with evidence.</p>
       </div>
-
-      <div class="how-step">
-        <div class="how-number">03</div>
+      <div class="h-step">
+        <div class="h-num">03</div>
         <h4>Built for UK–Africa Workflows</h4>
-        <p>Practical signals designed for trade, investment, and policy teams — not abstract scores without context.</p>
+        <p>Practical signals for trade, investment, and policy teams — not abstract scores without context.</p>
       </div>
-
     </div>
-
   </div>
 </section>
-
-
-<!-- HOW IT WORKS -->
    
 <!-- FOOTER -->
 <footer style="background: linear-gradient(135deg, #0a1628 0%, #1a365d 50%, #0f1f38 100%); color: white; padding: 60px 0 0; border-top: 3px solid #d4af37;">
