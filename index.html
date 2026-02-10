@@ -9371,35 +9371,127 @@ toggle() {
     </div>
   </div>
 </section>
+<section id="what-we-deliver" class="section deliver">
 
-    <section id="testimonials" class="section testimonials">
-        <div class="container">
-            <div class="section-header"><h2>What Our Clients Say</h2><p>Trusted by leading organizations</p></div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"AlgoEconomics has transformed how we approach African market analysis. The AI-powered insights save our team hours every week."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JM</div>
-                        <div class="author-info"><h4>James Morrison</h4><p>Investment Director, London Capital</p></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"The corruption index alone is worth the subscription. It's given us confidence to invest in markets we previously avoided."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">AN</div>
-                        <div class="author-info"><h4>Aisha Ndegwa</h4><p>CEO, East Africa Ventures</p></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Finally, a service that understands the nuances of UK-Africa trade. The daily briefs are essential reading."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RT</div>
-                        <div class="author-info"><h4>Richard Thompson</h4><p>Trade Advisor, UKTI</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <style>
+    /* Embedded CSS so nothing breaks */
+
+    #what-we-deliver {
+      padding: 80px 0;
+      background: #020617; /* deep navy */
+      color: #ffffff;
+      font-family: system-ui, sans-serif;
+    }
+
+    #what-we-deliver .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    #what-we-deliver .section-header h2 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    #what-we-deliver .section-header p {
+      font-size: 1rem;
+      opacity: 0.85;
+      color: #ffffff;
+    }
+
+    /* Grid */
+    .deliver-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .deliver-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .deliver-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .deliver-card {
+      background: #0f172a; /* slightly lighter navy for contrast */
+      border: 1px solid #facc15; /* gold */
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .deliver-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: #fefce8; /* soft off-white */
+    }
+
+    .deliver-card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #e5e7eb;
+    }
+
+    .deliver-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      border-color: #fde047; /* brighter gold */
+    }
+  </style>
+
+  <div class="container">
+    <div class="section-header">
+      <h2>What We Deliver</h2>
+      <p>For teams navigating UK–Africa markets</p>
+    </div>
+
+    <div class="deliver-grid">
+
+      <div class="deliver-card">
+        <h3>Faster Market Scanning</h3>
+        <p>Spot opportunities and risks quickly — without the manual hunt.</p>
+      </div>
+
+      <div class="deliver-card">
+        <h3>Clearer Governance Signals</h3>
+        <p>Know what matters, in real time. No noise, no lag.</p>
+      </div>
+
+      <div class="deliver-card">
+        <h3>Daily Intelligence Across Sectors</h3>
+        <p>Aviation, energy, tourism, health, agriculture — tracked every day.</p>
+      </div>
+
+      <div class="deliver-card">
+        <h3>Explainable AI Scoring</h3>
+        <p>Insights you can defend in a boardroom — not black-box outputs.</p>
+      </div>
+
+      <div class="deliver-card">
+        <h3>UK–Africa Context Built-In</h3>
+        <p>Designed specifically for this corridor. Not retrofitted from elsewhere.</p>
+      </div>
+
+      <div class="deliver-card">
+        <h3>Built For Institutional Decisions</h3>
+        <p>Signals structured for committees, investment memos, and risk frameworks.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  
 <!-- FOOTER -->
 <footer style="background: linear-gradient(135deg, #0a1628 0%, #1a365d 50%, #0f1f38 100%); color: white; padding: 60px 0 0; border-top: 3px solid #d4af37;">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
