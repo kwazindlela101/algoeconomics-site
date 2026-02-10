@@ -11255,69 +11255,56 @@ document.addEventListener('keydown', function(event) {
             errorMessage = errorMessage.replace(/<[^>]*>/g, '');
             showMessage(errorMessage, false);
         };
+<script>
+    const params = new URLSearchParams({
+        EMAIL: email,
+        c: callbackName
+    });
+    script.src = MAILCHIMP_URL + '&' + params.toString();
+    script.onerror = function() {
+        delete window[callbackName];
+        script.remove();
+        submitButton.disabled = false;
+        submitButton.textContent = 'Subscribe';
+        submitButton.style.opacity = '1';
+        submitButton.style.cursor = 'pointer';
+        showMessage('Network error. Please check your connection and try again.', false);
+    };
+    document.body.appendChild(script);
+}
 
-        const params = new URLSearchParams({
-            EMAIL: email,
-            c: callbackName
-        });
-        script.src = MAILCHIMP_URL + '&' + params.toString();
-        script.onerror = function() {
-            delete window[callbackName];
-            script.remove();
-            submitButton.disabled = false;
-            submitButton.textContent = 'Subscribe';
-            submitButton.style.opacity = '1';
-            submitButton.style.cursor = 'pointer';
-            showMessage('Network error. Please check your connection and try again.', false);
-        };
-        document.body.appendChild(script);
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = emailInput.value.trim();
+    if (!email) {
+        showMessage('Please enter your email address.', false);
+        return;
     }
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    if (!validateEmail(email)) {
+        showMessage('Please enter a valid email address.', false);
+        return;
+    }
 
-        const email = emailInput.value.trim();
-        if (!email) {
-            showMessage('Please enter your email address.', false);
-            return;
-        }
+    submitButton.disabled = true;
+    submitButton.textContent = 'Subscribing...';
+    submitButton.style.opacity = '0.7';
+    submitButton.style.cursor = 'not-allowed';
+    responseDiv.style.display = 'none';
 
-        if (!validateEmail(email)) {
-            showMessage('Please enter a valid email address.', false);
-            return;
-        }
+    submitToMailchimp(email);
+});
 
-        submitButton.disabled = true;
-        submitButton.textContent = 'Subscribing...';
-        submitButton.style.opacity = '0.7';
-        submitButton.style.cursor = 'not-allowed';
-        responseDiv.style.display = 'none';
+submitButton.addEventListener('mouseenter', function() {
+    if (!this.disabled) {
+        this.style.transform = 'translateY(-2px)';
+        this.style.boxShadow = '0 4px 12px rgba(212, 175, 55, 0.3)';
+    }
+});
 
-        submitToMailchimp(email);
-    });
-
-    submitButton.addEventListener('mouseenter', function() {
-        if (!this.disabled) {
-            this.style.transform = 'translateY(-2px)';
-            this.style.boxShadow = '0 4px 12px rgba(212, 175, 55, 0.3)';
-        }
-    });
-
-    submitButton.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-        this.style.boxShadow = 'none';
-    });
-
-    <script>
-  const aciModal = document.getElementById("aciModal");
-  const openAciModal = document.getElementById("openAciModal");
-  const closeAciModal = document.getElementById("closeAciModal");
-
-  openAciModal.onclick = () => aciModal.style.display = "flex";
-  closeAciModal.onclick = () => aciModal.style.display = "none";
-
-  window.onclick = (e) => {
-    if (e.target === aciModal) aciModal.style.display = "none";
-  };
+submitButton.addEventListener('mouseleave', function() {
+    this.style.transform = 'translateY(0)';
+    this.style.boxShadow = 'none';
+});
 </script>
-
