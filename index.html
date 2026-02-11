@@ -40,6 +40,11 @@
             --header-height: 105px;
             --ticker-height: 52px;
            --total-fixed-height: 157px;
+            /* ACI overlay variables */
+            --navy: #0a1628;
+            --navy-mid: #1a2f4a;
+            --slate: #94a3b8;
+            --text: #e2e8f0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -5671,6 +5676,153 @@ footer input:focus {
         }
         }
 
+        /* ══════════════════════════════════
+           ACI FULL-SCREEN OVERLAY STYLES
+           (copied from ACI reference modal)
+           ══════════════════════════════════ */
+        .fs-overlay {
+          position:fixed; inset:0; z-index:9999;
+          background:var(--navy); flex-direction:column;
+          display:none; opacity:0; transition:opacity 0.3s ease;
+        }
+        .fs-overlay.visible { opacity:1; }
+        .topbar {
+          display:flex; align-items:center; justify-content:space-between;
+          padding:0 28px; height:52px; flex-shrink:0;
+          border-bottom:1px solid rgba(212,175,55,0.18);
+          background:rgba(8,18,36,0.98);
+        }
+        .topbar-left { display:flex; align-items:center; gap:14px; }
+        .t-logo { font-family:'Playfair Display',serif; font-size:15px; color:var(--gold); letter-spacing:2px; }
+        .t-div { width:1px; height:18px; background:rgba(212,175,55,0.25); }
+        .t-label { font-size:12.5px; color:var(--slate); }
+        .t-badge {
+          background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.35);
+          color:#f87171; font-size:9px; font-weight:700; letter-spacing:0.1em;
+          text-transform:uppercase; padding:3px 8px; border-radius:2px;
+        }
+        .topbar-right { display:flex; align-items:center; gap:16px; }
+        .t-live { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--slate); }
+        .t-live::before { content:''; width:6px; height:6px; border-radius:50%; background:#10b981; animation:blink 2s infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+        .t-context { display:flex; align-items:center; gap:8px; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.2); border-radius:2px; padding:4px 12px; font-size:11px; color:var(--gold); transition:all 0.3s; font-weight:500; }
+        .t-context.hidden { opacity:0; pointer-events:none; }
+        .close-btn { background:transparent; border:1px solid rgba(212,175,55,0.25); color:var(--slate); width:30px; height:30px; border-radius:2px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+        .close-btn:hover { border-color:var(--gold); color:var(--gold); }
+        
+        /* Mobile Menu Toggle (inside overlay) */
+        .mobile-menu-toggle {
+          display: none;
+          background: transparent;
+          border: 1px solid rgba(212,175,55,0.25);
+          color: var(--gold);
+          width: 32px;
+          height: 32px;
+          border-radius: 2px;
+          cursor: pointer;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+        }
+
+        .layout { display:flex; flex:1; overflow:hidden; }
+        .sidebar { 
+          width:210px; flex-shrink:0; background:rgba(8,18,36,0.65); 
+          border-right:1px solid rgba(212,175,55,0.1); 
+          display:flex; flex-direction:column; padding:20px 0; gap:2px; 
+          transition: transform 0.3s ease;
+        }
+        .nav-section { padding:0 16px 6px; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(148,163,184,0.45); margin-top:10px; }
+        .nav-item { display:flex; align-items:center; gap:10px; padding:9px 18px; font-size:12.5px; color:var(--slate); cursor:pointer; transition:all 0.15s; border-left:2px solid transparent; font-weight:400; user-select:none; }
+        .nav-item:hover { color:var(--text); background:rgba(212,175,55,0.05); }
+        .nav-item.active { color:var(--gold); border-left-color:var(--gold); background:rgba(212,175,55,0.07); font-weight:600; }
+        .nav-icon { font-size:12px; width:15px; text-align:center; }
+        .sidebar-cell-info { margin:auto 14px 0; border:1px solid rgba(212,175,55,0.2); border-radius:4px; overflow:hidden; }
+        .sci-header { background:rgba(212,175,55,0.08); padding:8px 12px; font-size:9px; color:var(--gold); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
+        .sci-body { padding:12px; }
+        .sci-country { font-size:15px; font-weight:700; color:var(--text); margin-bottom:2px; }
+        .sci-sector  { font-size:11px; color:var(--slate); margin-bottom:10px; }
+        .sci-score   { font-family:'IBM Plex Mono',monospace; font-size:32px; color:var(--gold); line-height:1; margin-bottom:4px; }
+        .sci-risk    { font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; }
+        .sci-risk.high{color:#f87171} .sci-risk.modh{color:#fb923c} .sci-risk.mod{color:#fbbf24} .sci-risk.modl{color:#34d399} .sci-risk.low{color:#10b981}
+        .sci-hint { font-size:10px; color:var(--slate); margin-top:10px; font-style:italic; line-height:1.5; }
+        .main { flex:1; overflow-y:auto; padding:28px 32px; }
+        .main::-webkit-scrollbar{width:3px} .main::-webkit-scrollbar-thumb{background:rgba(212,175,55,0.25)}
+        .panel { display:none; }
+        .panel.active { display:block; animation:slideIn 0.22s ease-out; }
+        @keyframes slideIn { from{opacity:0;transform:translateX(6px)} to{opacity:1;transform:translateX(0)} }
+        .panel-title { font-family:'Playfair Display',serif; font-size:26px; color:#fff; margin-bottom:4px; }
+        .panel-sub { font-size:13px; color:var(--slate); margin-bottom:24px; }
+        .panel-sub span { color:var(--gold); font-weight:500; }
+        .heatmap-scroll { overflow-x:auto; margin-bottom:16px; }
+        .heatmap { display:grid; grid-template-columns:130px repeat(8,1fr); gap:5px; min-width:780px; }
+        .hm-col-header { padding:8px 6px; text-align:center; font-size:11px; font-weight:600; color:var(--slate); letter-spacing:0.03em; }
+        .hm-row-label { display:flex; align-items:center; font-size:11.5px; font-weight:600; color:var(--slate); padding:0 10px; }
+        .hm-cell { padding:13px 6px; border-radius:3px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:#fff; cursor:pointer; transition:transform 0.15s,box-shadow 0.15s,filter 0.15s,outline 0.15s; outline:2px solid transparent; position:relative; }
+        .hm-cell:hover { transform:scale(1.07); box-shadow:0 4px 18px rgba(0,0,0,0.55); filter:brightness(1.18); z-index:2; }
+        .hm-cell.selected { outline:2px solid #fff; transform:scale(1.07); filter:brightness(1.2); z-index:3; }
+        .hm-cell::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 7px); left:50%; transform:translateX(-50%); background:rgba(8,18,36,0.97); border:1px solid rgba(212,175,55,0.3); color:var(--text); font-family:'IBM Plex Sans',sans-serif; font-size:11px; white-space:nowrap; padding:5px 9px; border-radius:3px; pointer-events:none; z-index:100; opacity:0; transition:opacity 0.15s; }
+        .hm-cell:hover::after { opacity:1; }
+        .c-low{background:linear-gradient(135deg,#10b981,#059669)} .c-modl{background:linear-gradient(135deg,#34d399,#10b981)} .c-mod{background:linear-gradient(135deg,#fbbf24,#f59e0b)} .c-modh{background:linear-gradient(135deg,#fb923c,#f97316)} .c-high{background:linear-gradient(135deg,#ef4444,#dc2626)}
+        .risk-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px} .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--slate)} .l-dot{width:10px;height:10px;border-radius:2px}
+        .insights-box{margin-top:20px;padding:16px 20px;background:rgba(15,23,42,0.7);border-left:3px solid var(--gold);border-radius:0 4px 4px 0}
+        .insights-title{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px}
+        .insight-line{font-size:13px;color:#cbd5e1;line-height:1.6;margin-bottom:6px;padding-left:16px;position:relative}
+        .insight-line::before{content:'→';position:absolute;left:0;color:var(--gold)}
+        .breakdown-context{display:flex;align-items:center;gap:16px;padding:16px 20px;margin-bottom:24px;background:rgba(15,23,42,0.7);border:1px solid rgba(212,175,55,0.2);border-radius:4px;border-left:3px solid var(--gold);transition:all 0.3s}
+        .bc-flag{font-size:28px} .bc-title{font-size:17px;font-weight:700;color:#fff;margin-bottom:2px} .bc-meta{font-size:12px;color:var(--slate)} .bc-score{margin-left:auto;text-align:right}
+        .bc-num{font-family:'IBM Plex Mono',monospace;font-size:38px;color:var(--gold);line-height:1}
+        .bc-risk{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-top:2px}
+        .layer-card{background:rgba(15,23,42,0.75);border:1px solid rgba(212,175,55,0.12);border-radius:4px;padding:20px 24px;margin-bottom:10px;transition:border-color 0.3s}
+        .layer-card:hover{border-color:rgba(212,175,55,0.25)}
+        .layer-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+        .layer-name{font-size:14px;font-weight:600;color:var(--text)} .layer-score-val{font-family:'IBM Plex Mono',monospace;font-size:20px;color:var(--gold);font-weight:500}
+        .layer-track{height:8px;background:rgba(30,41,59,0.9);border-radius:2px;overflow:hidden;margin-bottom:9px}
+        .layer-fill{height:100%;border-radius:2px;width:0;transition:width 1.1s cubic-bezier(0.16,1,0.3,1)}
+        .fill-modl{background:linear-gradient(90deg,#34d399,#10b981)} .fill-mod{background:linear-gradient(90deg,#f59e0b,#fb923c)} .fill-high{background:linear-gradient(90deg,#dc2626,#ef4444)} .fill-modh{background:linear-gradient(90deg,#f97316,#fb923c)}
+        .layer-detail{font-size:12px;color:var(--slate);font-style:italic;line-height:1.55}
+        .layer-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+        .tag{font-size:10px;padding:3px 8px;border-radius:2px;background:rgba(30,41,59,0.9);color:var(--slate);border:1px solid rgba(51,65,85,0.6);font-weight:500}
+        .recommend-box{margin-top:12px;padding:16px 20px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.22);border-radius:4px}
+        .rec-label{font-size:10px;color:#f87171;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:7px}
+        .rec-text{font-size:13px;color:var(--text);line-height:1.7}
+        .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+        .stat-card{background:rgba(15,23,42,0.75);border:1px solid rgba(212,175,55,0.12);border-radius:4px;padding:16px 18px;position:relative;overflow:hidden}
+        .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+        .sc-label{font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:var(--slate);margin-bottom:8px}
+        .sc-val{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500;color:#fff} .sc-sub{font-size:11px;color:var(--slate);margin-top:3px}
+        .col-high{color:#f87171} .col-mod{color:#fbbf24} .col-low{color:#34d399}
+        .signal-strip{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}
+        .sig{padding:5px 11px;border-radius:2px;font-size:11px;font-weight:600;letter-spacing:0.04em}
+        .sig-red{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.35);color:#f87171}
+        .sig-amber{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.35);color:#fbbf24}
+        .sig-blue{background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.35);color:#a5b4fc}
+        .prompt-banner{display:flex;align-items:center;gap:12px;padding:14px 18px;margin-bottom:20px;background:rgba(212,175,55,0.06);border:1px dashed rgba(212,175,55,0.3);border-radius:4px;font-size:13px;color:var(--slate);transition:opacity 0.4s}
+        .prompt-banner.hidden{opacity:0;pointer-events:none} .prompt-icon{font-size:18px}
+
+        @media(max-width:768px){
+          .sidebar{
+            position: fixed;
+            top: 52px;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            transform: translateX(-100%);
+            background: rgba(8,18,36,0.98);
+            box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+          }
+          .fs-overlay.sidebar-open .sidebar {
+            transform: translateX(0);
+          }
+          .mobile-menu-toggle {
+            display: flex;
+          }
+          .stat-grid{grid-template-columns:repeat(2,1fr)} 
+          .main{padding:18px 14px} 
+          .topbar{padding:0 14px} 
+          .t-context{display:none}
+        }
+
 </style>
 </head>
 <body id="top">
@@ -7823,14 +7975,8 @@ toggle() {
 <div style="text-align: center;">
   <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 20px;">
 
-    <!-- Button 1 (unchanged) -->
-    <a href="#demo"
-       style="background: linear-gradient(135deg, #d4af37 0%, #e8c766 100%); color: #1a1f3a; padding: 16px 40px; font-size: 1rem; font-weight: 600; border-radius: 6px; text-decoration: none; display: inline-block; transition: all 0.3s ease;">
-       Request Institutional Demo
-    </a>
-
-    <!-- Button 2 (THIS is the one you replace) -->
-    <a id="openAciModal"
+    <!-- Explore Live Intelligence (opens ACI overlay) -->
+    <a id="openAci" class="aci-launch"
        style="background: transparent; color: #1a1f3a; border: 2px solid #1a1f3a; padding: 16px 40px; font-size: 1rem; font-weight: 600; border-radius: 6px; text-decoration: none; display: inline-block; transition: all 0.3s ease; cursor: pointer;">
        Explore Live Intelligence
     </a>
@@ -8434,7 +8580,7 @@ toggle() {
 
         <!-- See ACI in Action Button -->
         <div class="action-button-container">
-     <button class="action-button" type="button" onclick="showACIModal()">
+     <button class="action-button aci-launch" type="button">
                 See ACI in Action <i class="fas fa-arrow-right"></i>
             </button>
         </div>
@@ -11308,21 +11454,197 @@ submitButton.addEventListener('mouseleave', function() {
     this.style.boxShadow = 'none';
 });
 </script>
-            <script>
-  const aciModal = document.getElementById("aciModal");
-  const openAciModal = document.getElementById("openAciModal");
-  const closeAciModal = document.getElementById("closeAciModal");
 
-  if (openAciModal) {
-      openAciModal.onclick = () => aciModal.style.display = "flex";
+    <!-- ═══════════════════════════════════════
+         FULL-SCREEN ACI EXPERIENCE
+         ═══════════════════════════════════════ -->
+    <div class="fs-overlay" id="aciOverlay">
+      <div class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-toggle" id="menuToggle">☰</button>
+          <span class="t-logo">ALGOECONOMICS</span>
+          <div class="t-div"></div>
+          <span class="t-label">AI Corruption Index</span>
+          <span class="t-badge">Live Intelligence</span>
+        </div>
+        <div class="topbar-right">
+          <div class="t-context hidden" id="topContext">
+            <span id="topContextFlag"></span>
+            <span id="topContextLabel">—</span>
+          </div>
+          <span class="t-live">Signals active</span>
+          <button class="close-btn" id="closeAci">✕</button>
+        </div>
+      </div>
+      <div class="layout">
+        <nav class="sidebar" id="aciSidebar">
+          <div class="nav-section">Intelligence</div>
+          <div class="nav-item active" data-panel="overview"><span class="nav-icon">◈</span>Overview</div>
+          <div class="nav-item" data-panel="heatmap"><span class="nav-icon">▦</span>Portfolio Heatmap</div>
+          <div class="nav-section">Analysis</div>
+          <div class="nav-item" data-panel="breakdown"><span class="nav-icon">⊞</span>ACI Breakdown</div>
+          <div class="sidebar-cell-info" id="sidebarInfo">
+            <div class="sci-header">Selected Market</div>
+            <div class="sci-body">
+              <div class="sci-country" id="sciCountry">—</div>
+              <div class="sci-sector"  id="sciSector">Click a heatmap cell</div>
+              <div class="sci-score"   id="sciScore">—</div>
+              <div class="sci-risk"    id="sciRisk"></div>
+              <div class="sci-hint"    id="sciHint">Select any cell in the heatmap to load its full three-layer breakdown.</div>
+            </div>
+          </div>
+        </nav>
+        <main class="main">
+          <div class="panel active" id="panel-overview">
+            <div class="panel-title">ACI Market Intelligence</div>
+            <div class="panel-sub">UK-Africa Investment Corridor · <span>8 markets · 7 sectors · 200+ data signals</span></div>
+            <div class="signal-strip">
+              <span class="sig sig-red">Nigeria Energy 86/100 — Critical</span>
+              <span class="sig sig-red">Nigeria Mining 84/100 — High Risk</span>
+              <span class="sig sig-amber">Kenya Energy 71/100 — Elevated</span>
+              <span class="sig sig-blue">South Africa Fintech 36/100 — Lowest Risk</span>
+              <span class="sig sig-blue">Rwanda Fintech 39/100 — Strong governance</span>
+            </div>
+            <div class="stat-grid">
+              <div class="stat-card"><div class="sc-label">Highest Risk Cell</div><div class="sc-val col-high">86</div><div class="sc-sub">Nigeria · Energy</div></div>
+              <div class="stat-card"><div class="sc-label">Lowest Risk Cell</div><div class="sc-val col-low">36</div><div class="sc-sub">South Africa · Fintech</div></div>
+              <div class="stat-card"><div class="sc-label">Portfolio Average</div><div class="sc-val col-mod">62</div><div class="sc-sub">Across 56 assessments</div></div>
+              <div class="stat-card"><div class="sc-label">High Risk Cells</div><div class="sc-val col-high">9</div><div class="sc-sub">Above 75/100 threshold</div></div>
+            </div>
+            <div class="layer-card" style="margin-bottom:20px;">
+              <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">How to Use This Tool</div>
+              <div style="font-size:13px;color:#cbd5e1;line-height:1.8;">Navigate to <strong style="color:var(--text)">Portfolio Heatmap</strong> and click any cell to instantly load a full three-layer governance breakdown. The <strong style="color:var(--text)">ACI Breakdown</strong> panel shows layer-by-layer scoring with animated bars and an investment recommendation.</div>
+            </div>
+            <div class="insights-box">
+              <div class="insights-title">Key Insights</div>
+              <div class="insight-line">Highest Risk: Nigeria Energy (86/100) and Mining (84/100) require immediate due diligence</div>
+              <div class="insight-line">Lowest Risk: South Africa Fintech (36/100) — strong regulatory framework and enforcement</div>
+              <div class="insight-line">Sector Pattern: Energy and Mining consistently show elevated risk across all markets</div>
+              <div class="insight-line">Rwanda leads governance quality across 5 of 7 sectors</div>
+            </div>
+          </div>
+          <div class="panel" id="panel-heatmap">
+            <div class="panel-title">Portfolio Heatmap</div>
+            <div class="panel-sub">Click any cell to load a full three-layer ACI breakdown · <span>8 markets · 7 sectors</span></div>
+            <div class="heatmap-scroll"><div class="heatmap" id="heatmapGrid"></div></div>
+            <div class="risk-legend">
+              <div class="legend-item"><div class="l-dot c-low"></div>0–35: Low Risk</div>
+              <div class="legend-item"><div class="l-dot c-modl"></div>35–50: Moderate-Low</div>
+              <div class="legend-item"><div class="l-dot c-mod"></div>50–65: Moderate</div>
+              <div class="legend-item"><div class="l-dot c-modh"></div>65–75: Moderate-High</div>
+              <div class="legend-item"><div class="l-dot c-high"></div>75–100: High Risk</div>
+            </div>
+          </div>
+          <div class="panel" id="panel-breakdown">
+            <div class="prompt-banner" id="promptBanner">
+              <span class="prompt-icon">▦</span>
+              <span>Go to <strong>Portfolio Heatmap</strong> and click any cell to load its three-layer breakdown here.</span>
+            </div>
+            <div id="breakdownContent" style="display:none;">
+              <div class="breakdown-context"><span class="bc-flag" id="bdFlag"></span><div class="bc-info"><div class="bc-title" id="bdTitle"></div><div class="bc-meta" id="bdMeta"></div></div><div class="bc-score"><div class="bc-num" id="bdScore"></div><div class="bc-risk" id="bdRisk"></div></div></div>
+              <div class="layer-card"><div class="layer-row"><span class="layer-name">Layer 1 — Institutional Integrity</span><span class="layer-score-val" id="l1val"></span></div><div class="layer-track"><div class="layer-fill" id="l1bar"></div></div><div class="layer-detail" id="l1detail"></div><div class="layer-tags" id="l1tags"></div></div>
+              <div class="layer-card"><div class="layer-row"><span class="layer-name">Layer 2 — Sector Exposure</span><span class="layer-score-val" id="l2val"></span></div><div class="layer-track"><div class="layer-fill" id="l2bar"></div></div><div class="layer-detail" id="l2detail"></div><div class="layer-tags" id="l2tags"></div></div>
+              <div class="layer-card"><div class="layer-row"><span class="layer-name">Layer 3 — Execution Risk</span><span class="layer-score-val" id="l3val"></span></div><div class="layer-track"><div class="layer-fill" id="l3bar"></div></div><div class="layer-detail" id="l3detail"></div><div class="layer-tags" id="l3tags"></div></div>
+              <div class="recommend-box"><div class="rec-label">AlgoEconomics Recommendation</div><div class="rec-text" id="bdRecText"></div></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+<script>
+const COUNTRIES=[{id:'kenya',name:'Kenya',flag:'🇰🇪'},{id:'south_africa',name:'South Africa',flag:'🇿🇦'},{id:'nigeria',name:'Nigeria',flag:'🇳🇬'},{id:'ghana',name:'Ghana',flag:'🇬🇭'},{id:'egypt',name:'Egypt',flag:'🇪🇬'},{id:'rwanda',name:'Rwanda',flag:'🇷🇼'},{id:'tanzania',name:'Tanzania',flag:'🇹🇿'},{id:'morocco',name:'Morocco',flag:'🇲🇦'}];
+const SECTORS=['Mining','Agriculture','Fintech','Energy','Aviation','Healthcare','Tourism'];
+const SCORES={Mining:{kenya:74,south_africa:52,nigeria:84,ghana:56,egypt:62,rwanda:52,tanzania:75,morocco:58},Agriculture:{kenya:64,south_africa:48,nigeria:72,ghana:58,egypt:61,rwanda:51,tanzania:65,morocco:53},Fintech:{kenya:42,south_africa:36,nigeria:63,ghana:45,egypt:51,rwanda:39,tanzania:59,morocco:41},Energy:{kenya:71,south_africa:59,nigeria:86,ghana:64,egypt:73,rwanda:69,tanzania:68,morocco:61},Aviation:{kenya:68,south_africa:51,nigeria:79,ghana:62,egypt:54,rwanda:69,tanzania:65,morocco:56},Healthcare:{kenya:59,south_africa:43,nigeria:76,ghana:67,egypt:64,rwanda:46,tanzania:65,morocco:44},Tourism:{kenya:57,south_africa:46,nigeria:79,ghana:61,egypt:66,rwanda:52,tanzania:67,morocco:59}};
+const SECTOR_EXPOSURE={Mining:{detail:'Resource extraction opacity · Licensing irregularities · Environmental compliance gaps',tags:['Licensing Opacity','Extraction Contracts','Environmental Compliance','Revenue Transparency']},Agriculture:{detail:'Complex land tenure · Subsidy vulnerabilities · Export licensing discretion',tags:['Land Tenure Risk','Subsidy Exposure','Export Licensing','Input Markets']},Fintech:{detail:'Regulatory sandbox gaps · AML/KYC compliance · Digital payment oversight',tags:['AML/KYC Risk','Regulatory Clarity','Payment Oversight','Licensing Standards']},Energy:{detail:'State-owned enterprise exposure · Fuel subsidy irregularities · Grid contract procurement',tags:['SOE Exposure','Subsidy Risk','Grid Procurement','Fuel Import Contracts']},Aviation:{detail:'Airport concession opacity · Route licensing · Customs and duty manipulation',tags:['Concession Risk','Route Licensing','Customs Exposure','Safety Oversight']},Healthcare:{detail:'Procurement irregularities · Pharmaceutical supply chain · Public tender manipulation',tags:['Procurement Risk','Pharma Supply Chain','Public Tenders','Regulatory Approval']},Tourism:{detail:'Land allocation opacity · Hospitality licensing · Cultural heritage exploitation',tags:['Land Allocation','Licensing Risk','Foreign Investment','Revenue Leakage']}};
+const COUNTRY_L1={kenya:58,south_africa:44,nigeria:74,ghana:52,egypt:64,rwanda:42,tanzania:63,morocco:55};
+const COUNTRY_L1_DETAIL={kenya:'Moderate judicial independence · Mixed regulatory effectiveness · Recent reform trajectory',south_africa:'Independent judiciary · Strong regulatory bodies · Governance under scrutiny post-Zondo',nigeria:'Weak rule of law · Systemic institutional capture · Presidential oversight challenges',ghana:'Stable democratic institutions · Improving transparency indices · Procurement reform underway',egypt:'Executive-dominated judiciary · Limited civil society space · State-controlled regulatory bodies',rwanda:'Strong executive governance · Low corruption perception · Limited judicial independence noted',tanzania:'Moderate institutional quality · Recent anti-corruption drives · Regulatory gaps in extractives',morocco:'Improving rule of law · Judicial reform ongoing · Business regulatory quality above regional average'};
+
+function getRecommendation(o,c,s){if(o>=75)return'High Risk designation. Mandatory enhanced due diligence required before any capital commitment. Recommend independent ownership audit, third-party procurement review, and political exposure screening for all principals.';if(o>=65)return'Elevated Risk. Standard due diligence insufficient. Recommend sector-specialist legal review and quarterly monitoring during investment lifecycle.';if(o>=50)return'Moderate Risk. Proceed with standard institutional due diligence protocols. Contractual governance covenants recommended.';return`Lower Risk profile. Standard governance monitoring advised. ${c} demonstrates above-average institutional performance in ${s}.`;}
+
+function computeLayers(country,sector){const overall=SCORES[sector][country];const l1=COUNTRY_L1[country];const sb={Mining:8,Agriculture:4,Energy:10,Fintech:-10,Aviation:2,Healthcare:2,Tourism:0};const l2=Math.min(95,Math.max(30,l1+(sb[sector]||0)+Math.round((overall-l1)*0.4)));const l3=Math.min(98,Math.max(20,Math.round((overall-0.35*l1-0.33*l2)/0.32)));return{l1,l2,l3,overall};}
+
+function barClass(s){return s>=75?'fill-high':s>=65?'fill-modh':s>=50?'fill-mod':'fill-modl';}
+
+function riskLabel(s){return s>=75?{label:'⚠ High Risk',cls:'high'}:s>=65?{label:'▲ Moderate-High',cls:'modh'}:s>=50?{label:'◆ Moderate',cls:'mod'}:s>=35?{label:'▼ Moderate-Low',cls:'modl'}:{label:'✓ Low Risk',cls:'low'};}
+
+function cellClass(s){return s>=75?'c-high':s>=65?'c-modh':s>=50?'c-mod':s>=35?'c-modl':'c-low';}
+
+function buildHeatmap(){const grid=document.getElementById('heatmapGrid');grid.innerHTML='';grid.appendChild(makeDiv(''));COUNTRIES.forEach(c=>{grid.appendChild(makeDiv(c.name,'hm-col-header'));});SECTORS.forEach(sector=>{grid.appendChild(makeDiv(sector,'hm-row-label'));COUNTRIES.forEach(c=>{const score=SCORES[sector][c.id];const cell=document.createElement('div');cell.className=`hm-cell ${cellClass(score)}`;cell.textContent=score;cell.dataset.tip=`${c.name} · ${sector}: ${score}/100`;cell.addEventListener('click',()=>onCellClick(c,sector,score,cell));grid.appendChild(cell);});});}
+
+function makeDiv(text,cls){const d=document.createElement('div');if(cls)d.className=cls;d.textContent=text;return d;}
+
+let selectedCell=null;
+
+function onCellClick(country,sector,score,cellEl){
+  if(selectedCell)selectedCell.classList.remove('selected');
+  cellEl.classList.add('selected');
+  selectedCell=cellEl;
+  const layers=computeLayers(country.id,sector);
+  const risk=riskLabel(score);
+  
+  document.getElementById('topContextFlag').textContent=country.flag+' ';
+  document.getElementById('topContextLabel').textContent=`${country.name} · ${sector}`;
+  document.getElementById('topContext').classList.remove('hidden');
+  document.getElementById('sciCountry').textContent=country.name;
+  document.getElementById('sciSector').textContent=sector;
+  document.getElementById('sciScore').textContent=score;
+  const sr=document.getElementById('sciRisk');
+  sr.textContent=risk.label;sr.className=`sci-risk ${risk.cls}`;
+  document.getElementById('sciHint').textContent='Go to ACI Breakdown for the full analysis.';
+  const sd=SECTOR_EXPOSURE[sector];
+  document.getElementById('bdFlag').textContent=country.flag;
+  document.getElementById('bdTitle').textContent=`${country.name} · ${sector} Sector`;
+  document.getElementById('bdMeta').textContent='Assessment Q1 2026 · 14 data sources · AlgoEconomics ACI v2.4';
+  document.getElementById('bdScore').textContent=`${score}/100`;
+  const br=document.getElementById('bdRisk');
+  br.textContent=risk.label;br.className=`bc-risk ${risk.cls}`;
+  setLayer('l1',layers.l1,COUNTRY_L1_DETAIL[country.id],['Judicial Independence','Regulatory Quality','Rule of Law','Govt Effectiveness'],barClass(layers.l1));
+  setLayer('l2',layers.l2,sd.detail,sd.tags,barClass(layers.l2));
+  const l3d=layers.l3>=75?'Shell company structures detected · Single-bid procurement anomalies · Political connections verified':layers.l3>=60?'Beneficial ownership partially disclosed · Some procurement irregularities noted':'Ownership structure transparent · Procurement within normal thresholds';
+  setLayer('l3',layers.l3,l3d,layers.l3>=65?['Ownership Opacity','Procurement Risk','Political Exposure','Disclosure Score']:['Ownership Transparency','Procurement Quality','Disclosure Index','Compliance Rating'],barClass(layers.l3));
+  document.getElementById('bdRecText').textContent=getRecommendation(score,country.name,sector);
+  document.getElementById('promptBanner').classList.add('hidden');
+  document.getElementById('breakdownContent').style.display='block';
+  switchPanel('breakdown');
+  
+  // Auto-close sidebar on mobile after selection
+  if(window.innerWidth <= 768) {
+    document.getElementById('aciOverlay').classList.remove('sidebar-open');
   }
 
-  if (closeAciModal) {
-      closeAciModal.onclick = () => aciModal.style.display = "none";
-  }
+  setTimeout(()=>{['l1','l2','l3'].forEach(p=>{const b=document.getElementById(`${p}bar`);if(b&&b.dataset.target)b.style.width=b.dataset.target;});},80);
+}
 
-  window.onclick = (e) => {
-    if (e.target === aciModal) aciModal.style.display = "none";
-  };
+function setLayer(prefix,score,detail,tags,fillClass){document.getElementById(`${prefix}val`).textContent=`${score} / 100`;const bar=document.getElementById(`${prefix}bar`);bar.className=`layer-fill ${fillClass}`;bar.style.width='0';bar.dataset.target=`${score}%`;document.getElementById(`${prefix}detail`).textContent=detail;const tc=document.getElementById(`${prefix}tags`);tc.innerHTML='';tags.forEach(t=>{const s=document.createElement('span');s.className='tag';s.textContent=t;tc.appendChild(s);});}
+
+function switchPanel(p){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.querySelector(`[data-panel="${p}"]`).classList.add('active');document.getElementById(`panel-${p}`).classList.add('active');}
+
+document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('click',()=>switchPanel(item.dataset.panel)));
+
+const overlay=document.getElementById('aciOverlay');
+document.querySelectorAll('.aci-launch').forEach(btn=>btn.addEventListener('click',()=>{overlay.style.display='flex';requestAnimationFrame(()=>requestAnimationFrame(()=>overlay.classList.add('visible')));document.body.style.overflow='hidden';buildHeatmap();}));
+
+function closeOverlay(){overlay.classList.remove('visible');overlay.classList.remove('sidebar-open');setTimeout(()=>{overlay.style.display='none';document.body.style.overflow='';},300);}
+
+document.getElementById('closeAci').addEventListener('click',closeOverlay);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOverlay();});
+
+// Mobile Sidebar Toggle Logic
+document.getElementById('menuToggle').addEventListener('click', (e) => {
+  e.stopPropagation();
+  overlay.classList.toggle('sidebar-open');
+});
+
+// Close sidebar when clicking outside on mobile
+overlay.addEventListener('click', (e) => {
+  if(window.innerWidth <= 768 && overlay.classList.contains('sidebar-open')) {
+    if(!document.getElementById('aciSidebar').contains(e.target) && e.target !== document.getElementById('menuToggle')) {
+      overlay.classList.remove('sidebar-open');
+    }
+  }
+});
 </script>
 
+</body>
+</html>
