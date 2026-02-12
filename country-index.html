@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACI — AlgoEconomics Country Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #090B0E;
+    --surface:  #0F1318;
+    --border:   #1E2530;
+    --gold:     #C5973A;
+    --gold-dim: #8A6520;
+    --text:     #DDD8CF;
+    --muted:    #5C6070;
+    --green:    #4A9E72;
+    --red:      #B05050;
+    --white:    #F2EDE5;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.85); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes lineGrow {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+  @keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes numberCount {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.7;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    height: 30px;
+    display: flex;
+    align-items: center;
+  }
+  .ticker-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    background: var(--gold);
+    color: var(--bg);
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    font-weight: 400;
+  }
+  .ticker-track {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 28s linear infinite;
+    overflow: visible;
+  }
+  .ticker-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    padding: 0 28px;
+    letter-spacing: 0.05em;
+  }
+  .ticker-item span { color: var(--green); margin-left: 6px; }
+  .ticker-item .down { color: var(--red); }
+
+  /* ── HEADER ── */
+  header {
+    padding: 54px 64px 40px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.1s;
+  }
+
+  .logo-block {}
+
+  .logo-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s ease infinite;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 52px;
+    line-height: 1.05;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .header-sub {
+    font-size: 11.5px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .score-block {
+    text-align: right;
+    border-left: 1px solid var(--border);
+    padding-left: 40px;
+  }
+  .score-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .score-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 68px;
+    font-weight: 300;
+    color: var(--green);
+    line-height: 1;
+  }
+  .score-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--green);
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+  .score-countries {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── MAIN GRID ── */
+  main {
+    padding: 0 64px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    grid-template-rows: auto auto auto;
+    gap: 0;
+  }
+
+  /* ── SECTION HELPERS ── */
+  section {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 40px;
+  }
+
+  /* ── PROBLEM ── */
+  .section-problem {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    animation-delay: 0.2s;
+    padding-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .problem-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--white);
+    max-width: 760px;
+  }
+  .problem-text strong {
+    font-weight: 600;
+    color: var(--gold);
+    font-style: italic;
+  }
+  .blind-spot-line {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 28px;
+    overflow: hidden;
+  }
+  .blind-spot-item {
+    flex: 1;
+    text-align: center;
+    padding: 14px 12px;
+    border: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    position: relative;
+  }
+  .blind-spot-item .status {
+    display: block;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .blind-spot-item .status.live { color: var(--green); }
+  .blind-spot-item.missing {
+    border-color: var(--gold-dim);
+    background: rgba(197, 151, 58, 0.05);
+    color: var(--gold);
+  }
+  .blind-spot-item.missing .status { color: var(--gold); }
+
+  /* ── SOLUTION + SIDEBAR ── */
+  .section-solution {
+    grid-column: 1;
+    grid-row: 2;
+    padding-right: 48px;
+    border-right: 1px solid var(--border);
+    animation-delay: 0.3s;
+  }
+  .section-sidebar {
+    grid-column: 2;
+    grid-row: 2;
+    padding-left: 48px;
+    animation-delay: 0.35s;
+  }
+
+  p {
+    color: var(--text);
+    font-size: 13.5px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── COMPARISON TABLE ── */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+  }
+  .comparison-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .comparison-table td {
+    font-size: 12px;
+    padding: 11px 10px;
+    border-bottom: 1px solid rgba(30,37,48,0.6);
+    vertical-align: top;
+    color: var(--text);
+  }
+  .comparison-table td:first-child {
+    font-weight: 500;
+    color: var(--white);
+    white-space: nowrap;
+    font-size: 11.5px;
+  }
+  .comparison-table td:last-child {
+    color: var(--muted);
+    font-size: 11.5px;
+  }
+  .comparison-table tr:last-child td {
+    border-bottom: none;
+    background: rgba(197, 151, 58, 0.06);
+    color: var(--gold);
+  }
+  .comparison-table tr:last-child td:first-child {
+    color: var(--gold);
+  }
+
+  /* ── FOUNDATION BOTTOM ROW ── */
+  .section-foundation {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    border-bottom: none;
+    animation-delay: 0.45s;
+  }
+
+  .foundation-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 4px;
+  }
+  .foundation-card {
+    background: var(--surface);
+    padding: 22px 20px;
+  }
+  .foundation-card .number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .foundation-card .number sup {
+    font-size: 16px;
+    vertical-align: super;
+  }
+  .foundation-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .foundation-card p {
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ── ROADMAP BAR ── */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 28px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .roadmap-phase {
+    padding: 16px 18px;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .roadmap-phase:last-child { border-right: none; }
+  .roadmap-phase.active {
+    background: rgba(197, 151, 58, 0.07);
+  }
+  .roadmap-phase .phase-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .roadmap-phase .phase-title {
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--white);
+    margin-bottom: 4px;
+    letter-spacing: 0.03em;
+  }
+  .roadmap-phase .phase-desc {
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .roadmap-phase .phase-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: var(--gold);
+    margin-top: 6px;
+  }
+  .roadmap-phase.active .phase-label {
+    color: var(--gold);
+  }
+  .active-badge {
+    position: absolute;
+    top: 10px; right: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7px;
+    background: var(--gold);
+    color: var(--bg);
+    padding: 2px 6px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 24px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.55s;
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .footer-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+  .footer-title {
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .footer-close {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--gold);
+    text-align: right;
+    max-width: 380px;
+    line-height: 1.5;
+  }
+  .footer-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-align: center;
+  }
+
+  /* ── DIVIDER ACCENT ── */
+  .gold-rule {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 16px 0;
+  }
+
+  /* ── HIGHLIGHTS ── */
+  .highlight { color: var(--gold); font-weight: 500; }
+  .highlight-green { color: var(--green); }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; color: black; }
+    .ticker-wrap { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Live Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker-label">ACI LIVE</div>
+  <div style="overflow:hidden; flex:1;">
+    <div class="ticker-track">
+      <span class="ticker-item">NIGERIA GOVERNANCE <span>▲ +1.4pts</span></span>
+      <span class="ticker-item">KENYA POLICY REFORM <span>▲ +0.9pts</span></span>
+      <span class="ticker-item">SOUTH AFRICA STABILITY <span class="down">▼ −0.6pts</span></span>
+      <span class="ticker-item">GHANA INSTITUTIONAL INTEGRITY <span>▲ +2.1pts</span></span>
+      <span class="ticker-item">ETHIOPIA SECTOR RISK <span class="down">▼ −1.2pts</span></span>
+      <span class="ticker-item">AFRICA REGION COMPOSITE <span>▲ +0.7pts</span></span>
+      <span class="ticker-item">RWANDA EASE OF BUSINESS <span>▲ +3.0pts</span></span>
+      <span class="ticker-item">TANZANIA EXTRACTIVE RISK <span class="down">▼ −0.4pts</span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item">NIGERIA GOVERNANCE <span>▲ +1.4pts</span></span>
+      <span class="ticker-item">KENYA POLICY REFORM <span>▲ +0.9pts</span></span>
+      <span class="ticker-item">SOUTH AFRICA STABILITY <span class="down">▼ −0.6pts</span></span>
+      <span class="ticker-item">GHANA INSTITUTIONAL INTEGRITY <span>▲ +2.1pts</span></span>
+      <span class="ticker-item">ETHIOPIA SECTOR RISK <span class="down">▼ −1.2pts</span></span>
+      <span class="ticker-item">AFRICA REGION COMPOSITE <span>▲ +0.7pts</span></span>
+      <span class="ticker-item">RWANDA EASE OF BUSINESS <span>▲ +3.0pts</span></span>
+      <span class="ticker-item">TANZANIA EXTRACTIVE RISK <span class="down">▼ −0.4pts</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="logo-block">
+    <div class="logo-eyebrow">
+      <span class="live-dot"></span>
+      AlgoEconomics &nbsp;·&nbsp; Investor Brief
+    </div>
+    <h1>The <em>AlgoEconomics</em><br>Country Index</h1>
+    <div class="header-sub">A real-time governance intelligence system for African markets</div>
+  </div>
+  <div class="score-block">
+    <div class="score-label">Nigeria · ACI Score</div>
+    <div class="score-value">72.4</div>
+    <div class="score-sub">▲ +1.4 pts &nbsp; Improving</div>
+    <div class="score-countries" style="margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:0.12em;">POC ACTIVE · PILOT DATA</div>
+  </div>
+</header>
+
+<!-- Main Grid -->
+<main>
+
+  <!-- Problem — Full width -->
+  <section class="section-problem">
+    <div class="section-tag">The Problem</div>
+    <div class="problem-text">
+      Governance is the single biggest driver of investment outcomes — yet it's the <strong>only major domain without real-time data.</strong>
+    </div>
+    <div class="blind-spot-line">
+      <div class="blind-spot-item">
+        <span class="status live">● LIVE</span>
+        MARKETS
+      </div>
+      <div class="blind-spot-item">
+        <span class="status live">● LIVE</span>
+        WEATHER
+      </div>
+      <div class="blind-spot-item">
+        <span class="status live">● LIVE</span>
+        SUPPLY CHAINS
+      </div>
+      <div class="blind-spot-item">
+        <span class="status live">● LIVE</span>
+        COMMODITY PRICES
+      </div>
+      <div class="blind-spot-item missing">
+        <span class="status">◌ MISSING</span>
+        GOVERNANCE
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution — Left column -->
+  <section class="section-solution">
+    <div class="section-tag">What the ACI Does</div>
+    <p>The ACI takes thousands of fragmented signals — speeches, policies, protests, court rulings, corruption cases, regulatory shifts, geopolitical events — and compresses them into <span class="highlight">one clean, continuously updated score</span>. At a glance, you see how stable, investable, and well-governed a country is right now. And whether it's improving or deteriorating.</p>
+    <p>No anecdotes. No insider networks. No annual PDFs. Just evidence, updated as the world moves.</p>
+
+    <div class="gold-rule"></div>
+
+    <div class="section-tag">Why It Matters</div>
+    <p>Decision-makers today are forced to rely on outdated ratings, intuition, and personal networks. The ACI removes that guesswork. It <span class="highlight">levels the playing field</span> by making governance signals transparent and accessible to anyone — not just insiders. It shows <span class="highlight">momentum, not snapshots</span>: not where a country was last year, but where it's headed. It rewards real improvements that often go unnoticed, and flags risks early.</p>
+    <p>This is the first system that treats governance as a real-time, quantifiable variable. It fills <span class="highlight">the last blind spot</span> in global investment intelligence.</p>
+  </section>
+
+  <!-- Sidebar — Right column -->
+  <section class="section-sidebar">
+    <div class="section-tag">Competitive Gap</div>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Why it falls short</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Credit Agencies</td>
+          <td>Slow, backward-looking, debt-focused</td>
+        </tr>
+        <tr>
+          <td>Risk Consultancies</td>
+          <td>Expensive, bespoke, doesn't scale</td>
+        </tr>
+        <tr>
+          <td>WGI / FSI / V-Dem</td>
+          <td>Annual updates — descriptive, not predictive</td>
+        </tr>
+        <tr>
+          <td>CDS / FX / Bonds</td>
+          <td>React after events, can't explain why</td>
+        </tr>
+        <tr>
+          <td>AlgoEconomics ACI</td>
+          <td>Real-time · Machine-classified · Predictive · African-first</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Foundation — Full width -->
+  <section class="section-foundation">
+    <div class="section-tag">Where We Are Now</div>
+    <div class="foundation-grid">
+      <div class="foundation-card">
+        <div class="number">47</div>
+        <div class="label">Data Sources</div>
+        <p>World Bank, IMF, Mo Ibrahim, AfDB, Transparency Int'l, WHO, Reuters, Africa Data Hub, and regional bodies.</p>
+      </div>
+      <div class="foundation-card">
+        <div class="number">89<sup>%</sup></div>
+        <div class="label">Free & Public</div>
+        <p>Reputable, open-access data — structural governance, policy direction, and real-time political signals.</p>
+      </div>
+      <div class="foundation-card">
+        <div class="number">3</div>
+        <div class="label">Methodology Layers</div>
+        <p>Structural integrity · Policy direction · Real-time signals. Transparent, interpretable — no black box.</p>
+      </div>
+      <div class="foundation-card">
+        <div class="number">7</div>
+        <div class="label">Sectors Covered</div>
+        <p>Mining, agriculture, fintech, energy, aviation, healthcare, and tourism — sector-level risk resolution.</p>
+      </div>
+    </div>
+
+    <div class="roadmap">
+      <div class="roadmap-phase active">
+        <div class="active-badge">NOW</div>
+        <div class="phase-label">Phase 01</div>
+        <div class="phase-title">POC</div>
+        <div class="phase-desc">Nigeria — architecture live, methodology validated, pilot scoring active.</div>
+        <div class="phase-time">0 – 2 months</div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="phase-label">Phase 02</div>
+        <div class="phase-title">MVP</div>
+        <div class="phase-desc">Nigeria · Kenya · South Africa — live scoring, investor dashboard.</div>
+        <div class="phase-time">2 – 6 months</div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="phase-label">Phase 03</div>
+        <div class="phase-title">Production</div>
+        <div class="phase-desc">7–10 countries — institutional API access, premium tier launches.</div>
+        <div class="phase-time">6 – 12 months</div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="phase-label">Phase 04</div>
+        <div class="phase-title">Scale</div>
+        <div class="phase-desc">15–20 countries — predictive modelling, sector alerts, sovereign integrations.</div>
+        <div class="phase-time">12 – 24 months</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-name">Kwazi Ndlela</div>
+    <div class="footer-title">Founder & CEO · AlgoEconomics Ltd · London</div>
+  </div>
+  <div class="footer-meta">CONFIDENTIAL &nbsp;·&nbsp; SERIES SEED &nbsp;·&nbsp; 2026</div>
+  <div class="footer-close">
+    The thinking is done. The infrastructure is built.<br>
+    This is a system waiting to be switched on.
+  </div>
+</footer>
+
+</body>
+</html>
