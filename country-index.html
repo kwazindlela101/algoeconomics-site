@@ -147,6 +147,33 @@
     margin-top: 10px;
   }
 
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(197,151,58,0.4);
+    background: rgba(9,11,14,0.85);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  }
+  .back-button:hover {
+    background: rgba(197,151,58,0.12);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+    transform: translateY(-1px);
+  }
+  .back-button-icon {
+    font-size: 11px;
+  }
+
   .score-block {
     text-align: right;
     border-left: 1px solid var(--border);
@@ -494,6 +521,169 @@
   .highlight { color: var(--gold); font-weight: 500; }
   .highlight-green { color: var(--green); }
 
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    header {
+      grid-template-columns: 1fr;
+      padding: 32px 32px 24px;
+      gap: 24px;
+    }
+    .score-block {
+      border-left: none;
+      border-top: 1px solid var(--border);
+      padding-left: 0;
+      padding-top: 24px;
+      text-align: left;
+    }
+    h1 {
+      font-size: 38px;
+    }
+    .score-value {
+      font-size: 52px;
+    }
+    main {
+      grid-template-columns: 1fr;
+      padding: 0 32px;
+    }
+    .section-solution {
+      grid-column: 1;
+      grid-row: 2;
+      padding-right: 0;
+      padding-bottom: 0;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-sidebar {
+      grid-column: 1;
+      grid-row: 3;
+      padding-left: 0;
+      padding-top: 40px;
+    }
+    .blind-spot-line {
+      flex-wrap: wrap;
+    }
+    .blind-spot-item {
+      flex: 1 1 calc(50% - 1px);
+      min-width: 0;
+    }
+    .foundation-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .roadmap {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .roadmap-phase:nth-child(2n) {
+      border-right: none;
+    }
+    .roadmap-phase:nth-child(-n+2) {
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-table {
+      font-size: 11px;
+    }
+    .comparison-table th,
+    .comparison-table td {
+      padding: 8px 8px;
+      font-size: 10.5px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ticker-wrap {
+      height: 26px;
+    }
+    .ticker-label {
+      font-size: 8px;
+      padding: 0 8px;
+    }
+    .ticker-item {
+      font-size: 8.5px;
+      padding: 0 16px;
+    }
+    header {
+      padding: 24px 20px 20px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    .score-value {
+      font-size: 42px;
+    }
+    .header-sub {
+      font-size: 10px;
+    }
+    .back-button {
+      font-size: 9px;
+      padding: 5px 10px;
+    }
+    main {
+      padding: 0 20px;
+    }
+    section {
+      padding: 28px 0;
+    }
+    .problem-text {
+      font-size: 20px;
+    }
+    .blind-spot-item {
+      flex: 1 1 100%;
+      border-right: none !important;
+      padding: 12px 10px;
+      font-size: 8.5px;
+    }
+    .blind-spot-item:not(:last-child) {
+      border-bottom: 1px solid var(--border);
+    }
+    .foundation-grid {
+      grid-template-columns: 1fr;
+    }
+    .foundation-card {
+      padding: 18px 16px;
+    }
+    .foundation-card .number {
+      font-size: 32px;
+    }
+    .roadmap {
+      grid-template-columns: 1fr;
+    }
+    .roadmap-phase {
+      border-right: none !important;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 16px;
+    }
+    .roadmap-phase:last-child {
+      border-bottom: none;
+    }
+    footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px 20px;
+    }
+    .footer-close {
+      text-align: left;
+      max-width: 100%;
+      font-size: 15px;
+    }
+    .footer-meta {
+      font-size: 7.5px;
+    }
+    .comparison-table {
+      font-size: 10px;
+    }
+    .comparison-table th {
+      font-size: 7.5px;
+      padding: 6px 6px;
+    }
+    .comparison-table td {
+      padding: 8px 6px;
+      font-size: 9.5px;
+    }
+    .comparison-table td:first-child {
+      font-size: 10px;
+    }
+  }
+
   /* ── PRINT ── */
   @media print {
     body { background: white; color: black; }
@@ -532,6 +722,10 @@
 <!-- Header -->
 <header>
   <div class="logo-block">
+    <a href="index.html" class="back-button">
+      <span class="back-button-icon">←</span>
+      Back to platform
+    </a>
     <div class="logo-eyebrow">
       <span class="live-dot"></span>
       AlgoEconomics &nbsp;·&nbsp; Investor Brief
@@ -688,8 +882,7 @@
 <!-- Footer -->
 <footer>
   <div class="footer-brand">
-    <div class="footer-name">Kwazi Ndlela</div>
-    <div class="footer-title">Founder & CEO · AlgoEconomics Ltd · London</div>
+    <div class="footer-name"> <img src="ALGO LOGO2.png" alt="AlgoEconomics" style="max-height:80px; width:auto; display:block;"> </div>
   </div>
   <div class="footer-meta">CONFIDENTIAL &nbsp;·&nbsp; SERIES SEED &nbsp;·&nbsp; 2026</div>
   <div class="footer-close">
