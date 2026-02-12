@@ -5800,6 +5800,22 @@ footer input:focus {
         .prompt-banner{display:flex;align-items:center;gap:12px;padding:14px 18px;margin-bottom:20px;background:rgba(212,175,55,0.06);border:1px dashed rgba(212,175,55,0.3);border-radius:4px;font-size:13px;color:var(--slate);transition:opacity 0.4s}
         .prompt-banner.hidden{opacity:0;pointer-events:none} .prompt-icon{font-size:18px}
 
+        /* Mobile-only ACI header context inside sidebar */
+        .mobile-aci-context{
+          display:none;
+          align-items:center;
+          gap:8px;
+          padding:8px 16px 4px;
+          border-bottom:1px solid rgba(212,175,55,0.15);
+        }
+        .mobile-aci-context .t-label{
+          font-size:11px;
+          color:var(--slate);
+        }
+        .mobile-aci-context .t-badge{
+          margin-left:auto;
+        }
+
         @media(max-width:768px){
           .sidebar{
             position: fixed;
@@ -5819,7 +5835,19 @@ footer input:focus {
           }
           .stat-grid{grid-template-columns:repeat(2,1fr)} 
           .main{padding:18px 14px} 
-          .topbar{padding:0 14px} 
+          .topbar{
+            padding:0 14px;
+          }
+          /* Hide long label + badge divider in topbar to keep X visible */
+          .topbar-left .t-div,
+          .topbar-left .t-label,
+          .topbar-left .t-badge{
+            display:none;
+          }
+          /* Show compact copy of AI Corruption Index + Live badge inside sidebar */
+          .mobile-aci-context{
+            display:flex;
+          }
           .t-context{display:none}
         }
 
@@ -11478,6 +11506,10 @@ submitButton.addEventListener('mouseleave', function() {
       </div>
       <div class="layout">
         <nav class="sidebar" id="aciSidebar">
+          <div class="mobile-aci-context">
+            <span class="t-label">AI Corruption Index</span>
+            <span class="t-badge">Live Intelligence</span>
+          </div>
           <div class="nav-section">Intelligence</div>
           <div class="nav-item active" data-panel="overview"><span class="nav-icon">◈</span>Overview</div>
           <div class="nav-item" data-panel="heatmap"><span class="nav-icon">▦</span>Portfolio Heatmap</div>
