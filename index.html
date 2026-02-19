@@ -5,6 +5,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AlgoEconomics | AI-Powered Economic Intelligence for UK-Africa Markets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="tickers.css">
     <link rel="stylesheet" href="modal.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -9333,198 +9334,477 @@ toggle() {
     </div>        
 
 
-<section id="pricing" class="py-20 bg-gray-50">
-  <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold text-navy-900 mb-4">Infrastructure Licensing</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        Enterprise governance intelligence for institutional investors deploying capital across African infrastructure markets
-      </p>
+<div class="pricing-section-alt">
+    <style>
+  :root {
+    --p-navy: #0a0f1e;
+    --p-navy-mid: #0d1628;
+    --p-navy-light: #111d35;
+    --p-gold: #c9a84c;
+    --p-gold-light: #e2c47a;
+    --p-gold-dim: rgba(201,168,76,0.15);
+    --p-teal: #00c9b1;
+    --p-teal-dim: rgba(0,201,177,0.1);
+    --p-white: #f0f4ff;
+    --p-muted: #6b7fa3;
+    --p-border: rgba(201,168,76,0.2);
+  }
+
+  .pricing-section-alt {
+    position: relative;
+    z-index: 1;
+    padding: 100px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-family: 'Barlow', sans-serif;
+    background: var(--p-navy);
+    text-align: left;
+  }
+
+  .pricing-section-alt .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--p-gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    justify-content: flex-start;
+  }
+  .pricing-section-alt .section-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--p-gold);
+  }
+
+  .pricing-section-alt .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 62px);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--p-white);
+    text-align: left;
+  }
+
+  .pricing-section-alt .section-subtitle {
+    font-size: 17px;
+    color: var(--p-muted);
+    font-weight: 300;
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 70px;
+    text-align: left;
+  }
+
+  .pricing-section-alt .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    /* background: var(--p-border); */
+    /* border: 1px solid var(--p-border); */
+    border-radius: 2px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .pricing-section-alt .tier {
+    background: var(--p-navy-mid);
+    padding: 48px 40px 52px;
+    position: relative;
+    transition: background 0.3s ease;
+    cursor: default;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pricing-section-alt .tier:hover {
+    background: var(--p-navy-light);
+  }
+
+  .pricing-section-alt .tier.featured {
+    background: var(--p-navy-light);
+    border-top: 2px solid var(--p-gold);
+  }
+
+  .pricing-section-alt .tier.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--p-gold);
+    color: var(--p-navy);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    padding: 7px 16px;
+    font-weight: 600;
+    border-radius: 2px;
+  }
+
+  .pricing-section-alt .tier-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--p-muted);
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  .pricing-section-alt .tier-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--p-white);
+    margin-bottom: 8px;
+    text-align: left;
+  }
+
+  .pricing-section-alt .tier.featured .tier-name {
+    color: var(--p-gold-light);
+  }
+
+  .pricing-section-alt .tier-desc {
+    font-size: 13px;
+    color: var(--p-muted);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    font-weight: 300;
+    min-height: 42px;
+    text-align: left;
+  }
+
+  .pricing-section-alt .tier-access {
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    text-align: left;
+  }
+
+  .pricing-section-alt .access-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--p-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+
+  .pricing-section-alt .access-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--p-white);
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .pricing-section-alt .tier.featured .access-value {
+    color: var(--p-gold-light);
+  }
+
+  .pricing-section-alt .tier:last-child .access-value {
+    color: var(--p-teal);
+  }
+
+  .pricing-section-alt .features-list {
+    list-style: none;
+    margin-bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .pricing-section-alt .features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13.5px;
+    color: #8fa3c4;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .pricing-section-alt .features-list li::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border-radius: 50%;
+    background: var(--p-gold-dim);
+    border: 1px solid var(--p-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10px;
+  }
+
+  .pricing-section-alt .tier.featured .features-list li {
+    color: #b0c4de;
+  }
+
+  .pricing-section-alt .tier-cta {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: auto;
+  }
+
+  .pricing-section-alt .tier-cta.outline {
+    border-color: rgba(201,168,76,0.3);
+    color: var(--p-gold);
+    background: transparent;
+  }
+
+  .pricing-section-alt .tier-cta.outline:hover {
+    border-color: var(--p-gold);
+    background: var(--p-gold-dim);
+  }
+
+  .pricing-section-alt .tier-cta.solid {
+    border-color: var(--p-gold);
+    color: var(--p-navy);
+    background: var(--p-gold);
+  }
+
+  .pricing-section-alt .tier-cta.solid:hover {
+    background: var(--p-gold-light);
+    border-color: var(--p-gold-light);
+  }
+
+  .pricing-section-alt .tier-cta.teal {
+    border-color: rgba(0,201,177,0.4);
+    color: var(--p-teal);
+    background: transparent;
+  }
+
+  .pricing-section-alt .tier-cta.teal:hover {
+    border-color: var(--p-teal);
+    background: var(--p-teal-dim);
+  }
+
+  .pricing-section-alt .pricing-footnote {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    text-align: left;
+  }
+
+  .pricing-section-alt .footnote-text {
+    font-size: 13px;
+    color: var(--p-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 600px;
+    text-align: left;
+  }
+
+  .pricing-section-alt .footnote-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--p-gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  .pricing-section-alt .footnote-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--p-gold);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .pricing-section-alt .tier {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .pricing-section-alt .tier:nth-child(1) { animation-delay: 0.1s; }
+  .pricing-section-alt .tier:nth-child(2) { animation-delay: 0.25s; }
+  .pricing-section-alt .tier:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive Optimizations */
+  @media (max-width: 1100px) {
+    .pricing-section-alt {
+        padding: 100px 40px;
+    }
+    .pricing-section-alt .pricing-grid {
+      grid-template-columns: 1fr;
+      background: transparent;
+      gap: 16px;
+      border: none;
+    }
+    .pricing-section-alt .tier {
+      border: 1px solid var(--p-border);
+      border-radius: 4px;
+      height: auto;
+    }
+    .pricing-section-alt .tier.featured {
+      border-top: 3px solid var(--p-gold);
+    }
+    .pricing-section-alt .section-subtitle {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .pricing-section-alt {
+        padding: 80px 30px;
+    }
+    .pricing-section-alt .tier {
+      padding: 40px 32px;
+    }
+    .pricing-section-alt .pricing-footnote {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pricing-section-alt {
+        padding: 60px 20px;
+    }
+    .pricing-section-alt .section-title {
+        font-size: 32px;
+    }
+    .pricing-section-alt .tier {
+      padding: 32px 24px;
+    }
+    .pricing-section-alt .tier-name {
+      font-size: 24px;
+    }
+    .pricing-section-alt .access-value {
+      font-size: 20px;
+    }
+    .pricing-section-alt .footnote-badge {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+    }
+  }
+</style>
+
+  <div class="section-eyebrow">Infrastructure Licensing</div>
+  <h2 class="section-title">Enterprise Intelligence,<br>Precisely Calibrated</h2>
+  <p class="section-subtitle">Governance intelligence built for institutional capital. Select the tier that matches your deployment scale and risk appetite.</p>
+
+  <div class="pricing-grid">
+
+    <!-- Tier 1: Market -->
+    <div class="tier">
+      <div class="tier-tag">Tier 01</div>
+      <div class="tier-name">Market</div>
+      <div class="tier-desc">For single-market deployment and sector-specific risk assessment</div>
+      <div class="tier-access">
+        <div class="access-label">Licensing Access</div>
+        <div class="access-value">Schedule an Assessment</div>
+      </div>
+      <ul class="features-list">
+        <li>Single market coverage</li>
+        <li>Up to 3 sector modules</li>
+        <li>Real-time ACI monitoring</li>
+        <li>Quarterly governance reports</li>
+        <li>API access — 1,000 calls/month</li>
+        <li>Up to 5 user seats</li>
+      </ul>
+      <a href="#consultation" class="tier-cta outline">Request Demo</a>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      
-      <!-- Infrastructure Tier -->
-      <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-gray-200 hover:border-gold-500 transition-all">
-        <h3 class="text-2xl font-bold text-navy-900 mb-4">Infrastructure</h3>
-        <p class="text-gray-600 mb-6">For single-market deployment and sector-specific risk assessment</p>
-        
-        <ul class="space-y-4 mb-8">
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Single market coverage</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Up to 3 sector modules</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Real-time ACI monitoring</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Quarterly governance reports</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">API access (1,000 calls/month)</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Up to 5 user seats</span>
-          </li>
-        </ul>
-
-        <a href="#consultation" class="block w-full text-center bg-gold-500 hover:bg-gold-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
-          Schedule Assessment
-        </a>
+    <!-- Tier 2: Enterprise (Featured) -->
+    <div class="tier featured">
+      <div class="tier-tag">Tier 02</div>
+      <div class="tier-name">Enterprise</div>
+      <div class="tier-desc">For multi-sector institutional investors with complex exposure portfolios</div>
+      <div class="tier-access">
+        <div class="access-label">Licensing Access</div>
+        <div class="access-value">Schedule an Assessment</div>
       </div>
-
-      <!-- Enterprise Tier (Most Popular) -->
-      <div class="bg-white rounded-lg shadow-xl p-8 border-2 border-gold-500 transform scale-105 relative">
-        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <span class="bg-gold-500 text-white px-4 py-1 rounded-full text-sm font-semibold">Most Popular</span>
-        </div>
-        
-        <h3 class="text-2xl font-bold text-navy-900 mb-4">Enterprise</h3>
-        <p class="text-gray-600 mb-6">For multi-market portfolio governance and cross-sector risk intelligence</p>
-        
-        <ul class="space-y-4 mb-8">
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Up to 5 markets coverage</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">All 7 sector modules</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Real-time ACI monitoring + alerts</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Monthly governance reports</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">API access (10,000 calls/month)</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Up to 20 user seats</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Dedicated account manager</span>
-          </li>
-        </ul>
-
-        <a href="#consultation" class="block w-full text-center bg-gold-500 hover:bg-gold-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
-          Schedule Assessment
-        </a>
-      </div>
-
-      <!-- Institutional Tier -->
-      <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-gray-200 hover:border-gold-500 transition-all">
-        <h3 class="text-2xl font-bold text-navy-900 mb-4">Institutional</h3>
-        <p class="text-gray-600 mb-6">For sovereign wealth funds, DFIs, and institutional asset managers</p>
-        
-        <ul class="space-y-4 mb-8">
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Full continental coverage</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">All 7 sector modules + custom sectors</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Real-time ACI + custom risk models</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Weekly governance intelligence briefings</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Unlimited API access</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Unlimited user seats</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">White-label integration options</span>
-          </li>
-          <li class="flex items-start">
-            <svg class="text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">24/7 priority support</span>
-          </li>
-        </ul>
-
-        <a href="#consultation" class="block w-full text-center bg-gold-500 hover:bg-gold-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
-          Contact Sales
-        </a>
-      </div>
-
+      <ul class="features-list">
+        <li>Multi-sector coverage — up to 5 sectors</li>
+        <li>All 7 sector modules</li>
+        <li>Real-time ACI + risk alerts</li>
+        <li>Monthly governance intelligence briefings</li>
+        <li>API access — 10,000 calls/month</li>
+        <li>Up to 20 user seats</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a href="#consultation" class="tier-cta solid">Request Demo</a>
     </div>
 
-    <div class="text-center mt-12">
-      <p class="text-gray-600 text-lg">
-        All licensing includes quarterly strategy sessions and regulatory compliance support.
-      </p>
-      <p class="text-gray-500 mt-2">
-        Annual licensing starting from £30,000. Custom configurations available for multi-institutional partnerships.
-      </p>
+    <!-- Tier 3: Sovereign -->
+    <div class="tier">
+      <div class="tier-tag">Tier 03</div>
+      <div class="tier-name">Sovereign</div>
+      <div class="tier-desc">For sovereign wealth funds, DFIs, and institutional asset managers</div>
+      <div class="tier-access">
+        <div class="access-label">Licensing Access</div>
+        <div class="access-value">Bespoke Configuration</div>
+      </div>
+      <ul class="features-list">
+        <li>Full continental coverage</li>
+        <li>All 7 sectors + custom sector modules</li>
+        <li>Real-time ACI + custom risk models</li>
+        <li>Weekly governance intelligence briefings</li>
+        <li>Unlimited API access</li>
+        <li>Unlimited user seats</li>
+        <li>White-label integration options</li>
+        <li>Dedicated support & account management</li>
+      </ul>
+      <a href="#consultation" class="tier-cta teal">Request Demo</a>
     </div>
+
   </div>
-</section>
+
+  <div class="pricing-footnote">
+    <p class="footnote-text">All licensing tiers include quarterly strategy sessions and regulatory compliance support. Custom configurations available for multi-institutional partnerships and co-investment structures.</p>
+    <div class="footnote-badge">Regulatory-Grade Intelligence</div>
+  </div>
+
+</div>
 <section id="what-we-deliver" class="section deliver">
 
   <style>
