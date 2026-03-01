@@ -1,500 +1,1384 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlgoEconomics · Exit Intelligence Infrastructure</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0a0e1a; color: #e0e6f0; font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlgoEconomics · Exit Intelligence Infrastructure</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* TOP BAR */
-  .topbar {
-    display: flex; align-items: center; background: #0d1220; border-bottom: 1px solid #1e2840;
-    padding: 0 20px; height: 48px; position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  }
-  .topbar-logo { color: #f5c842; font-weight: 800; font-size: 15px; letter-spacing: 0.05em; margin-right: 24px; }
-  .topbar-logo span { color: #fff; }
-  .topbar-divider { width: 1px; height: 24px; background: #1e2840; margin-right: 20px; }
-  .topbar-title { color: #8899bb; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; margin-right: 16px; }
-  .topbar-badge {
-    background: transparent; border: 1px solid #2ecc71; color: #2ecc71;
-    font-size: 10px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 3px; text-transform: uppercase;
-  }
-  .topbar-market {
-    margin-left: auto; display: flex; align-items: center; gap: 8px;
-    background: #1a2035; border: 1px solid #2a3550; padding: 5px 14px; border-radius: 4px;
-  }
-  .topbar-market .flag {
-    background: #f5c842; color: #0a0e1a; font-size: 10px; font-weight: 800;
-    padding: 2px 6px; border-radius: 2px;
-  }
-  .topbar-market .mname { color: #e0e6f0; font-size: 12px; letter-spacing: 0.05em; }
-  .signal-dot { width: 8px; height: 8px; background: #2ecc71; border-radius: 50%; margin-left: 12px; }
-  .signal-text { color: #2ecc71; font-size: 11px; }
+    body {
+      background: #0a0e1a;
+      color: #e0e6f0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+    }
 
-  /* LAYOUT */
-  .layout { display: flex; margin-top: 48px; min-height: calc(100vh - 48px); }
+    /* TOP BAR */
+    .topbar {
+      display: flex;
+      align-items: center;
+      background: #0d1220;
+      border-bottom: 1px solid #1e2840;
+      padding: 0 20px;
+      height: 48px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
 
-  /* SIDEBAR */
-  .sidebar {
-    width: 200px; background: #0d1220; border-right: 1px solid #1e2840;
-    padding: 20px 0; position: fixed; top: 48px; bottom: 0; overflow-y: auto;
-  }
-  .sidebar-section { padding: 0 16px; margin-bottom: 20px; }
-  .sidebar-label { color: #4a5878; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; padding: 0 4px; }
-  .sidebar-item {
-    display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 4px;
-    cursor: pointer; color: #8899bb; font-size: 12px; transition: all 0.15s; margin-bottom: 2px;
-  }
-  .sidebar-item:hover { background: #1a2035; color: #e0e6f0; }
-  .sidebar-item.active { background: #1a2035; color: #f5c842; }
-  .sidebar-item .icon { width: 16px; text-align: center; font-size: 13px; }
+    .topbar-logo {
+      color: #f5c842;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      margin-right: 24px;
+    }
 
-  .sidebar-market { padding: 16px; border-top: 1px solid #1e2840; margin-top: auto; position: absolute; bottom: 0; left: 0; right: 0; background: #0d1220; }
-  .sidebar-market-label { color: #4a5878; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
-  .sidebar-market-name { color: #fff; font-size: 14px; font-weight: 600; }
-  .sidebar-market-sector { color: #8899bb; font-size: 11px; margin-bottom: 8px; }
-  .sidebar-score { font-size: 28px; font-weight: 800; }
-  .sidebar-score-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(1.3); }
-  }
-  .ers-line { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
-  .ers-score-small { color: #e67e22; font-size: 16px; font-weight: 700; }
-  .ers-label-small { color: #e67e22; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
-  .color-high { color: #e74c3c; }
-  .color-mod-high { color: #e67e22; }
-  .color-mod { color: #f5c842; }
-  .color-mod-low { color: #2ecc71; }
-  .color-low { color: #27ae60; }
+    .topbar-logo span {
+      color: #fff;
+    }
 
-  /* MAIN CONTENT */
-  .main { margin-left: 200px; padding: 24px; flex: 1; }
+    .topbar-divider {
+      width: 1px;
+      height: 24px;
+      background: #1e2840;
+      margin-right: 20px;
+    }
 
-  /* HEATMAP */
-  .heatmap-header { text-align: center; margin-bottom: 20px; }
-  .heatmap-header h2 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-  .heatmap-header p { color: #8899bb; font-size: 13px; }
-  .heatmap-header p span { color: #f5c842; font-weight: 600; }
+    .topbar-title {
+      color: #8899bb;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-right: 16px;
+    }
 
-  .heatmap-grid { overflow-x: auto; }
-  .heatmap-table { width: 100%; border-collapse: separate; border-spacing: 4px; }
-  .heatmap-table th {
-    color: #8899bb; font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
-    padding: 8px 4px; text-align: center;
-  }
-  .heatmap-table th .market-code { font-size: 9px; color: #4a5878; }
-  .heatmap-table td { padding: 2px; }
-  .heatmap-table .row-label {
-    color: #8899bb; font-size: 12px; font-weight: 500; padding: 4px 12px 4px 0;
-    white-space: nowrap; text-align: left;
-  }
+    .topbar-badge {
+      background: transparent;
+      border: 1px solid #2ecc71;
+      color: #2ecc71;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
 
-  .cell {
-    border-radius: 6px; cursor: pointer; padding: 8px 6px;
-    text-align: center; transition: all 0.15s; position: relative;
-    min-width: 110px;
-  }
-  .cell:hover { transform: scale(1.03); filter: brightness(1.15); }
-  .cell.selected { outline: 2px solid #fff; outline-offset: 1px; }
-  .cell-aci { font-size: 16px; font-weight: 800; color: #fff; line-height: 1; }
-  .cell-aci-label { font-size: 8px; color: rgba(255,255,255,0.7); letter-spacing: 0.08em; margin-top: 1px; }
-  .cell-divider { height: 1px; background: rgba(255,255,255,0.2); margin: 5px 4px; }
-  .cell-ers { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1; }
-  .cell-ers-label { font-size: 8px; color: rgba(255,255,255,0.6); letter-spacing: 0.08em; margin-top: 1px; }
+    .topbar-market {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #1a2035;
+      border: 1px solid #2a3550;
+      padding: 5px 14px;
+      border-radius: 4px;
+    }
 
-  .bg-low { background: #1a6b3a; }
-  .bg-mod-low { background: #2d7a45; }
-  .bg-mod { background: #b8860b; }
-  .bg-mod-high { background: #c05c12; }
-  .bg-high { background: #8b1a1a; }
+    .topbar-market .flag {
+      background: #f5c842;
+      color: #0a0e1a;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
 
-  .legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #8899bb; }
-  .legend-dot { width: 12px; height: 12px; border-radius: 2px; }
+    .topbar-market .mname {
+      color: #e0e6f0;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+    }
 
-  /* TABS */
-  .tabs { display: flex; gap: 2px; margin-bottom: 24px; background: #0d1220; padding: 4px; border-radius: 6px; width: fit-content; }
-  .tab {
-    padding: 8px 18px; border-radius: 4px; cursor: pointer; font-size: 12px;
-    color: #8899bb; transition: all 0.15s; letter-spacing: 0.03em;
-  }
-  .tab:hover { color: #e0e6f0; }
-  .tab.active { background: #1a2035; color: #f5c842; font-weight: 600; }
+    .signal-dot {
+      width: 8px;
+      height: 8px;
+      background: #2ecc71;
+      border-radius: 50%;
+      margin-left: 12px;
+    }
 
-  /* PANELS */
-  .panel { display: none; }
-  .panel.active { display: block; }
+    .signal-text {
+      color: #2ecc71;
+      font-size: 11px;
+    }
 
-  /* OVERVIEW PANEL */
-  .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-  .metric-card {
-    background: #0d1220; border: 1px solid #1e2840; border-radius: 8px; padding: 20px;
-  }
-  .metric-card h3 { font-size: 11px; color: #8899bb; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
-  .metric-big { font-size: 48px; font-weight: 800; line-height: 1; }
-  .metric-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
-  .metric-sub { color: #8899bb; font-size: 12px; margin-top: 8px; }
+    /* LAYOUT */
+    .layout {
+      display: flex;
+      margin-top: 48px;
+      min-height: calc(100vh - 48px);
+    }
 
-  /* ACI BREAKDOWN */
-  .market-header {
-    background: #0d1220; border: 1px solid #1e2840; border-radius: 8px;
-    padding: 20px 24px; margin-bottom: 16px; display: flex; align-items: center;
-  }
-  .market-flag {
-    width: 40px; height: 40px; background: #f5c842; border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    color: #0a0e1a; font-weight: 800; font-size: 13px; margin-right: 16px; flex-shrink: 0;
-  }
-  .market-title h2 { font-size: 20px; font-weight: 700; color: #fff; }
-  .market-title p { color: #8899bb; font-size: 12px; margin-top: 3px; }
-  .market-score { margin-left: auto; text-align: right; }
-  .market-score .score { font-size: 48px; font-weight: 800; line-height: 1; }
-  .market-score .score-label { font-size: 10px; letter-spacing: 0.1em; color: #8899bb; text-transform: uppercase; margin-top: 2px; }
+    /* SIDEBAR */
+    .sidebar {
+      width: 200px;
+      background: #0d1220;
+      border-right: 1px solid #1e2840;
+      padding: 20px 0;
+      position: fixed;
+      top: 48px;
+      bottom: 0;
+      overflow-y: auto;
+    }
 
-  .aci-tag {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: #1a2035; border: 1px solid #2a3550; border-radius: 4px;
-    padding: 6px 12px; font-size: 11px; color: #8899bb; margin-bottom: 16px;
-  }
-  .aci-tag span { color: #f5c842; font-weight: 600; }
+    .sidebar-section {
+      padding: 0 16px;
+      margin-bottom: 20px;
+    }
 
-  .pillar {
-    background: #0d1220; border: 1px solid #1e2840; border-radius: 8px;
-    margin-bottom: 12px; overflow: hidden;
-  }
-  .pillar-header {
-    display: flex; align-items: center; padding: 16px 20px;
-    cursor: pointer; transition: background 0.15s;
-  }
-  .pillar-header:hover { background: #1a2035; }
-  .pillar-num {
-    width: 32px; height: 32px; border-radius: 50%; background: #1a2035;
-    display: flex; align-items: center; justify-content: center;
-    color: #f5c842; font-weight: 800; font-size: 13px; margin-right: 16px; flex-shrink: 0;
-  }
-  .pillar-info { flex: 1; }
-  .pillar-info h3 { font-size: 14px; font-weight: 600; color: #fff; }
-  .pillar-info p { font-size: 11px; color: #8899bb; margin-top: 2px; }
-  .pillar-score { font-size: 20px; font-weight: 800; }
-  .pillar-body { padding: 0 20px 16px; }
+    .sidebar-label {
+      color: #4a5878;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding: 0 4px;
+    }
 
-  .factor {
-    display: flex; align-items: center; padding: 12px 0;
-    border-top: 1px solid #1e2840;
-  }
-  .factor-code { color: #4a5878; font-size: 10px; font-weight: 700; width: 36px; flex-shrink: 0; }
-  .factor-info { flex: 1; }
-  .factor-info h4 { font-size: 13px; color: #e0e6f0; font-weight: 500; }
-  .factor-info p { font-size: 11px; color: #4a5878; margin-top: 2px; }
-  .factor-score { font-size: 18px; font-weight: 800; margin-right: 12px; }
-  .factor-badge {
-    font-size: 9px; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 3px;
-    text-transform: uppercase; font-weight: 700; white-space: nowrap;
-  }
-  .badge-critical { background: #2d0f0f; color: #e74c3c; border: 1px solid #e74c3c33; }
-  .badge-high { background: #2d1a0a; color: #e67e22; border: 1px solid #e67e2233; }
-  .badge-mod { background: #2d2500; color: #f5c842; border: 1px solid #f5c84233; }
-  .badge-low { background: #0f2d1a; color: #2ecc71; border: 1px solid #2ecc7133; }
-  .conf { font-size: 10px; color: #4a5878; margin-left: 8px; white-space: nowrap; }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #8899bb;
+      font-size: 12px;
+      transition: all 0.15s;
+      margin-bottom: 2px;
+    }
 
-  /* EXIT INTELLIGENCE */
-  .exit-header {
-    background: linear-gradient(135deg, #0d1220 0%, #1a1030 100%);
-    border: 1px solid #2a1850; border-radius: 8px; padding: 24px; margin-bottom: 20px;
-  }
-  .exit-header h2 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-  .exit-header p { color: #8899bb; font-size: 13px; line-height: 1.6; }
-  .exit-score-display {
-    display: flex; align-items: center; gap: 20px; margin-top: 16px;
-  }
-  .exit-big-score { font-size: 64px; font-weight: 800; color: #e67e22; line-height: 1; }
-  .exit-score-info h3 { font-size: 16px; font-weight: 700; color: #e67e22; }
-  .exit-score-info p { color: #8899bb; font-size: 12px; margin-top: 4px; line-height: 1.5; }
+    .sidebar-item:hover {
+      background: #1a2035;
+      color: #e0e6f0;
+    }
 
-  .exit-dims { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-  .exit-dim {
-    background: #0d1220; border: 1px solid #1e2840; border-radius: 8px; padding: 16px;
-  }
-  .exit-dim-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-  .exit-dim-header h4 { font-size: 12px; color: #8899bb; font-weight: 600; letter-spacing: 0.05em; }
-  .exit-dim-score { font-size: 22px; font-weight: 800; }
-  .exit-bar-bg { height: 4px; background: #1e2840; border-radius: 2px; margin-bottom: 8px; }
-  .exit-bar-fill { height: 4px; border-radius: 2px; }
-  .exit-dim p { font-size: 11px; color: #4a5878; line-height: 1.5; }
-  .exit-dim .weight { font-size: 10px; color: #4a5878; margin-top: 4px; }
+    .sidebar-item.active {
+      background: #1a2035;
+      color: #f5c842;
+    }
 
-  .exit-arch {
-    background: #0d1220; border: 1px solid #2a1850; border-radius: 8px; padding: 20px;
-    margin-bottom: 16px;
-  }
-  .exit-arch h3 { font-size: 14px; font-weight: 700; color: #c471ed; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-size: 11px; }
-  .arch-items { display: flex; flex-wrap: wrap; gap: 8px; }
-  .arch-item {
-    background: #1a1030; border: 1px solid #3a2060; border-radius: 4px;
-    padding: 8px 14px; font-size: 12px; color: #d0a0f0;
-  }
+    .sidebar-item .icon {
+      width: 16px;
+      text-align: center;
+      font-size: 13px;
+    }
 
-  /* STRATEGIC ADVISORY */
-  .advisory-header {
-    background: #0d1220; border: 1px solid #1e2840; border-radius: 8px;
-    padding: 20px 24px; margin-bottom: 16px;
-  }
-  .advisory-header .tag { font-size: 10px; letter-spacing: 0.12em; color: #f5c842; text-transform: uppercase; margin-bottom: 8px; }
-  .advisory-header h2 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .sidebar-market {
+      padding: 16px;
+      border-top: 1px solid #1e2840;
+      margin-top: auto;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #0d1220;
+    }
 
-  .thesis-block {
-    background: #0d1220; border: 1px solid #1e2840; border-radius: 8px; padding: 20px; margin-bottom: 12px;
-  }
-  .thesis-block h3 { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #f5c842; margin-bottom: 10px; }
-  .thesis-block p { font-size: 13px; color: #b0bcd0; line-height: 1.7; }
+    .sidebar-market-label {
+      color: #4a5878;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
 
-  .comparables { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
-  .comparable {
-    background: #0d1220; border: 1px solid #1e2840; border-radius: 8px; padding: 16px;
-  }
-  .comparable .comp-tag { font-size: 10px; color: #4a5878; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
-  .comparable .comp-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .comparable .comp-aci { font-size: 11px; color: #f5c842; margin-bottom: 8px; }
-  .comparable p { font-size: 11px; color: #8899bb; line-height: 1.5; }
+    .sidebar-market-name {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
 
-  .instruction-banner {
-    background: #0d1220; border: 1px solid #1e2840; border-radius: 6px;
-    padding: 14px 20px; margin-bottom: 20px; color: #8899bb; font-size: 12px;
-    display: flex; align-items: center; gap: 10px;
-  }
+    .sidebar-market-sector {
+      color: #8899bb;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
 
-  .scores-dual { display: flex; gap: 32px; align-items: flex-start; }
-  .score-block { text-align: center; }
-  .score-block .big { font-size: 56px; font-weight: 800; line-height: 1; }
-  .score-block .lbl { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #8899bb; margin-top: 4px; }
-  .score-block .cat { font-size: 11px; letter-spacing: 0.08em; font-weight: 700; margin-top: 2px; text-transform: uppercase; }
-  .score-divider { width: 1px; background: #1e2840; align-self: stretch; }
-</style>
+    .sidebar-score {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .sidebar-score-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(1.3);
+      }
+    }
+
+    .ers-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .ers-score-small {
+      color: #e67e22;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .ers-label-small {
+      color: #e67e22;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .color-high {
+      color: #e74c3c;
+    }
+
+    .color-mod-high {
+      color: #e67e22;
+    }
+
+    .color-mod {
+      color: #f5c842;
+    }
+
+    .color-mod-low {
+      color: #2ecc71;
+    }
+
+    .color-low {
+      color: #27ae60;
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      margin-left: 200px;
+      padding: 24px;
+      flex: 1;
+    }
+
+    /* HEATMAP */
+    .heatmap-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .heatmap-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .heatmap-header p {
+      color: #8899bb;
+      font-size: 13px;
+    }
+
+    .heatmap-header p span {
+      color: #f5c842;
+      font-weight: 600;
+    }
+
+    .heatmap-grid {
+      overflow-x: auto;
+    }
+
+    .heatmap-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 4px;
+    }
+
+    .heatmap-table th {
+      color: #8899bb;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 8px 4px;
+      text-align: center;
+    }
+
+    .heatmap-table th .market-code {
+      font-size: 9px;
+      color: #4a5878;
+    }
+
+    .heatmap-table td {
+      padding: 2px;
+    }
+
+    .heatmap-table .row-label {
+      color: #8899bb;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px 4px 0;
+      white-space: nowrap;
+      text-align: left;
+    }
+
+    .cell {
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 8px 6px;
+      text-align: center;
+      transition: all 0.15s;
+      position: relative;
+      min-width: 110px;
+    }
+
+    .cell:hover {
+      transform: scale(1.03);
+      filter: brightness(1.15);
+    }
+
+    .cell.selected {
+      outline: 2px solid #fff;
+      outline-offset: 1px;
+    }
+
+    .cell-aci {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .cell-aci-label {
+      font-size: 8px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.08em;
+      margin-top: 1px;
+    }
+
+    .cell-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 5px 4px;
+    }
+
+    .cell-ers {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1;
+    }
+
+    .cell-ers-label {
+      font-size: 8px;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.08em;
+      margin-top: 1px;
+    }
+
+    .bg-low {
+      background: #1a6b3a;
+    }
+
+    .bg-mod-low {
+      background: #2d7a45;
+    }
+
+    .bg-mod {
+      background: #b8860b;
+    }
+
+    .bg-mod-high {
+      background: #c05c12;
+    }
+
+    .bg-high {
+      background: #8b1a1a;
+    }
+
+    .legend {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #8899bb;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 24px;
+      background: #0d1220;
+      padding: 4px;
+      border-radius: 6px;
+      width: fit-content;
+    }
+
+    .tab {
+      padding: 8px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #8899bb;
+      transition: all 0.15s;
+      letter-spacing: 0.03em;
+    }
+
+    .tab:hover {
+      color: #e0e6f0;
+    }
+
+    .tab.active {
+      background: #1a2035;
+      color: #f5c842;
+      font-weight: 600;
+    }
+
+    /* PANELS */
+    .panel {
+      display: none;
+      margin-top: 3rem;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    /* OVERVIEW PANEL */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: #0d1220;
+      border: 1px solid #1e2840;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .metric-card h3 {
+      font-size: 11px;
+      color: #8899bb;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .metric-big {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .metric-sub {
+      color: #8899bb;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    /* ACI BREAKDOWN */
+    .market-header {
+      background: #0d1220;
+      border: 1px solid #1e2840;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .market-flag {
+      width: 40px;
+      height: 40px;
+      background: #f5c842;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0a0e1a;
+      font-weight: 800;
+      font-size: 13px;
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+
+    .market-title h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .market-title p {
+      color: #8899bb;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .market-score {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .market-score .score {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .market-score .score-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: #8899bb;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .aci-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a2035;
+      border: 1px solid #2a3550;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 11px;
+      color: #8899bb;
+      margin-bottom: 16px;
+    }
+
+    .aci-tag span {
+      color: #f5c842;
+      font-weight: 600;
+    }
+
+    .pillar {
+      background: #0d1220;
+      border: 1px solid #1e2840;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .pillar-header {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .pillar-header:hover {
+      background: #1a2035;
+    }
+
+    .pillar-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #1a2035;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5c842;
+      font-weight: 800;
+      font-size: 13px;
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+
+    .pillar-info {
+      flex: 1;
+    }
+
+    .pillar-info h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .pillar-info p {
+      font-size: 11px;
+      color: #8899bb;
+      margin-top: 2px;
+    }
+
+    .pillar-score {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .pillar-body {
+      padding: 0 20px 16px;
+    }
+
+    .factor {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-top: 1px solid #1e2840;
+    }
+
+    .factor-code {
+      color: #4a5878;
+      font-size: 10px;
+      font-weight: 700;
+      width: 36px;
+      flex-shrink: 0;
+    }
+
+    .factor-info {
+      flex: 1;
+    }
+
+    .factor-info h4 {
+      font-size: 13px;
+      color: #e0e6f0;
+      font-weight: 500;
+    }
+
+    .factor-info p {
+      font-size: 11px;
+      color: #4a5878;
+      margin-top: 2px;
+    }
+
+    .factor-score {
+      font-size: 18px;
+      font-weight: 800;
+      margin-right: 12px;
+    }
+
+    .factor-badge {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-critical {
+      background: #2d0f0f;
+      color: #e74c3c;
+      border: 1px solid #e74c3c33;
+    }
+
+    .badge-high {
+      background: #2d1a0a;
+      color: #e67e22;
+      border: 1px solid #e67e2233;
+    }
+
+    .badge-mod {
+      background: #2d2500;
+      color: #f5c842;
+      border: 1px solid #f5c84233;
+    }
+
+    .badge-low {
+      background: #0f2d1a;
+      color: #2ecc71;
+      border: 1px solid #2ecc7133;
+    }
+
+    .conf {
+      font-size: 10px;
+      color: #4a5878;
+      margin-left: 8px;
+      white-space: nowrap;
+    }
+
+    /* EXIT INTELLIGENCE */
+    .exit-header {
+      background: linear-gradient(135deg, #0d1220 0%, #1a1030 100%);
+      border: 1px solid #2a1850;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .exit-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .exit-header p {
+      color: #8899bb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .exit-score-display {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .exit-big-score {
+      font-size: 64px;
+      font-weight: 800;
+      color: #e67e22;
+      line-height: 1;
+    }
+
+    .exit-score-info h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #e67e22;
+    }
+
+    .exit-score-info p {
+      color: #8899bb;
+      font-size: 12px;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .exit-dims {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .exit-dim {
+      background: #0d1220;
+      border: 1px solid #1e2840;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .exit-dim-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .exit-dim-header h4 {
+      font-size: 12px;
+      color: #8899bb;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .exit-dim-score {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .exit-bar-bg {
+      height: 4px;
+      background: #1e2840;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+
+    .exit-bar-fill {
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    .exit-dim p {
+      font-size: 11px;
+      color: #4a5878;
+      line-height: 1.5;
+    }
+
+    .exit-dim .weight {
+      font-size: 10px;
+      color: #4a5878;
+      margin-top: 4px;
+    }
+
+    .exit-arch {
+      background: #0d1220;
+      border: 1px solid #2a1850;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .exit-arch h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #c471ed;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+
+    .arch-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .arch-item {
+      background: #1a1030;
+      border: 1px solid #3a2060;
+      border-radius: 4px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: #d0a0f0;
+    }
+
+    /* STRATEGIC ADVISORY */
+    .advisory-header {
+      background: #0d1220;
+      border: 1px solid #1e2840;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+
+    .advisory-header .tag {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: #f5c842;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .advisory-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .thesis-block {
+      background: #0d1220;
+      border: 1px solid #1e2840;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+
+    .thesis-block h3 {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #f5c842;
+      margin-bottom: 10px;
+    }
+
+    .thesis-block p {
+      font-size: 13px;
+      color: #b0bcd0;
+      line-height: 1.7;
+    }
+
+    .comparables {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .comparable {
+      background: #0d1220;
+      border: 1px solid #1e2840;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .comparable .comp-tag {
+      font-size: 10px;
+      color: #4a5878;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .comparable .comp-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .comparable .comp-aci {
+      font-size: 11px;
+      color: #f5c842;
+      margin-bottom: 8px;
+    }
+
+    .comparable p {
+      font-size: 11px;
+      color: #8899bb;
+      line-height: 1.5;
+    }
+
+    .instruction-banner {
+      background: #0d1220;
+      border: 1px solid #1e2840;
+      border-radius: 6px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      color: #8899bb;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .scores-dual {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .score-block {
+      text-align: center;
+    }
+
+    .score-block .big {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .score-block .lbl {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8899bb;
+      margin-top: 4px;
+    }
+
+    .score-block .cat {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    .score-divider {
+      width: 1px;
+      background: #1e2840;
+      align-self: stretch;
+    }
+
+    /* RESPONSIVE LAYOUT */
+    .tb-res-hide-level1,
+    .tb-res-hide-level2,
+    .tb-res-hide-level3 {
+      transition: opacity 0.3s;
+    }
+
+    .sidebar-mobile-status {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      padding: 20px 16px;
+      border-bottom: 1px solid #1e2840;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .sb-ms-row {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sb-ms-row.level3 .topbar-market {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      margin-right: 15px;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 48px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 90;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    @media (max-width: 1100px) {
+      .tb-res-hide-level1 {
+        display: none !important;
+      }
+
+      .sidebar-mobile-status {
+        display: flex;
+      }
+
+      .sb-ms-row.level1 {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 950px) {
+      .tb-res-hide-level2 {
+        display: none !important;
+      }
+
+      .sb-ms-row.level2 {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .tb-res-hide-level3 {
+        display: none !important;
+      }
+
+      .sb-ms-row.level3 {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .sidebar {
+        z-index: 95;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      body.sidebar-open .sidebar {
+        transform: translateX(0);
+      }
+
+      body.sidebar-open .sidebar-overlay {
+        display: block;
+        opacity: 1;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 16px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="topbar-logo">ALGO<span>ECONOMICS</span></div>
-  <div class="topbar-divider"></div>
-  <div class="topbar-title">Exit Intelligence Infrastructure</div>
-  <div class="topbar-badge">LIVE INTELLIGENCE</div>
-  <div class="topbar-market" id="topbar-market">
-    <div class="flag" id="topbar-flag">NG</div>
-    <div class="mname" id="topbar-mname">Nigeria · Energy</div>
-  </div>
-  <div class="signal-dot"></div>
-  <div class="signal-text" style="margin-left:6px; font-size:11px;">Signals active</div>
-</div>
-
-<!-- SIDEBAR -->
-<div class="sidebar">
-  <div class="sidebar-section">
-    <div class="sidebar-label">Intelligence</div>
-    <div class="sidebar-item" onclick="showPanel('overview')" id="nav-overview">
-      <span class="icon">◆</span> Overview
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    <div class="topbar-logo">ALGO<span>ECONOMICS</span></div>
+    <div class="topbar-divider tb-res-hide-level1"></div>
+    <div class="topbar-title tb-res-hide-level1">Exit Intelligence Infrastructure</div>
+    <div class="topbar-badge tb-res-hide-level1">LIVE INTELLIGENCE</div>
+    <div class="topbar-market tb-res-hide-level3" id="topbar-market">
+      <div class="flag" id="topbar-flag">NG</div>
+      <div class="mname" id="topbar-mname">Nigeria · Energy</div>
     </div>
-    <div class="sidebar-item active" onclick="showPanel('heatmap')" id="nav-heatmap">
-      <span class="icon">▦</span> Portfolio Heatmap
-    </div>
-  </div>
-  <div class="sidebar-section">
-    <div class="sidebar-label">Analysis</div>
-    <div class="sidebar-item" onclick="showPanel('aci')" id="nav-aci">
-      <span class="icon">≡</span> ACI Breakdown
-    </div>
-    <div class="sidebar-item" onclick="showPanel('exit')" id="nav-exit">
-      <span class="icon">◎</span> Exit Intelligence
-    </div>
-    <div class="sidebar-item" onclick="showPanel('advisory')" id="nav-advisory">
-      <span class="icon">→</span> Strategic Advisory
-    </div>
+    <div class="signal-dot tb-res-hide-level2"></div>
+    <div class="signal-text tb-res-hide-level2" style="margin-left:6px; font-size:11px;">Signals active</div>
   </div>
 
-  <div class="sidebar-market">
-    <div class="sidebar-market-label">Selected Market</div>
-    <div class="sidebar-market-name" id="sb-name">Nigeria</div>
-    <div class="sidebar-market-sector" id="sb-sector">Energy</div>
-    <div class="sidebar-score color-high" id="sb-aci">86</div>
-    <div class="sidebar-score-label color-high" id="sb-aci-cat">▲ HIGH RISK</div>
-    <div style="font-size:9px; color:#4a5878; margin: 2px 0 4px;">10-Factor ACI · Q1 2026</div>
-    <div class="ers-line">
-      <div class="ers-score-small" id="sb-ers">ERS: 38</div>
-      <div class="ers-label-small" id="sb-ers-cat">· EXIT-DIFFICULT</div>
-    </div>
-    <div style="font-size:9px; color:#4a5878; margin-top:6px; cursor:pointer; text-decoration:underline;" onclick="showPanel('aci')">Go to ACI Breakdown →</div>
-  </div>
-</div>
-
-<!-- MAIN -->
-<div class="main">
-
-  <!-- OVERVIEW PANEL -->
-  <div class="panel" id="panel-overview">
-    <div style="margin-bottom:20px;">
-      <h1 style="font-size:20px; font-weight:700; color:#fff; margin-bottom:4px;">AlgoEconomics · Full-Cycle Intelligence</h1>
-      <p style="color:#8899bb; font-size:13px;">The world's first Exit Intelligence Infrastructure — ACI + ERS across 8 markets · 7 sectors</p>
-    </div>
-    <div class="overview-grid">
-      <div class="metric-card">
-        <h3>ACI Coverage</h3>
-        <div class="metric-big color-mod-high">8</div>
-        <div class="metric-label color-mod-high">African Markets</div>
-        <div class="metric-sub">10-Factor Governance Intelligence · Real-Time · Q1 2026</div>
+  <!-- SIDEBAR -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Intelligence</div>
+      <div class="sidebar-item" onclick="showPanel('overview')" id="nav-overview">
+        <span class="icon">◆</span> Overview
       </div>
-      <div class="metric-card">
-        <h3>ERS Coverage</h3>
-        <div class="metric-big" style="color:#c471ed;">8</div>
-        <div class="metric-label" style="color:#c471ed;">Exit Scores Active</div>
-        <div class="metric-sub">Exit Feasibility · 4-Dimension Framework · All Sectors</div>
-      </div>
-      <div class="metric-card">
-        <h3>Sector Depth</h3>
-        <div class="metric-big color-mod">7</div>
-        <div class="metric-label color-mod">Key Sectors</div>
-        <div class="metric-sub">Mining · Agriculture · Fintech · Energy · Aviation · Healthcare · Tourism</div>
-      </div>
-      <div class="metric-card">
-        <h3>Platform Category</h3>
-        <div style="font-size:22px; font-weight:800; color:#f5c842; margin: 8px 0;">EXIT INTELLIGENCE INFRASTRUCTURE</div>
-        <div class="metric-sub">ACI answers: Can you operate?<br>ERS answers: Can you exit?<br><strong style="color:#f5c842;">Governance + Exit = Investability</strong></div>
+      <div class="sidebar-item active" onclick="showPanel('heatmap')" id="nav-heatmap">
+        <span class="icon">▦</span> Portfolio Heatmap
       </div>
     </div>
-    <div style="text-align:center; padding:20px; color:#8899bb; font-size:13px;">
-      → Select <strong style="color:#f5c842;">Portfolio Heatmap</strong> to explore all markets, or choose a market in the sidebar
+    <div class="sidebar-section">
+      <div class="sidebar-label">Analysis</div>
+      <div class="sidebar-item" onclick="showPanel('aci')" id="nav-aci">
+        <span class="icon">≡</span> ACI Breakdown
+      </div>
+      <div class="sidebar-item" onclick="showPanel('exit')" id="nav-exit">
+        <span class="icon">◎</span> Exit Intelligence
+      </div>
+      <div class="sidebar-item" onclick="showPanel('advisory')" id="nav-advisory">
+        <span class="icon">→</span> Strategic Advisory
+      </div>
+    </div>
+    <div class="sidebar-mobile-status">
+      <div class="sb-ms-row level1">
+        <span class="topbar-title" style="margin: 0; display: inline-block;">Exit Intelligence Infrastructure</span>
+        <span class="topbar-badge" style="display: inline-block;">LIVE INTELLIGENCE</span>
+      </div>
+      <div class="sb-ms-row level2">
+        <div style="display: flex; align-items: center;">
+          <div class="signal-dot" style="margin-left: 0; margin-right: 6px;"></div>
+          <div class="signal-text">Signals active</div>
+        </div>
+      </div>
+      <div class="sb-ms-row level3">
+        <div class="topbar-market" id="topbar-market-mobile">
+          <div class="flag" id="topbar-flag-mobile">NG</div>
+          <div class="mname" id="topbar-mname-mobile">Nigeria · Energy</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-market">
+      <div class="sidebar-market-label">Selected Market</div>
+      <div class="sidebar-market-name" id="sb-name">Nigeria</div>
+      <div class="sidebar-market-sector" id="sb-sector">Energy</div>
+      <div class="sidebar-score color-high" id="sb-aci">86</div>
+      <div class="sidebar-score-label color-high" id="sb-aci-cat">▲ HIGH RISK</div>
+      <div style="font-size:9px; color:#4a5878; margin: 2px 0 4px;">10-Factor ACI · Q1 2026</div>
+      <div class="ers-line">
+        <div class="ers-score-small" id="sb-ers">ERS: 38</div>
+        <div class="ers-label-small" id="sb-ers-cat">· EXIT-DIFFICULT</div>
+      </div>
+      <div style="font-size:9px; color:#4a5878; margin-top:6px; cursor:pointer; text-decoration:underline;"
+        onclick="showPanel('aci')">Go to ACI Breakdown →</div>
     </div>
   </div>
 
-  <!-- HEATMAP PANEL -->
-  <div class="panel active" id="panel-heatmap">
-    <div class="heatmap-header">
-      <h2>Portfolio Heatmap</h2>
-      <p>Click any cell to load the full ACI + ERS analysis · <span>8 markets</span> · <span>7 sectors</span></p>
-      <p style="margin-top:4px; font-size:11px; color:#4a5878;">Each cell shows ACI (governance risk) and ERS (exit feasibility)</p>
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- OVERVIEW PANEL -->
+    <div class="panel" id="panel-overview">
+      <div style="margin-bottom:20px;">
+        <h1 style="font-size:20px; font-weight:700; color:#fff; margin-bottom:4px;">AlgoEconomics · Full-Cycle
+          Intelligence</h1>
+        <p style="color:#8899bb; font-size:13px;">The world's first Exit Intelligence Infrastructure — ACI + ERS across
+          8 markets · 7 sectors</p>
+      </div>
+      <div class="overview-grid">
+        <div class="metric-card">
+          <h3>ACI Coverage</h3>
+          <div class="metric-big color-mod-high">8</div>
+          <div class="metric-label color-mod-high">African Markets</div>
+          <div class="metric-sub">10-Factor Governance Intelligence · Real-Time · Q1 2026</div>
+        </div>
+        <div class="metric-card">
+          <h3>ERS Coverage</h3>
+          <div class="metric-big" style="color:#c471ed;">8</div>
+          <div class="metric-label" style="color:#c471ed;">Exit Scores Active</div>
+          <div class="metric-sub">Exit Feasibility · 4-Dimension Framework · All Sectors</div>
+        </div>
+        <div class="metric-card">
+          <h3>Sector Depth</h3>
+          <div class="metric-big color-mod">7</div>
+          <div class="metric-label color-mod">Key Sectors</div>
+          <div class="metric-sub">Mining · Agriculture · Fintech · Energy · Aviation · Healthcare · Tourism</div>
+        </div>
+        <div class="metric-card">
+          <h3>Platform Category</h3>
+          <div style="font-size:22px; font-weight:800; color:#f5c842; margin: 8px 0;">EXIT INTELLIGENCE INFRASTRUCTURE
+          </div>
+          <div class="metric-sub">ACI answers: Can you operate?<br>ERS answers: Can you exit?<br><strong
+              style="color:#f5c842;">Governance + Exit = Investability</strong></div>
+        </div>
+      </div>
+      <div style="text-align:center; padding:20px; color:#8899bb; font-size:13px;">
+        → Select <strong style="color:#f5c842;">Portfolio Heatmap</strong> to explore all markets, or choose a market in
+        the sidebar
+      </div>
     </div>
 
-    <div class="heatmap-grid">
-      <table class="heatmap-table" id="heatmap"></table>
+    <!-- HEATMAP PANEL -->
+    <div class="panel active" id="panel-heatmap">
+      <div class="heatmap-header">
+        <h2>Portfolio Heatmap</h2>
+        <p>Click any cell to load the full ACI + ERS analysis · <span>8 markets</span> · <span>7 sectors</span></p>
+        <p style="margin-top:4px; font-size:11px; color:#4a5878;">Each cell shows ACI (governance risk) and ERS (exit
+          feasibility)</p>
+      </div>
+
+      <div class="heatmap-grid">
+        <table class="heatmap-table" id="heatmap"></table>
+      </div>
+
+      <div class="legend" style="margin-top:16px;">
+        <div class="legend-item">
+          <div class="legend-dot bg-low"></div> 0–35: Low Risk
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot bg-mod-low"></div> 35–50: Moderate-Low
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot bg-mod"></div> 50–65: Moderate
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot bg-mod-high"></div> 65–75: Moderate-High
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot bg-high"></div> 75–100: High Risk
+        </div>
+      </div>
+      <div style="margin-top:8px; font-size:11px; color:#4a5878;">
+        ACI = Governance Risk (higher = more risk) · ERS = Exit Feasibility (higher = easier exit)
+      </div>
     </div>
 
-    <div class="legend" style="margin-top:16px;">
-      <div class="legend-item"><div class="legend-dot bg-low"></div> 0–35: Low Risk</div>
-      <div class="legend-item"><div class="legend-dot bg-mod-low"></div> 35–50: Moderate-Low</div>
-      <div class="legend-item"><div class="legend-dot bg-mod"></div> 50–65: Moderate</div>
-      <div class="legend-item"><div class="legend-dot bg-mod-high"></div> 65–75: Moderate-High</div>
-      <div class="legend-item"><div class="legend-dot bg-high"></div> 75–100: High Risk</div>
+    <!-- ACI BREAKDOWN PANEL -->
+    <div class="panel" id="panel-aci">
+      <div class="instruction-banner" id="aci-instruction">
+        ▦ Select a cell in the <strong style="color:#f5c842;">Portfolio Heatmap</strong> to load the full 10-factor ACI
+        breakdown.
+      </div>
+      <div id="aci-content"></div>
     </div>
-    <div style="margin-top:8px; font-size:11px; color:#4a5878;">
-      ACI = Governance Risk (higher = more risk) · ERS = Exit Feasibility (higher = easier exit)
+
+    <!-- EXIT INTELLIGENCE PANEL -->
+    <div class="panel" id="panel-exit">
+      <div id="exit-content"></div>
     </div>
+
+    <!-- STRATEGIC ADVISORY PANEL -->
+    <div class="panel" id="panel-advisory">
+      <div id="advisory-content"></div>
+    </div>
+
   </div>
 
-  <!-- ACI BREAKDOWN PANEL -->
-  <div class="panel" id="panel-aci">
-    <div class="instruction-banner" id="aci-instruction">
-      ▦ Select a cell in the <strong style="color:#f5c842;">Portfolio Heatmap</strong> to load the full 10-factor ACI breakdown.
-    </div>
-    <div id="aci-content"></div>
-  </div>
+  <script>
+    // ============================================================
+    // DATA
+    // ============================================================
+    const MARKETS = ['Kenya', 'South Africa', 'Nigeria', 'Ghana', 'Egypt', 'Rwanda', 'Tanzania', 'Morocco'];
+    const CODES = ['KE', 'ZA', 'NG', 'GH', 'EG', 'RW', 'TZ', 'MA'];
+    const SECTORS = ['Mining', 'Agriculture', 'Fintech', 'Energy', 'Aviation', 'Healthcare', 'Tourism'];
 
-  <!-- EXIT INTELLIGENCE PANEL -->
-  <div class="panel" id="panel-exit">
-    <div id="exit-content"></div>
-  </div>
+    // ACI Scores (governance risk: higher = more risk)
+    const ACI = {
+      Kenya: [74, 64, 42, 71, 68, 59, 57],
+      'South Africa': [52, 48, 36, 59, 51, 43, 46],
+      Nigeria: [84, 72, 63, 86, 79, 76, 79],
+      Ghana: [56, 58, 45, 64, 62, 67, 61],
+      Egypt: [62, 61, 51, 73, 54, 64, 66],
+      Rwanda: [52, 51, 39, 69, 69, 46, 52],
+      Tanzania: [75, 65, 59, 68, 65, 65, 67],
+      Morocco: [58, 53, 41, 61, 56, 44, 59]
+    };
 
-  <!-- STRATEGIC ADVISORY PANEL -->
-  <div class="panel" id="panel-advisory">
-    <div id="advisory-content"></div>
-  </div>
+    // ERS Scores (exit feasibility: higher = easier to exit)
+    const ERS = {
+      Kenya: [48, 52, 55, 47, 51, 53, 54],
+      'South Africa': [68, 72, 75, 65, 70, 73, 74],
+      Nigeria: [35, 40, 44, 38, 36, 39, 41],
+      Ghana: [44, 48, 50, 42, 46, 49, 50],
+      Egypt: [40, 44, 46, 38, 43, 45, 46],
+      Rwanda: [46, 50, 52, 45, 49, 51, 52],
+      Tanzania: [41, 45, 47, 40, 44, 46, 47],
+      Morocco: [58, 62, 65, 55, 63, 64, 66]
+    };
 
-</div>
+    const ERS_CATS = s => s >= 66 ? 'EXIT-CAPABLE' : s >= 41 ? 'EXIT-CONSTRAINED' : 'EXIT-DIFFICULT';
+    const ACI_CATS = s => s >= 75 ? 'HIGH RISK' : s >= 65 ? 'MODERATE-HIGH' : s >= 50 ? 'MODERATE' : s >= 35 ? 'MODERATE-LOW' : 'LOW RISK';
 
-<script>
-// ============================================================
-// DATA
-// ============================================================
-const MARKETS = ['Kenya','South Africa','Nigeria','Ghana','Egypt','Rwanda','Tanzania','Morocco'];
-const CODES   = ['KE','ZA','NG','GH','EG','RW','TZ','MA'];
-const SECTORS = ['Mining','Agriculture','Fintech','Energy','Aviation','Healthcare','Tourism'];
+    function aciColor(s) {
+      if (s >= 75) return '#e74c3c';
+      if (s >= 65) return '#e67e22';
+      if (s >= 50) return '#f5c842';
+      if (s >= 35) return '#2ecc71';
+      return '#27ae60';
+    }
+    function ersBg(s) {
+      if (s >= 66) return '#27ae60';
+      if (s >= 41) return '#b8860b';
+      return '#8b3a3a';
+    }
+    function ersColor(s) {
+      if (s >= 66) return '#2ecc71';
+      if (s >= 41) return '#f5c842';
+      return '#e67e22';
+    }
+    function cellBg(aci) {
+      if (aci >= 75) return 'bg-high';
+      if (aci >= 65) return 'bg-mod-high';
+      if (aci >= 50) return 'bg-mod';
+      if (aci >= 35) return 'bg-mod-low';
+      return 'bg-low';
+    }
 
-// ACI Scores (governance risk: higher = more risk)
-const ACI = {
-  Kenya:        [74, 64, 42, 71, 68, 59, 57],
-  'South Africa':[52, 48, 36, 59, 51, 43, 46],
-  Nigeria:      [84, 72, 63, 86, 79, 76, 79],
-  Ghana:        [56, 58, 45, 64, 62, 67, 61],
-  Egypt:        [62, 61, 51, 73, 54, 64, 66],
-  Rwanda:       [52, 51, 39, 69, 69, 46, 52],
-  Tanzania:     [75, 65, 59, 68, 65, 65, 67],
-  Morocco:      [58, 53, 41, 61, 56, 44, 59]
-};
+    // ============================================================
+    // BUILD HEATMAP
+    // ============================================================
+    function buildHeatmap() {
+      const table = document.getElementById('heatmap');
+      // header row
+      let headerHTML = '<tr><th></th>';
+      MARKETS.forEach((m, i) => {
+        headerHTML += `<th><div class="market-code">${CODES[i]}</div>${m}</th>`;
+      });
+      headerHTML += '</tr>';
+      table.innerHTML = headerHTML;
 
-// ERS Scores (exit feasibility: higher = easier to exit)
-const ERS = {
-  Kenya:        [48, 52, 55, 47, 51, 53, 54],
-  'South Africa':[68, 72, 75, 65, 70, 73, 74],
-  Nigeria:      [35, 40, 44, 38, 36, 39, 41],
-  Ghana:        [44, 48, 50, 42, 46, 49, 50],
-  Egypt:        [40, 44, 46, 38, 43, 45, 46],
-  Rwanda:       [46, 50, 52, 45, 49, 51, 52],
-  Tanzania:     [41, 45, 47, 40, 44, 46, 47],
-  Morocco:      [58, 62, 65, 55, 63, 64, 66]
-};
-
-const ERS_CATS = s => s >= 66 ? 'EXIT-CAPABLE' : s >= 41 ? 'EXIT-CONSTRAINED' : 'EXIT-DIFFICULT';
-const ACI_CATS = s => s >= 75 ? 'HIGH RISK' : s >= 65 ? 'MODERATE-HIGH' : s >= 50 ? 'MODERATE' : s >= 35 ? 'MODERATE-LOW' : 'LOW RISK';
-
-function aciColor(s) {
-  if (s >= 75) return '#e74c3c';
-  if (s >= 65) return '#e67e22';
-  if (s >= 50) return '#f5c842';
-  if (s >= 35) return '#2ecc71';
-  return '#27ae60';
-}
-function ersBg(s) {
-  if (s >= 66) return '#27ae60';
-  if (s >= 41) return '#b8860b';
-  return '#8b3a3a';
-}
-function ersColor(s) {
-  if (s >= 66) return '#2ecc71';
-  if (s >= 41) return '#f5c842';
-  return '#e67e22';
-}
-function cellBg(aci) {
-  if (aci >= 75) return 'bg-high';
-  if (aci >= 65) return 'bg-mod-high';
-  if (aci >= 50) return 'bg-mod';
-  if (aci >= 35) return 'bg-mod-low';
-  return 'bg-low';
-}
-
-// ============================================================
-// BUILD HEATMAP
-// ============================================================
-function buildHeatmap() {
-  const table = document.getElementById('heatmap');
-  // header row
-  let headerHTML = '<tr><th></th>';
-  MARKETS.forEach((m, i) => {
-    headerHTML += `<th><div class="market-code">${CODES[i]}</div>${m}</th>`;
-  });
-  headerHTML += '</tr>';
-  table.innerHTML = headerHTML;
-
-  SECTORS.forEach((sector, si) => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td class="row-label">${sector}</td>`;
-    MARKETS.forEach((market, mi) => {
-      const aci = ACI[market][si];
-      const ers = ERS[market][si];
-      const ersCat = ERS_CATS(ers);
-      const ersCatShort = ersCat === 'EXIT-CAPABLE' ? 'CAPABLE' : ersCat === 'EXIT-CONSTRAINED' ? 'CONSTRAINED' : 'DIFFICULT';
-      const td = document.createElement('td');
-      td.innerHTML = `
+      SECTORS.forEach((sector, si) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="row-label">${sector}</td>`;
+        MARKETS.forEach((market, mi) => {
+          const aci = ACI[market][si];
+          const ers = ERS[market][si];
+          const ersCat = ERS_CATS(ers);
+          const ersCatShort = ersCat === 'EXIT-CAPABLE' ? 'CAPABLE' : ersCat === 'EXIT-CONSTRAINED' ? 'CONSTRAINED' : 'DIFFICULT';
+          const td = document.createElement('td');
+          td.innerHTML = `
         <div class="cell ${cellBg(aci)}" onclick="selectCell('${market}','${sector}',${mi},${si})" id="cell-${mi}-${si}">
           <div class="cell-aci">${aci}</div>
           <div class="cell-aci-label">ACI</div>
@@ -502,62 +1386,67 @@ function buildHeatmap() {
           <div class="cell-ers" style="color:${ersColor(ers)}">${ers}</div>
           <div class="cell-ers-label" style="color:${ersColor(ers)}">${ersCatShort}</div>
         </div>`;
-      tr.appendChild(td);
-    });
-    table.appendChild(tr);
-  });
-}
+          tr.appendChild(td);
+        });
+        table.appendChild(tr);
+      });
+    }
 
-// ============================================================
-// SELECT CELL
-// ============================================================
-let selectedCell = null;
-function selectCell(market, sector, mi, si) {
-  // Clear previous selection
-  if (selectedCell) {
-    document.getElementById(`cell-${selectedCell[0]}-${selectedCell[1]}`)?.classList.remove('selected');
-  }
-  selectedCell = [mi, si];
-  document.getElementById(`cell-${mi}-${si}`)?.classList.add('selected');
+    // ============================================================
+    // SELECT CELL
+    // ============================================================
+    let selectedCell = null;
+    function selectCell(market, sector, mi, si) {
+      // Clear previous selection
+      if (selectedCell) {
+        document.getElementById(`cell-${selectedCell[0]}-${selectedCell[1]}`)?.classList.remove('selected');
+      }
+      selectedCell = [mi, si];
+      document.getElementById(`cell-${mi}-${si}`)?.classList.add('selected');
 
-  const aci = ACI[market][si];
-  const ers = ERS[market][si];
-  const aciCat = ACI_CATS(aci);
-  const ersCat = ERS_CATS(ers);
+      const aci = ACI[market][si];
+      const ers = ERS[market][si];
+      const aciCat = ACI_CATS(aci);
+      const ersCat = ERS_CATS(ers);
 
-  // Update sidebar
-  document.getElementById('sb-name').textContent = market;
-  document.getElementById('sb-sector').textContent = sector;
-  document.getElementById('sb-aci').textContent = aci;
-  document.getElementById('sb-aci').className = `sidebar-score ${aci >= 75 ? 'color-high' : aci >= 65 ? 'color-mod-high' : 'color-mod'}`;
-  document.getElementById('sb-aci-cat').textContent = `▲ ${aciCat}`;
-  document.getElementById('sb-aci-cat').className = `sidebar-score-label ${aci >= 75 ? 'color-high' : aci >= 65 ? 'color-mod-high' : 'color-mod'}`;
-  document.getElementById('sb-ers').textContent = `ERS: ${ers}`;
-  document.getElementById('sb-ers-cat').textContent = `· ${ersCat}`;
-  document.getElementById('topbar-flag').textContent = CODES[mi];
-  document.getElementById('topbar-mname').textContent = `${market} · ${sector}`;
+      // Update sidebar
+      document.getElementById('sb-name').textContent = market;
+      document.getElementById('sb-sector').textContent = sector;
+      document.getElementById('sb-aci').textContent = aci;
+      document.getElementById('sb-aci').className = `sidebar-score ${aci >= 75 ? 'color-high' : aci >= 65 ? 'color-mod-high' : 'color-mod'}`;
+      document.getElementById('sb-aci-cat').textContent = `▲ ${aciCat}`;
+      document.getElementById('sb-aci-cat').className = `sidebar-score-label ${aci >= 75 ? 'color-high' : aci >= 65 ? 'color-mod-high' : 'color-mod'}`;
+      document.getElementById('sb-ers').textContent = `ERS: ${ers}`;
+      document.getElementById('sb-ers-cat').textContent = `· ${ersCat}`;
+      document.getElementById('topbar-flag').textContent = CODES[mi];
+      document.getElementById('topbar-mname').textContent = `${market} · ${sector}`;
 
-  // Render ACI content
-  renderACI(market, sector, aci, aciCat);
-  // Render Exit Intelligence
-  renderExit(market, sector, aci, ers, ersCat);
-  // Render Advisory
-  renderAdvisory(market, sector, aci, aciCat, ers, ersCat);
+      if (document.getElementById('topbar-flag-mobile')) {
+        document.getElementById('topbar-flag-mobile').textContent = CODES[mi];
+        document.getElementById('topbar-mname-mobile').textContent = `${market} · ${sector}`;
+      }
 
-  // Show ACI panel
-  showPanel('aci');
-}
+      // Render ACI content
+      renderACI(market, sector, aci, aciCat);
+      // Render Exit Intelligence
+      renderExit(market, sector, aci, ers, ersCat);
+      // Render Advisory
+      renderAdvisory(market, sector, aci, aciCat, ers, ersCat);
 
-// ============================================================
-// RENDER ACI BREAKDOWN
-// ============================================================
-function renderACI(market, sector, aci, aciCat) {
-  document.getElementById('aci-instruction').style.display = 'none';
+      // Show ACI panel
+      showPanel('aci');
+    }
 
-  const factors = getACIFactors(market, sector, aci);
-  const scoreColor = aciColor(aci);
+    // ============================================================
+    // RENDER ACI BREAKDOWN
+    // ============================================================
+    function renderACI(market, sector, aci, aciCat) {
+      document.getElementById('aci-instruction').style.display = 'none';
 
-  let html = `
+      const factors = getACIFactors(market, sector, aci);
+      const scoreColor = aciColor(aci);
+
+      let html = `
     <div class="market-header">
       <div class="market-flag">${CODES[MARKETS.indexOf(market)]}</div>
       <div class="market-title">
@@ -574,12 +1463,12 @@ function renderACI(market, sector, aci, aciCat) {
       <span>ACI</span> 10-Factor Governance Engine · Reasoning Chain · Strategic Advisory · Click any factor to expand
     </div>`;
 
-  factors.pillars.forEach((pillar, pi) => {
-    const pillarScore = pillar.factors.reduce((a,f) => a + f.score, 0) / pillar.factors.length;
-    html += `
+      factors.pillars.forEach((pillar, pi) => {
+        const pillarScore = pillar.factors.reduce((a, f) => a + f.score, 0) / pillar.factors.length;
+        html += `
       <div class="pillar">
         <div class="pillar-header" onclick="togglePillar(${pi})">
-          <div class="pillar-num">P${pi+1}</div>
+          <div class="pillar-num">P${pi + 1}</div>
           <div class="pillar-info">
             <h3>${pillar.name}</h3>
             <p>${pillar.desc}</p>
@@ -588,10 +1477,10 @@ function renderACI(market, sector, aci, aciCat) {
         </div>
         <div class="pillar-body" id="pillar-body-${pi}">`;
 
-    pillar.factors.forEach(f => {
-      const badge = f.score <= 2 ? 'badge-critical' : f.score <= 4 ? 'badge-high' : f.score <= 6 ? 'badge-mod' : 'badge-low';
-      const badgeLabel = f.score <= 2 ? 'Critical Weakness' : f.score <= 4 ? 'High Risk' : f.score <= 6 ? 'Moderate' : 'Positive';
-      html += `
+        pillar.factors.forEach(f => {
+          const badge = f.score <= 2 ? 'badge-critical' : f.score <= 4 ? 'badge-high' : f.score <= 6 ? 'badge-mod' : 'badge-low';
+          const badgeLabel = f.score <= 2 ? 'Critical Weakness' : f.score <= 4 ? 'High Risk' : f.score <= 6 ? 'Moderate' : 'Positive';
+          html += `
         <div class="factor">
           <div class="factor-code">${f.code}</div>
           <div class="factor-info">
@@ -602,276 +1491,276 @@ function renderACI(market, sector, aci, aciCat) {
           <div class="factor-badge ${badge}">${badgeLabel}</div>
           <div class="conf">conf: ${f.conf}</div>
         </div>`;
-    });
-    html += `</div></div>`;
-  });
+        });
+        html += `</div></div>`;
+      });
 
-  document.getElementById('aci-content').innerHTML = html;
-}
-
-function togglePillar(i) {
-  const body = document.getElementById(`pillar-body-${i}`);
-  body.style.display = body.style.display === 'none' ? 'block' : 'none';
-}
-
-// ============================================================
-// RENDER EXIT INTELLIGENCE
-// ============================================================
-// ============================================================
-// MARKET-SPECIFIC REGULATORY EXIT ALERT DATA
-// ============================================================
-function getMarketAlerts(market, sector) {
-  const alerts = {
-    'Egypt': {
-      severity: 'ELEVATED',
-      activeAlerts: 1,
-      subtitle: 'Currency devaluation cycle & CBE profit repatriation controls — Capital exit risk elevated Q1 2026',
-      primaryAlert: {
-        title: 'EGYPT — CBE PROFIT REPATRIATION CONSTRAINTS · ONGOING 2022–2026',
-        tag: 'CAPITAL EXIT — ELEVATED',
-        tagColor: '#e67e22',
-        stats: [
-          { label: 'EGP DEVALUATION (2022–2024)', value: '~70%', sub: 'Cumulative vs USD across three devaluation events', color: '#e05252' },
-          { label: 'REPATRIATION QUEUE', value: 'CLEARED', sub: 'USD backlog resolved mid-2024; structural risk remains', color: '#f5c842' },
-          { label: 'CBE USD ACCESS', value: 'RESTRICTED', sub: 'Foreign exchange access subject to CBE approval and timing', color: '#e67e22' }
-        ],
-        leftTitle: 'KEY CAPITAL EXIT CONSTRAINTS',
-        leftItems: ['CBE approval required for large FX conversions', 'Dividend repatriation subject to 10% withholding tax', 'EGP convertibility dependent on CBE reserve levels', 'USD-denominated PPAs provide partial hedge in Energy', 'EGPC partnership structures limit secondary sale flexibility'],
-        rightNotes: [
-          { color: '#e05252', label: 'THREE DEVALUATION EVENTS', text: 'Egypt devalued the EGP in March 2022 (15%), October 2022 (15%), and January 2023 (35%). Each event crystallised FX losses for USD-invested capital. A managed float policy adopted mid-2024 has stabilised the rate but structural risks persist.' },
-          { color: '#f5c842', label: 'USD BACKLOG — RESOLVED BUT WATCHED', text: 'A multi-billion dollar queue of foreign investor profit repatriation requests built up in 2022–2023 as CBE prioritised sovereign debt servicing over commercial FX. Cleared by Q2 2024 via IMF-supported reserve injection. Recurrence risk flagged for any FX pressure event.' },
-          { color: '#2ecc71', label: 'ENERGY SECTOR PARTIAL PROTECTION', text: 'Petroleum agreements and most energy PPAs are USD-denominated with EGPC as offtaker, providing structural protection against EGP devaluation at the revenue level. Capital repatriation at exit remains the critical constraint.' }
-        ],
-        intelligenceNote: `Egypt's exit risk profile is dominated by capital repatriation mechanics, not forced divestment. The CBE profit repatriation framework has historically created exit timing uncertainty that has materially extended hold periods beyond LP expectations. For ${sector} sector exposures, investors must model a 7–10 year hold with convertibility insurance as non-negotiable. The ERS score of ${sector === 'Energy' ? '38' : 'mid-30s to low-40s'} reflects this repatriation constraint as the primary drag — structural economic reform under the IMF programme provides a medium-term improvement path, but Q1 2026 ERS classification remains EXIT-DIFFICULT.`
-      },
-      watchItems: [
-        { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'CBK repatriation framework transparent. No active currency crisis signals.' },
-        { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'CBN FX unification ongoing. Naira devaluation of 70%+ since 2023. Structural parallel.' },
-        { market: 'Tanzania', risk: 'MODERATE', color: '#f5c842', note: 'BoT restrictions on FX retention accounts. Sector-specific convertibility variance.' },
-        { market: 'Ghana', risk: 'MODERATE', color: '#f5c842', note: 'GHS depreciated 55% in 2022. IMF programme stabilising but repatriation friction persists.' }
-      ],
-      watchLabel: 'CURRENCY REPATRIATION RISK — REGIONAL COMPARATOR TRACKER'
-    },
-    'Nigeria': {
-      severity: 'ELEVATED',
-      activeAlerts: 1,
-      subtitle: 'NUPRC local content mandates & CBN FX unification impact on capital repatriation — updated Q1 2026',
-      primaryAlert: {
-        title: 'NIGERIA — CBN FX UNIFICATION & NAIRA DEVALUATION CYCLE · 2023–2026',
-        tag: 'CURRENCY & REPATRIATION — ELEVATED',
-        tagColor: '#e67e22',
-        stats: [
-          { label: 'NAIRA DEVALUATION (2023–2024)', value: '~70%', sub: 'Since CBN unified official/parallel rates in June 2023', color: '#e05252' },
-          { label: 'LOCAL CONTENT MANDATE', value: '55%+', sub: 'NUPRC Nigerian content target for upstream oil services', color: '#f5c842' },
-          { label: 'REPATRIATION STATUS', value: 'IMPROVING', sub: 'FX backlog cleared 2024; NAFEM window operational', color: '#2ecc71' }
-        ],
-        leftTitle: 'KEY REGULATORY EXIT CONSTRAINTS',
-        leftItems: ['CBN NAFEM window: USD access improved but volume-limited', 'Petroleum Industry Act 2021 host community levy obligations', 'NUPRC local content board approval required for asset transfers', 'Nigerian Content Development Fund deductions on energy contracts', 'Pre-approval required for secondary market asset disposals'],
-        rightNotes: [
-          { color: '#e05252', label: 'FX UNIFICATION IMPACT', text: 'The CBN\'s June 2023 FX rate unification eliminated the official/parallel spread but triggered an immediate ~40% devaluation. Further depreciation through 2023-2024 resulted in ~70% cumulative loss against USD. USD-denominated energy contracts provide partial structural hedging at revenue level.' },
-          { color: '#f5c842', label: 'NUPRC LOCAL CONTENT COMPLIANCE', text: 'The Nigerian Upstream Petroleum Regulatory Commission enforces Nigerian Content requirements that materially affect asset transfer timelines. Secondary sales must demonstrate equivalent or improved Nigerian content compliance — a condition that can delay exits by 12–18 months.' },
-          { color: '#2ecc71', label: 'PIA 2021 — STRUCTURAL REFORM CONTEXT', text: 'The Petroleum Industry Act 2021 fundamentally restructured Nigeria\'s upstream regulatory framework, creating NUPRC and NMDPRA. While creating compliance complexity, the Act introduced fiscal stability clauses that provide some protection for contractual exit rights.' }
-        ],
-        intelligenceNote: `Nigeria's exit risk for the ${sector} sector is characterised by layered regulatory complexity rather than outright divestment mandates. The primary exit constraint is FX repatriation mechanics — while the NAFEM window has improved USD access, large-scale capital repatriation above $50M still requires CBN coordination. Secondary market buyer pool depth remains limited to a small set of regional strategic acquirers and DFIs. ERS classification reflects this constrained exit environment, with structured DFI co-investment as the recommended mitigation pathway.`
-      },
-      watchItems: [
-        { market: 'Egypt', risk: 'ELEVATED', color: '#e67e22', note: 'CBE repatriation framework. Parallel devaluation trajectory. Structural comparator.' },
-        { market: 'Ghana', risk: 'MODERATE', color: '#f5c842', note: 'GHS devaluation precedent. IMF programme reducing FX risk profile.' },
-        { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'CBK framework transparent. KES managed float with limited intervention.' },
-        { market: 'Tanzania', risk: 'MODERATE', color: '#f5c842', note: 'BoT FX retention controls. Mining sector renegotiation precedent elevated.' }
-      ],
-      watchLabel: 'FX REPATRIATION RISK — WEST & EAST AFRICA COMPARATOR'
-    },
-    'Kenya': {
-      severity: 'MODERATE',
-      activeAlerts: 0,
-      subtitle: 'No active forced divestment mandates — Finance Bill 2024 policy volatility noted · monitoring Q1 2026',
-      primaryAlert: {
-        title: 'KENYA — REGULATORY ENVIRONMENT ASSESSMENT · Q1 2026',
-        tag: 'NO ACTIVE ALERT — MONITORING',
-        tagColor: '#2ecc71',
-        stats: [
-          { label: 'FDI RESTRICTION LEVEL', value: 'LOW', sub: 'Generally open regime. No active forced divestment mandates', color: '#2ecc71' },
-          { label: 'POLICY VOLATILITY INDEX', value: 'MODERATE', sub: 'Finance Bill 2024 withdrawal signals fiscal policy sensitivity', color: '#f5c842' },
-          { label: 'KES STABILITY (2024)', value: 'STABLE', sub: 'KES recovered from 2023 lows; CBK reserves improving', color: '#2ecc71' }
-        ],
-        leftTitle: 'SECTOR-SPECIFIC RESTRICTIONS',
-        leftItems: ['Media ownership: 20% foreign equity cap (Communications Act)', 'Land: Non-citizens restricted from freehold ownership', 'Healthcare: No foreign equity cap — open sector', 'Energy: IPP framework open to foreign ownership', 'Financial services: CBK approval required for >25% stake transfers'],
-        rightNotes: [
-          { color: '#f5c842', label: 'FINANCE BILL 2024 — POLICY RISK FLAG', text: 'The government\'s withdrawal of the Finance Bill 2024 following public protests demonstrated Kenya\'s exposure to politically-driven fiscal policy reversal. While investor-friendly on FDI, Kenya\'s policy environment carries meaningful volatility risk when fiscal pressures intensify — a signal AlgoEconomics monitors as a leading indicator for regulatory shift.' },
-          { color: '#2ecc71', label: 'INVESTOR PROTECTION FRAMEWORK', text: 'Kenya\'s Investment Promotion Act and bilateral investment treaties with UK, Netherlands, and Germany provide strong exit protection for qualifying investments. ICSID arbitration has been successfully invoked by foreign investors on multiple occasions, establishing credible deterrence against regulatory overreach.' },
-          { color: '#f5c842', label: 'WATCH: LOCAL CONTENT LEGISLATION', text: 'Sector-specific local content bills under parliamentary consideration in oil & gas and digital infrastructure. If enacted, these could introduce ownership transfer requirements similar to Nigeria\'s NUPRC framework. AlgoEconomics flagging as a Q2 2026 forward risk.' }
-        ],
-        intelligenceNote: `Kenya presents one of the cleaner exit risk profiles in East Africa. No active forced divestment mandates, open FX convertibility, and functioning secondary market mechanisms position it favourably relative to regional peers. The primary exit constraint for ${sector} sector investments is buyer pool depth — secondary market transactions above $50M USD require DFI or strategic buyer involvement, which can extend exit timelines. ERS classification reflects fundamentally achievable exits with appropriate structuring, rather than structural barriers.`
-      },
-      watchItems: [
-        { market: 'Tanzania', risk: 'ELEVATED', color: '#e67e22', note: 'Natural Wealth Act renegotiation precedent. Mining sector re-nationalisation risk.' },
-        { market: 'Rwanda', risk: 'LOW', color: '#2ecc71', note: 'Strongest FDI protection framework in East Africa. EAC comparable.' },
-        { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'CBN FX constraints. NUPRC local content complexity.' },
-        { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment mandate in 14 reserved sectors. EXIT-BLOCKED.' }
-      ],
-      watchLabel: 'EAST AFRICA REGULATORY RISK — COMPARATIVE TRACKER'
-    },
-    'Ghana': {
-      severity: 'MODERATE',
-      activeAlerts: 0,
-      subtitle: 'GIPC Act sector restrictions & GHS devaluation recovery — IMF programme stabilising exit conditions · Q1 2026',
-      primaryAlert: {
-        title: 'GHANA — GIPC ACT COMPLIANCE & GHS REPATRIATION FRAMEWORK · Q1 2026',
-        tag: 'MONITORING — MODERATE WATCH',
-        tagColor: '#f5c842',
-        stats: [
-          { label: 'GHS RECOVERY (2024)', value: 'PARTIAL', sub: 'GHS stabilised post-IMF programme; 55% devaluation since 2022 not recovered', color: '#f5c842' },
-          { label: 'GIPC SECTOR RESERVES', value: 'ACTIVE', sub: 'Retail trading &amp; certain services reserved for Ghanaians under GIPC Act', color: '#f5c842' },
-          { label: 'DEBT RESTRUCTURING', value: 'ONGOING', sub: 'DDEP domestic debt exchange completed; external restructuring in progress', color: '#e67e22' }
-        ],
-        leftTitle: 'GIPC ACT — RESERVED SECTOR FRAMEWORK',
-        leftItems: ['Retail trading (goods): Reserved for Ghanaian nationals', 'Taxis &amp; car hire below $1M threshold: Reserved', 'Lotteries &amp; pools: Restricted foreign participation', 'Beauty salons &amp; barbershops: Reserved for citizens', 'Healthcare &amp; pharmaceutical: Open — foreign investment permitted'],
-        rightNotes: [
-          { color: '#e67e22', label: 'DEBT EXCHANGE PROGRAMME IMPACT', text: 'Ghana\'s Domestic Debt Exchange Programme (DDEP) in 2023 restructured cedi-denominated government bonds, forcing haircuts on financial sector investors. This precedent of government-imposed restructuring elevated exit risk sub-indicators for financial and infrastructure sector investments across the ACI RF framework.' },
-          { color: '#f5c842', label: 'GHS DEVALUATION — REPATRIATION IMPACT', text: 'The cedi depreciated approximately 55% against USD between 2022 and end-2023 — one of the largest African currency shocks of the period. While the IMF $3B programme has stabilised the rate, the structural deficit financing dynamic persists. USD-denominated revenue streams or contractual FX protections are essential for exit value preservation.' },
-          { color: '#2ecc71', label: `HEALTHCARE SECTOR — OPEN FRAMEWORK`, text: `Ghana's healthcare sector has no foreign equity caps and benefits from active NHIA (National Health Insurance Authority) engagement with private sector providers. Exit routes via strategic trade sale to pan-African healthcare groups (e.g. Aga Khan Health, Helios) are credible. DFI investor base (IFC, DEG, Proparco) active in sector supports secondary market liquidity.` }
-        ],
-        intelligenceNote: `Ghana's exit risk profile for ${sector} sector is shaped primarily by FX dynamics rather than ownership restrictions. The GIPC Act reserved sectors do not affect healthcare or professional services — the primary exit constraint is GHS convertibility and the secondary market depth in a post-DDEP environment. IFC and DEG presence in Ghana's ${sector} sector creates a credible DFI exit pathway. ERS classification reflects achievable exits with FX protection structures, targeting a 5–7 year hold period aligned with IMF programme milestones.`
-      },
-      watchItems: [
-        { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'Deeper structural FX constraints. NUPRC local content layer adds complexity.' },
-        { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'Cleaner FX framework. Lower repatriation friction. ERS comparator.' },
-        { market: 'Egypt', risk: 'ELEVATED', color: '#e67e22', note: 'CBE repatriation history. Parallel devaluation trajectory to GHS.' },
-        { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment in 14 sectors. Contagion risk monitor active.' }
-      ],
-      watchLabel: 'WEST AFRICA FX & REGULATORY RISK — COMPARATIVE TRACKER'
-    },
-    'Rwanda': {
-      severity: 'LOW',
-      activeAlerts: 0,
-      subtitle: 'No active regulatory exit constraints — strongest FDI protection framework in East Africa · Q1 2026',
-      primaryAlert: {
-        title: 'RWANDA — REGULATORY EXIT ENVIRONMENT ASSESSMENT · Q1 2026',
-        tag: 'CLEAR — LOW RISK',
-        tagColor: '#2ecc71',
-        stats: [
-          { label: 'FDI PROTECTION RATING', value: 'STRONG', sub: 'Investment Code 2021 provides full repatriation rights', color: '#2ecc71' },
-          { label: 'RWF STABILITY (2024)', value: 'STABLE', sub: 'Managed float with low inflation; NBR reserves adequate', color: '#2ecc71' },
-          { label: 'FORCED DIVESTMENT RISK', value: 'NONE', sub: 'No active or proposed forced divestment mandates', color: '#2ecc71' }
-        ],
-        leftTitle: 'EXIT FRAMEWORK STRENGTHS',
-        leftItems: ['Investment Code 2021: Full capital &amp; profit repatriation rights guaranteed', 'No foreign equity caps in most sectors including ${sector}', 'ICSID arbitration access for qualifying foreign investors', 'Kigali International Financial Centre (KIFC) exit-facilitation framework', 'Double taxation treaties with 14 countries including UK &amp; Netherlands'],
-        rightNotes: [
-          { color: '#2ecc71', label: 'INVESTMENT CODE 2021', text: 'Rwanda\'s Investment Code guarantees full repatriation of profits, dividends, and capital proceeds with no waiting periods or volume restrictions. This represents the strongest statutory exit protection in East Africa and is a material differentiator in ERS scoring relative to peer markets.' },
-          { color: '#f5c842', label: 'MARKET SIZE CONSTRAINT', text: 'Rwanda\'s primary exit challenge is buyer pool depth, not regulatory restriction. Secondary market transactions above $30M USD face limited domestic buyer options, requiring strategic acquirer or DFI involvement. This is a liquidity constraint, not a governance failure — and is reflected in the ERS market liquidity component rather than the regulatory risk dimension.' },
-          { color: '#2ecc71', label: 'KIFC — EXIT FACILITATION INFRASTRUCTURE', text: 'The Kigali International Financial Centre provides a regulated framework specifically designed to facilitate foreign investor entry and exit, including special purpose vehicle structuring and cross-border capital movement. This institutional infrastructure is a genuine regional advantage.' }
-        ],
-        intelligenceNote: `Rwanda's regulatory exit environment is the cleanest in the AlgoEconomics coverage universe. No forced divestment mandates, no repatriation controls, and a statutory investment protection framework with genuine enforcement credibility. The ${sector} sector ERS score reflects this, with the primary constraint being buyer pool liquidity rather than regulatory friction. Exit architecture should focus on pre-identified strategic acquirer relationships and DFI secondary market positioning rather than regulatory mitigation instruments.`
-      },
-      watchItems: [
-        { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'Comparable framework. Finance Bill volatility the key differentiation.' },
-        { market: 'Tanzania', risk: 'ELEVATED', color: '#e67e22', note: 'Natural Wealth Act renegotiation risk. Acacia/Barrick precedent.' },
-        { market: 'Uganda', risk: 'MODERATE', color: '#f5c842', note: '1972 Amin expulsion historical context. Current FDI framework improved.' },
-        { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% divestment mandate. Adjacent contagion risk flagged.' }
-      ],
-      watchLabel: 'EAST AFRICA REGULATORY ENVIRONMENT — COMPARATIVE TRACKER'
-    },
-    'Tanzania': {
-      severity: 'ELEVATED',
-      activeAlerts: 1,
-      subtitle: 'Natural Wealth &amp; Resources Act renegotiation risk &amp; sector re-nationalisation precedent — Q1 2026',
-      primaryAlert: {
-        title: 'TANZANIA — NATURAL WEALTH &amp; RESOURCES ACT 2017 · ONGOING RISK',
-        tag: 'RENEGOTIATION RISK — ELEVATED',
-        tagColor: '#e67e22',
-        stats: [
-          { label: 'PRECEDENT EVENT', value: 'ACACIA', sub: '$300M settlement forced by government renegotiation of mining terms', color: '#e05252' },
-          { label: 'NWRA SCOPE', value: 'BROAD', sub: 'Covers all natural resources; state participation right up to 50%', color: '#e67e22' },
-          { label: 'CURRENT STATUS', value: 'ACTIVE', sub: 'NWRA remains in force; enforcement selective but credible', color: '#f5c842' }
-        ],
-        leftTitle: 'KEY REGULATORY EXIT CONSTRAINTS',
-        leftItems: ['NWRA: Government can claim up to 50% free-carried interest', 'Contract renegotiation right embedded in natural resources law', 'Mandatory local value addition requirements', 'Export restrictions on unprocessed natural resources', 'Approval required for foreign asset transfers in regulated sectors'],
-        rightNotes: [
-          { color: '#e05252', label: 'ACACIA MINING PRECEDENT — 2019', text: 'The Tanzanian government\'s forced renegotiation of Barrick Gold\'s Acacia Mining contracts in 2019 — resulting in a $300M settlement and 16% government stake — established that even large-scale investments with established legal protections are subject to executive renegotiation. This precedent elevated Tanzania\'s exit risk sub-indicators materially.' },
-          { color: '#f5c842', label: 'NWRA IMPLEMENTATION — SELECTIVE ENFORCEMENT', text: 'The Natural Wealth and Resources Act 2017 has been enforced selectively — primarily targeting large extractive projects. SME-scale investments and social infrastructure sectors (healthcare, education) have not been subject to NWRA enforcement to date. Sector risk profile varies significantly.' },
-          { color: '#e67e22', label: 'MAGUFULI TO HASSAN — POLICY CONTINUITY', text: 'President Hassan\'s administration has maintained NWRA provisions but adopted a more investor-friendly rhetorical posture than the Magufuli era. Practical enforcement has softened on new investments, but the legal framework creating renegotiation rights remains unchanged — the risk is structural, not merely political.' }
-        ],
-        intelligenceNote: `Tanzania's exit risk for ${sector} sector is materially shaped by the NWRA precedent, which created a credible government right to renegotiate commercial terms across natural resource and infrastructure investments. For ${sector} sector specifically, enforcement risk is ${sector === 'Energy' || sector === 'Agribusiness' ? 'directly applicable and must be contractually hedged' : 'lower than extractive sectors but the contagion risk from the Acacia precedent elevates general contract security concerns'}. Exit architecture must include political risk insurance, offshore SPV structuring, and pre-negotiated government buyout rights to ensure exit viability within a realistic hold period.`
-      },
-      watchItems: [
-        { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'Strong BIT framework. No equivalent re-nationalisation precedent.' },
-        { market: 'Rwanda', risk: 'LOW', color: '#2ecc71', note: 'Cleanest regulatory exit environment in EAC.' },
-        { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment mandate in 14 sectors.' },
-        { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'PIA renegotiation history. CBN FX constraints layer.' }
-      ],
-      watchLabel: 'EAST AFRICA RENEGOTIATION RISK — COMPARATIVE TRACKER'
-    },
-    'South Africa': {
-      severity: 'MODERATE',
-      activeAlerts: 1,
-      subtitle: 'B-BBEE equity ownership requirements &amp; Mining Charter III compliance — active monitoring Q1 2026',
-      primaryAlert: {
-        title: 'SOUTH AFRICA — B-BBEE EQUITY TRANSFER REQUIREMENTS · ONGOING',
-        tag: 'EQUITY COMPLIANCE — MODERATE',
-        tagColor: '#f5c842',
-        stats: [
-          { label: 'MINING CHARTER III', value: '30%', sub: 'Minimum Black ownership required in new mining rights', color: '#f5c842' },
-          { label: 'B-BBEE IMPACT ON EXITS', value: 'ACTIVE', sub: 'B-BBEE compliance status affects secondary sale buyer eligibility', color: '#f5c842' },
-          { label: 'BUYER POOL CONSTRAINT', value: 'MODERATE', sub: 'Qualifying B-BBEE buyers with capital capacity are limited', color: '#f5c842' }
-        ],
-        leftTitle: 'B-BBEE EXIT IMPACT BY SECTOR',
-        leftItems: ['Mining: 30% Black ownership (Mining Charter III mandatory)', 'Financial services: FSC scorecard compliance required', 'Healthcare: B-BBEE preferred but not mandatory ownership transfer', 'Energy (REIPPP): Local content &amp; community ownership mandatory', 'Telecoms: ICASA licence B-BBEE compliance conditions'],
-        rightNotes: [
-          { color: '#f5c842', label: 'B-BBEE BUYER POOL DEPTH', text: 'South Africa\'s B-BBEE framework creates a structural constraint on secondary market exits: qualifying buyers must meet B-BBEE ownership thresholds, which materially limits the eligible buyer universe for mining, energy, and financial services assets. This buyer pool constraint extends exit timelines relative to other markets and is captured in the ERS market liquidity component.' },
-          { color: '#e67e22', label: 'MINING CHARTER III — COMPLIANCE MECHANISM', text: 'Mining Charter III requires 30% Black ownership for new mining rights, with existing rights subject to compliance renewal on ownership structure. Exit transactions in the mining sector require DMR approval and must maintain compliance with the 30% threshold, creating complexity for partial divestments or secondary sales to non-qualifying buyers.' },
-          { color: '#2ecc71', label: 'INSTITUTIONAL FRAMEWORK STRENGTH', text: 'South Africa\'s institutional exit infrastructure — JSE, sophisticated legal framework, functional courts, and established M&amp;A advisory market — remains the strongest in sub-Saharan Africa. B-BBEE compliance adds cost and complexity, but does not represent a fundamental barrier to exit for well-structured investments with appropriate ownership planning from entry.' }
-        ],
-        intelligenceNote: `South Africa's exit complexity is structurally different from other covered markets — the primary constraint is not currency risk or forced divestment, but B-BBEE compliance cost and buyer pool limitation. For ${sector} sector, B-BBEE impact ${sector === 'Mining' || sector === 'Energy' ? 'is directly material: mandatory ownership thresholds restrict eligible secondary buyers and require DMR/NERSA approval' : 'is indirect but present: preferred supplier status and licensing renewal conditions create soft compliance requirements that affect asset marketability'}. South Africa's institutional quality means exits are achievable — but B-BBEE compliance architecture must be planned at the investment structuring stage, not at exit.`
-      },
-      watchItems: [
-        { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment mandate. Adjacent market contagion watch.' },
-        { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'CAMA local content. CBN FX constraints layer.' },
-        { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'Open FDI framework. Strong BIT protection.' },
-        { market: 'Rwanda', risk: 'LOW', color: '#2ecc71', note: 'Best-in-class investor exit protections in East Africa.' }
-      ],
-      watchLabel: 'OWNERSHIP COMPLIANCE RISK — SOUTHERN AFRICA TRACKER'
-    },
-    'Morocco': {
-      severity: 'LOW',
-      activeAlerts: 0,
-      subtitle: 'Stable exit environment — Investment Charter reforms 2022 strengthening FDI protections · Q1 2026',
-      primaryAlert: {
-        title: 'MOROCCO — INVESTMENT CHARTER FRAMEWORK &amp; EXIT ENVIRONMENT · Q1 2026',
-        tag: 'STABLE — LOW RISK',
-        tagColor: '#2ecc71',
-        stats: [
-          { label: 'INVESTMENT CHARTER', value: '2022', sub: 'New framework provides enhanced FDI protections &amp; repatriation rights', color: '#2ecc71' },
-          { label: 'MAD STABILITY', value: 'STABLE', sub: 'BAM managed float vs EUR/USD basket. Low devaluation risk', color: '#2ecc71' },
-          { label: 'FORCED DIVESTMENT RISK', value: 'NONE', sub: 'No active or proposed forced ownership transfer requirements', color: '#2ecc71' }
-        ],
-        leftTitle: 'EXIT FRAMEWORK STRENGTHS',
-        leftItems: ['Investment Charter 2022: Full profit &amp; capital repatriation guaranteed', 'No foreign equity caps in ${sector} sector', 'MAD convertibility for current account transactions maintained', 'Office des Changes approval for capital account transactions', 'Association Agreement with EU provides international arbitration access'],
-        rightNotes: [
-          { color: '#2ecc71', label: 'INVESTMENT CHARTER 2022 — REFORM IMPACT', text: 'Morocco\'s Investment Charter adopted in 2022 replaced the 1995 framework with enhanced investor protections including streamlined approval processes, explicit non-discrimination guarantees, and strengthened capital repatriation rights. The reforms were specifically designed to address prior friction points identified by institutional investors.' },
-          { color: '#f5c842', label: 'OFFICE DES CHANGES — CAPITAL ACCOUNT CONTROLS', text: 'While current account transactions (dividends, operating income repatriation) are freely convertible, capital account transactions above certain thresholds require Office des Changes authorisation. This administrative requirement adds process friction to exit transactions but does not represent a substantive barrier — approval is routinely granted for qualifying foreign investments.' },
-          { color: '#2ecc71', label: 'REGIONAL HUB ADVANTAGE', text: 'Morocco\'s positioning as a regional financial hub — with the Casablanca Finance City providing a regulated framework for African investment holding structures — creates unique exit optionality. Assets can be structured through CFC-domiciled vehicles to facilitate secondary sales to pan-African investors with access to CFC\'s institutional buyer network.' }
-        ],
-        intelligenceNote: `Morocco presents one of the most favourable exit environments in AlgoEconomics' coverage universe, alongside Rwanda. The primary exit constraint for ${sector} sector is buyer pool depth in the secondary market — Morocco's private equity ecosystem is developing but not yet at the scale of South Africa or Kenya. The Casablanca Finance City's institutional infrastructure provides a partial solution via structured vehicle frameworks. Exit architecture should leverage CFC domicile structures and target European or pan-African strategic acquirers as the primary exit route.`
-      },
-      watchItems: [
-        { market: 'Egypt', risk: 'ELEVATED', color: '#e67e22', note: 'CBE repatriation constraints. North Africa regional comparator.' },
-        { market: 'Tunisia', risk: 'ELEVATED', color: '#e67e22', note: 'Political instability post-2021. BCT FX controls tightened.' },
-        { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'CBN FX unification. NUPRC local content complexity.' },
-        { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment mandate. Global Africa exit risk signal.' }
-      ],
-      watchLabel: 'NORTH AFRICA &amp; GLOBAL EXIT RISK — COMPARATIVE TRACKER'
+      document.getElementById('aci-content').innerHTML = html;
     }
-  };
-  return alerts[market] || alerts['Kenya'];
-}
 
-function renderAlertContent(alertData, acColor) {
-  const a = alertData.primaryAlert;
-  const pulseColor = alertData.severity === 'CRITICAL' ? '#e05252' : alertData.severity === 'ELEVATED' ? '#e67e22' : alertData.severity === 'MODERATE' ? '#f5c842' : '#2ecc71';
-  const hasActiveAlert = alertData.activeAlerts > 0;
+    function togglePillar(i) {
+      const body = document.getElementById(`pillar-body-${i}`);
+      body.style.display = body.style.display === 'none' ? 'block' : 'none';
+    }
 
-  let html = `
+    // ============================================================
+    // RENDER EXIT INTELLIGENCE
+    // ============================================================
+    // ============================================================
+    // MARKET-SPECIFIC REGULATORY EXIT ALERT DATA
+    // ============================================================
+    function getMarketAlerts(market, sector) {
+      const alerts = {
+        'Egypt': {
+          severity: 'ELEVATED',
+          activeAlerts: 1,
+          subtitle: 'Currency devaluation cycle & CBE profit repatriation controls — Capital exit risk elevated Q1 2026',
+          primaryAlert: {
+            title: 'EGYPT — CBE PROFIT REPATRIATION CONSTRAINTS · ONGOING 2022–2026',
+            tag: 'CAPITAL EXIT — ELEVATED',
+            tagColor: '#e67e22',
+            stats: [
+              { label: 'EGP DEVALUATION (2022–2024)', value: '~70%', sub: 'Cumulative vs USD across three devaluation events', color: '#e05252' },
+              { label: 'REPATRIATION QUEUE', value: 'CLEARED', sub: 'USD backlog resolved mid-2024; structural risk remains', color: '#f5c842' },
+              { label: 'CBE USD ACCESS', value: 'RESTRICTED', sub: 'Foreign exchange access subject to CBE approval and timing', color: '#e67e22' }
+            ],
+            leftTitle: 'KEY CAPITAL EXIT CONSTRAINTS',
+            leftItems: ['CBE approval required for large FX conversions', 'Dividend repatriation subject to 10% withholding tax', 'EGP convertibility dependent on CBE reserve levels', 'USD-denominated PPAs provide partial hedge in Energy', 'EGPC partnership structures limit secondary sale flexibility'],
+            rightNotes: [
+              { color: '#e05252', label: 'THREE DEVALUATION EVENTS', text: 'Egypt devalued the EGP in March 2022 (15%), October 2022 (15%), and January 2023 (35%). Each event crystallised FX losses for USD-invested capital. A managed float policy adopted mid-2024 has stabilised the rate but structural risks persist.' },
+              { color: '#f5c842', label: 'USD BACKLOG — RESOLVED BUT WATCHED', text: 'A multi-billion dollar queue of foreign investor profit repatriation requests built up in 2022–2023 as CBE prioritised sovereign debt servicing over commercial FX. Cleared by Q2 2024 via IMF-supported reserve injection. Recurrence risk flagged for any FX pressure event.' },
+              { color: '#2ecc71', label: 'ENERGY SECTOR PARTIAL PROTECTION', text: 'Petroleum agreements and most energy PPAs are USD-denominated with EGPC as offtaker, providing structural protection against EGP devaluation at the revenue level. Capital repatriation at exit remains the critical constraint.' }
+            ],
+            intelligenceNote: `Egypt's exit risk profile is dominated by capital repatriation mechanics, not forced divestment. The CBE profit repatriation framework has historically created exit timing uncertainty that has materially extended hold periods beyond LP expectations. For ${sector} sector exposures, investors must model a 7–10 year hold with convertibility insurance as non-negotiable. The ERS score of ${sector === 'Energy' ? '38' : 'mid-30s to low-40s'} reflects this repatriation constraint as the primary drag — structural economic reform under the IMF programme provides a medium-term improvement path, but Q1 2026 ERS classification remains EXIT-DIFFICULT.`
+          },
+          watchItems: [
+            { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'CBK repatriation framework transparent. No active currency crisis signals.' },
+            { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'CBN FX unification ongoing. Naira devaluation of 70%+ since 2023. Structural parallel.' },
+            { market: 'Tanzania', risk: 'MODERATE', color: '#f5c842', note: 'BoT restrictions on FX retention accounts. Sector-specific convertibility variance.' },
+            { market: 'Ghana', risk: 'MODERATE', color: '#f5c842', note: 'GHS depreciated 55% in 2022. IMF programme stabilising but repatriation friction persists.' }
+          ],
+          watchLabel: 'CURRENCY REPATRIATION RISK — REGIONAL COMPARATOR TRACKER'
+        },
+        'Nigeria': {
+          severity: 'ELEVATED',
+          activeAlerts: 1,
+          subtitle: 'NUPRC local content mandates & CBN FX unification impact on capital repatriation — updated Q1 2026',
+          primaryAlert: {
+            title: 'NIGERIA — CBN FX UNIFICATION & NAIRA DEVALUATION CYCLE · 2023–2026',
+            tag: 'CURRENCY & REPATRIATION — ELEVATED',
+            tagColor: '#e67e22',
+            stats: [
+              { label: 'NAIRA DEVALUATION (2023–2024)', value: '~70%', sub: 'Since CBN unified official/parallel rates in June 2023', color: '#e05252' },
+              { label: 'LOCAL CONTENT MANDATE', value: '55%+', sub: 'NUPRC Nigerian content target for upstream oil services', color: '#f5c842' },
+              { label: 'REPATRIATION STATUS', value: 'IMPROVING', sub: 'FX backlog cleared 2024; NAFEM window operational', color: '#2ecc71' }
+            ],
+            leftTitle: 'KEY REGULATORY EXIT CONSTRAINTS',
+            leftItems: ['CBN NAFEM window: USD access improved but volume-limited', 'Petroleum Industry Act 2021 host community levy obligations', 'NUPRC local content board approval required for asset transfers', 'Nigerian Content Development Fund deductions on energy contracts', 'Pre-approval required for secondary market asset disposals'],
+            rightNotes: [
+              { color: '#e05252', label: 'FX UNIFICATION IMPACT', text: 'The CBN\'s June 2023 FX rate unification eliminated the official/parallel spread but triggered an immediate ~40% devaluation. Further depreciation through 2023-2024 resulted in ~70% cumulative loss against USD. USD-denominated energy contracts provide partial structural hedging at revenue level.' },
+              { color: '#f5c842', label: 'NUPRC LOCAL CONTENT COMPLIANCE', text: 'The Nigerian Upstream Petroleum Regulatory Commission enforces Nigerian Content requirements that materially affect asset transfer timelines. Secondary sales must demonstrate equivalent or improved Nigerian content compliance — a condition that can delay exits by 12–18 months.' },
+              { color: '#2ecc71', label: 'PIA 2021 — STRUCTURAL REFORM CONTEXT', text: 'The Petroleum Industry Act 2021 fundamentally restructured Nigeria\'s upstream regulatory framework, creating NUPRC and NMDPRA. While creating compliance complexity, the Act introduced fiscal stability clauses that provide some protection for contractual exit rights.' }
+            ],
+            intelligenceNote: `Nigeria's exit risk for the ${sector} sector is characterised by layered regulatory complexity rather than outright divestment mandates. The primary exit constraint is FX repatriation mechanics — while the NAFEM window has improved USD access, large-scale capital repatriation above $50M still requires CBN coordination. Secondary market buyer pool depth remains limited to a small set of regional strategic acquirers and DFIs. ERS classification reflects this constrained exit environment, with structured DFI co-investment as the recommended mitigation pathway.`
+          },
+          watchItems: [
+            { market: 'Egypt', risk: 'ELEVATED', color: '#e67e22', note: 'CBE repatriation framework. Parallel devaluation trajectory. Structural comparator.' },
+            { market: 'Ghana', risk: 'MODERATE', color: '#f5c842', note: 'GHS devaluation precedent. IMF programme reducing FX risk profile.' },
+            { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'CBK framework transparent. KES managed float with limited intervention.' },
+            { market: 'Tanzania', risk: 'MODERATE', color: '#f5c842', note: 'BoT FX retention controls. Mining sector renegotiation precedent elevated.' }
+          ],
+          watchLabel: 'FX REPATRIATION RISK — WEST & EAST AFRICA COMPARATOR'
+        },
+        'Kenya': {
+          severity: 'MODERATE',
+          activeAlerts: 0,
+          subtitle: 'No active forced divestment mandates — Finance Bill 2024 policy volatility noted · monitoring Q1 2026',
+          primaryAlert: {
+            title: 'KENYA — REGULATORY ENVIRONMENT ASSESSMENT · Q1 2026',
+            tag: 'NO ACTIVE ALERT — MONITORING',
+            tagColor: '#2ecc71',
+            stats: [
+              { label: 'FDI RESTRICTION LEVEL', value: 'LOW', sub: 'Generally open regime. No active forced divestment mandates', color: '#2ecc71' },
+              { label: 'POLICY VOLATILITY INDEX', value: 'MODERATE', sub: 'Finance Bill 2024 withdrawal signals fiscal policy sensitivity', color: '#f5c842' },
+              { label: 'KES STABILITY (2024)', value: 'STABLE', sub: 'KES recovered from 2023 lows; CBK reserves improving', color: '#2ecc71' }
+            ],
+            leftTitle: 'SECTOR-SPECIFIC RESTRICTIONS',
+            leftItems: ['Media ownership: 20% foreign equity cap (Communications Act)', 'Land: Non-citizens restricted from freehold ownership', 'Healthcare: No foreign equity cap — open sector', 'Energy: IPP framework open to foreign ownership', 'Financial services: CBK approval required for >25% stake transfers'],
+            rightNotes: [
+              { color: '#f5c842', label: 'FINANCE BILL 2024 — POLICY RISK FLAG', text: 'The government\'s withdrawal of the Finance Bill 2024 following public protests demonstrated Kenya\'s exposure to politically-driven fiscal policy reversal. While investor-friendly on FDI, Kenya\'s policy environment carries meaningful volatility risk when fiscal pressures intensify — a signal AlgoEconomics monitors as a leading indicator for regulatory shift.' },
+              { color: '#2ecc71', label: 'INVESTOR PROTECTION FRAMEWORK', text: 'Kenya\'s Investment Promotion Act and bilateral investment treaties with UK, Netherlands, and Germany provide strong exit protection for qualifying investments. ICSID arbitration has been successfully invoked by foreign investors on multiple occasions, establishing credible deterrence against regulatory overreach.' },
+              { color: '#f5c842', label: 'WATCH: LOCAL CONTENT LEGISLATION', text: 'Sector-specific local content bills under parliamentary consideration in oil & gas and digital infrastructure. If enacted, these could introduce ownership transfer requirements similar to Nigeria\'s NUPRC framework. AlgoEconomics flagging as a Q2 2026 forward risk.' }
+            ],
+            intelligenceNote: `Kenya presents one of the cleaner exit risk profiles in East Africa. No active forced divestment mandates, open FX convertibility, and functioning secondary market mechanisms position it favourably relative to regional peers. The primary exit constraint for ${sector} sector investments is buyer pool depth — secondary market transactions above $50M USD require DFI or strategic buyer involvement, which can extend exit timelines. ERS classification reflects fundamentally achievable exits with appropriate structuring, rather than structural barriers.`
+          },
+          watchItems: [
+            { market: 'Tanzania', risk: 'ELEVATED', color: '#e67e22', note: 'Natural Wealth Act renegotiation precedent. Mining sector re-nationalisation risk.' },
+            { market: 'Rwanda', risk: 'LOW', color: '#2ecc71', note: 'Strongest FDI protection framework in East Africa. EAC comparable.' },
+            { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'CBN FX constraints. NUPRC local content complexity.' },
+            { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment mandate in 14 reserved sectors. EXIT-BLOCKED.' }
+          ],
+          watchLabel: 'EAST AFRICA REGULATORY RISK — COMPARATIVE TRACKER'
+        },
+        'Ghana': {
+          severity: 'MODERATE',
+          activeAlerts: 0,
+          subtitle: 'GIPC Act sector restrictions & GHS devaluation recovery — IMF programme stabilising exit conditions · Q1 2026',
+          primaryAlert: {
+            title: 'GHANA — GIPC ACT COMPLIANCE & GHS REPATRIATION FRAMEWORK · Q1 2026',
+            tag: 'MONITORING — MODERATE WATCH',
+            tagColor: '#f5c842',
+            stats: [
+              { label: 'GHS RECOVERY (2024)', value: 'PARTIAL', sub: 'GHS stabilised post-IMF programme; 55% devaluation since 2022 not recovered', color: '#f5c842' },
+              { label: 'GIPC SECTOR RESERVES', value: 'ACTIVE', sub: 'Retail trading &amp; certain services reserved for Ghanaians under GIPC Act', color: '#f5c842' },
+              { label: 'DEBT RESTRUCTURING', value: 'ONGOING', sub: 'DDEP domestic debt exchange completed; external restructuring in progress', color: '#e67e22' }
+            ],
+            leftTitle: 'GIPC ACT — RESERVED SECTOR FRAMEWORK',
+            leftItems: ['Retail trading (goods): Reserved for Ghanaian nationals', 'Taxis &amp; car hire below $1M threshold: Reserved', 'Lotteries &amp; pools: Restricted foreign participation', 'Beauty salons &amp; barbershops: Reserved for citizens', 'Healthcare &amp; pharmaceutical: Open — foreign investment permitted'],
+            rightNotes: [
+              { color: '#e67e22', label: 'DEBT EXCHANGE PROGRAMME IMPACT', text: 'Ghana\'s Domestic Debt Exchange Programme (DDEP) in 2023 restructured cedi-denominated government bonds, forcing haircuts on financial sector investors. This precedent of government-imposed restructuring elevated exit risk sub-indicators for financial and infrastructure sector investments across the ACI RF framework.' },
+              { color: '#f5c842', label: 'GHS DEVALUATION — REPATRIATION IMPACT', text: 'The cedi depreciated approximately 55% against USD between 2022 and end-2023 — one of the largest African currency shocks of the period. While the IMF $3B programme has stabilised the rate, the structural deficit financing dynamic persists. USD-denominated revenue streams or contractual FX protections are essential for exit value preservation.' },
+              { color: '#2ecc71', label: `HEALTHCARE SECTOR — OPEN FRAMEWORK`, text: `Ghana's healthcare sector has no foreign equity caps and benefits from active NHIA (National Health Insurance Authority) engagement with private sector providers. Exit routes via strategic trade sale to pan-African healthcare groups (e.g. Aga Khan Health, Helios) are credible. DFI investor base (IFC, DEG, Proparco) active in sector supports secondary market liquidity.` }
+            ],
+            intelligenceNote: `Ghana's exit risk profile for ${sector} sector is shaped primarily by FX dynamics rather than ownership restrictions. The GIPC Act reserved sectors do not affect healthcare or professional services — the primary exit constraint is GHS convertibility and the secondary market depth in a post-DDEP environment. IFC and DEG presence in Ghana's ${sector} sector creates a credible DFI exit pathway. ERS classification reflects achievable exits with FX protection structures, targeting a 5–7 year hold period aligned with IMF programme milestones.`
+          },
+          watchItems: [
+            { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'Deeper structural FX constraints. NUPRC local content layer adds complexity.' },
+            { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'Cleaner FX framework. Lower repatriation friction. ERS comparator.' },
+            { market: 'Egypt', risk: 'ELEVATED', color: '#e67e22', note: 'CBE repatriation history. Parallel devaluation trajectory to GHS.' },
+            { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment in 14 sectors. Contagion risk monitor active.' }
+          ],
+          watchLabel: 'WEST AFRICA FX & REGULATORY RISK — COMPARATIVE TRACKER'
+        },
+        'Rwanda': {
+          severity: 'LOW',
+          activeAlerts: 0,
+          subtitle: 'No active regulatory exit constraints — strongest FDI protection framework in East Africa · Q1 2026',
+          primaryAlert: {
+            title: 'RWANDA — REGULATORY EXIT ENVIRONMENT ASSESSMENT · Q1 2026',
+            tag: 'CLEAR — LOW RISK',
+            tagColor: '#2ecc71',
+            stats: [
+              { label: 'FDI PROTECTION RATING', value: 'STRONG', sub: 'Investment Code 2021 provides full repatriation rights', color: '#2ecc71' },
+              { label: 'RWF STABILITY (2024)', value: 'STABLE', sub: 'Managed float with low inflation; NBR reserves adequate', color: '#2ecc71' },
+              { label: 'FORCED DIVESTMENT RISK', value: 'NONE', sub: 'No active or proposed forced divestment mandates', color: '#2ecc71' }
+            ],
+            leftTitle: 'EXIT FRAMEWORK STRENGTHS',
+            leftItems: ['Investment Code 2021: Full capital &amp; profit repatriation rights guaranteed', 'No foreign equity caps in most sectors including ${sector}', 'ICSID arbitration access for qualifying foreign investors', 'Kigali International Financial Centre (KIFC) exit-facilitation framework', 'Double taxation treaties with 14 countries including UK &amp; Netherlands'],
+            rightNotes: [
+              { color: '#2ecc71', label: 'INVESTMENT CODE 2021', text: 'Rwanda\'s Investment Code guarantees full repatriation of profits, dividends, and capital proceeds with no waiting periods or volume restrictions. This represents the strongest statutory exit protection in East Africa and is a material differentiator in ERS scoring relative to peer markets.' },
+              { color: '#f5c842', label: 'MARKET SIZE CONSTRAINT', text: 'Rwanda\'s primary exit challenge is buyer pool depth, not regulatory restriction. Secondary market transactions above $30M USD face limited domestic buyer options, requiring strategic acquirer or DFI involvement. This is a liquidity constraint, not a governance failure — and is reflected in the ERS market liquidity component rather than the regulatory risk dimension.' },
+              { color: '#2ecc71', label: 'KIFC — EXIT FACILITATION INFRASTRUCTURE', text: 'The Kigali International Financial Centre provides a regulated framework specifically designed to facilitate foreign investor entry and exit, including special purpose vehicle structuring and cross-border capital movement. This institutional infrastructure is a genuine regional advantage.' }
+            ],
+            intelligenceNote: `Rwanda's regulatory exit environment is the cleanest in the AlgoEconomics coverage universe. No forced divestment mandates, no repatriation controls, and a statutory investment protection framework with genuine enforcement credibility. The ${sector} sector ERS score reflects this, with the primary constraint being buyer pool liquidity rather than regulatory friction. Exit architecture should focus on pre-identified strategic acquirer relationships and DFI secondary market positioning rather than regulatory mitigation instruments.`
+          },
+          watchItems: [
+            { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'Comparable framework. Finance Bill volatility the key differentiation.' },
+            { market: 'Tanzania', risk: 'ELEVATED', color: '#e67e22', note: 'Natural Wealth Act renegotiation risk. Acacia/Barrick precedent.' },
+            { market: 'Uganda', risk: 'MODERATE', color: '#f5c842', note: '1972 Amin expulsion historical context. Current FDI framework improved.' },
+            { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% divestment mandate. Adjacent contagion risk flagged.' }
+          ],
+          watchLabel: 'EAST AFRICA REGULATORY ENVIRONMENT — COMPARATIVE TRACKER'
+        },
+        'Tanzania': {
+          severity: 'ELEVATED',
+          activeAlerts: 1,
+          subtitle: 'Natural Wealth &amp; Resources Act renegotiation risk &amp; sector re-nationalisation precedent — Q1 2026',
+          primaryAlert: {
+            title: 'TANZANIA — NATURAL WEALTH &amp; RESOURCES ACT 2017 · ONGOING RISK',
+            tag: 'RENEGOTIATION RISK — ELEVATED',
+            tagColor: '#e67e22',
+            stats: [
+              { label: 'PRECEDENT EVENT', value: 'ACACIA', sub: '$300M settlement forced by government renegotiation of mining terms', color: '#e05252' },
+              { label: 'NWRA SCOPE', value: 'BROAD', sub: 'Covers all natural resources; state participation right up to 50%', color: '#e67e22' },
+              { label: 'CURRENT STATUS', value: 'ACTIVE', sub: 'NWRA remains in force; enforcement selective but credible', color: '#f5c842' }
+            ],
+            leftTitle: 'KEY REGULATORY EXIT CONSTRAINTS',
+            leftItems: ['NWRA: Government can claim up to 50% free-carried interest', 'Contract renegotiation right embedded in natural resources law', 'Mandatory local value addition requirements', 'Export restrictions on unprocessed natural resources', 'Approval required for foreign asset transfers in regulated sectors'],
+            rightNotes: [
+              { color: '#e05252', label: 'ACACIA MINING PRECEDENT — 2019', text: 'The Tanzanian government\'s forced renegotiation of Barrick Gold\'s Acacia Mining contracts in 2019 — resulting in a $300M settlement and 16% government stake — established that even large-scale investments with established legal protections are subject to executive renegotiation. This precedent elevated Tanzania\'s exit risk sub-indicators materially.' },
+              { color: '#f5c842', label: 'NWRA IMPLEMENTATION — SELECTIVE ENFORCEMENT', text: 'The Natural Wealth and Resources Act 2017 has been enforced selectively — primarily targeting large extractive projects. SME-scale investments and social infrastructure sectors (healthcare, education) have not been subject to NWRA enforcement to date. Sector risk profile varies significantly.' },
+              { color: '#e67e22', label: 'MAGUFULI TO HASSAN — POLICY CONTINUITY', text: 'President Hassan\'s administration has maintained NWRA provisions but adopted a more investor-friendly rhetorical posture than the Magufuli era. Practical enforcement has softened on new investments, but the legal framework creating renegotiation rights remains unchanged — the risk is structural, not merely political.' }
+            ],
+            intelligenceNote: `Tanzania's exit risk for ${sector} sector is materially shaped by the NWRA precedent, which created a credible government right to renegotiate commercial terms across natural resource and infrastructure investments. For ${sector} sector specifically, enforcement risk is ${sector === 'Energy' || sector === 'Agribusiness' ? 'directly applicable and must be contractually hedged' : 'lower than extractive sectors but the contagion risk from the Acacia precedent elevates general contract security concerns'}. Exit architecture must include political risk insurance, offshore SPV structuring, and pre-negotiated government buyout rights to ensure exit viability within a realistic hold period.`
+          },
+          watchItems: [
+            { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'Strong BIT framework. No equivalent re-nationalisation precedent.' },
+            { market: 'Rwanda', risk: 'LOW', color: '#2ecc71', note: 'Cleanest regulatory exit environment in EAC.' },
+            { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment mandate in 14 sectors.' },
+            { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'PIA renegotiation history. CBN FX constraints layer.' }
+          ],
+          watchLabel: 'EAST AFRICA RENEGOTIATION RISK — COMPARATIVE TRACKER'
+        },
+        'South Africa': {
+          severity: 'MODERATE',
+          activeAlerts: 1,
+          subtitle: 'B-BBEE equity ownership requirements &amp; Mining Charter III compliance — active monitoring Q1 2026',
+          primaryAlert: {
+            title: 'SOUTH AFRICA — B-BBEE EQUITY TRANSFER REQUIREMENTS · ONGOING',
+            tag: 'EQUITY COMPLIANCE — MODERATE',
+            tagColor: '#f5c842',
+            stats: [
+              { label: 'MINING CHARTER III', value: '30%', sub: 'Minimum Black ownership required in new mining rights', color: '#f5c842' },
+              { label: 'B-BBEE IMPACT ON EXITS', value: 'ACTIVE', sub: 'B-BBEE compliance status affects secondary sale buyer eligibility', color: '#f5c842' },
+              { label: 'BUYER POOL CONSTRAINT', value: 'MODERATE', sub: 'Qualifying B-BBEE buyers with capital capacity are limited', color: '#f5c842' }
+            ],
+            leftTitle: 'B-BBEE EXIT IMPACT BY SECTOR',
+            leftItems: ['Mining: 30% Black ownership (Mining Charter III mandatory)', 'Financial services: FSC scorecard compliance required', 'Healthcare: B-BBEE preferred but not mandatory ownership transfer', 'Energy (REIPPP): Local content &amp; community ownership mandatory', 'Telecoms: ICASA licence B-BBEE compliance conditions'],
+            rightNotes: [
+              { color: '#f5c842', label: 'B-BBEE BUYER POOL DEPTH', text: 'South Africa\'s B-BBEE framework creates a structural constraint on secondary market exits: qualifying buyers must meet B-BBEE ownership thresholds, which materially limits the eligible buyer universe for mining, energy, and financial services assets. This buyer pool constraint extends exit timelines relative to other markets and is captured in the ERS market liquidity component.' },
+              { color: '#e67e22', label: 'MINING CHARTER III — COMPLIANCE MECHANISM', text: 'Mining Charter III requires 30% Black ownership for new mining rights, with existing rights subject to compliance renewal on ownership structure. Exit transactions in the mining sector require DMR approval and must maintain compliance with the 30% threshold, creating complexity for partial divestments or secondary sales to non-qualifying buyers.' },
+              { color: '#2ecc71', label: 'INSTITUTIONAL FRAMEWORK STRENGTH', text: 'South Africa\'s institutional exit infrastructure — JSE, sophisticated legal framework, functional courts, and established M&amp;A advisory market — remains the strongest in sub-Saharan Africa. B-BBEE compliance adds cost and complexity, but does not represent a fundamental barrier to exit for well-structured investments with appropriate ownership planning from entry.' }
+            ],
+            intelligenceNote: `South Africa's exit complexity is structurally different from other covered markets — the primary constraint is not currency risk or forced divestment, but B-BBEE compliance cost and buyer pool limitation. For ${sector} sector, B-BBEE impact ${sector === 'Mining' || sector === 'Energy' ? 'is directly material: mandatory ownership thresholds restrict eligible secondary buyers and require DMR/NERSA approval' : 'is indirect but present: preferred supplier status and licensing renewal conditions create soft compliance requirements that affect asset marketability'}. South Africa's institutional quality means exits are achievable — but B-BBEE compliance architecture must be planned at the investment structuring stage, not at exit.`
+          },
+          watchItems: [
+            { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment mandate. Adjacent market contagion watch.' },
+            { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'CAMA local content. CBN FX constraints layer.' },
+            { market: 'Kenya', risk: 'LOW', color: '#2ecc71', note: 'Open FDI framework. Strong BIT protection.' },
+            { market: 'Rwanda', risk: 'LOW', color: '#2ecc71', note: 'Best-in-class investor exit protections in East Africa.' }
+          ],
+          watchLabel: 'OWNERSHIP COMPLIANCE RISK — SOUTHERN AFRICA TRACKER'
+        },
+        'Morocco': {
+          severity: 'LOW',
+          activeAlerts: 0,
+          subtitle: 'Stable exit environment — Investment Charter reforms 2022 strengthening FDI protections · Q1 2026',
+          primaryAlert: {
+            title: 'MOROCCO — INVESTMENT CHARTER FRAMEWORK &amp; EXIT ENVIRONMENT · Q1 2026',
+            tag: 'STABLE — LOW RISK',
+            tagColor: '#2ecc71',
+            stats: [
+              { label: 'INVESTMENT CHARTER', value: '2022', sub: 'New framework provides enhanced FDI protections &amp; repatriation rights', color: '#2ecc71' },
+              { label: 'MAD STABILITY', value: 'STABLE', sub: 'BAM managed float vs EUR/USD basket. Low devaluation risk', color: '#2ecc71' },
+              { label: 'FORCED DIVESTMENT RISK', value: 'NONE', sub: 'No active or proposed forced ownership transfer requirements', color: '#2ecc71' }
+            ],
+            leftTitle: 'EXIT FRAMEWORK STRENGTHS',
+            leftItems: ['Investment Charter 2022: Full profit &amp; capital repatriation guaranteed', 'No foreign equity caps in ${sector} sector', 'MAD convertibility for current account transactions maintained', 'Office des Changes approval for capital account transactions', 'Association Agreement with EU provides international arbitration access'],
+            rightNotes: [
+              { color: '#2ecc71', label: 'INVESTMENT CHARTER 2022 — REFORM IMPACT', text: 'Morocco\'s Investment Charter adopted in 2022 replaced the 1995 framework with enhanced investor protections including streamlined approval processes, explicit non-discrimination guarantees, and strengthened capital repatriation rights. The reforms were specifically designed to address prior friction points identified by institutional investors.' },
+              { color: '#f5c842', label: 'OFFICE DES CHANGES — CAPITAL ACCOUNT CONTROLS', text: 'While current account transactions (dividends, operating income repatriation) are freely convertible, capital account transactions above certain thresholds require Office des Changes authorisation. This administrative requirement adds process friction to exit transactions but does not represent a substantive barrier — approval is routinely granted for qualifying foreign investments.' },
+              { color: '#2ecc71', label: 'REGIONAL HUB ADVANTAGE', text: 'Morocco\'s positioning as a regional financial hub — with the Casablanca Finance City providing a regulated framework for African investment holding structures — creates unique exit optionality. Assets can be structured through CFC-domiciled vehicles to facilitate secondary sales to pan-African investors with access to CFC\'s institutional buyer network.' }
+            ],
+            intelligenceNote: `Morocco presents one of the most favourable exit environments in AlgoEconomics' coverage universe, alongside Rwanda. The primary exit constraint for ${sector} sector is buyer pool depth in the secondary market — Morocco's private equity ecosystem is developing but not yet at the scale of South Africa or Kenya. The Casablanca Finance City's institutional infrastructure provides a partial solution via structured vehicle frameworks. Exit architecture should leverage CFC domicile structures and target European or pan-African strategic acquirers as the primary exit route.`
+          },
+          watchItems: [
+            { market: 'Egypt', risk: 'ELEVATED', color: '#e67e22', note: 'CBE repatriation constraints. North Africa regional comparator.' },
+            { market: 'Tunisia', risk: 'ELEVATED', color: '#e67e22', note: 'Political instability post-2021. BCT FX controls tightened.' },
+            { market: 'Nigeria', risk: 'ELEVATED', color: '#e67e22', note: 'CBN FX unification. NUPRC local content complexity.' },
+            { market: 'Zimbabwe', risk: 'CRITICAL', color: '#e05252', note: 'Dec 2025: 75% forced divestment mandate. Global Africa exit risk signal.' }
+          ],
+          watchLabel: 'NORTH AFRICA &amp; GLOBAL EXIT RISK — COMPARATIVE TRACKER'
+        }
+      };
+      return alerts[market] || alerts['Kenya'];
+    }
+
+    function renderAlertContent(alertData, acColor) {
+      const a = alertData.primaryAlert;
+      const pulseColor = alertData.severity === 'CRITICAL' ? '#e05252' : alertData.severity === 'ELEVATED' ? '#e67e22' : alertData.severity === 'MODERATE' ? '#f5c842' : '#2ecc71';
+      const hasActiveAlert = alertData.activeAlerts > 0;
+
+      let html = `
     <div style="background:#0d0800; border:1px solid ${pulseColor}33; border-radius:5px; padding:14px; margin-bottom:16px; display:flex; gap:10px; align-items:flex-start;">
       <div style="font-size:18px; margin-top:1px;">${hasActiveAlert ? '⚠' : '◈'}</div>
       <div>
@@ -931,20 +1820,20 @@ function renderAlertContent(alertData, acColor) {
         <div style="background:#080d1a; border:1px solid #1e2840; border-radius:4px; padding:10px;">
           <div style="font-size:11px; color:#c8d0e0; font-weight:700; margin-bottom:4px;">${w.market}</div>
           <div style="font-size:10px; font-weight:700; color:${w.color}; margin-bottom:6px; letter-spacing:0.06em;">${w.risk}</div>
-          <div style="height:2px; background:#1e2840; border-radius:1px; margin-bottom:6px;"><div style="height:2px; background:${w.color}; width:${w.risk==='LOW'?'15%':w.risk==='LOW-MOD'?'30%':w.risk==='MODERATE'?'50%':w.risk==='ELEVATED'?'70%':'90%'}; border-radius:1px;"></div></div>
+          <div style="height:2px; background:#1e2840; border-radius:1px; margin-bottom:6px;"><div style="height:2px; background:${w.color}; width:${w.risk === 'LOW' ? '15%' : w.risk === 'LOW-MOD' ? '30%' : w.risk === 'MODERATE' ? '50%' : w.risk === 'ELEVATED' ? '70%' : '90%'}; border-radius:1px;"></div></div>
           <p style="font-size:10px; color:#4a5878; line-height:1.5; margin:0;">${w.note}</p>
         </div>`).join('')}
       </div>
     </div>`;
-  return html;
-}
+      return html;
+    }
 
-function renderExit(market, sector, aci, ers, ersCat) {
-  const ersC = ersColor(ers);
-  const comp = getERSComponents(market, sector, ers);
+    function renderExit(market, sector, aci, ers, ersCat) {
+      const ersC = ersColor(ers);
+      const comp = getERSComponents(market, sector, ers);
 
-  // ── HEADER ──
-  let html = `
+      // ── HEADER ──
+      let html = `
     <div style="margin-bottom:24px;">
       <div style="font-size:10px; letter-spacing:0.12em; color:#c471ed; text-transform:uppercase; margin-bottom:6px;">◎ EXIT INTELLIGENCE MODULE · ERS</div>
       <h2 style="font-size:20px; font-weight:700; color:#e8eaf6; margin:0 0 4px;">${market} · ${sector} Sector · Exit Intelligence</h2>
@@ -998,7 +1887,7 @@ function renderExit(market, sector, aci, ers, ersCat) {
     <div style="margin-bottom:24px;">
       <div style="font-size:10px; letter-spacing:0.1em; color:#4a5878; text-transform:uppercase; margin-bottom:10px;">ERS SCORE SCALE & LABELS</div>
       <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px;">
-        ${[['0–20','EXIT-BLOCKED','#e05252'],['21–40','EXIT-DIFFICULT','#e67e22'],['41–65','EXIT-CONSTRAINED','#f5c842'],['66–80','EXIT-CAPABLE','#2ecc71'],['81–100','EXIT-READY','#00bcd4']].map(([r,l,c]) => `
+        ${[['0–20', 'EXIT-BLOCKED', '#e05252'], ['21–40', 'EXIT-DIFFICULT', '#e67e22'], ['41–65', 'EXIT-CONSTRAINED', '#f5c842'], ['66–80', 'EXIT-CAPABLE', '#2ecc71'], ['81–100', 'EXIT-READY', '#00bcd4']].map(([r, l, c]) => `
         <div style="background:#0d1526; border:1px solid ${ers >= parseInt(r) && ers <= parseInt(r.split('–')[1]) ? c : '#1e2840'}; border-radius:4px; padding:10px; text-align:center;">
           <div style="font-size:16px; font-weight:800; color:${c};">${r}</div>
           <div style="font-size:9px; color:${c}; letter-spacing:0.08em; margin-top:3px;">${l}</div>
@@ -1006,8 +1895,8 @@ function renderExit(market, sector, aci, ers, ersCat) {
       </div>
     </div>`;
 
-  // ── COMPONENT 1: EXIT ROUTE ANALYSIS ──
-  html += `
+      // ── COMPONENT 1: EXIT ROUTE ANALYSIS ──
+      html += `
     <div style="border:1px solid #1e2840; border-radius:6px; overflow:hidden; margin-bottom:16px;">
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
@@ -1028,14 +1917,14 @@ function renderExit(market, sector, aci, ers, ersCat) {
           <div style="font-size:12px; color:#c8d0e0; font-weight:600; margin-bottom:8px;">${r.name}</div>
           <div style="font-size:22px; font-weight:800; color:${ersColor(r.score * 10)};">${r.score}</div>
           <div style="font-size:9px; color:#4a5878; margin-top:2px;">/10</div>
-          <div style="margin-top:6px; height:3px; background:#1e2840; border-radius:2px;"><div style="height:3px; background:${ersColor(r.score*10)}; width:${r.score*10}%; border-radius:2px;"></div></div>
+          <div style="margin-top:6px; height:3px; background:#1e2840; border-radius:2px;"><div style="height:3px; background:${ersColor(r.score * 10)}; width:${r.score * 10}%; border-radius:2px;"></div></div>
           <div style="font-size:10px; color:#8899bb; margin-top:6px;">${r.note}</div>
         </div>`).join('')}
       </div>
     </div>`;
 
-  // ── COMPONENT 2: IRR BENCHMARKING ──
-  html += `
+      // ── COMPONENT 2: IRR BENCHMARKING ──
+      html += `
     <div style="border:1px solid #1e2840; border-radius:6px; overflow:hidden; margin-bottom:16px;">
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
@@ -1065,8 +1954,8 @@ function renderExit(market, sector, aci, ers, ersCat) {
       </div>
     </div>`;
 
-  // ── COMPONENT 3: CAPITAL REPATRIATION ──
-  html += `
+      // ── COMPONENT 3: CAPITAL REPATRIATION ──
+      html += `
     <div style="border:1px solid #1e2840; border-radius:6px; overflow:hidden; margin-bottom:16px;">
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
@@ -1100,8 +1989,8 @@ function renderExit(market, sector, aci, ers, ersCat) {
       </div>
     </div>`;
 
-  // ── COMPONENT 4: MARKET LIQUIDITY DEPTH ──
-  html += `
+      // ── COMPONENT 4: MARKET LIQUIDITY DEPTH ──
+      html += `
     <div style="border:1px solid #1e2840; border-radius:6px; overflow:hidden; margin-bottom:16px;">
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
@@ -1139,8 +2028,8 @@ function renderExit(market, sector, aci, ers, ersCat) {
       </div>
     </div>`;
 
-  // ── COMPONENT 5: EXIT TIMELINE PROBABILITY ──
-  html += `
+      // ── COMPONENT 5: EXIT TIMELINE PROBABILITY ──
+      html += `
     <div style="border:1px solid #1e2840; border-radius:6px; overflow:hidden; margin-bottom:16px;">
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
@@ -1156,8 +2045,8 @@ function renderExit(market, sector, aci, ers, ersCat) {
       </div>
       <div class="comp-body" style="padding:18px;">
         <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1px solid #1e2840; border-radius:5px; overflow:hidden; margin-bottom:12px;">
-          ${comp.timeline.map((t,i) => `
-          <div style="padding:20px; text-align:center; ${i<3?'border-right:1px solid #1e2840;':''}">
+          ${comp.timeline.map((t, i) => `
+          <div style="padding:20px; text-align:center; ${i < 3 ? 'border-right:1px solid #1e2840;' : ''}">
             <div style="font-size:10px; color:#4a5878; letter-spacing:0.08em; margin-bottom:8px;">${t.years}</div>
             <div style="font-size:36px; font-weight:900; color:${t.color};">${t.prob}%</div>
             <div style="font-size:10px; color:#8899bb; margin-top:6px;">${t.route}</div>
@@ -1171,18 +2060,18 @@ function renderExit(market, sector, aci, ers, ersCat) {
 
 
 
-  // ── DATA SOURCES ──
-  html += `
+      // ── DATA SOURCES ──
+      html += `
     <div style="margin-bottom:20px;">
       <div style="font-size:10px; letter-spacing:0.1em; color:#4a5878; text-transform:uppercase; margin-bottom:12px;">DATA SOURCES — EXIT INTELLIGENCE MODULE</div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
         ${[
-          {code:'IFC', name:'IFC Annual Reports + Portfolio Data', desc:'IRR benchmarking from verified emerging market transactions. 15-year dataset across 40+ African markets.', tag:'→ IRR BENCHMARKING (Component 2)'},
-          {code:'CDC', name:'CDC Group / British International Investment', desc:'UK DFI portfolio exits. Directly relevant to UK investor corridor. Transaction-level data.', tag:'→ IRR BENCHMARKING + EXIT ROUTE (Components 1, 2)'},
-          {code:'AfDB', name:'African Development Bank Deal Register', desc:'M&A activity across 54 African markets. Deal velocity and acquirer pool data.', tag:'→ MARKET LIQUIDITY DEPTH (Component 4)'},
-          {code:'IMF', name:'IMF Article IV Reports + FX Data', desc:'Capital controls history, FX reserve adequacy, currency convertibility framework.', tag:'→ CAPITAL REPATRIATION SCORE (Component 3)'},
-          {code:'BIT', name:'UNCTAD Bilateral Investment Treaties Database', desc:'UK-Africa BIT network. Treaty protections for dividend repatriation and expropriation.', tag:'→ CAPITAL REPATRIATION SCORE (Component 3)'},
-          {code:'NGX', name:'NSE / NGX / JSE Exchange Data', desc:'Market depth, daily volume, listed company data, IPO pipeline. Real-time where available.', tag:'→ MARKET LIQUIDITY DEPTH (Component 4)'},
+          { code: 'IFC', name: 'IFC Annual Reports + Portfolio Data', desc: 'IRR benchmarking from verified emerging market transactions. 15-year dataset across 40+ African markets.', tag: '→ IRR BENCHMARKING (Component 2)' },
+          { code: 'CDC', name: 'CDC Group / British International Investment', desc: 'UK DFI portfolio exits. Directly relevant to UK investor corridor. Transaction-level data.', tag: '→ IRR BENCHMARKING + EXIT ROUTE (Components 1, 2)' },
+          { code: 'AfDB', name: 'African Development Bank Deal Register', desc: 'M&A activity across 54 African markets. Deal velocity and acquirer pool data.', tag: '→ MARKET LIQUIDITY DEPTH (Component 4)' },
+          { code: 'IMF', name: 'IMF Article IV Reports + FX Data', desc: 'Capital controls history, FX reserve adequacy, currency convertibility framework.', tag: '→ CAPITAL REPATRIATION SCORE (Component 3)' },
+          { code: 'BIT', name: 'UNCTAD Bilateral Investment Treaties Database', desc: 'UK-Africa BIT network. Treaty protections for dividend repatriation and expropriation.', tag: '→ CAPITAL REPATRIATION SCORE (Component 3)' },
+          { code: 'NGX', name: 'NSE / NGX / JSE Exchange Data', desc: 'Market depth, daily volume, listed company data, IPO pipeline. Real-time where available.', tag: '→ MARKET LIQUIDITY DEPTH (Component 4)' },
         ].map(s => `
         <div style="background:#080d1a; border:1px solid #1e2840; border-radius:5px; padding:14px; display:flex; gap:12px;">
           <div style="background:#1a1a3a; color:#c471ed; font-size:10px; font-weight:700; padding:4px 8px; border-radius:3px; height:fit-content; white-space:nowrap;">${s.code}</div>
@@ -1195,12 +2084,12 @@ function renderExit(market, sector, aci, ers, ersCat) {
       </div>
     </div>`;
 
-  // ── REGULATORY EXIT RISK MONITOR ──
-  const alertData = getMarketAlerts(market, sector);
-  const alertBorderColor = alertData.severity === 'CRITICAL' ? '#e05252' : alertData.severity === 'ELEVATED' ? '#e67e22' : alertData.severity === 'MODERATE' ? '#f5c842' : '#2ecc71';
-  const alertBgColor = alertData.severity === 'CRITICAL' ? '#130000' : alertData.severity === 'ELEVATED' ? '#130a00' : alertData.severity === 'MODERATE' ? '#131000' : '#001a0a';
-  const alertCountLabel = alertData.activeAlerts > 0 ? `${alertData.activeAlerts} ACTIVE ALERT${alertData.activeAlerts > 1 ? 'S' : ''}` : 'MONITORING';
-  html += `
+      // ── REGULATORY EXIT RISK MONITOR ──
+      const alertData = getMarketAlerts(market, sector);
+      const alertBorderColor = alertData.severity === 'CRITICAL' ? '#e05252' : alertData.severity === 'ELEVATED' ? '#e67e22' : alertData.severity === 'MODERATE' ? '#f5c842' : '#2ecc71';
+      const alertBgColor = alertData.severity === 'CRITICAL' ? '#130000' : alertData.severity === 'ELEVATED' ? '#130a00' : alertData.severity === 'MODERATE' ? '#131000' : '#001a0a';
+      const alertCountLabel = alertData.activeAlerts > 0 ? `${alertData.activeAlerts} ACTIVE ALERT${alertData.activeAlerts > 1 ? 'S' : ''}` : 'MONITORING';
+      html += `
     <div style="border:1px solid ${alertBorderColor}44; border-left:3px solid ${alertBorderColor}; border-radius:6px; overflow:hidden; margin-bottom:16px;">
       <div style="background:${alertBgColor}; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
@@ -1221,15 +2110,15 @@ function renderExit(market, sector, aci, ers, ersCat) {
       </div>
     </div>`;
 
-  // ── CONCLUSION ──
-  html += `
+      // ── CONCLUSION ──
+      html += `
     <div style="background:#080d1a; border:1px solid #1e3050; border-left:3px solid #c471ed; border-radius:6px; padding:20px;">
       <div style="font-size:10px; letter-spacing:0.12em; color:#c471ed; text-transform:uppercase; margin-bottom:10px;">ALGOECONOMICS — EXIT INTELLIGENCE CONCLUSION</div>
       <p style="color:#c8d0e0; font-size:13px; line-height:1.7; margin:0;">${comp.conclusion}</p>
     </div>`;
 
-  // ── EXIT ARCHITECTURE ──
-  html += `
+      // ── EXIT ARCHITECTURE ──
+      html += `
     <div style="margin-top:16px;">
       <div style="background:#0a0f1e; border:1px solid #1e2840; border-radius:6px; padding:18px;">
         <h3 style="font-size:13px; font-weight:700; color:#f5c842; letter-spacing:0.06em; margin:0 0 12px;">RECOMMENDED EXIT ARCHITECTURE</h3>
@@ -1239,14 +2128,14 @@ function renderExit(market, sector, aci, ers, ersCat) {
       </div>
     </div>`;
 
-  document.getElementById('exit-content').innerHTML = html;
-}
+      document.getElementById('exit-content').innerHTML = html;
+    }
 
-// ============================================================
-// RENDER STRATEGIC ADVISORY
-// ============================================================
-function renderAdvisory(market, sector, aci, aciCat, ers, ersCat) {
-  let html = `
+    // ============================================================
+    // RENDER STRATEGIC ADVISORY
+    // ============================================================
+    function renderAdvisory(market, sector, aci, aciCat, ers, ersCat) {
+      let html = `
     <div class="advisory-header">
       <div class="tag">→ STRATEGIC ADVISORY · ACI + ERS CONCLUSION</div>
       <h2>${market} · ${sector} Sector · Investment Thesis</h2>
@@ -1270,268 +2159,308 @@ function renderAdvisory(market, sector, aci, aciCat, ers, ersCat) {
     <div style="margin-bottom:12px; font-size:12px; color:#8899bb; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;">How Comparable Markets Have Structured Similar Risks</div>
     <div class="comparables">`;
 
-  const comps = getComparables(market);
-  comps.forEach(c => {
-    html += `
+      const comps = getComparables(market);
+      comps.forEach(c => {
+        html += `
       <div class="comparable">
         <div class="comp-tag">${c.code} · ACI ${c.aci}</div>
         <div class="comp-name">${c.name}</div>
         <div class="comp-aci">${c.label}</div>
         <p>${c.desc}</p>
       </div>`;
-  });
+      });
 
-  html += `</div>`;
-  document.getElementById('advisory-content').innerHTML = html;
-}
+      html += `</div>`;
+      document.getElementById('advisory-content').innerHTML = html;
+    }
 
-// ============================================================
-// PANEL NAVIGATION
-// ============================================================
-function toggleComp(header) {
-  const body = header.nextElementSibling;
-  const isHidden = body.style.display === 'none';
-  body.style.display = isHidden ? '' : 'none';
-  header.querySelector('span:last-child').textContent = isHidden ? '▲' : '▼';
-}
+    // ============================================================
+    // MOBILE MENU TOGGLE
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.getElementById('menuToggle');
+      const sidebarOverlay = document.getElementById('sidebarOverlay');
+      const body = document.body;
 
-function showPanel(name) {
-  ['overview','heatmap','aci','exit','advisory'].forEach(p => {
-    document.getElementById(`panel-${p}`).classList.remove('active');
-    document.getElementById(`nav-${p}`)?.classList.remove('active');
-  });
-  document.getElementById(`panel-${name}`).classList.add('active');
-  document.getElementById(`nav-${name}`)?.classList.add('active');
-}
+      if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+          body.classList.toggle('sidebar-open');
+        });
+      }
 
-// ============================================================
-// DATA HELPERS
-// ============================================================
-function getACIFactors(market, sector, aci) {
-  const isNigeria = market === 'Nigeria';
-  const isHighRisk = aci >= 75;
-  const base = isHighRisk ? 1.5 : aci >= 65 ? 3.5 : aci >= 50 ? 5.5 : 7;
+      if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', () => {
+          body.classList.remove('sidebar-open');
+        });
+      }
 
-  const vary = (b, range) => Math.max(1, Math.min(10, parseFloat((b + (Math.random()-0.5)*range).toFixed(1))));
+      // Close sidebar when clicking a panel link on mobile
+      const navItems = document.querySelectorAll('.sidebar-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            body.classList.remove('sidebar-open');
+          }
+        });
+      });
+    });
 
-  return { pillars: [
-    { name: 'Policy & Regulatory Risk', desc: 'Factors 1–3 · Highest investor weight · 45% composite', factors: [
-      { code:'RF01', name:'Ease of Market Entry', desc:'Licensing, procurement, tendering, legal frameworks', score:vary(base,1.5), conf:'0.67' },
-      { code:'RF02', name:'Clarity of Investment Priorities', desc:'Government plans, strategy alignment, priority signals', score:vary(base,1.5), conf:'0.69' },
-      { code:'RF03', name:'Certainty of Cash Flow', desc:'Cost recovery, payment discipline, off-taker reliability', score:vary(base,1.8), conf:'0.68' },
-    ]},
-    { name: 'Sector Context Risk', desc: 'Factors 4–6 · Market opportunity signal · 24% composite', factors: [
-      { code:'RF04', name:'Sectoral Track Record', desc:'Historical precedent, comparable transactions', score:vary(base+1,1.5), conf:'0.78' },
-      { code:'RF05', name:'Demand Fundamentals', desc:'Market size, growth trajectory, structural need', score:vary(base+2,1.2), conf:'0.82' },
-      { code:'RF06', name:'SOE Exposure', desc:'State-owned enterprise risk, off-taker dependency', score:vary(base,1.8), conf:'0.71' },
-    ]},
-    { name: 'Execution & Institutional Risk', desc: 'Factors 7–10 · Operational friction · 31% composite', factors: [
-      { code:'RF07', name:'Regulatory Predictability', desc:'Rule consistency, regulatory body independence', score:vary(base,1.5), conf:'0.73' },
-      { code:'RF08', name:'Administrative Efficiency', desc:'Permit timelines, bureaucratic friction', score:vary(base,2), conf:'0.65' },
-      { code:'RF09', name:'FX Allocation & Liquidity', desc:'Central bank FX access, backlog, convertibility', score:vary(base-0.5,1.5), conf:'0.72' },
-      { code:'RF10', name:'Political Stability', desc:'Election risk, policy continuity, institutional strength', score:vary(base,1.8), conf:'0.70' },
-    ]},
-  ]};
-}
+    // ============================================================
+    // PANEL NAVIGATION
+    // ============================================================
+    function toggleComp(header) {
+      const body = header.nextElementSibling;
+      const isHidden = body.style.display === 'none';
+      body.style.display = isHidden ? '' : 'none';
+      header.querySelector('span:last-child').textContent = isHidden ? '▲' : '▼';
+    }
 
-function ersLabel(score) {
-  if (score >= 66) return 'EXIT-CAPABLE';
-  if (score >= 41) return 'CONSTRAINED';
-  if (score >= 21) return 'EXIT-DIFFICULT';
-  return 'EXIT-BLOCKED';
-}
+    function showPanel(name) {
+      ['overview', 'heatmap', 'aci', 'exit', 'advisory'].forEach(p => {
+        document.getElementById(`panel-${p}`).classList.remove('active');
+        document.getElementById(`nav-${p}`)?.classList.remove('active');
+      });
+      document.getElementById(`panel-${name}`).classList.add('active');
+      document.getElementById(`nav-${name}`)?.classList.add('active');
+    }
 
-function getERSComponents(market, sector, ers) {
-  const isNigeria = market === 'Nigeria' && sector === 'Energy';
-  const isGhana   = market === 'Ghana'   && sector === 'Energy';
-  const clamp = (v, min=1, max=100) => Math.max(min, Math.min(max, Math.round(v)));
-  const vary = (base, range) => clamp(base + (Math.random()-0.5)*range);
+    // ============================================================
+    // DATA HELPERS
+    // ============================================================
+    function getACIFactors(market, sector, aci) {
+      const isNigeria = market === 'Nigeria';
+      const isHighRisk = aci >= 75;
+      const base = isHighRisk ? 1.5 : aci >= 65 ? 3.5 : aci >= 50 ? 5.5 : 7;
 
-  // Component scores (0-100 scale)
-  const c1 = isNigeria ? 42 : isGhana ? 55 : clamp(ers * 0.9 + (Math.random()-0.5)*10);
-  const c2 = isNigeria ? 61 : isGhana ? 68 : clamp(ers * 1.4 + (Math.random()-0.5)*12);
-  const c3 = isNigeria ? 28 : isGhana ? 38 : clamp(ers * 0.7 + (Math.random()-0.5)*8);
-  const c4 = isNigeria ? 35 : isGhana ? 48 : clamp(ers * 0.85 + (Math.random()-0.5)*10);
-  const c5 = isNigeria ? 44 : isGhana ? 52 : clamp(ers * 1.0 + (Math.random()-0.5)*10);
+      const vary = (b, range) => Math.max(1, Math.min(10, parseFloat((b + (Math.random() - 0.5) * range).toFixed(1))));
 
-  const components = [
-    { shortName:'Exit Route Analysis', score:c1, weight:'35%' },
-    { shortName:'IRR Benchmarking',    score:c2, weight:'15%' },
-    { shortName:'Capital Repatriation',score:c3, weight:'25%' },
-    { shortName:'Market Liquidity',    score:c4, weight:'25%' },
-    { shortName:'Exit Timeline Prob.', score:c5, weight:'5%'  },
-  ];
+      return {
+        pillars: [
+          {
+            name: 'Policy & Regulatory Risk', desc: 'Factors 1–3 · Highest investor weight · 45% composite', factors: [
+              { code: 'RF01', name: 'Ease of Market Entry', desc: 'Licensing, procurement, tendering, legal frameworks', score: vary(base, 1.5), conf: '0.67' },
+              { code: 'RF02', name: 'Clarity of Investment Priorities', desc: 'Government plans, strategy alignment, priority signals', score: vary(base, 1.5), conf: '0.69' },
+              { code: 'RF03', name: 'Certainty of Cash Flow', desc: 'Cost recovery, payment discipline, off-taker reliability', score: vary(base, 1.8), conf: '0.68' },
+            ]
+          },
+          {
+            name: 'Sector Context Risk', desc: 'Factors 4–6 · Market opportunity signal · 24% composite', factors: [
+              { code: 'RF04', name: 'Sectoral Track Record', desc: 'Historical precedent, comparable transactions', score: vary(base + 1, 1.5), conf: '0.78' },
+              { code: 'RF05', name: 'Demand Fundamentals', desc: 'Market size, growth trajectory, structural need', score: vary(base + 2, 1.2), conf: '0.82' },
+              { code: 'RF06', name: 'SOE Exposure', desc: 'State-owned enterprise risk, off-taker dependency', score: vary(base, 1.8), conf: '0.71' },
+            ]
+          },
+          {
+            name: 'Execution & Institutional Risk', desc: 'Factors 7–10 · Operational friction · 31% composite', factors: [
+              { code: 'RF07', name: 'Regulatory Predictability', desc: 'Rule consistency, regulatory body independence', score: vary(base, 1.5), conf: '0.73' },
+              { code: 'RF08', name: 'Administrative Efficiency', desc: 'Permit timelines, bureaucratic friction', score: vary(base, 2), conf: '0.65' },
+              { code: 'RF09', name: 'FX Allocation & Liquidity', desc: 'Central bank FX access, backlog, convertibility', score: vary(base - 0.5, 1.5), conf: '0.72' },
+              { code: 'RF10', name: 'Political Stability', desc: 'Election risk, policy continuity, institutional strength', score: vary(base, 1.8), conf: '0.70' },
+            ]
+          },
+        ]
+      };
+    }
 
-  // Exit Routes (Component 1)
-  const exitRoutes = isNigeria ? [
-    { code:'ER1', name:'DFI Secondary Sale', score:6.8, note:'Most viable route. BII/IFC active buyers for structured energy assets.' },
-    { code:'ER2', name:'Trade Sale to Strategic', score:4.2, note:'Limited pool. International energy majors cautious on Nigeria.' },
-    { code:'ER3', name:'NGX Listing (IPO)', score:2.8, note:'Exchange underdeveloped for energy. 0 confirmed IPO pipeline.' },
-    { code:'ER4', name:'Secondary PE Sale', score:4.5, note:'Regional PE funds active but thin above $300M asset size.' },
-  ] : isGhana ? [
-    { code:'ER1', name:'DFI Secondary Sale', score:7.2, note:'IFC and BII active. Ghana energy reform creates viable pipeline.' },
-    { code:'ER2', name:'Trade Sale to Strategic', score:5.8, note:'Regional buyers present. ECOWAS corridor creates strategic appetite.' },
-    { code:'ER3', name:'GSE Listing (IPO)', score:3.5, note:'Exchange improving but limited depth for large energy assets.' },
-    { code:'ER4', name:'Secondary PE Sale', score:5.2, note:'West Africa PE market more developed than Nigeria for exits.' },
-  ] : [
-    { code:'ER1', name:'DFI Secondary Sale', score:parseFloat((ers/13).toFixed(1)), note:'DFI appetite depends on market governance and deal structure.' },
-    { code:'ER2', name:'Trade Sale to Strategic', score:parseFloat((ers/14).toFixed(1)), note:'Strategic buyer pool varies by sector and corridor access.' },
-    { code:'ER3', name:'Local Exchange Listing', score:parseFloat((ers/20).toFixed(1)), note:'Exchange depth and IPO pipeline determine viability.' },
-    { code:'ER4', name:'Secondary PE Sale', score:parseFloat((ers/15).toFixed(1)), note:'Regional PE fund appetite active across most SSA markets.' },
-  ];
+    function ersLabel(score) {
+      if (score >= 66) return 'EXIT-CAPABLE';
+      if (score >= 41) return 'CONSTRAINED';
+      if (score >= 21) return 'EXIT-DIFFICULT';
+      return 'EXIT-BLOCKED';
+    }
 
-  // IRR Data (Component 2)
-  const irrData = isNigeria ? [
-    { market:'Nigeria Energy', range:'22–32% USD', median:'26% USD', source:'IFC Annual Report 2024 · CDC/BII Portfolio Data 2023', primary:true },
-    { market:'West Africa Energy (Comparable)', range:'18–28% USD', median:'24% USD', source:'Proparco REPP Fund · AfDB Deal Register 2024', primary:false },
-    { market:'Kenya Energy (Comparable)', range:'14–24% USD', median:'18% USD', source:'CDC/BII Portfolio Data 2023', primary:false },
-    { market:'South Africa Energy (Comparable)', range:'12–20% USD', median:'15% USD', source:'JSE Infrastructure Data · DBSA Annual Report', primary:false },
-  ] : isGhana ? [
-    { market:'Ghana Energy', range:'18–26% USD', median:'22% USD', source:'IFC Annual Report 2024 · CDC/BII Portfolio Data 2023', primary:true },
-    { market:'Nigeria Energy (Comparable)', range:'22–32% USD', median:'26% USD', source:'IFC Annual Report 2024', primary:false },
-    { market:'Kenya Energy (Comparable)', range:'14–24% USD', median:'18% USD', source:'CDC/BII Portfolio Data 2023', primary:false },
-  ] : [
-    { market:`${market} ${sector}`, range:`${clamp(ers/4+8,10,30)}–${clamp(ers/4+16,15,38)}% USD`, median:`${clamp(ers/4+12,12,32)}% USD`, source:'IFC/CDC Portfolio Data 2024', primary:true },
-    { market:'Kenya (Comparable)', range:'14–24% USD', median:'18% USD', source:'CDC/BII Portfolio Data 2023', primary:false },
-    { market:'South Africa (Comparable)', range:'12–20% USD', median:'15% USD', source:'JSE Infrastructure Data · DBSA', primary:false },
-  ];
+    function getERSComponents(market, sector, ers) {
+      const isNigeria = market === 'Nigeria' && sector === 'Energy';
+      const isGhana = market === 'Ghana' && sector === 'Energy';
+      const clamp = (v, min = 1, max = 100) => Math.max(min, Math.min(max, Math.round(v)));
+      const vary = (base, range) => clamp(base + (Math.random() - 0.5) * range);
 
-  const irrNote = isNigeria
-    ? "Nigeria's IRR range is the highest in the ACI coverage universe for energy. The premium reflects risk — specifically RF03 (cash flow certainty: 4.2) and RF08 (macro: 4.1). Investors who structure around these two constraints — DFI guarantee on cash flow, USD-denominated debt service — can realistically target the 24–28% median while substantially reducing downside risk."
-    : `${market}'s ${sector} IRR range reflects the risk-adjusted return profile for this corridor. The premium compensates for governance friction and exit constraints quantified in this module. Structured transactions with DFI co-investment can target the upper median while reducing downside exposure.`;
+      // Component scores (0-100 scale)
+      const c1 = isNigeria ? 42 : isGhana ? 55 : clamp(ers * 0.9 + (Math.random() - 0.5) * 10);
+      const c2 = isNigeria ? 61 : isGhana ? 68 : clamp(ers * 1.4 + (Math.random() - 0.5) * 12);
+      const c3 = isNigeria ? 28 : isGhana ? 38 : clamp(ers * 0.7 + (Math.random() - 0.5) * 8);
+      const c4 = isNigeria ? 35 : isGhana ? 48 : clamp(ers * 0.85 + (Math.random() - 0.5) * 10);
+      const c5 = isNigeria ? 44 : isGhana ? 52 : clamp(ers * 1.0 + (Math.random() - 0.5) * 10);
 
-  // Repatriation (Component 3)
-  const repatriation = isNigeria ? [
-    { code:'FX CONV', name:'FX Convertibility', desc:'Ease of converting naira to USD/GBP at exit', score:2.4, label:'CRITICAL', weight:'30%' },
-    { code:'DIVIDEND', name:'Dividend Repatriation Rules', desc:'CBN regulations on profit remittance abroad', score:3.1, label:'RESTRICTED', weight:'25%' },
-    { code:'FX RES', name:'FX Reserve Adequacy', desc:'CBN reserve buffer for external obligations', score:4.2, label:'MARGINAL', weight:'20%' },
-    { code:'BIT', name:'Bilateral Investment Treaty Protection', desc:'UK-Nigeria BIT enforceability and expropriation clauses', score:4.8, label:'PARTIAL', weight:'15%' },
-    { code:'ESCROW', name:'Offshore Escrow Access', desc:'Availability of offshore payment mechanisms', score:5.5, label:'AVAILABLE', weight:'10%' },
-  ] : isGhana ? [
-    { code:'FX CONV', name:'FX Convertibility', desc:'Ease of converting cedi to USD/GBP at exit', score:3.8, label:'RESTRICTED', weight:'30%' },
-    { code:'DIVIDEND', name:'Dividend Repatriation Rules', desc:'BOG regulations on profit remittance abroad', score:4.5, label:'MODERATE', weight:'25%' },
-    { code:'FX RES', name:'FX Reserve Adequacy', desc:'BOG reserve buffer for external obligations', score:4.8, label:'MARGINAL', weight:'20%' },
-    { code:'BIT', name:'Bilateral Investment Treaty Protection', desc:'UK-Ghana BIT enforceability and coverage', score:5.8, label:'FUNCTIONAL', weight:'15%' },
-    { code:'ESCROW', name:'Offshore Escrow Access', desc:'Availability of offshore payment mechanisms', score:6.2, label:'AVAILABLE', weight:'10%' },
-  ] : [
-    { code:'FX CONV', name:'FX Convertibility', desc:`Ease of converting local currency to USD/GBP at exit`, score:parseFloat((ers/28).toFixed(1)), label: ers<40?'CRITICAL':ers<55?'RESTRICTED':'MODERATE', weight:'30%' },
-    { code:'DIVIDEND', name:'Dividend Repatriation Rules', desc:'Central bank regulations on profit remittance', score:parseFloat((ers/24).toFixed(1)), label: ers<40?'RESTRICTED':ers<55?'PARTIAL':'FUNCTIONAL', weight:'25%' },
-    { code:'FX RES', name:'FX Reserve Adequacy', desc:'Reserve buffer for external obligations', score:parseFloat((ers/20).toFixed(1)), label: ers<40?'MARGINAL':ers<55?'ADEQUATE':'STRONG', weight:'20%' },
-    { code:'BIT', name:'BIT Protection', desc:'UK bilateral investment treaty enforceability', score:parseFloat((ers/18).toFixed(1)), label:'PARTIAL', weight:'15%' },
-    { code:'ESCROW', name:'Offshore Escrow Access', desc:'Availability of offshore payment mechanisms', score:parseFloat((ers/16).toFixed(1)), label:'AVAILABLE', weight:'10%' },
-  ];
+      const components = [
+        { shortName: 'Exit Route Analysis', score: c1, weight: '35%' },
+        { shortName: 'IRR Benchmarking', score: c2, weight: '15%' },
+        { shortName: 'Capital Repatriation', score: c3, weight: '25%' },
+        { shortName: 'Market Liquidity', score: c4, weight: '25%' },
+        { shortName: 'Exit Timeline Prob.', score: c5, weight: '5%' },
+      ];
 
-  // Liquidity (Component 4)
-  const liquidity = isNigeria ? {
-    maVelocity: 14, avgDeal:'$85M', timeToClose:'18 months avg',
-    evEbitda:'6.2×', ssaMedian:'7.4×', globalInfra:'11.2×',
-    acquirerPool: 12, acquirerNote:'Thin for assets above $500M',
-    exchangeName:'NGX', exchangeDepth:'Low',
-    exchangeNote:'Market cap $48B · Daily volume <$40M\nEnergy sector IPO pipeline: 0 confirmed',
-  } : isGhana ? {
-    maVelocity: 9, avgDeal:'$65M', timeToClose:'14 months avg',
-    evEbitda:'7.1×', ssaMedian:'7.4×', globalInfra:'11.2×',
-    acquirerPool: 11, acquirerNote:'Moderate depth for mid-market assets',
-    exchangeName:'GSE', exchangeDepth:'Moderate',
-    exchangeNote:'Market cap $12B · Daily volume <$8M\nEnergy sector IPO pipeline: 1 potential',
-  } : {
-    maVelocity: clamp(ers/5+2, 3, 30), avgDeal:'$50–80M', timeToClose:'12–18 months avg',
-    evEbitda:`${(ers/14+4).toFixed(1)}×`, ssaMedian:'7.4×', globalInfra:'11.2×',
-    acquirerPool: clamp(ers/5+3, 4, 25), acquirerNote:'Buyer pool varies by deal size and sector',
-    exchangeName:'Local', exchangeDepth: ers>=60?'Moderate':ers>=40?'Low':'Very Low',
-    exchangeNote:`Local exchange depth reflects market maturity score ERS: ${ers}`,
-  };
+      // Exit Routes (Component 1)
+      const exitRoutes = isNigeria ? [
+        { code: 'ER1', name: 'DFI Secondary Sale', score: 6.8, note: 'Most viable route. BII/IFC active buyers for structured energy assets.' },
+        { code: 'ER2', name: 'Trade Sale to Strategic', score: 4.2, note: 'Limited pool. International energy majors cautious on Nigeria.' },
+        { code: 'ER3', name: 'NGX Listing (IPO)', score: 2.8, note: 'Exchange underdeveloped for energy. 0 confirmed IPO pipeline.' },
+        { code: 'ER4', name: 'Secondary PE Sale', score: 4.5, note: 'Regional PE funds active but thin above $300M asset size.' },
+      ] : isGhana ? [
+        { code: 'ER1', name: 'DFI Secondary Sale', score: 7.2, note: 'IFC and BII active. Ghana energy reform creates viable pipeline.' },
+        { code: 'ER2', name: 'Trade Sale to Strategic', score: 5.8, note: 'Regional buyers present. ECOWAS corridor creates strategic appetite.' },
+        { code: 'ER3', name: 'GSE Listing (IPO)', score: 3.5, note: 'Exchange improving but limited depth for large energy assets.' },
+        { code: 'ER4', name: 'Secondary PE Sale', score: 5.2, note: 'West Africa PE market more developed than Nigeria for exits.' },
+      ] : [
+        { code: 'ER1', name: 'DFI Secondary Sale', score: parseFloat((ers / 13).toFixed(1)), note: 'DFI appetite depends on market governance and deal structure.' },
+        { code: 'ER2', name: 'Trade Sale to Strategic', score: parseFloat((ers / 14).toFixed(1)), note: 'Strategic buyer pool varies by sector and corridor access.' },
+        { code: 'ER3', name: 'Local Exchange Listing', score: parseFloat((ers / 20).toFixed(1)), note: 'Exchange depth and IPO pipeline determine viability.' },
+        { code: 'ER4', name: 'Secondary PE Sale', score: parseFloat((ers / 15).toFixed(1)), note: 'Regional PE fund appetite active across most SSA markets.' },
+      ];
 
-  // Timeline (Component 5)
-  const timeline = isNigeria ? [
-    { years:'3–4 YEARS', prob:18, color:'#e05252', route:'Secondary PE sale only' },
-    { years:'5–6 YEARS', prob:42, color:'#f5c842', route:'Trade sale or PE secondary' },
-    { years:'7–10 YEARS', prob:68, color:'#e67e22', route:'Trade sale most likely' },
-    { years:'10+ YEARS', prob:84, color:'#2ecc71', route:'Any route viable' },
-  ] : isGhana ? [
-    { years:'3–4 YEARS', prob:24, color:'#e05252', route:'Secondary PE sale only' },
-    { years:'5–6 YEARS', prob:52, color:'#f5c842', route:'Trade sale or PE secondary' },
-    { years:'7–10 YEARS', prob:74, color:'#e67e22', route:'Trade sale most likely' },
-    { years:'10+ YEARS', prob:89, color:'#2ecc71', route:'Any route viable' },
-  ] : [
-    { years:'3–4 YEARS', prob:clamp(ers/3, 5, 40), color:'#e05252', route:'Secondary PE sale only' },
-    { years:'5–6 YEARS', prob:clamp(ers/1.8, 20, 65), color:'#f5c842', route:'Trade sale or PE secondary' },
-    { years:'7–10 YEARS', prob:clamp(ers*1.2, 40, 85), color:'#e67e22', route:'Trade sale most likely' },
-    { years:'10+ YEARS', prob:clamp(ers*1.6, 60, 96), color:'#2ecc71', route:'Any route viable' },
-  ];
+      // IRR Data (Component 2)
+      const irrData = isNigeria ? [
+        { market: 'Nigeria Energy', range: '22–32% USD', median: '26% USD', source: 'IFC Annual Report 2024 · CDC/BII Portfolio Data 2023', primary: true },
+        { market: 'West Africa Energy (Comparable)', range: '18–28% USD', median: '24% USD', source: 'Proparco REPP Fund · AfDB Deal Register 2024', primary: false },
+        { market: 'Kenya Energy (Comparable)', range: '14–24% USD', median: '18% USD', source: 'CDC/BII Portfolio Data 2023', primary: false },
+        { market: 'South Africa Energy (Comparable)', range: '12–20% USD', median: '15% USD', source: 'JSE Infrastructure Data · DBSA Annual Report', primary: false },
+      ] : isGhana ? [
+        { market: 'Ghana Energy', range: '18–26% USD', median: '22% USD', source: 'IFC Annual Report 2024 · CDC/BII Portfolio Data 2023', primary: true },
+        { market: 'Nigeria Energy (Comparable)', range: '22–32% USD', median: '26% USD', source: 'IFC Annual Report 2024', primary: false },
+        { market: 'Kenya Energy (Comparable)', range: '14–24% USD', median: '18% USD', source: 'CDC/BII Portfolio Data 2023', primary: false },
+      ] : [
+        { market: `${market} ${sector}`, range: `${clamp(ers / 4 + 8, 10, 30)}–${clamp(ers / 4 + 16, 15, 38)}% USD`, median: `${clamp(ers / 4 + 12, 12, 32)}% USD`, source: 'IFC/CDC Portfolio Data 2024', primary: true },
+        { market: 'Kenya (Comparable)', range: '14–24% USD', median: '18% USD', source: 'CDC/BII Portfolio Data 2023', primary: false },
+        { market: 'South Africa (Comparable)', range: '12–20% USD', median: '15% USD', source: 'JSE Infrastructure Data · DBSA', primary: false },
+      ];
 
-  // Rationale
-  const rationale = isNigeria
-    ? "Nigeria Energy's ACI score of 58 reflects strong market demand fundamentals (RF05: 8.3) against weak cash flow certainty (RF03: 4.2). The ERS of 38 reveals the other side of that equation: even if your investment performs, extracting value faces substantial structural friction. Currency inconvertibility risk is high, the acquirer pool for energy assets is thin outside DFI-structured transactions, and the NGX listing pathway for energy companies remains underdeveloped. Investors entering without exit modelling are assuming a liquidity event that the market does not yet reliably support."
-    : isGhana
-    ? `Ghana Energy's ACI score of 64 reflects moderate governance conditions with improving regulatory clarity (RF02: 5.8) and reasonable demand fundamentals (RF05: 7.6). The ERS of ${ers} indicates exit is feasible but constrained — primarily by GHS convertibility limitations and a thin secondary buyer pool for assets above $200M. Structured transactions with DFI participation can achieve exits within 5–7 years. The Ghana Energy Compact reforms are improving the pipeline, but contractual FX protections remain essential.`
-    : `${market}'s ${sector} sector ERS of ${ers} reflects the structural exit conditions for this corridor. The score quantifies the friction investors face when attempting to exit, even when underlying investments perform as modelled. Key constraints are flagged across the 5-component framework above. Exit architecture must be engineered at entry — do not assume liquidity that the data does not support.`;
+      const irrNote = isNigeria
+        ? "Nigeria's IRR range is the highest in the ACI coverage universe for energy. The premium reflects risk — specifically RF03 (cash flow certainty: 4.2) and RF08 (macro: 4.1). Investors who structure around these two constraints — DFI guarantee on cash flow, USD-denominated debt service — can realistically target the 24–28% median while substantially reducing downside risk."
+        : `${market}'s ${sector} IRR range reflects the risk-adjusted return profile for this corridor. The premium compensates for governance friction and exit constraints quantified in this module. Structured transactions with DFI co-investment can target the upper median while reducing downside exposure.`;
 
-  // Conclusion
-  const conclusion = isNigeria
-    ? "Nigeria Energy ERS: 38 EXIT-DIFFICULT. Entry is investable for structured capital with DFI co-investment and contractual exit protections. The critical constraint is capital repatriation (Score: 28) — no investment should proceed without MIGA convertibility insurance or offshore escrow structures. The strongest exit route is DFI secondary sale (ER4: 6.8), not NGX listing (ER3: 2.8). Structure entry assuming a 7–10 year hold with trade sale as primary exit. IRR benchmarking confirms 24–28% median USD return is achievable for correctly structured transactions — the premium compensates for the repatriation and liquidity constraints quantified in this module."
-    : `${market} ${sector} ERS: ${ers} ${ersLabel(ers)}. ${ers <= 40 ? 'Entry is investable for structured capital with DFI co-investment and contractual exit protections. Capital repatriation is the critical constraint — no investment should proceed without convertibility insurance or offshore escrow structures.' : ers <= 65 ? 'Entry is viable for experienced investors with structured finance capability. Blended finance and DFI co-investment recommended. Exit is achievable within 5–8 years with appropriate contractual protections.' : 'Entry is accessible for commercial capital. Standard exit documentation and secondary market participation are viable. DFI co-investment optional but value-accretive.'} Structure entry with a ${ers <= 40 ? '7–10' : ers <= 65 ? '5–7' : '3–6'} year hold period as the primary exit timeline.`;
+      // Repatriation (Component 3)
+      const repatriation = isNigeria ? [
+        { code: 'FX CONV', name: 'FX Convertibility', desc: 'Ease of converting naira to USD/GBP at exit', score: 2.4, label: 'CRITICAL', weight: '30%' },
+        { code: 'DIVIDEND', name: 'Dividend Repatriation Rules', desc: 'CBN regulations on profit remittance abroad', score: 3.1, label: 'RESTRICTED', weight: '25%' },
+        { code: 'FX RES', name: 'FX Reserve Adequacy', desc: 'CBN reserve buffer for external obligations', score: 4.2, label: 'MARGINAL', weight: '20%' },
+        { code: 'BIT', name: 'Bilateral Investment Treaty Protection', desc: 'UK-Nigeria BIT enforceability and expropriation clauses', score: 4.8, label: 'PARTIAL', weight: '15%' },
+        { code: 'ESCROW', name: 'Offshore Escrow Access', desc: 'Availability of offshore payment mechanisms', score: 5.5, label: 'AVAILABLE', weight: '10%' },
+      ] : isGhana ? [
+        { code: 'FX CONV', name: 'FX Convertibility', desc: 'Ease of converting cedi to USD/GBP at exit', score: 3.8, label: 'RESTRICTED', weight: '30%' },
+        { code: 'DIVIDEND', name: 'Dividend Repatriation Rules', desc: 'BOG regulations on profit remittance abroad', score: 4.5, label: 'MODERATE', weight: '25%' },
+        { code: 'FX RES', name: 'FX Reserve Adequacy', desc: 'BOG reserve buffer for external obligations', score: 4.8, label: 'MARGINAL', weight: '20%' },
+        { code: 'BIT', name: 'Bilateral Investment Treaty Protection', desc: 'UK-Ghana BIT enforceability and coverage', score: 5.8, label: 'FUNCTIONAL', weight: '15%' },
+        { code: 'ESCROW', name: 'Offshore Escrow Access', desc: 'Availability of offshore payment mechanisms', score: 6.2, label: 'AVAILABLE', weight: '10%' },
+      ] : [
+        { code: 'FX CONV', name: 'FX Convertibility', desc: `Ease of converting local currency to USD/GBP at exit`, score: parseFloat((ers / 28).toFixed(1)), label: ers < 40 ? 'CRITICAL' : ers < 55 ? 'RESTRICTED' : 'MODERATE', weight: '30%' },
+        { code: 'DIVIDEND', name: 'Dividend Repatriation Rules', desc: 'Central bank regulations on profit remittance', score: parseFloat((ers / 24).toFixed(1)), label: ers < 40 ? 'RESTRICTED' : ers < 55 ? 'PARTIAL' : 'FUNCTIONAL', weight: '25%' },
+        { code: 'FX RES', name: 'FX Reserve Adequacy', desc: 'Reserve buffer for external obligations', score: parseFloat((ers / 20).toFixed(1)), label: ers < 40 ? 'MARGINAL' : ers < 55 ? 'ADEQUATE' : 'STRONG', weight: '20%' },
+        { code: 'BIT', name: 'BIT Protection', desc: 'UK bilateral investment treaty enforceability', score: parseFloat((ers / 18).toFixed(1)), label: 'PARTIAL', weight: '15%' },
+        { code: 'ESCROW', name: 'Offshore Escrow Access', desc: 'Availability of offshore payment mechanisms', score: parseFloat((ers / 16).toFixed(1)), label: 'AVAILABLE', weight: '10%' },
+      ];
 
-  return { components, exitRoutes, irrData, irrNote, repatriation, liquidity, timeline, rationale, conclusion };
-}
+      // Liquidity (Component 4)
+      const liquidity = isNigeria ? {
+        maVelocity: 14, avgDeal: '$85M', timeToClose: '18 months avg',
+        evEbitda: '6.2×', ssaMedian: '7.4×', globalInfra: '11.2×',
+        acquirerPool: 12, acquirerNote: 'Thin for assets above $500M',
+        exchangeName: 'NGX', exchangeDepth: 'Low',
+        exchangeNote: 'Market cap $48B · Daily volume <$40M\nEnergy sector IPO pipeline: 0 confirmed',
+      } : isGhana ? {
+        maVelocity: 9, avgDeal: '$65M', timeToClose: '14 months avg',
+        evEbitda: '7.1×', ssaMedian: '7.4×', globalInfra: '11.2×',
+        acquirerPool: 11, acquirerNote: 'Moderate depth for mid-market assets',
+        exchangeName: 'GSE', exchangeDepth: 'Moderate',
+        exchangeNote: 'Market cap $12B · Daily volume <$8M\nEnergy sector IPO pipeline: 1 potential',
+      } : {
+        maVelocity: clamp(ers / 5 + 2, 3, 30), avgDeal: '$50–80M', timeToClose: '12–18 months avg',
+        evEbitda: `${(ers / 14 + 4).toFixed(1)}×`, ssaMedian: '7.4×', globalInfra: '11.2×',
+        acquirerPool: clamp(ers / 5 + 3, 4, 25), acquirerNote: 'Buyer pool varies by deal size and sector',
+        exchangeName: 'Local', exchangeDepth: ers >= 60 ? 'Moderate' : ers >= 40 ? 'Low' : 'Very Low',
+        exchangeNote: `Local exchange depth reflects market maturity score ERS: ${ers}`,
+      };
 
-function getArchitecture(ers) {
-  if (ers <= 40) return [
-    'DFI co-investment required','MIGA convertibility insurance','Offshore escrow mandatory',
-    'Pre-structured secondary sale to DFIs','Contractual FX protections','Offshore SPV structure',
-    'Payment security mechanism','Political risk insurance'
-  ];
-  if (ers <= 65) return [
-    'Blended finance structuring','Contractual FX protections','Partial risk guarantee (PRG)',
-    'DFI co-investment recommended','Secondary market alignment','Escrow account structure'
-  ];
-  return [
-    'Commercial capital viable','Secondary markets available','Standard exit documentation',
-    'Optional DFI co-investment','IRR-driven exit modelling'
-  ];
-}
+      // Timeline (Component 5)
+      const timeline = isNigeria ? [
+        { years: '3–4 YEARS', prob: 18, color: '#e05252', route: 'Secondary PE sale only' },
+        { years: '5–6 YEARS', prob: 42, color: '#f5c842', route: 'Trade sale or PE secondary' },
+        { years: '7–10 YEARS', prob: 68, color: '#e67e22', route: 'Trade sale most likely' },
+        { years: '10+ YEARS', prob: 84, color: '#2ecc71', route: 'Any route viable' },
+      ] : isGhana ? [
+        { years: '3–4 YEARS', prob: 24, color: '#e05252', route: 'Secondary PE sale only' },
+        { years: '5–6 YEARS', prob: 52, color: '#f5c842', route: 'Trade sale or PE secondary' },
+        { years: '7–10 YEARS', prob: 74, color: '#e67e22', route: 'Trade sale most likely' },
+        { years: '10+ YEARS', prob: 89, color: '#2ecc71', route: 'Any route viable' },
+      ] : [
+        { years: '3–4 YEARS', prob: clamp(ers / 3, 5, 40), color: '#e05252', route: 'Secondary PE sale only' },
+        { years: '5–6 YEARS', prob: clamp(ers / 1.8, 20, 65), color: '#f5c842', route: 'Trade sale or PE secondary' },
+        { years: '7–10 YEARS', prob: clamp(ers * 1.2, 40, 85), color: '#e67e22', route: 'Trade sale most likely' },
+        { years: '10+ YEARS', prob: clamp(ers * 1.6, 60, 96), color: '#2ecc71', route: 'Any route viable' },
+      ];
 
-function getExitVerdict(market, sector, aci, ers, ersCat) {
-  if (ers <= 40) return `${market}'s ${sector} sector presents significant exit friction (ERS: ${ers}). Even where the investment performs as modelled, capital extraction faces structural constraints — primarily FX convertibility and political gatekeeping. The DFI co-investment route is the recommended entry and exit architecture. MIGA convertibility insurance and offshore escrow are non-negotiable. Investors must engineer the exit before the entry.`;
-  if (ers <= 65) return `${market}'s ${sector} sector offers viable exit pathways with structured support (ERS: ${ers}). Exit is possible but requires contractual FX protections, blended finance structures, and active DFI engagement. Secondary buyers exist but depth is limited. Investors with structured finance capability can participate; pure commercial capital faces elevated extraction risk.`;
-  return `${market}'s ${sector} sector offers predictable exit pathways (ERS: ${ers}). Secondary markets function, FX convertibility is reliable, and legal exit mechanisms are enforceable. Commercial capital can participate without heavy DFI scaffolding. Exits are modelable and align with standard institutional timelines.`;
-}
+      // Rationale
+      const rationale = isNigeria
+        ? "Nigeria Energy's ACI score of 58 reflects strong market demand fundamentals (RF05: 8.3) against weak cash flow certainty (RF03: 4.2). The ERS of 38 reveals the other side of that equation: even if your investment performs, extracting value faces substantial structural friction. Currency inconvertibility risk is high, the acquirer pool for energy assets is thin outside DFI-structured transactions, and the NGX listing pathway for energy companies remains underdeveloped. Investors entering without exit modelling are assuming a liquidity event that the market does not yet reliably support."
+        : isGhana
+          ? `Ghana Energy's ACI score of 64 reflects moderate governance conditions with improving regulatory clarity (RF02: 5.8) and reasonable demand fundamentals (RF05: 7.6). The ERS of ${ers} indicates exit is feasible but constrained — primarily by GHS convertibility limitations and a thin secondary buyer pool for assets above $200M. Structured transactions with DFI participation can achieve exits within 5–7 years. The Ghana Energy Compact reforms are improving the pipeline, but contractual FX protections remain essential.`
+          : `${market}'s ${sector} sector ERS of ${ers} reflects the structural exit conditions for this corridor. The score quantifies the friction investors face when attempting to exit, even when underlying investments perform as modelled. Key constraints are flagged across the 5-component framework above. Exit architecture must be engineered at entry — do not assume liquidity that the data does not support.`;
 
-function getThesis(market, sector, aci, ers, ersCat) {
-  const demand = sector === 'Energy' ? '85 million people without reliable power and a documented government reform agenda create a compelling structural demand case' :
-    sector === 'Fintech' ? 'deep financial inclusion gaps and rapid mobile penetration create extraordinary structural demand' :
-    sector === 'Agriculture' ? 'food security imperatives and export growth targets underpin strong structural demand fundamentals' :
-    `structural demand fundamentals in ${sector} remain compelling`;
+      // Conclusion
+      const conclusion = isNigeria
+        ? "Nigeria Energy ERS: 38 EXIT-DIFFICULT. Entry is investable for structured capital with DFI co-investment and contractual exit protections. The critical constraint is capital repatriation (Score: 28) — no investment should proceed without MIGA convertibility insurance or offshore escrow structures. The strongest exit route is DFI secondary sale (ER4: 6.8), not NGX listing (ER3: 2.8). Structure entry assuming a 7–10 year hold with trade sale as primary exit. IRR benchmarking confirms 24–28% median USD return is achievable for correctly structured transactions — the premium compensates for the repatriation and liquidity constraints quantified in this module."
+        : `${market} ${sector} ERS: ${ers} ${ersLabel(ers)}. ${ers <= 40 ? 'Entry is investable for structured capital with DFI co-investment and contractual exit protections. Capital repatriation is the critical constraint — no investment should proceed without convertibility insurance or offshore escrow structures.' : ers <= 65 ? 'Entry is viable for experienced investors with structured finance capability. Blended finance and DFI co-investment recommended. Exit is achievable within 5–8 years with appropriate contractual protections.' : 'Entry is accessible for commercial capital. Standard exit documentation and secondary market participation are viable. DFI co-investment optional but value-accretive.'} Structure entry with a ${ers <= 40 ? '7–10' : ers <= 65 ? '5–7' : '3–6'} year hold period as the primary exit timeline.`;
 
-  if (aci >= 75 && ers <= 40) return `${market}'s ${sector} sector combines high governance friction (ACI: ${aci}) with significant exit difficulty (ERS: ${ers}). ${demand.charAt(0).toUpperCase() + demand.slice(1)}. However, this is a market for investors who can engineer around both operational and exit constraints. The opportunity is real — but it is not accessible to investors without structured finance capability and DFI partnerships.`;
-  if (aci >= 50 && ers <= 40) return `${market}'s ${sector} sector is operationally feasible (ACI: ${aci} — ${ACI_CATS(aci)}) but exit-constrained (ERS: ${ers}). The demand story is credible and governance, while imperfect, is workable. The binding constraint is exit architecture. Investors must structure the exit at entry or accept that capital extraction timelines will be extended and uncertain.`;
-  return `${market}'s ${sector} sector presents a balanced opportunity (ACI: ${aci}, ERS: ${ers}). ${demand.charAt(0).toUpperCase() + demand.slice(1)}. Governance conditions are manageable and exit pathways are viable with appropriate structuring. This market is accessible to investors with frontier market experience and standard structured finance capability.`;
-}
+      return { components, exitRoutes, irrData, irrNote, repatriation, liquidity, timeline, rationale, conclusion };
+    }
 
-function getStructuring(market, sector, aci, ers) {
-  const items = getArchitecture(ers);
-  return `Based on the combined ACI/ERS assessment for ${market} ${sector}, the following structuring requirements are indicated: ${items.slice(0,5).join(', ')}. ${ers <= 40 ? 'DFI co-investment is a structural requirement, not a preference. Without it, exit pathways are insufficiently engineered for commercial capital.' : ers <= 65 ? 'Blended finance unlocks commercial participation. Contractual protections are essential but sufficient for experienced investors.' : 'Standard commercial structuring applies. DFI involvement optional but value-accretive.'}`;
-}
+    function getArchitecture(ers) {
+      if (ers <= 40) return [
+        'DFI co-investment required', 'MIGA convertibility insurance', 'Offshore escrow mandatory',
+        'Pre-structured secondary sale to DFIs', 'Contractual FX protections', 'Offshore SPV structure',
+        'Payment security mechanism', 'Political risk insurance'
+      ];
+      if (ers <= 65) return [
+        'Blended finance structuring', 'Contractual FX protections', 'Partial risk guarantee (PRG)',
+        'DFI co-investment recommended', 'Secondary market alignment', 'Escrow account structure'
+      ];
+      return [
+        'Commercial capital viable', 'Secondary markets available', 'Standard exit documentation',
+        'Optional DFI co-investment', 'IRR-driven exit modelling'
+      ];
+    }
 
-function getComparables(market) {
-  const all = [
-    { code:'KE', name:'Kenya', aci:61, label:'Moderate Risk', desc:'Long-term PPAs with government-backed off-takers, World Bank Partial Risk Guarantees, and IDA-supported payment security mechanisms. Azura-type PRG replicable for select transactions.' },
-    { code:'CI', name:'Côte d\'Ivoire', aci:59, label:'Moderate Risk', desc:'Cost-reflective tariffs combined with sovereign guarantees and standardised IPP frameworks. Demonstrates that tariff reform unlocks commercial capital without ongoing DFI dependency.' },
-    { code:'SN', name:'Senegal', aci:54, label:'Moderate Risk', desc:'Competitive auctions with standardised contracts and blended finance to de-risk early-stage projects. Demonstrates how transparent procurement drives investor confidence independent of country size.' },
-    { code:'ZA', name:'South Africa', aci:48, label:'Moderate-Low', desc:'Deep secondary markets and strong legal infrastructure enable exits without DFI scaffolding. REIPPPP programme demonstrates scalable structured procurement at institutional grade.' },
-    { code:'MA', name:'Morocco', aci:55, label:'Moderate Risk', desc:'Strong legal framework and improving FX convertibility make Morocco the highest ERS market in North Africa. Offshore escrow and sovereign guarantees well-established.' },
-  ];
-  return all.filter(c => c.name !== market).slice(0, 3);
-}
+    function getExitVerdict(market, sector, aci, ers, ersCat) {
+      if (ers <= 40) return `${market}'s ${sector} sector presents significant exit friction (ERS: ${ers}). Even where the investment performs as modelled, capital extraction faces structural constraints — primarily FX convertibility and political gatekeeping. The DFI co-investment route is the recommended entry and exit architecture. MIGA convertibility insurance and offshore escrow are non-negotiable. Investors must engineer the exit before the entry.`;
+      if (ers <= 65) return `${market}'s ${sector} sector offers viable exit pathways with structured support (ERS: ${ers}). Exit is possible but requires contractual FX protections, blended finance structures, and active DFI engagement. Secondary buyers exist but depth is limited. Investors with structured finance capability can participate; pure commercial capital faces elevated extraction risk.`;
+      return `${market}'s ${sector} sector offers predictable exit pathways (ERS: ${ers}). Secondary markets function, FX convertibility is reliable, and legal exit mechanisms are enforceable. Commercial capital can participate without heavy DFI scaffolding. Exits are modelable and align with standard institutional timelines.`;
+    }
 
-// ============================================================
-// INIT
-// ============================================================
-buildHeatmap();
-showPanel('heatmap');
+    function getThesis(market, sector, aci, ers, ersCat) {
+      const demand = sector === 'Energy' ? '85 million people without reliable power and a documented government reform agenda create a compelling structural demand case' :
+        sector === 'Fintech' ? 'deep financial inclusion gaps and rapid mobile penetration create extraordinary structural demand' :
+          sector === 'Agriculture' ? 'food security imperatives and export growth targets underpin strong structural demand fundamentals' :
+            `structural demand fundamentals in ${sector} remain compelling`;
 
-// Auto-select Nigeria Energy
-selectCell('Nigeria', 'Energy', 2, 3);
-</script>
+      if (aci >= 75 && ers <= 40) return `${market}'s ${sector} sector combines high governance friction (ACI: ${aci}) with significant exit difficulty (ERS: ${ers}). ${demand.charAt(0).toUpperCase() + demand.slice(1)}. However, this is a market for investors who can engineer around both operational and exit constraints. The opportunity is real — but it is not accessible to investors without structured finance capability and DFI partnerships.`;
+      if (aci >= 50 && ers <= 40) return `${market}'s ${sector} sector is operationally feasible (ACI: ${aci} — ${ACI_CATS(aci)}) but exit-constrained (ERS: ${ers}). The demand story is credible and governance, while imperfect, is workable. The binding constraint is exit architecture. Investors must structure the exit at entry or accept that capital extraction timelines will be extended and uncertain.`;
+      return `${market}'s ${sector} sector presents a balanced opportunity (ACI: ${aci}, ERS: ${ers}). ${demand.charAt(0).toUpperCase() + demand.slice(1)}. Governance conditions are manageable and exit pathways are viable with appropriate structuring. This market is accessible to investors with frontier market experience and standard structured finance capability.`;
+    }
+
+    function getStructuring(market, sector, aci, ers) {
+      const items = getArchitecture(ers);
+      return `Based on the combined ACI/ERS assessment for ${market} ${sector}, the following structuring requirements are indicated: ${items.slice(0, 5).join(', ')}. ${ers <= 40 ? 'DFI co-investment is a structural requirement, not a preference. Without it, exit pathways are insufficiently engineered for commercial capital.' : ers <= 65 ? 'Blended finance unlocks commercial participation. Contractual protections are essential but sufficient for experienced investors.' : 'Standard commercial structuring applies. DFI involvement optional but value-accretive.'}`;
+    }
+
+    function getComparables(market) {
+      const all = [
+        { code: 'KE', name: 'Kenya', aci: 61, label: 'Moderate Risk', desc: 'Long-term PPAs with government-backed off-takers, World Bank Partial Risk Guarantees, and IDA-supported payment security mechanisms. Azura-type PRG replicable for select transactions.' },
+        { code: 'CI', name: 'Côte d\'Ivoire', aci: 59, label: 'Moderate Risk', desc: 'Cost-reflective tariffs combined with sovereign guarantees and standardised IPP frameworks. Demonstrates that tariff reform unlocks commercial capital without ongoing DFI dependency.' },
+        { code: 'SN', name: 'Senegal', aci: 54, label: 'Moderate Risk', desc: 'Competitive auctions with standardised contracts and blended finance to de-risk early-stage projects. Demonstrates how transparent procurement drives investor confidence independent of country size.' },
+        { code: 'ZA', name: 'South Africa', aci: 48, label: 'Moderate-Low', desc: 'Deep secondary markets and strong legal infrastructure enable exits without DFI scaffolding. REIPPPP programme demonstrates scalable structured procurement at institutional grade.' },
+        { code: 'MA', name: 'Morocco', aci: 55, label: 'Moderate Risk', desc: 'Strong legal framework and improving FX convertibility make Morocco the highest ERS market in North Africa. Offshore escrow and sovereign guarantees well-established.' },
+      ];
+      return all.filter(c => c.name !== market).slice(0, 3);
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    buildHeatmap();
+    showPanel('heatmap');
+
+    // Auto-select Nigeria Energy
+    selectCell('Nigeria', 'Energy', 2, 3);
+  </script>
 </body>
+
 </html>
