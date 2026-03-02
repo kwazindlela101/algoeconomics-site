@@ -7140,7 +7140,8 @@
                         <li><a href="/platform-overview" class="nav-link"><i
                                     class="fas fa-cogs"></i><span>Platform</span></a>
                         </li>
-                        <li><a href="/aci_dashboard_v4" class="nav-link"><i class="fas fa-robot"></i><span>AI
+                        <li><a class="nav-link aci-launch" style="cursor: pointer;"><i
+                                    class="fas fa-robot"></i><span>ACI
                                     Demo</span></a>
                         </li>
                         <li><a href="/country-index" class="nav-link"><i
@@ -7166,7 +7167,8 @@
                 <a href="#regional-analysis" class="mobile-quick-link"><i class="fas fa-globe-africa"></i> Regions</a>
                 <a href="#features" class="nav-link"><i class="fas fa-cogs"></i>Platform</a>
                 <a href="#african-markets" class="mobile-quick-link"><i class="fas fa-city"></i> Markets</a>
-                <a href="#ai-demo" class="mobile-quick-link"><i class="fas fa-robot"></i> AI Demo</a>
+                <a href="#ai-demo" class="mobile-quick-link aci-launch" style="cursor: pointer;"><i
+                        class="fas fa-robot"></i> ACI Demo</a>
                 <a href="#backend-programme" class="mobile-quick-link"><i class="fas fa-code"></i> Backend Programme</a>
             </div>
         </div>
@@ -7233,9 +7235,9 @@
                             <i class="fas fa-city"></i>
                             <span>Markets</span>
                         </a>
-                        <a href="#ai-demo" class="hero-nav-item">
+                        <a href="#ai-demo" class="hero-nav-item aci-launch" style="cursor: pointer;">
                             <i class="fas fa-robot"></i>
-                            <span>AI Demo</span>
+                            <span>ACI Demo</span>
                         </a>
                         <a href="#backend-programme" class="hero-nav-item">
                             <i class="fas fa-code"></i>
@@ -13184,162 +13186,43 @@
                 </script>
 
                 <!-- ═══════════════════════════════════════
-         ACI 2.0 FULL-SCREEN OVERLAY (from aci2_complete_demo)
+         ACI 2.0 FULL-SCREEN OVERLAY (from aci_dashboard_v4.html)
          ═══════════════════════════════════════ -->
-                <div class="tooltip" id="tooltip"></div>
-                <div class="fs-overlay" id="aciOverlay">
-                    <div class="aci-topbar">
-                        <button class="aci-menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-                        <span class="tb-brand">AlgoEconomics</span>
-                        <div class="tb-pipe tb-res-hide-level1">|</div>
-                        <span class="tb-product tb-res-hide-level1">AI Corruption Index</span>
-                        <span class="tb-live tb-res-hide-level1">Live Intelligence</span>
-                        <div class="tb-spacer"></div>
-                        <div class="tb-context tb-res-hide-level3" id="tbContext">
-                            <span class="tb-ctx-flag" id="tbFlag"></span>
-                            <span class="tb-ctx-label" id="tbLabel"></span>
-                        </div>
-                        <div class="tb-sig tb-res-hide-level2"><span class="tb-sig-dot"></span>Signals active</div>
-                        <button class="tb-close" id="closeAci">✕</button>
-                    </div>
-                    <div class="aci-layout">
-                        <nav class="aci-sidebar" id="aciSidebar">
-                            <div class="nav-item active" data-panel="overview"><span class="nav-icon">◈</span>Overview
-                            </div>
-                            <div class="nav-item" data-panel="heatmap"><span class="nav-icon">▦</span>Portfolio Heatmap
-                            </div>
-                            <div class="sb-divider"></div>
-                            <div class="sb-section">Analysis</div>
-                            <div class="nav-item" data-panel="breakdown"><span class="nav-icon">⊞</span>ACI Breakdown
-                            </div>
-                            <div class="aci-sidebar-mobile-status">
-                                <div class="sb-ms-row level1">
-                                    <span class="tb-product">AI Corruption Index</span>
-                                    <span class="tb-live">Live Intelligence</span>
-                                </div>
-                                <div class="sb-ms-row level2">
-                                    <div class="tb-sig"><span class="tb-sig-dot"></span>Signals active</div>
-                                </div>
-                                <div class="sb-ms-row level3">
-                                    <div class="tb-context" id="tbContextMobile">
-                                        <span class="tb-ctx-flag" id="tbFlagMobile"></span>
-                                        <span class="tb-ctx-label" id="tbLabelMobile"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sb-market">
-                                <div class="sb-market-label" style="text-align:start;">Selected Market</div>
-                                <div class="sb-country" id="sbCountry" style="text-align:start;">—</div>
-                                <div class="sb-sector" id="sbSector" style="text-align:start;">Click a heatmap cell
-                                </div>
-                                <div class="sb-score" id="sbScore"
-                                    style="color:var(--txt3);font-size:16px;text-align:start;">—</div>
-                                <div class="sb-risk-tag" id="sbRisk" style="text-align:start;"></div>
-                                <div class="sb-hint" id="sbHint" style="text-align:start;">Select any cell in the
-                                    heatmap to load its full
-                                    10-factor ACI breakdown.</div>
-                            </div>
-                        </nav>
-                        <main class="aci-main">
-                            <div class="aci-panel panel active" id="panel-overview">
-                                <div class="ov-title">Portfolio Intelligence</div>
-                                <div class="ov-sub">Live governance signals across 8 African markets · 7 sectors · 56
-                                    active data cells</div>
-                                <div class="ov-grid">
-                                    <div class="ov-card display:flex;flex-direction:column;align-items:flex-start;">
-                                        <div class="ov-card-label">Markets Covered</div>
-                                        <div class="ov-card-val">8</div>
-                                        <div class="ov-card-sub">Kenya · Nigeria · S. Africa + 5</div>
-                                    </div>
-                                    <div class="ov-card">
-                                        <div class="ov-card-label">Sectors Tracked</div>
-                                        <div class="ov-card-val">7</div>
-                                        <div class="ov-card-sub">Mining · Fintech · Energy + 4</div>
-                                    </div>
-                                    <div class="ov-card">
-                                        <div class="ov-card-label">Highest Risk Cell</div>
-                                        <div class="ov-card-val" style="color:var(--red)">86</div>
-                                        <div class="ov-card-sub">Nigeria · Energy</div>
-                                    </div>
-                                    <div class="ov-card">
-                                        <div class="ov-card-label">Lowest Risk Cell</div>
-                                        <div class="ov-card-val" style="color:var(--green)">36</div>
-                                        <div class="ov-card-sub">South Africa · Fintech</div>
-                                    </div>
-                                </div>
-                                <div class="signal-row">
-                                    <div class="signal-tag"><span class="signal-dot sig-red"></span>Nigeria Energy — 86
-                                        — High Risk</div>
-                                    <div class="signal-tag"><span class="signal-dot sig-red"></span>Nigeria Mining — 84
-                                        — High Risk</div>
-                                    <div class="signal-tag"><span class="signal-dot sig-red"></span>Tanzania Mining — 75
-                                        — High Risk</div>
-                                    <div class="signal-tag"><span class="signal-dot sig-amber"></span>Kenya Mining — 74
-                                        — Moderate-High</div>
-                                    <div class="signal-tag"><span class="signal-dot sig-green"></span>South Africa
-                                        Fintech — 36 — Moderate-Low</div>
-                                    <div class="signal-tag"><span class="signal-dot sig-green"></span>Rwanda Fintech —
-                                        39 — Moderate-Low</div>
-                                    <div class="signal-tag"><span class="signal-dot sig-green"></span>Morocco Fintech —
-                                        41 — Moderate-Low</div>
-                                </div>
-                                <div
-                                    style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:20px;margin-top:8px;display:flex;flex-direction:column;align-items:flex-start;">
-                                    <div
-                                        style="font-size:9px;font-weight:700;letter-spacing:.14em;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">
-                                        ACI 2.0 Methodology</div>
-                                    <div style="font-size:12px;color:var(--txt2);line-height:1.8;text-align:start">The
-                                        AlgoEconomics
-                                        Corruption Index (ACI 2.0) provides composite governance risk scores across
-                                        three analytical pillars: <strong style="color:var(--txt)">P1 Policy &amp;
-                                            Regulatory Risk</strong> (45% composite weight) assessing market entry,
-                                        investment clarity, and cash flow certainty; <strong style="color:var(--txt)">P2
-                                            Sector Context Risk</strong> (24%) covering sector track record, growth
-                                        potential, and firm-level access; and <strong style="color:var(--txt)">P3
-                                            Country &amp; Macro Risk</strong> (31%) capturing political stability,
-                                        currency risk, rule of law, and banking depth. Each
-                                        pillar is assessed across 10 Readiness Factors with confidence scores from 14+
-                                        primary data sources.</div>
-                                </div>
-                            </div>
-                            <div class="aci-panel panel" id="panel-heatmap">
-                                <div class="hm-title">Portfolio Heatmap</div>
-                                <div class="hm-sub">Click any cell to load a full 10-factor ACI breakdown · <strong>8
-                                        markets</strong> · <strong>7 sectors</strong></div>
-                                <div class="heatmap-scroll">
-                                    <div class="aci-heatmap" id="heatmapGrid"></div>
-                                </div>
-                                <div class="hm-legend">
-                                    <div class="hm-legend-item">
-                                        <div class="hm-legend-dot c-low"></div>0–35: Low Risk
-                                    </div>
-                                    <div class="hm-legend-item">
-                                        <div class="hm-legend-dot c-modl"></div>35–50: Moderate-Low
-                                    </div>
-                                    <div class="hm-legend-item">
-                                        <div class="hm-legend-dot c-mod"></div>50–65: Moderate
-                                    </div>
-                                    <div class="hm-legend-item">
-                                        <div class="hm-legend-dot c-modh"></div>65–75: Moderate-High
-                                    </div>
-                                    <div class="hm-legend-item">
-                                        <div class="hm-legend-dot c-high"></div>75–100: High Risk
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="aci-panel panel" id="panel-breakdown">
-                                <div class="prompt-banner" id="promptBanner">
-                                    <span class="pb-icon">▦</span>
-                                    <span>Select a cell in the <strong>Portfolio Heatmap</strong> to load the full
-                                        10-factor ACI breakdown.</span>
-                                </div>
-                                <div id="breakdownContent" style="display:none;text-align:start"></div>
-                            </div>
-                        </main>
-                    </div>
+                <div class="fs-overlay" id="aciOverlay" style="padding: 0; overflow: hidden; background: #0a0e1a;">
+                    <iframe src="aci_dashboard_v4.html"
+                        style="width: 100%; height: 100%; border: none; background: transparent;"></iframe>
                 </div>
 
-                <script src="acimodal.js"></script>
+                <script>
+                                const aciOverlay = document.getElementById('aciOverlay');
+                    
+                    document.querySelectorAll('.aci-launch').forEach(btn => btn.addEventListener('click', (e) => {
+                                    e.preventDefault();
+                                aciOverlay.style.display = 'flex';
+                        requestAnimationFrame(() => requestAnimationFrame(() => aciOverlay.classList.add('visible')));
+                                document.body.style.overflow = 'hidden';
+                    }));
+
+                                function closeAciOverlay() {
+                                    aciOverlay.classList.remove('visible');
+                        setTimeout(() => {
+                                    aciOverlay.style.display = 'none';
+                                document.body.style.overflow = '';
+                        }, 300);
+                    }
+
+                                window.addEventListener('message', function(e) {
+                        if (e.data && e.data.action === 'closeAci') {
+                                    closeAciOverlay();
+                        }
+                    });
+                    
+                    document.addEventListener('keydown', e => {
+                        if (e.key === 'Escape' && aciOverlay.classList.contains('visible')) {
+                                    closeAciOverlay();
+                        }
+                    });
+                </script>
 
 </body>
 
