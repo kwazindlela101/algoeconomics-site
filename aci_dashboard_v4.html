@@ -1129,12 +1129,19 @@
     <div class="topbar-divider tb-res-hide-level1"></div>
     <div class="topbar-title tb-res-hide-level1">Exit Intelligence Infrastructure</div>
     <div class="topbar-badge tb-res-hide-level1">LIVE INTELLIGENCE</div>
-    <div class="topbar-market tb-res-hide-level3" id="topbar-market">
-      <div class="flag" id="topbar-flag">NG</div>
-      <div class="mname" id="topbar-mname">Nigeria · Energy</div>
+    <div style="margin-left:auto; display: flex; align-items: center; gap: 4px;">
+      <div class="topbar-market tb-res-hide-level3" id="topbar-market">
+        <div class="flag" id="topbar-flag">NG</div>
+        <div class="mname" id="topbar-mname">Nigeria · Energy</div>
+      </div>
+      <div class="signal-dot tb-res-hide-level2"></div>
+      <div class="signal-text tb-res-hide-level2" style="margin-left:6px; font-size:11px; margin-right: 16px;">Signals
+        active</div>
+      <button id="closeAciBtn"
+        style="background: transparent; border: none; color: #8899bb; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: color 0.2s; margin-left: 4px;"
+        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#8899bb'" aria-label="Close Dashboard"
+        onclick="window.parent.postMessage({action: 'closeAci'}, '*')">✕</button>
     </div>
-    <div class="signal-dot tb-res-hide-level2"></div>
-    <div class="signal-text tb-res-hide-level2" style="margin-left:6px; font-size:11px;">Signals active</div>
   </div>
 
   <!-- SIDEBAR -->
