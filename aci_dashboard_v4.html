@@ -1137,11 +1137,11 @@
       <div class="signal-dot tb-res-hide-level2"></div>
       <div class="signal-text tb-res-hide-level2" style="margin-left:6px; font-size:11px; margin-right: 16px;">Signals
         active</div>
-      <button id="closeAciBtn"
-        style="background: transparent; border: none; color: #8899bb; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: color 0.2s; margin-left: 4px;"
-        onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#8899bb'" aria-label="Close Dashboard"
-        onclick="window.parent.postMessage({action: 'closeAci'}, '*')">✕</button>
     </div>
+    <button id="closeAciBtn"
+      style="background: transparent; border: none; color: #8899bb; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: color 0.2s; margin-left: 10px; z-index: 999; position: relative;"
+      onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#8899bb'" aria-label="Close Dashboard"
+      onclick="window.parent.postMessage({action: 'closeAci'}, '*')">✕</button>
   </div>
 
   <!-- SIDEBAR -->
