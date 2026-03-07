@@ -2,29 +2,30 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Platform Overview — AlgoEconomics Exit Intelligence Infrastructure</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Framework — AlgoEconomics</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap"
-    rel="stylesheet" />
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600&display=swap"
+    rel="stylesheet">
   <style>
-    /* ── DESIGN TOKENS — match AlgoEconomics brand ── */
     :root {
-      --navy-deep: #0a0d1e;
-      --navy-mid: #0f1535;
-      --navy-card: #131a3a;
-      --navy-border: #1e2a50;
-      --gold: #c8a84b;
-      --gold-light: #f5c842;
-      --gold-dim: #8a6f2e;
-      --white: #ffffff;
-      --white-80: rgba(255, 255, 255, 0.80);
-      --white-50: rgba(255, 255, 255, 0.50);
-      --white-20: rgba(255, 255, 255, 0.12);
-      --accent-green: #2ecc71;
-      --accent-red: #e05252;
-      --accent-orange: #e67e22;
+      --bg-primary: #07090f;
+      --bg-secondary: #0d1018;
+      --bg-card: #111520;
+      --bg-card-hover: #161b26;
+      --gold: #c9a84c;
+      --gold-light: #e2c97e;
+      --gold-dim: rgba(201, 168, 76, 0.15);
+      --teal: #3ecfb2;
+      --teal-dim: rgba(62, 207, 178, 0.12);
+      --red: #e05252;
+      --red-dim: rgba(224, 82, 82, 0.12);
+      --white: #f0ede6;
+      --white-dim: rgba(240, 237, 230, 0.55);
+      --white-faint: rgba(240, 237, 230, 0.08);
+      --border: rgba(201, 168, 76, 0.18);
+      --border-faint: rgba(240, 237, 230, 0.06);
     }
 
     *,
@@ -35,79 +36,98 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: var(--navy-deep);
+      background: var(--bg-primary);
       color: var(--white);
       font-family: 'Barlow', sans-serif;
-      font-weight: 400;
-      line-height: 1.65;
+      font-weight: 300;
+      line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* ── TICKER BAR (matches site header ticker) ── */
-    .ticker-bar {
-      background: var(--navy-mid);
-      border-bottom: 1px solid var(--navy-border);
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-faint);
       padding: 8px 0;
       overflow: hidden;
       white-space: nowrap;
     }
 
-    .ticker-track {
+    .ticker-inner {
       display: inline-flex;
       gap: 48px;
-      animation: ticker 28s linear infinite;
+      animation: ticker 30s linear infinite;
     }
 
     .ticker-item {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: 11px;
-      letter-spacing: 0.08em;
-      color: var(--white-50);
+      letter-spacing: 0.12em;
+      color: var(--white-dim);
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .ticker-item .pair {
-      color: var(--white-80);
-      font-weight: 600;
+    .ticker-item .label {
+      color: var(--white-dim);
+    }
+
+    .ticker-item .val {
+      color: var(--white);
+      font-weight: 500;
     }
 
     .ticker-item .up {
-      color: var(--accent-green);
+      color: var(--teal);
     }
 
     .ticker-item .dn {
-      color: var(--accent-red);
+      color: var(--red);
     }
 
     @keyframes ticker {
-      from {
+      0% {
         transform: translateX(0);
       }
 
-      to {
+      100% {
         transform: translateX(-50%);
       }
     }
 
-    /* ── BACK BUTTON ── */
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 15, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-faint);
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
     .back-button {
       display: inline-flex;
-      position: relative;
-      z-index: 10;
       align-items: center;
       gap: 6px;
-      padding: 6px 14px;
-      margin-bottom: 24px;
+      margin-bottom: 14px;
+      padding: 6px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(200, 168, 75, 0.4);
-      /* var(--gold) */
-      background: rgba(10, 13, 30, 0.85);
-      /* var(--navy-deep) */
+      border: 1px solid rgba(197, 151, 58, 0.4);
+      background: rgba(9, 11, 14, 0.85);
       color: var(--gold);
-      font-size: 11px;
-      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       text-decoration: none;
@@ -116,631 +136,123 @@
     }
 
     .back-button:hover {
-      background: rgba(200, 168, 75, 0.15);
+      background: rgba(197, 151, 58, 0.12);
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
-      transform: translateY(-1px);
     }
 
     .back-button-icon {
+      font-size: 11px;
+    }
+
+    @media (max-width: 600px) {
+      .back-button {
+        font-size: 9px;
+        padding: 5px 10px;
+      }
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--gold);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .logo-text {
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .logo-sub {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--white-dim);
+      text-transform: uppercase;
+      display: block;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold);
+    }
+
+    .nav-cta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 8px 20px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--bg-primary);
     }
 
     /* ── HERO ── */
     .hero {
-      position: relative;
-      padding: 70px 24px 80px;
-      text-align: center;
-      overflow: hidden;
+      padding: 120px 48px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 80px;
+      align-items: end;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200, 168, 75, 0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 80% 60%, rgba(46, 204, 113, 0.05) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      border: 1px solid var(--gold-dim);
-      color: var(--gold);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 6px 18px;
-      border-radius: 2px;
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 28px;
     }
 
-    .hero h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(38px, 6vw, 72px);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      max-width: 860px;
-      margin: 0 auto 24px;
-    }
-
-    .hero h1 span {
-      color: var(--gold-light);
-    }
-
-    .hero-statement {
-      font-size: clamp(16px, 2vw, 20px);
-      color: var(--white-80);
-      max-width: 680px;
-      margin: 0 auto 40px;
-      font-weight: 300;
-      line-height: 1.6;
-    }
-
-    .hero-statement strong {
-      color: var(--white);
-      font-weight: 600;
-    }
-
-    /* ── FORMULA BLOCK ── */
-    .formula-wrap {
-      display: flex;
-      justify-content: center;
-      margin: 0 auto 60px;
-    }
-
-    .formula {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-top: 3px solid var(--gold);
-      border-radius: 6px;
-      padding: 28px 48px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .formula-part {
-      text-align: center;
-    }
-
-    .formula-part .label {
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      color: var(--white-50);
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .formula-part .value {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-    }
-
-    .formula-part .value.gold {
-      color: var(--gold-light);
-    }
-
-    .formula-part .value.white {
-      color: var(--white);
-    }
-
-    .formula-operator {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 32px;
-      color: var(--white-50);
-      font-weight: 300;
-      margin: 0 4px;
-      align-self: flex-end;
-      padding-bottom: 2px;
-    }
-
-    /* ── SECTION WRAPPER ── */
-    .section {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 64px 24px;
-    }
-
-    .section+.section {
-      border-top: 1px solid var(--navy-border);
-    }
-
-    .section-number {
-      font-size: 9px;
-      letter-spacing: 0.16em;
-      color: var(--gold-dim);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .section h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(26px, 4vw, 40px);
-      font-weight: 800;
-      letter-spacing: 0.01em;
-      margin-bottom: 20px;
-      line-height: 1.1;
-    }
-
-    .section h2 span {
-      color: var(--gold-light);
-    }
-
-    .section p {
-      color: var(--white-80);
-      font-size: 15px;
-      line-height: 1.75;
-      max-width: 720px;
-    }
-
-    .section p+p {
-      margin-top: 14px;
-    }
-
-    /* ── PROBLEM SECTION ── */
-    .problem-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 32px;
-    }
-
-    @media (max-width: 640px) {
-      .problem-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .problem-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 6px;
-      padding: 24px;
-    }
-
-    .problem-card.red {
-      border-left: 3px solid var(--accent-red);
-    }
-
-    .problem-card.gold {
-      border-left: 3px solid var(--gold);
-    }
-
-    .problem-card .card-label {
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .problem-card.red .card-label {
-      color: var(--accent-red);
-    }
-
-    .problem-card.gold .card-label {
-      color: var(--gold);
-    }
-
-    .problem-card p {
-      font-size: 14px;
-      color: var(--white-80);
-      line-height: 1.65;
-      max-width: none;
-    }
-
-    /* ── PULL QUOTE ── */
-    .pull-quote {
-      background: linear-gradient(135deg, var(--navy-card) 0%, #0e1830 100%);
-      border: 1px solid var(--navy-border);
-      border-left: 4px solid var(--gold-light);
-      border-radius: 6px;
-      padding: 32px 40px;
-      margin: 40px 0;
-    }
-
-    .pull-quote p {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(20px, 3vw, 28px);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.3;
-      max-width: none;
-    }
-
-    .pull-quote p em {
-      color: var(--gold-light);
-      font-style: normal;
-    }
-
-    /* ── SOLUTION COMPONENTS ── */
-    .solution-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 768px) {
-      .solution-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .sol-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 6px;
-      padding: 28px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sol-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-    }
-
-    .sol-card.aci::before {
-      background: var(--gold-light);
-    }
-
-    .sol-card.ers::before {
-      background: var(--accent-green);
-    }
-
-    .sol-card.combo::before {
-      background: linear-gradient(90deg, var(--gold-light), var(--accent-green));
-    }
-
-    .sol-card .sol-tag {
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .sol-card.aci .sol-tag {
-      color: var(--gold-light);
-    }
-
-    .sol-card.ers .sol-tag {
-      color: var(--accent-green);
-    }
-
-    .sol-card.combo .sol-tag {
-      color: var(--white-50);
-    }
-
-    .sol-card h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 14px;
-      letter-spacing: 0.02em;
-    }
-
-    .sol-card ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .sol-card ul li {
-      font-size: 13px;
-      color: var(--white-80);
-      padding: 5px 0;
-      padding-left: 14px;
-      position: relative;
-      line-height: 1.5;
-      border-bottom: 1px solid var(--white-20);
-    }
-
-    .sol-card ul li:last-child {
-      border-bottom: none;
-    }
-
-    .sol-card ul li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      font-size: 11px;
-    }
-
-    .sol-card.aci ul li::before {
-      color: var(--gold-light);
-    }
-
-    .sol-card.ers ul li::before {
-      color: var(--accent-green);
-    }
-
-    .sol-card.combo ul li::before {
-      color: var(--white-50);
-    }
-
-    /* ── STAT ROW ── */
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 640px) {
-      .stat-row {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .stat-box {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 6px;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .stat-box .num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 36px;
-      font-weight: 800;
-      color: var(--gold-light);
-      line-height: 1;
-    }
-
-    .stat-box .desc {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--white-50);
-      margin-top: 6px;
-    }
-
-    /* ── METHODOLOGY STEPS ── */
-    .method-list {
-      margin-top: 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .method-item {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 16px;
-      align-items: flex-start;
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 6px;
-      padding: 20px 24px;
-    }
-
-    .method-item:hover {
-      border-color: var(--gold-dim);
-      transition: border-color 0.2s;
-    }
-
-    .method-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--gold-light);
-      opacity: 0.35;
-      line-height: 1;
-      padding-top: 2px;
-    }
-
-    .method-content h4 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin-bottom: 6px;
-      color: var(--white);
-    }
-
-    .method-content p {
-      font-size: 13px;
-      color: var(--white-50);
-      line-height: 1.6;
-      max-width: none;
-    }
-
-    /* ── WHO IT'S FOR ── */
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 36px;
-    }
-
-    @media (max-width: 640px) {
-      .audience-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .audience-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 6px;
-      padding: 22px 20px;
-    }
-
-    .audience-card .icon {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .audience-card h4 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 8px;
-    }
-
-    .audience-card p {
-      font-size: 13px;
-      color: var(--white-50);
-      line-height: 1.6;
-      max-width: none;
-    }
-
-    /* ── CTA SECTION ── */
-    .cta-section {
-      background: linear-gradient(135deg, #0f1535 0%, #0a0d1e 50%, #0f1535 100%);
-      border-top: 1px solid var(--navy-border);
-      border-bottom: 1px solid var(--navy-border);
-      padding: 80px 24px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200, 168, 75, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .cta-section h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 800;
-      margin-bottom: 16px;
-      line-height: 1.1;
-    }
-
-    .cta-section h2 span {
-      color: var(--gold-light);
-    }
-
-    .cta-section p {
-      color: var(--white-80);
-      font-size: 16px;
-      max-width: 520px;
-      margin: 0 auto 36px;
-      line-height: 1.65;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: var(--gold);
-      color: #0a0d1e;
-      font-family: 'Barlow', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.04em;
-      padding: 14px 32px;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--gold);
-      font-family: 'Barlow', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.04em;
-      padding: 14px 32px;
-      border: 1px solid var(--gold);
-      border-radius: 3px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(200, 168, 75, 0.1);
-      transform: translateY(-1px);
-    }
-
-    /* ── DIVIDER ── */
-    .gold-divider {
-      width: 48px;
-      height: 3px;
-      background: var(--gold);
-      margin: 20px 0;
-    }
-
-    /* ── ADVISORY BADGE ── */
-    .advisory-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 32px;
-    }
-
-    .advisory-badge {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 4px;
-      padding: 8px 16px;
-      font-size: 11px;
-      color: var(--white-50);
-      letter-spacing: 0.06em;
-    }
-
-    .advisory-badge strong {
-      color: var(--white-80);
-    }
-
-    /* ── LIVE SIGNAL PILL ── */
-    .live-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(46, 204, 113, 0.08);
-      border: 1px solid rgba(46, 204, 113, 0.3);
-      border-radius: 20px;
-      padding: 6px 16px;
-      font-size: 11px;
-      color: var(--accent-green);
-      letter-spacing: 0.08em;
-      font-weight: 600;
-      margin-bottom: 32px;
-    }
-
-    .live-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--accent-green);
+    .dot {
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      animation: pulse 1.8s infinite;
+      background: var(--gold);
+      animation: pulse 2.5s ease-in-out infinite;
     }
 
     @keyframes pulse {
@@ -753,7 +265,971 @@
 
       50% {
         opacity: 0.4;
-        transform: scale(1.4);
+        transform: scale(0.7);
+      }
+    }
+
+    .eyebrow-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+    }
+
+    .eyebrow-divider {
+      width: 24px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 6vw, 80px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--white-dim);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* Hero score card */
+    .hero-score {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+
+    .hero-score::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .score-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      margin-bottom: 8px;
+    }
+
+    .score-country {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-faint);
+    }
+
+    .score-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      font-weight: 300;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .score-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--red-dim);
+      border: 1px solid rgba(224, 82, 82, 0.3);
+      padding: 4px 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    .score-status .icon {
+      font-size: 10px;
+    }
+
+    .score-meta {
+      font-size: 11px;
+      color: var(--white-dim);
+      line-height: 1.6;
+    }
+
+    .score-bars {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .score-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .score-bar-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    .score-bar-track {
+      flex: 1;
+      height: 3px;
+      background: var(--white-faint);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: var(--red);
+      transform-origin: left;
+      animation: barGrow 1s ease forwards;
+      transform: scaleX(0);
+    }
+
+    @keyframes barGrow {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .score-bar-fill.gold {
+      background: var(--gold);
+    }
+
+    .score-bar-fill.teal {
+      background: var(--teal);
+    }
+
+    .score-bar-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      color: var(--white-dim);
+      width: 24px;
+      text-align: right;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border-faint);
+      margin: 0;
+    }
+
+    /* ── PROBLEM ── */
+    .problem {
+      padding: 80px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .section-label span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-faint);
+      max-width: 80px;
+    }
+
+    .problem-statement {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300;
+      line-height: 1.25;
+      max-width: 760px;
+      margin-bottom: 48px;
+    }
+
+    .problem-statement em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .live-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border-faint);
+      border: 1px solid var(--border-faint);
+    }
+
+    .live-cell {
+      background: var(--bg-secondary);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .live-cell.missing {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      margin: -1px;
+    }
+
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .live-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .live-dot.missing-dot {
+      background: var(--gold);
+      animation: none;
+    }
+
+    .live-indicator.live-color {
+      color: var(--teal);
+    }
+
+    .live-indicator.missing-color {
+      color: var(--gold);
+    }
+
+    .live-category {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+    }
+
+    .live-cell.missing .live-category {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ── FRAMEWORK SECTIONS ── */
+    .framework-section {
+      padding: 80px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .framework-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 60px;
+    }
+
+    .framework-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .badge-pill {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+
+    .badge-pill.teal-pill {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 54px);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    h2 em.teal {
+      color: var(--teal);
+    }
+
+    .framework-desc {
+      font-size: 15px;
+      color: var(--white-dim);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .framework-score-range {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .range-bar {
+      flex: 1;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--gold), var(--teal));
+      border-radius: 2px;
+      max-width: 120px;
+    }
+
+    /* Component cards */
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-faint);
+      border: 1px solid var(--border-faint);
+    }
+
+    .components-grid.five-col {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .component-card {
+      background: var(--bg-card);
+      padding: 28px 24px;
+      position: relative;
+      transition: background 0.25s;
+    }
+
+    .component-card:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .component-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold-dim);
+      transition: background 0.25s;
+    }
+
+    .component-card:hover::before {
+      background: var(--gold);
+    }
+
+    .component-card.teal-card::before {
+      background: var(--teal-dim);
+    }
+
+    .component-card.teal-card:hover::before {
+      background: var(--teal);
+    }
+
+    .component-weight {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .component-weight.teal-weight {
+      color: var(--teal);
+    }
+
+    .component-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-faint);
+    }
+
+    .component-desc {
+      font-size: 12px;
+      color: var(--white-dim);
+      line-height: 1.7;
+    }
+
+    .component-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 12px;
+      opacity: 0.7;
+    }
+
+    .component-sub.teal-sub {
+      color: var(--teal);
+    }
+
+    /* ── ERS CALLOUT ── */
+    .ers-callout {
+      padding: 0 48px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .callout-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .callout-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), transparent);
+    }
+
+    .callout-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .callout-label::before {
+      content: '▸';
+      font-size: 8px;
+    }
+
+    .callout-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .callout-title em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .callout-text {
+      font-size: 14px;
+      color: var(--white-dim);
+      line-height: 1.8;
+    }
+
+    .callout-score-display {
+      text-align: center;
+    }
+
+    .callout-score-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 100px;
+      font-weight: 300;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .callout-score-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      margin-bottom: 12px;
+    }
+
+    .exit-tag {
+      display: inline-block;
+      background: var(--red-dim);
+      border: 1px solid rgba(224, 82, 82, 0.4);
+      padding: 6px 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    .exit-components {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: left;
+      margin-top: 16px;
+    }
+
+    .exit-comp-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--white-dim);
+    }
+
+    .exit-comp-val {
+      color: var(--red);
+    }
+
+    .exit-comp-val.ok {
+      color: var(--teal);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border-faint);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+    }
+
+    .footer-right {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-4 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-5 {
+      animation-delay: 0.5s;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── DUAL SYSTEM BRIDGE ── */
+    .bridge {
+      padding: 60px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .bridge-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 28px 40px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .bridge-block.gold-block {
+      border-color: var(--border);
+    }
+
+    .bridge-block.teal-block {
+      border-color: rgba(62, 207, 178, 0.25);
+    }
+
+    .bridge-acronym {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .bridge-acronym.gold {
+      color: var(--gold);
+    }
+
+    .bridge-acronym.teal {
+      color: var(--teal);
+    }
+
+    .bridge-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      margin-bottom: 8px;
+    }
+
+    .bridge-desc {
+      font-size: 12px;
+      color: var(--white-dim);
+      line-height: 1.6;
+    }
+
+    .bridge-arrow {
+      padding: 0 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      color: var(--white-dim);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .bridge-arrow-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 80px 24px 60px;
+      }
+
+      .problem,
+      .framework-section,
+      .ers-callout {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .framework-header {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .components-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .components-grid.five-col {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .live-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .callout-box {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .bridge {
+        flex-direction: column;
+      }
+
+      .bridge-arrow {
+        transform: rotate(90deg);
+        padding: 16px 0;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    /* ── MODAL STYLES (Consultation) ── */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(13, 31, 45, 0.9);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #1a3a52 0%, #0d1f2d 100%);
+      margin: 2% auto;
+      padding: 0;
+      border: 1px solid #2a4a62;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      pointer-events: auto;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      padding: 30px 40px 20px;
+      border-bottom: 1px solid #2a4a62;
+    }
+
+    .modal-header h2 {
+      color: #f4b942;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .modal-header p {
+      color: #b8c5d0;
+      font-size: 15px;
+    }
+
+    .close {
+      color: #b8c5d0;
+      float: right;
+      font-size: 32px;
+      font-weight: 300;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      z-index: 10000;
+      position: relative;
+      pointer-events: auto;
+    }
+
+    .close:hover {
+      color: #f4b942;
+    }
+
+    .modal-body {
+      padding: 30px 40px 40px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      color: #e8eef3;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #2a4a62;
+      border-radius: 6px;
+      font-size: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #e8eef3;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #f4b942;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: inherit;
+    }
+
+    .form-group select {
+      cursor: pointer;
+    }
+
+    .form-group select option {
+      background: #0d1f2d;
+      color: #e8eef3;
+    }
+
+    .required {
+      color: #f4b942;
+    }
+
+    .submit-button {
+      width: 100%;
+      background: #f4b942;
+      color: #0d1f2d;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .submit-button:hover {
+      background: #ffca5d;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        margin: 10% auto;
+        width: 95%;
+      }
+
+      .modal-body {
+        padding: 25px 25px;
+        overflow-y: auto;
+        max-height: 70vh;
+      }
+
+      .modal-header h2 {
+        font-size: 24px;
       }
     }
   </style>
@@ -762,286 +1238,548 @@
 <body>
 
   <!-- TICKER -->
-  <div class="ticker-bar">
-    <div class="ticker-track">
-      <span class="ticker-item"><span class="pair">GBP/NGN</span> 2,043.18 <span class="up">▲ +0.38%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/ZAR</span> 23.41 <span class="up">▲ +0.64%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/GHS</span> 19.87 <span class="dn">▼ -1.14%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/EGP</span> 63.15 <span class="up">▲ +0.67%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/TZS</span> 3,234.56 <span class="up">▲ +1.42%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/KES</span> 168.74 <span class="dn">▼ -0.22%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/MAD</span> 11.23 <span class="up">▲ +0.11%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/RWF</span> 1,452.33 <span class="up">▲ +0.55%</span></span>
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span class="label">ACI LIVE</span></span>
+      <span class="ticker-item"><span class="label">NIGERIA</span> <span class="val">ACI 72.4</span> <span class="up">▲
+          +1.4pts</span></span>
+      <span class="ticker-item"><span class="label">NIGERIA ENERGY</span> <span class="val">ERS 38</span> <span
+          class="dn">▼ EXIT-DIFFICULT</span></span>
+      <span class="ticker-item"><span class="label">SOUTH AFRICA</span> <span class="val">ACI 68.1</span> <span
+          class="dn">▼ -0.6pts</span></span>
+      <span class="ticker-item"><span class="label">GHANA</span> <span class="val">ACI 74.3</span> <span class="up">▲
+          +2.1pts</span></span>
+      <span class="ticker-item"><span class="label">ETHIOPIA</span> <span class="val">ACI 51.2</span> <span class="dn">▼
+          -1.2pts</span></span>
+      <span class="ticker-item"><span class="label">KENYA</span> <span class="val">ACI 66.8</span> <span class="up">▲
+          +0.9pts</span></span>
       <!-- duplicate for seamless loop -->
-      <span class="ticker-item"><span class="pair">GBP/NGN</span> 2,043.18 <span class="up">▲ +0.38%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/ZAR</span> 23.41 <span class="up">▲ +0.64%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/GHS</span> 19.87 <span class="dn">▼ -1.14%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/EGP</span> 63.15 <span class="up">▲ +0.67%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/TZS</span> 3,234.56 <span class="up">▲ +1.42%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/KES</span> 168.74 <span class="dn">▼ -0.22%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/MAD</span> 11.23 <span class="up">▲ +0.11%</span></span>
-      <span class="ticker-item"><span class="pair">GBP/RWF</span> 1,452.33 <span class="up">▲ +0.55%</span></span>
+      <span class="ticker-item"><span class="label">ACI LIVE</span></span>
+      <span class="ticker-item"><span class="label">NIGERIA</span> <span class="val">ACI 72.4</span> <span class="up">▲
+          +1.4pts</span></span>
+      <span class="ticker-item"><span class="label">NIGERIA ENERGY</span> <span class="val">ERS 38</span> <span
+          class="dn">▼ EXIT-DIFFICULT</span></span>
+      <span class="ticker-item"><span class="label">SOUTH AFRICA</span> <span class="val">ACI 68.1</span> <span
+          class="dn">▼ -0.6pts</span></span>
+      <span class="ticker-item"><span class="label">GHANA</span> <span class="val">ACI 74.3</span> <span class="up">▲
+          +2.1pts</span></span>
+      <span class="ticker-item"><span class="label">ETHIOPIA</span> <span class="val">ACI 51.2</span> <span class="dn">▼
+          -1.2pts</span></span>
+      <span class="ticker-item"><span class="label">KENYA</span> <span class="val">ACI 66.8</span> <span class="up">▲
+          +0.9pts</span></span>
     </div>
   </div>
 
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="footer-name"> <img src="ALGO LOGO2.png" alt="AlgoEconomics"
+          style="max-height:35px; width:auto; display:block;"> </div>
+      <div>
+        <div class="logo-text">AlgoEconomics</div>
+        <span class="logo-sub">Exit Intelligence Infrastructure</span>
+      </div>
+    </a>
+    <a href="#" onclick="openConsultationModal(); return false;" class="nav-cta">Request Access</a>
+  </nav>
+
   <!-- HERO -->
-  <div class="hero">
+  <section class="hero">
     <div>
-      <a href="/" class="back-button">
+      <a href="index.html" class="back-button">
         <span class="back-button-icon">←</span>
         Back to platform
       </a>
+      <div class="hero-eyebrow fade-up">
+        <div class="dot"></div>
+        <span class="eyebrow-text">AlgoEconomics</span>
+        <div class="eyebrow-divider"></div>
+        <span class="eyebrow-text">The Framework</span>
+      </div>
+      <h1 class="fade-up delay-1">Exit <em>Intelligence</em><br>Infrastructure</h1>
+      <p class="hero-sub fade-up delay-2">A dual-framework scoring system that tells institutional investors not just
+        whether to enter African markets — but how, when, and whether capital can exit.</p>
     </div>
-    <div class="live-pill"><span class="live-dot"></span>Live Intelligence Active</div>
-    <div class="hero-tag">Exit Intelligence Infrastructure · Platform Overview</div>
-    <h1>The Infrastructure That<br><span>Governs Capital Movement</span></h1>
-    <p class="hero-statement">
-      AlgoEconomics is <strong>not a dashboard</strong>. It is Exit Intelligence Infrastructure — a full-cycle system
-      that tells investors not just where they can operate, but <strong>where they can exit</strong>.
+
+    <div class="hero-score">
+      <div class="score-label">Live Pilot · Nigeria Energy Sector</div>
+      <div class="score-country">ERS — Exit Risk Score</div>
+      <div class="score-val">38</div>
+      <div class="score-status"><span class="icon">▼</span> Exit-Difficult</div>
+      <div class="score-meta">Score 0–100 · 100 = Easiest Exit<br>Updated: March 2026 · Pilot Data</div>
+      <div class="score-bars">
+        <div class="score-bar-row">
+          <span class="score-bar-label">Exit Routes</span>
+          <div class="score-bar-track">
+            <div class="score-bar-fill" style="width:32%;animation-delay:0.6s"></div>
+          </div>
+          <span class="score-bar-num">32</span>
+        </div>
+        <div class="score-bar-row">
+          <span class="score-bar-label">Repatriation</span>
+          <div class="score-bar-track">
+            <div class="score-bar-fill" style="width:41%;animation-delay:0.7s"></div>
+          </div>
+          <span class="score-bar-num">41</span>
+        </div>
+        <div class="score-bar-row">
+          <span class="score-bar-label">Liquidity</span>
+          <div class="score-bar-track">
+            <div class="score-bar-fill" style="width:28%;animation-delay:0.8s"></div>
+          </div>
+          <span class="score-bar-num">28</span>
+        </div>
+        <div class="score-bar-row">
+          <span class="score-bar-label">IRR Bench</span>
+          <div class="score-bar-track">
+            <div class="score-bar-fill gold" style="width:55%;animation-delay:0.9s"></div>
+          </div>
+          <span class="score-bar-num">55</span>
+        </div>
+        <div class="score-bar-row">
+          <span class="score-bar-label">Timeline</span>
+          <div class="score-bar-track">
+            <div class="score-bar-fill" style="width:38%;animation-delay:1s"></div>
+          </div>
+          <span class="score-bar-num">38</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- THE PROBLEM -->
+  <section class="problem reveal">
+    <div class="section-label"><span>The Problem</span></div>
+    <p class="problem-statement">
+      Governance is the single biggest driver of investment outcomes — yet it's the <em>only major domain without
+        real-time data.</em>
     </p>
-
-    <!-- FORMULA -->
-    <div class="formula-wrap">
-      <div class="formula">
-        <div class="formula-part">
-          <div class="label">Investability</div>
-          <div class="value gold">INVESTABILITY</div>
+    <div class="live-grid">
+      <div class="live-cell">
+        <div class="live-indicator live-color">
+          <div class="live-dot"></div> Live
         </div>
-        <div class="formula-operator">=</div>
-        <div class="formula-part">
-          <div class="label">Entry Risk (ACI)</div>
-          <div class="value white">ENTRY RISK</div>
+        <div class="live-category">Markets</div>
+      </div>
+      <div class="live-cell">
+        <div class="live-indicator live-color">
+          <div class="live-dot"></div> Live
         </div>
-        <div class="formula-operator">×</div>
-        <div class="formula-part">
-          <div class="label">Exit Feasibility (ERS)</div>
-          <div class="value gold">EXIT FEASIBILITY</div>
+        <div class="live-category">Weather</div>
+      </div>
+      <div class="live-cell">
+        <div class="live-indicator live-color">
+          <div class="live-dot"></div> Live
         </div>
+        <div class="live-category">Supply Chains</div>
+      </div>
+      <div class="live-cell">
+        <div class="live-indicator live-color">
+          <div class="live-dot"></div> Live
+        </div>
+        <div class="live-category">Commodity Prices</div>
+      </div>
+      <div class="live-cell missing">
+        <div class="live-indicator missing-color">
+          <div class="live-dot missing-dot"></div> Missing
+        </div>
+        <div class="live-category">Governance</div>
       </div>
     </div>
+  </section>
 
-    <p style="font-size:13px; color:var(--white-50); letter-spacing:0.06em;">
-      If either side is zero — the investment is zero.
-    </p>
-  </div>
+  <hr class="section-divider">
 
-  <!-- SECTION 1: THE PROBLEM -->
-  <div class="section">
-    <div class="section-number">01 · The Core Problem</div>
-    <h2>Investors Don't Lose Money<br>Entering. They Lose It <span>Not Exiting</span>.</h2>
-    <div class="gold-divider"></div>
-    <p>Global investors have spent decades trying to understand African markets through frameworks built for developed
-      economies. These frameworks focus heavily on entry risk — macroeconomics, governance, liquidity, FX — but they
-      fail to measure the single factor that ultimately determines investment outcomes: <strong
-        style="color:var(--white);">the ability to exit.</strong></p>
-    <p>Traditional risk models treat entry and exit as separate questions. In frontier markets, they are inseparable.
-      Without a unified framework, global capital systematically misprices African opportunities and overestimates
-      structural risk.</p>
-
-    <div class="problem-grid">
-      <div class="problem-card red">
-        <div class="card-label">❌ The Old Model — Incomplete</div>
-        <p>A market with low entry risk but no exit pathways is a trap. Existing platforms stop at entry. They tell you
-          what a market looks like today — not whether you can leave it tomorrow.</p>
-      </div>
-      <div class="problem-card gold">
-        <div class="card-label">✓ The AlgoEconomics Model — Full Cycle</div>
-        <p>A market with higher entry risk but strong exit pathways can still be highly investable. AlgoEconomics is the
-          first system to quantify both — simultaneously, in a single coherent framework.</p>
-      </div>
+  <!-- DUAL SYSTEM BRIDGE -->
+  <div class="bridge reveal">
+    <div class="bridge-block gold-block">
+      <div class="bridge-acronym gold">ACI</div>
+      <div class="bridge-name">AlgoEconomics Core Intelligence</div>
+      <div class="bridge-desc">Governance & entry risk scoring across 4 dimensions. Answers: <em>is this market
+          investable?</em></div>
     </div>
-
-    <div class="pull-quote">
-      <p>"A market with low entry risk but no exit pathways is <em>a trap</em>. A market with higher entry risk but
-        strong exit pathways can still be <em>highly investable</em>."</p>
+    <div class="bridge-arrow">
+      <span>→</span>
+      <span class="bridge-arrow-label">Powers</span>
     </div>
-  </div>
-
-  <!-- SECTION 2: THE SOLUTION -->
-  <div class="section">
-    <div class="section-number">02 · The Solution</div>
-    <h2>Full-Cycle Investment<br><span>Intelligence</span></h2>
-    <div class="gold-divider"></div>
-    <p>Exit Intelligence Infrastructure provides a single, coherent system that governs investment decisions across the
-      full capital cycle. Two frameworks. One verdict.</p>
-
-    <div class="solution-grid">
-      <div class="sol-card aci">
-        <div class="sol-tag">◆ ACI — Entry Intelligence</div>
-        <h3>Real-Time Entry Conditions</h3>
-        <ul>
-          <li>Governance and institutional reliability</li>
-          <li>Policy stability and regulatory behaviour</li>
-          <li>FX convertibility and liquidity</li>
-          <li>Market transparency and data integrity</li>
-          <li>10-Factor scoring across 8 markets · 7 sectors</li>
-        </ul>
-        <p style="font-size:12px; color:var(--white-50); margin-top:14px; max-width:none;">ACI answers: <strong
-            style="color:var(--gold-light);">Can you operate?</strong></p>
-      </div>
-      <div class="sol-card ers">
-        <div class="sol-tag">◎ ERS — Exit Intelligence</div>
-        <h3>Structural Exit Feasibility</h3>
-        <ul>
-          <li>Buyer universe depth and incentives</li>
-          <li>Sector-specific exit pathways</li>
-          <li>Historical exit patterns and multiples</li>
-          <li>Capital controls and liquidity constraints</li>
-          <li>Local vs global acquirer dynamics</li>
-        </ul>
-        <p style="font-size:12px; color:var(--white-50); margin-top:14px; max-width:none;">ERS answers: <strong
-            style="color:var(--accent-green);">Can you exit?</strong></p>
-      </div>
-      <div class="sol-card combo">
-        <div class="sol-tag">◈ COMBINED — Investment Verdict</div>
-        <h3>The Full-Cycle Framework</h3>
-        <ul>
-          <li>Live Regulatory Exit Risk Monitor</li>
-          <li>Forced divestment &amp; indigenisation alerts</li>
-          <li>Capital repatriation signal layer</li>
-          <li>Market-specific contagion tracking</li>
-          <li>Strategic Advisory with exit architecture</li>
-        </ul>
-        <p style="font-size:12px; color:var(--white-50); margin-top:14px; max-width:none;">Together: <strong
-            style="color:var(--white);">Governance + Exit = Investability</strong></p>
-      </div>
-    </div>
-
-    <div class="stat-row" style="margin-top:40px;">
-      <div class="stat-box">
-        <div class="num">8</div>
-        <div class="desc">African Markets</div>
-      </div>
-      <div class="stat-box">
-        <div class="num">7</div>
-        <div class="desc">Key Sectors</div>
-      </div>
-      <div class="stat-box">
-        <div class="num">10</div>
-        <div class="desc">ACI Risk Factors</div>
-      </div>
-      <div class="stat-box">
-        <div class="num">5</div>
-        <div class="desc">ERS Components</div>
+    <div class="bridge-block teal-block">
+      <div class="bridge-acronym teal">ERS</div>
+      <div class="bridge-name">Exit Risk Score</div>
+      <div class="bridge-desc">Exit feasibility scoring across 5 dimensions. Answers: <em>can capital get out?</em>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 3: METHODOLOGY -->
-  <div class="section">
-    <div class="section-number">03 · Methodology</div>
-    <h2>How the <span>Intelligence</span> Is Built</h2>
-    <div class="gold-divider"></div>
-    <p>This is the first system that treats capital movement as a full-cycle engineering problem, not a speculative
-      judgment call. Every score is derived, not assumed.</p>
+  <hr class="section-divider">
 
-    <div class="method-list">
-      <div class="method-item">
-        <div class="method-num">01</div>
-        <div class="method-content">
-          <h4>Governance Signal Capture — ACI RF Framework</h4>
-          <p>Ten risk factors across three pillars — Institutional Integrity, Sector Exposure, and Execution Risk — are
-            scored and weighted to produce the ACI score. Each factor is independently calibrated per market and sector.
-            This is not a perception index. It is a structural governance measurement.</p>
+  <!-- ACI SECTION -->
+  <section class="framework-section reveal">
+    <div class="framework-header">
+      <div>
+        <div class="framework-badge">
+          <span class="badge-pill">Framework 01</span>
+        </div>
+        <h2>AlgoEconomics<br><em>Core Intelligence</em></h2>
+        <p class="framework-desc">
+          The ACI compresses thousands of fragmented signals — policy shifts, regulatory changes, court rulings,
+          institutional behaviour — into a single continuously updated governance score. No annual PDFs. No insider
+          networks. Just evidence, updated as the world moves.
+        </p>
+        <p class="framework-desc">
+          Four sub-components, each scored independently, combine to produce a composite ACI score from 0–100. Higher
+          scores indicate stronger governance conditions for investment entry.
+        </p>
+        <div class="framework-score-range">
+          <span>0</span>
+          <div class="range-bar"></div>
+          <span>100</span>
+          <span style="margin-left:8px;color:var(--white-dim)">· Entry Investability</span>
         </div>
       </div>
-      <div class="method-item">
-        <div class="method-num">02</div>
-        <div class="method-content">
-          <h4>Exit Feasibility Quantification — ERS Framework</h4>
-          <p>Five components — Exit Route Analysis (35%), Capital Repatriation (25%), Market Liquidity Depth (25%), IRR
-            Benchmarking (15%), and Exit Timeline Probability (5%) — are scored and weighted to produce the Exit
-            Readiness Score. Each component draws on IFC, CDC, AfDB, IMF, and UNCTAD data.</p>
+      <div>
+        <div
+          style="background:var(--bg-card);border:1px solid var(--border);padding:32px;position:relative;overflow:hidden;">
+          <div
+            style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)">
+          </div>
+          <div
+            style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);margin-bottom:8px;">
+            Nigeria · ACI Score · March 2026</div>
+          <div
+            style="font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px;">
+            72.4</div>
+          <div
+            style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.15em;color:var(--teal);display:flex;align-items:center;gap:6px;margin-bottom:24px;">
+            ▲ +1.4pts &nbsp; Improving</div>
+          <div style="font-size:12px;color:var(--white-dim);line-height:1.7;">Governance conditions are improving.
+            Policy direction is positive. Execution risk remains the primary constraint. ACI-Stability score elevated
+            following NNPC reform signals.</div>
+          <div
+            style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-top:20px;opacity:0.7;">
+            POC Active · Pilot Data</div>
         </div>
       </div>
-      <div class="method-item">
-        <div class="method-num">03</div>
-        <div class="method-content">
-          <h4>Live Regulatory Intelligence Layer</h4>
-          <p>Active forced divestment mandates, capital repatriation controls, ownership transfer requirements, and
-            sector re-nationalisation precedents are monitored as live signals across all covered markets. Each alert
-            feeds directly into ERS component scoring. This transforms static scores into live intelligence.</p>
+    </div>
+
+    <div class="components-grid">
+      <div class="component-card">
+        <div class="component-weight">ACI-E</div>
+        <div class="component-name">Exposure</div>
+        <div class="component-desc">Political risk exposure, conflict proximity, and institutional fragility signals.
+          Measures the structural vulnerability of the operating environment.</div>
+        <div class="component-sub">Policy Risk · Geopolitical</div>
+      </div>
+      <div class="component-card">
+        <div class="component-weight">ACI-X</div>
+        <div class="component-name">Execution</div>
+        <div class="component-desc">Regulatory implementation quality, contract enforcement reliability, and
+          bureaucratic friction across sector-specific contexts.</div>
+        <div class="component-sub">Regulatory · Enforcement</div>
+      </div>
+      <div class="component-card">
+        <div class="component-weight">ACI-I</div>
+        <div class="component-name">Integrity</div>
+        <div class="component-desc">Anti-corruption signals, transparency of public institutions, and quality of
+          governance accountability frameworks at national and sector level.</div>
+        <div class="component-sub">Transparency · Anti-Corruption</div>
+      </div>
+      <div class="component-card">
+        <div class="component-weight">ACI-S</div>
+        <div class="component-name">Stability</div>
+        <div class="component-desc">Policy direction consistency, macroeconomic framework durability, and momentum
+          signals that indicate whether conditions are improving or deteriorating.</div>
+        <div class="component-sub">Macro · Policy Direction</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ERS SECTION -->
+  <section class="framework-section reveal">
+    <div class="framework-header">
+      <div>
+        <div class="framework-badge">
+          <span class="badge-pill teal-pill">Framework 02</span>
+        </div>
+        <h2>Exit Risk<br><em class="teal">Score</em></h2>
+        <p class="framework-desc">
+          The ERS answers the question that existing indices never ask: <strong style="color:var(--white)">can capital
+            exit?</strong> It quantifies how, when, and whether an investor can realise returns from a specific market
+          and sector combination.
+        </p>
+        <p class="framework-desc">
+          Five weighted components produce a score from 0–100. A score of 100 represents the easiest possible exit
+          environment. Scores below 40 are classified EXIT-DIFFICULT — signalling structural barriers to capital
+          repatriation.
+        </p>
+        <div class="framework-score-range">
+          <span>0</span>
+          <div class="range-bar"></div>
+          <span>100</span>
+          <span style="margin-left:8px;color:var(--white-dim)">· Exit Feasibility</span>
         </div>
       </div>
-      <div class="method-item">
-        <div class="method-num">04</div>
-        <div class="method-content">
-          <h4>Strategic Advisory Output</h4>
-          <p>The combined ACI + ERS framework produces a market-specific Strategic Advisory layer — investment thesis,
-            structuring requirements, exit architecture recommendations, and comparable market precedents. This is the
-            output that goes directly into investment committee materials.</p>
+      <div
+        style="background:var(--bg-card);border:1px solid rgba(62,207,178,0.25);padding:32px;position:relative;overflow:hidden;">
+        <div
+          style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent)">
+        </div>
+        <div
+          style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);margin-bottom:8px;">
+          ERS Scoring Scale</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--teal);">80–100
+            </div>
+            <div style="flex:1;height:4px;background:var(--teal);border-radius:2px;"></div>
+            <div
+              style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);">
+              Exit-Ready</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--gold);">60–79
+            </div>
+            <div style="flex:1;height:4px;background:var(--gold);border-radius:2px;"></div>
+            <div
+              style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">
+              Conditional Exit</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;font-family:'Barlow Condensed',sans-serif;font-size:11px;color:#e09a3e;">40–59</div>
+            <div style="flex:1;height:4px;background:#e09a3e;border-radius:2px;"></div>
+            <div
+              style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#e09a3e;">
+              Exit-Constrained</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--red);">0–39
+            </div>
+            <div style="flex:1;height:4px;background:var(--red);border-radius:2px;"></div>
+            <div
+              style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);">
+              Exit-Difficult</div>
+          </div>
+        </div>
+        <div
+          style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border-faint);font-size:12px;color:var(--white-dim);line-height:1.7;">
+          Sub-40 scores signal structural barriers to capital exit: currency restrictions, shallow M&A markets, limited
+          IPO pathways, repatriation controls, or prolonged exit timelines.
+        </div>
+      </div>
+    </div>
+
+    <div class="components-grid five-col">
+      <div class="component-card teal-card">
+        <div class="component-weight teal-weight">35%</div>
+        <div class="component-name">Exit Route Analysis</div>
+        <div class="component-desc">Availability and viability of M&A, IPO, secondary sale, and strategic buyer pathways
+          in market.</div>
+        <div class="component-sub teal-sub">Highest Weight</div>
+      </div>
+      <div class="component-card teal-card">
+        <div class="component-weight teal-weight">25%</div>
+        <div class="component-name">Capital Repatriation</div>
+        <div class="component-desc">Currency convertibility, FX control regimes, withholding tax structure, and
+          cross-border fund transfer friction.</div>
+        <div class="component-sub teal-sub">Regulatory Layer</div>
+      </div>
+      <div class="component-card teal-card">
+        <div class="component-weight teal-weight">25%</div>
+        <div class="component-name">Market Liquidity Depth</div>
+        <div class="component-desc">Depth of capital markets, institutional investor presence, and secondary market
+          activity within the sector.</div>
+        <div class="component-sub teal-sub">Market Structure</div>
+      </div>
+      <div class="component-card teal-card">
+        <div class="component-weight teal-weight">15%</div>
+        <div class="component-name">IRR Benchmarking</div>
+        <div class="component-desc">Realistic return expectations benchmarked against comparable exits in the region and
+          sector over 5-year windows.</div>
+        <div class="component-sub teal-sub">Return Calibration</div>
+      </div>
+      <div class="component-card teal-card">
+        <div class="component-weight teal-weight">5%</div>
+        <div class="component-name">Exit Timeline Probability</div>
+        <div class="component-desc">Probabilistic modelling of exit duration based on market conditions, deal
+          complexity, and regulatory clearance times.</div>
+        <div class="component-sub teal-sub">Temporal Risk</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERS CALLOUT -->
+  <div class="ers-callout reveal">
+    <div class="callout-box">
+      <div>
+        <div class="callout-label">Live Pilot · ERS in Action</div>
+        <div class="callout-title">Nigeria Energy Sector —<br><em>Exit-Difficult</em></div>
+        <p class="callout-text">
+          Nigeria's energy sector presents a compelling entry thesis: strong IRR benchmarks, active sector reform, and
+          growing DFI interest. But the ERS tells a different story on exit. Currency controls, shallow domestic M&A
+          markets, and prolonged regulatory clearance timelines combine to produce an ERS of 38 — signalling that while
+          entry conditions are improving, capital faces structural barriers to exit.
+        </p>
+        <p class="callout-text" style="margin-top:16px;">
+          This is the intelligence gap AlgoEconomics fills. ACI alone would show a governance environment that is
+          improving. ERS shows that exit risk remains structurally elevated — and why.
+        </p>
+      </div>
+      <div class="callout-score-display">
+        <div class="callout-score-label">ERS · Nigeria Energy · March 2026</div>
+        <div class="callout-score-num">38</div>
+        <div class="exit-tag">▼ Exit-Difficult</div>
+        <div class="exit-components">
+          <div class="exit-comp-row">
+            <span>Exit Route Analysis (35%)</span>
+            <span class="exit-comp-val">32</span>
+          </div>
+          <div class="exit-comp-row">
+            <span>Capital Repatriation (25%)</span>
+            <span class="exit-comp-val">41</span>
+          </div>
+          <div class="exit-comp-row">
+            <span>Market Liquidity (25%)</span>
+            <span class="exit-comp-val">28</span>
+          </div>
+          <div class="exit-comp-row">
+            <span>IRR Benchmarking (15%)</span>
+            <span class="exit-comp-val ok">55</span>
+          </div>
+          <div class="exit-comp-row">
+            <span>Exit Timeline (5%)</span>
+            <span class="exit-comp-val">38</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 4: WHO IT'S FOR -->
-  <div class="section">
-    <div class="section-number">04 · Who It's For</div>
-    <h2>Built for <span>Institutions</span><br>Operating in Complex Markets</h2>
-    <div class="gold-divider"></div>
-    <p>Our insights are designed for investment committees, credit teams, risk officers, DFI structuring teams, and
-      corporate strategy units. Every output is dashboard-ready, methodologically transparent, and built to the
-      standards of global institutions.</p>
+  <!-- ── CONSULTATION MODAL ── -->
+  <div id="consultationModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" onclick="closeConsultationModal()">&times;</span>
+        <h2>Schedule Your Consultation</h2>
+        <p>Connect with our team to explore how AlgoEconomics can enhance your African investment strategy.</p>
+      </div>
+      <div class="modal-body">
+        <form id="consultationForm"
+          action="https://algoeconomics.us9.list-manage.com/subscribe/post?u=7f33efbbec31ffdd7dd87bce1&id=fddc7c24c3&f_id=007b42e1f0"
+          method="post">
+          <div class="form-group">
+            <label for="name">Full Name <span class="required">*</span></label>
+            <input type="text" id="name" name="FNAME" required>
+          </div>
 
-    <div class="audience-grid">
-      <div class="audience-card">
-        <div class="icon">🏛</div>
-        <h4>Institutional Investors</h4>
-        <p>Pension funds, sovereign wealth funds, and endowments seeking structured Africa exposure with quantifiable
-          exit visibility.</p>
-      </div>
-      <div class="audience-card">
-        <div class="icon">🌍</div>
-        <h4>DFIs &amp; Development Banks</h4>
-        <p>Development finance institutions requiring governance intelligence and exit structuring guidance across the
-          UK–Africa corridor.</p>
-      </div>
-      <div class="audience-card">
-        <div class="icon">📊</div>
-        <h4>Private Equity &amp; Credit</h4>
-        <p>Fund managers and credit teams needing sector-level exit route analysis, IRR benchmarking, and buyer pool
-          depth data.</p>
-      </div>
-      <div class="audience-card">
-        <div class="icon">⚖️</div>
-        <h4>Risk &amp; Compliance Officers</h4>
-        <p>Officers requiring regulatory-grade intelligence on governance risk, repatriation controls, and forced
-          divestment exposure.</p>
-      </div>
-      <div class="audience-card">
-        <div class="icon">🏢</div>
-        <h4>Corporate Strategy Units</h4>
-        <p>Multinationals and corporates assessing market entry viability and long-term operational exit optionality
-          across Africa.</p>
-      </div>
-      <div class="audience-card">
-        <div class="icon">🔬</div>
-        <h4>Research &amp; Advisory</h4>
-        <p>Economic consultancies, policy bodies, and research institutions requiring methodologically transparent
-          Africa market data.</p>
-      </div>
-    </div>
+          <div class="form-group">
+            <label for="organization">Organization <span class="required">*</span></label>
+            <input type="text" id="organization" name="COMPANY" required>
+          </div>
 
-    <div class="advisory-row">
-      <div class="advisory-badge">Advisory Board: <strong>World Economic Forum</strong></div>
-      <div class="advisory-badge">Advisory Board: <strong>IMF / World Bank</strong></div>
-      <div class="advisory-badge">Advisory Board: <strong>Economic Consultants Association</strong></div>
+          <div class="form-group">
+            <label for="role">Role / Title <span class="required">*</span></label>
+            <input type="text" id="role" name="LNAME" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="EMAIL" required>
+          </div>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true">
+            <input type="text" name="b_7f33efbbec31ffdd7dd87bce1_fddc7c24c3" tabindex="-1" value="">
+          </div>
+          <div class="form-group">
+            <label for="investment_focus">Investment Focus <span class="required">*</span></label>
+            <select id="investment_focus" name="investment_focus" required>
+              <option value="">Select sector...</option>
+              <option value="mining">Mining & Extractives</option>
+              <option value="energy">Energy & Renewables</option>
+              <option value="agriculture">Agriculture & Food Security</option>
+              <option value="fintech">Fintech & Financial Services</option>
+              <option value="aviation">Aviation & Transport</option>
+              <option value="healthcare">Healthcare & Pharmaceuticals</option>
+              <option value="tourism">Tourism & Hospitality</option>
+              <option value="multiple">Multiple Sectors</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Additional Information (Optional)</label>
+            <textarea id="message" name="message"
+              placeholder="Tell us about your specific governance intelligence needs..."></textarea>
+          </div>
+
+          <input type="hidden" name="_subject" value="New Consultation Request - AlgoEconomics">
+          <input type="hidden" name="_next" value="https://www.algoeconomics.com/thank-you">
+
+          <button type="submit" class="submit-button">
+            Submit Request
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 
-  <!-- CTA -->
-  <div class="cta-section">
-    <div class="hero-tag" style="margin-bottom:24px;">Ready to explore the infrastructure</div>
-    <h2>The <span>Missing Layer</span><br>Global Institutions Have Needed</h2>
-    <p>Explore the live ACI + ERS dashboard across 8 African markets and 7 sectors. Request an institutional demo for a
-      full methodology briefing.</p>
-    <div class="btn-group">
-      <a href="#" class="btn-primary">Explore Platform</a>
-      <a href="#" class="btn-secondary">Request Institutional Demo</a>
-    </div>
-  </div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">Confidential · Series Seed · 2026 · AlgoEconomics Ltd</div>
+    <div class="footer-right">The thinking is done. The infrastructure is built.<br>This is a system waiting to be
+      switched on.</div>
+  </footer>
 
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── MODAL LOGIC ──
+    function openConsultationModal() {
+      const modal = document.getElementById('consultationModal');
+      if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeConsultationModal() {
+      const modal = document.getElementById('consultationModal');
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        const form = document.getElementById('consultationForm');
+        if (form) form.reset();
+      }
+    }
+
+    // Close on outside click
+    window.addEventListener('click', function (event) {
+      const modal = document.getElementById('consultationModal');
+      if (event.target == modal) {
+        closeConsultationModal();
+      }
+    });
+
+    // Close on Escape key
+    window.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeConsultationModal();
+      }
+    });
+  </script>
 </body>
 
 </html>
