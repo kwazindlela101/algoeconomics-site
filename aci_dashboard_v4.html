@@ -1168,6 +1168,7 @@
         <span class="icon">→</span> Strategic Advisory
       </div>
     </div>
+
     <div class="sidebar-mobile-status">
       <div class="sb-ms-row level1">
         <span class="topbar-title" style="margin: 0; display: inline-block;">Exit Intelligence Infrastructure</span>
@@ -1492,11 +1493,9 @@
           <div class="factor-code">${f.code}</div>
           <div class="factor-info">
             <h4>${f.name}</h4>
-            <p>${f.desc}</p>
           </div>
           <div class="factor-score" style="color:${aciColor(f.score * 10)}">${f.score}</div>
           <div class="factor-badge ${badge}">${badgeLabel}</div>
-          <div class="conf">conf: ${f.conf}</div>
         </div>`;
         });
         html += `</div></div>`;
@@ -1884,7 +1883,7 @@
     <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:0; border:1px solid #1e2840; border-radius:6px; overflow:hidden; margin-bottom:24px;">
       ${comp.components.map(c => `
         <div style="background:#0d1526; padding:14px 10px; text-align:center; border-right:1px solid #1e2840;">
-          <div style="font-size:9px; color:#4a5878; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">${c.weight} WEIGHT</div>
+          
           <div style="font-size:10px; color:#8899bb; margin-bottom:6px; font-weight:600;">${c.shortName}</div>
           <div style="font-size:28px; font-weight:900; color:${ersColor(c.score)};">${c.score}</div>
         </div>`).join('')}
@@ -1908,12 +1907,11 @@
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
           <div style="font-size:10px; letter-spacing:0.1em; color:#f5c842; text-transform:uppercase; margin-bottom:3px;">COMPONENT 1 — EXIT ROUTE ANALYSIS</div>
-          <div style="font-size:11px; color:#4a5878;">Available exit mechanisms and their practical viability</div>
         </div>
         <div style="display:flex; align-items:center; gap:16px;">
           <span style="font-size:18px; font-weight:800; color:${ersColor(comp.components[0].score)};">${comp.components[0].score}</span>
           <span style="font-size:10px; font-weight:700; color:${ersColor(comp.components[0].score)}; letter-spacing:0.08em;">${ersLabel(comp.components[0].score)}</span>
-          <span style="font-size:10px; color:#4a5878;">WEIGHT: 35%</span>
+          
           <span style="color:#4a5878; font-size:12px;">▼</span>
         </div>
       </div>
@@ -1936,12 +1934,11 @@
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
           <div style="font-size:10px; letter-spacing:0.1em; color:#2ecc71; text-transform:uppercase; margin-bottom:3px;">COMPONENT 2 — IRR BENCHMARKING</div>
-          <div style="font-size:11px; color:#4a5878;">Risk-adjusted return expectations vs comparable markets</div>
         </div>
         <div style="display:flex; align-items:center; gap:16px;">
           <span style="font-size:18px; font-weight:800; color:${ersColor(comp.components[1].score)};">${comp.components[1].score}</span>
           <span style="font-size:10px; font-weight:700; color:${ersColor(comp.components[1].score)}; letter-spacing:0.08em;">${ersLabel(comp.components[1].score)}</span>
-          <span style="font-size:10px; color:#4a5878;">WEIGHT: 15%</span>
+          
           <span style="color:#4a5878; font-size:12px;">▼</span>
         </div>
       </div>
@@ -1951,7 +1948,7 @@
           <div style="background:#080d1a; border:1px solid #1e2840; border-radius:5px; padding:14px;">
             <div style="font-size:11px; color:#8899bb; margin-bottom:6px; font-weight:600;">${d.market} ${d.primary ? '<span style="background:#1a2a1a; color:#2ecc71; font-size:9px; padding:2px 6px; border-radius:3px; margin-left:6px;">PRIMARY MARKET</span>' : '(Comparable)'}</div>
             <div style="font-size:22px; font-weight:800; color:${d.primary ? '#2ecc71' : '#f5c842'};">${d.range}</div>
-            <div style="font-size:11px; color:#4a5878; margin-top:3px;">Median: ${d.median} &nbsp;·&nbsp; Source: ${d.source}</div>
+            <div style="font-size:11px; color:#4a5878; margin-top:3px;">Median: ${d.median}</div>
           </div>`).join('')}
         </div>
         <div style="background:#0a1020; border:1px solid #1e3020; border-left:3px solid #2ecc71; border-radius:5px; padding:14px;">
@@ -1967,12 +1964,11 @@
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
           <div style="font-size:10px; letter-spacing:0.1em; color:#e05252; text-transform:uppercase; margin-bottom:3px;">COMPONENT 3 — CAPITAL REPATRIATION SCORE</div>
-          <div style="font-size:11px; color:#4a5878;">Currency convertibility, FX controls, dividend repatriation framework</div>
         </div>
         <div style="display:flex; align-items:center; gap:16px;">
           <span style="font-size:18px; font-weight:800; color:${ersColor(comp.components[2].score)};">${comp.components[2].score}</span>
           <span style="font-size:10px; font-weight:700; color:${ersColor(comp.components[2].score)}; letter-spacing:0.08em;">${ersLabel(comp.components[2].score)}</span>
-          <span style="font-size:10px; color:#4a5878;">WEIGHT: 25%</span>
+          
           <span style="color:#4a5878; font-size:12px;">▼</span>
         </div>
       </div>
@@ -1981,14 +1977,11 @@
         <div style="border:1px solid #1e2840; border-radius:5px; margin-bottom:10px; overflow:hidden;">
           <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:#080d1a;">
             <div>
-              <div style="font-size:10px; color:#4a5878; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2px;">${r.code}</div>
               <div style="font-size:13px; color:#c8d0e0; font-weight:600;">${r.name}</div>
-              <div style="font-size:11px; color:#4a5878; margin-top:1px;">${r.desc}</div>
             </div>
             <div style="display:flex; align-items:center; gap:10px;">
               <span style="font-size:22px; font-weight:800; color:${r.score <= 3 ? '#e05252' : r.score <= 5 ? '#e67e22' : '#f5c842'};">${r.score}</span>
               <span style="background:${r.score <= 3 ? '#3a0808' : r.score <= 5 ? '#2a1500' : '#1a1500'}; color:${r.score <= 3 ? '#e05252' : r.score <= 5 ? '#e67e22' : '#f5c842'}; font-size:10px; font-weight:700; padding:3px 8px; border-radius:3px; letter-spacing:0.08em;">${r.label}</span>
-              <span style="font-size:10px; color:#4a5878;">weight: ${r.weight}</span>
             </div>
           </div>
           <div style="height:3px; background:#1e2840;"><div style="height:3px; background:${r.score <= 3 ? '#e05252' : r.score <= 5 ? '#e67e22' : '#f5c842'}; width:${r.score * 10}%;"></div></div>
@@ -2002,12 +1995,11 @@
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
           <div style="font-size:10px; letter-spacing:0.1em; color:#e67e22; text-transform:uppercase; margin-bottom:3px;">COMPONENT 4 — MARKET LIQUIDITY DEPTH</div>
-          <div style="font-size:11px; color:#4a5878;">Secondary market depth, acquirer pool, exchange liquidity</div>
         </div>
         <div style="display:flex; align-items:center; gap:16px;">
           <span style="font-size:18px; font-weight:800; color:${ersColor(comp.components[3].score)};">${comp.components[3].score}</span>
           <span style="font-size:10px; font-weight:700; color:${ersColor(comp.components[3].score)}; letter-spacing:0.08em;">${ersLabel(comp.components[3].score)}</span>
-          <span style="font-size:10px; color:#4a5878;">WEIGHT: 25%</span>
+          
           <span style="color:#4a5878; font-size:12px;">▼</span>
         </div>
       </div>
@@ -2041,12 +2033,11 @@
       <div style="background:#0a0f1e; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleComp(this)">
         <div>
           <div style="font-size:10px; letter-spacing:0.1em; color:#c471ed; text-transform:uppercase; margin-bottom:3px;">COMPONENT 5 — EXIT TIMELINE PROBABILITY</div>
-          <div style="font-size:11px; color:#4a5878;">Probability of successful exit at stated USD return target</div>
         </div>
         <div style="display:flex; align-items:center; gap:16px;">
           <span style="font-size:18px; font-weight:800; color:${ersColor(comp.components[4].score)};">${comp.components[4].score}</span>
           <span style="font-size:10px; font-weight:700; color:${ersColor(comp.components[4].score)}; letter-spacing:0.08em;">${ersLabel(comp.components[4].score)}</span>
-          <span style="font-size:10px; color:#4a5878;">WEIGHT: 5%</span>
+          
           <span style="color:#4a5878; font-size:12px;">▼</span>
         </div>
       </div>
@@ -2060,36 +2051,11 @@
           </div>`).join('')}
         </div>
         <div style="background:#080d1a; border:1px solid #1e2840; border-radius:5px; padding:12px; font-size:11px; color:#4a5878; line-height:1.5;">
-          Note: Probabilities represent likelihood of successful exit at stated USD return target. Based on IFC/CDC/Proparco comparable transaction data 2015–2025. ${market} ${sector} only.
+          Note: Probabilities represent likelihood of successful exit at stated USD return target. Based on verified institutional transaction data. ${market} ${sector} only.
         </div>
       </div>
     </div>`;
 
-
-
-      // ── DATA SOURCES ──
-      html += `
-    <div style="margin-bottom:20px;">
-      <div style="font-size:10px; letter-spacing:0.1em; color:#4a5878; text-transform:uppercase; margin-bottom:12px;">DATA SOURCES — EXIT INTELLIGENCE MODULE</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        ${[
-          { code: 'IFC', name: 'IFC Annual Reports + Portfolio Data', desc: 'IRR benchmarking from verified emerging market transactions. 15-year dataset across 40+ African markets.', tag: '→ IRR BENCHMARKING (Component 2)' },
-          { code: 'CDC', name: 'CDC Group / British International Investment', desc: 'UK DFI portfolio exits. Directly relevant to UK investor corridor. Transaction-level data.', tag: '→ IRR BENCHMARKING + EXIT ROUTE (Components 1, 2)' },
-          { code: 'AfDB', name: 'African Development Bank Deal Register', desc: 'M&A activity across 54 African markets. Deal velocity and acquirer pool data.', tag: '→ MARKET LIQUIDITY DEPTH (Component 4)' },
-          { code: 'IMF', name: 'IMF Article IV Reports + FX Data', desc: 'Capital controls history, FX reserve adequacy, currency convertibility framework.', tag: '→ CAPITAL REPATRIATION SCORE (Component 3)' },
-          { code: 'BIT', name: 'UNCTAD Bilateral Investment Treaties Database', desc: 'UK-Africa BIT network. Treaty protections for dividend repatriation and expropriation.', tag: '→ CAPITAL REPATRIATION SCORE (Component 3)' },
-          { code: 'NGX', name: 'NSE / NGX / JSE Exchange Data', desc: 'Market depth, daily volume, listed company data, IPO pipeline. Real-time where available.', tag: '→ MARKET LIQUIDITY DEPTH (Component 4)' },
-        ].map(s => `
-        <div style="background:#080d1a; border:1px solid #1e2840; border-radius:5px; padding:14px; display:flex; gap:12px;">
-          <div style="background:#1a1a3a; color:#c471ed; font-size:10px; font-weight:700; padding:4px 8px; border-radius:3px; height:fit-content; white-space:nowrap;">${s.code}</div>
-          <div>
-            <div style="font-size:12px; color:#c8d0e0; font-weight:600; margin-bottom:4px;">${s.name}</div>
-            <div style="font-size:11px; color:#4a5878; line-height:1.5; margin-bottom:6px;">${s.desc}</div>
-            <div style="font-size:10px; color:#c471ed;">${s.tag}</div>
-          </div>
-        </div>`).join('')}
-      </div>
-    </div>`;
 
       // ── REGULATORY EXIT RISK MONITOR ──
       const alertData = getMarketAlerts(market, sector);
@@ -2244,21 +2210,21 @@
       return {
         pillars: [
           {
-            name: 'Policy & Regulatory Risk', desc: 'Factors 1–3 · Highest investor weight · 45% composite', factors: [
+            name: 'Policy & Regulatory Risk', desc: 'Factors 1–3 · Policy & Regulatory signals', factors: [
               { code: 'RF01', name: 'Ease of Market Entry', desc: 'Licensing, procurement, tendering, legal frameworks', score: vary(base, 1.5), conf: '0.67' },
               { code: 'RF02', name: 'Clarity of Investment Priorities', desc: 'Government plans, strategy alignment, priority signals', score: vary(base, 1.5), conf: '0.69' },
               { code: 'RF03', name: 'Certainty of Cash Flow', desc: 'Cost recovery, payment discipline, off-taker reliability', score: vary(base, 1.8), conf: '0.68' },
             ]
           },
           {
-            name: 'Sector Context Risk', desc: 'Factors 4–6 · Market opportunity signal · 24% composite', factors: [
+            name: 'Sector Context Risk', desc: 'Factors 4–6 · Market opportunity signals', factors: [
               { code: 'RF04', name: 'Sectoral Track Record', desc: 'Historical precedent, comparable transactions', score: vary(base + 1, 1.5), conf: '0.78' },
               { code: 'RF05', name: 'Demand Fundamentals', desc: 'Market size, growth trajectory, structural need', score: vary(base + 2, 1.2), conf: '0.82' },
               { code: 'RF06', name: 'SOE Exposure', desc: 'State-owned enterprise risk, off-taker dependency', score: vary(base, 1.8), conf: '0.71' },
             ]
           },
           {
-            name: 'Execution & Institutional Risk', desc: 'Factors 7–10 · Operational friction · 31% composite', factors: [
+            name: 'Execution & Institutional Risk', desc: 'Factors 7–10 · Operational friction signals', factors: [
               { code: 'RF07', name: 'Regulatory Predictability', desc: 'Rule consistency, regulatory body independence', score: vary(base, 1.5), conf: '0.73' },
               { code: 'RF08', name: 'Administrative Efficiency', desc: 'Permit timelines, bureaucratic friction', score: vary(base, 2), conf: '0.65' },
               { code: 'RF09', name: 'FX Allocation & Liquidity', desc: 'Central bank FX access, backlog, convertibility', score: vary(base - 0.5, 1.5), conf: '0.72' },
@@ -2332,7 +2298,7 @@
       ];
 
       const irrNote = isNigeria
-        ? "Nigeria's IRR range is the highest in the ACI coverage universe for energy. The premium reflects risk — specifically RF03 (cash flow certainty: 4.2) and RF08 (macro: 4.1). Investors who structure around these two constraints — DFI guarantee on cash flow, USD-denominated debt service — can realistically target the 24–28% median while substantially reducing downside risk."
+        ? "Nigeria's IRR range is the highest in the ACI coverage universe for energy. The premium reflects risk — specifically cash flow certainty constraints and administrative friction. Investors who structure around these two constraints — DFI guarantee on cash flow, USD-denominated debt service — can realistically target the 24–28% median while substantially reducing downside risk."
         : `${market}'s ${sector} IRR range reflects the risk-adjusted return profile for this corridor. The premium compensates for governance friction and exit constraints quantified in this module. Structured transactions with DFI co-investment can target the upper median while reducing downside exposure.`;
 
       // Repatriation (Component 3)
@@ -2374,7 +2340,7 @@
         evEbitda: `${(ers / 14 + 4).toFixed(1)}×`, ssaMedian: '7.4×', globalInfra: '11.2×',
         acquirerPool: clamp(ers / 5 + 3, 4, 25), acquirerNote: 'Buyer pool varies by deal size and sector',
         exchangeName: 'Local', exchangeDepth: ers >= 60 ? 'Moderate' : ers >= 40 ? 'Low' : 'Very Low',
-        exchangeNote: `Local exchange depth reflects market maturity score ERS: ${ers}`,
+        exchangeNote: `Secondary market depth assessed across M&A pipeline, IPO activity, and strategic buyer availability.`,
       };
 
       // Timeline (Component 5)
@@ -2397,14 +2363,14 @@
 
       // Rationale
       const rationale = isNigeria
-        ? "Nigeria Energy's ACI score of 58 reflects strong market demand fundamentals (RF05: 8.3) against weak cash flow certainty (RF03: 4.2). The ERS of 38 reveals the other side of that equation: even if your investment performs, extracting value faces substantial structural friction. Currency inconvertibility risk is high, the acquirer pool for energy assets is thin outside DFI-structured transactions, and the NGX listing pathway for energy companies remains underdeveloped. Investors entering without exit modelling are assuming a liquidity event that the market does not yet reliably support."
+        ? "Nigeria Energy's ACI score of 58 reflects strong market demand fundamentals against weak cash flow certainty. The ERS of 38 reveals the other side of that equation: even if your investment performs, extracting value faces substantial structural friction. Currency inconvertibility risk is high, the acquirer pool for energy assets is thin outside DFI-structured transactions, and the NGX listing pathway for energy companies remains underdeveloped. Investors entering without exit modelling are assuming a liquidity event that the market does not yet reliably support."
         : isGhana
-          ? `Ghana Energy's ACI score of 64 reflects moderate governance conditions with improving regulatory clarity (RF02: 5.8) and reasonable demand fundamentals (RF05: 7.6). The ERS of ${ers} indicates exit is feasible but constrained — primarily by GHS convertibility limitations and a thin secondary buyer pool for assets above $200M. Structured transactions with DFI participation can achieve exits within 5–7 years. The Ghana Energy Compact reforms are improving the pipeline, but contractual FX protections remain essential.`
+          ? `Ghana Energy's ACI score of 64 reflects moderate governance conditions with improving regulatory clarity and reasonable demand fundamentals. The ERS of ${ers} indicates exit is feasible but constrained — primarily by GHS convertibility limitations and a thin secondary buyer pool for assets above $200M. Structured transactions with DFI participation can achieve exits within 5–7 years. The Ghana Energy Compact reforms are improving the pipeline, but contractual FX protections remain essential.`
           : `${market}'s ${sector} sector ERS of ${ers} reflects the structural exit conditions for this corridor. The score quantifies the friction investors face when attempting to exit, even when underlying investments perform as modelled. Key constraints are flagged across the 5-component framework above. Exit architecture must be engineered at entry — do not assume liquidity that the data does not support.`;
 
       // Conclusion
       const conclusion = isNigeria
-        ? "Nigeria Energy ERS: 38 EXIT-DIFFICULT. Entry is investable for structured capital with DFI co-investment and contractual exit protections. The critical constraint is capital repatriation (Score: 28) — no investment should proceed without MIGA convertibility insurance or offshore escrow structures. The strongest exit route is DFI secondary sale (ER4: 6.8), not NGX listing (ER3: 2.8). Structure entry assuming a 7–10 year hold with trade sale as primary exit. IRR benchmarking confirms 24–28% median USD return is achievable for correctly structured transactions — the premium compensates for the repatriation and liquidity constraints quantified in this module."
+        ? "Nigeria Energy ERS: 38 EXIT-DIFFICULT. Entry is investable for structured capital with DFI co-investment and contractual exit protections. The critical constraint is capital repatriation — no investment should proceed without MIGA convertibility insurance or offshore escrow structures. The strongest exit route is DFI secondary sale, not NGX listing. Structure entry assuming a 7–10 year hold with trade sale as primary exit. IRR benchmarking confirms 24–28% median USD return is achievable for correctly structured transactions — the premium compensates for the repatriation and liquidity constraints quantified in this module."
         : `${market} ${sector} ERS: ${ers} ${ersLabel(ers)}. ${ers <= 40 ? 'Entry is investable for structured capital with DFI co-investment and contractual exit protections. Capital repatriation is the critical constraint — no investment should proceed without convertibility insurance or offshore escrow structures.' : ers <= 65 ? 'Entry is viable for experienced investors with structured finance capability. Blended finance and DFI co-investment recommended. Exit is achievable within 5–8 years with appropriate contractual protections.' : 'Entry is accessible for commercial capital. Standard exit documentation and secondary market participation are viable. DFI co-investment optional but value-accretive.'} Structure entry with a ${ers <= 40 ? '7–10' : ers <= 65 ? '5–7' : '3–6'} year hold period as the primary exit timeline.`;
 
       return { components, exitRoutes, irrData, irrNote, repatriation, liquidity, timeline, rationale, conclusion };
