@@ -1131,8 +1131,8 @@
     <div class="topbar-badge tb-res-hide-level1">LIVE INTELLIGENCE</div>
     <div style="margin-left:auto; display: flex; align-items: center; gap: 4px;">
       <div class="topbar-market tb-res-hide-level3" id="topbar-market">
-        <div class="flag" id="topbar-flag">NG</div>
-        <div class="mname" id="topbar-mname">Nigeria · Energy</div>
+        <div class="flag" id="topbar-flag">--</div>
+        <div class="mname" id="topbar-mname">No market selected</div>
       </div>
       <div class="signal-dot tb-res-hide-level2"></div>
       <div class="signal-text tb-res-hide-level2" style="margin-left:6px; font-size:11px; margin-right: 16px;">Signals
@@ -1182,22 +1182,22 @@
       </div>
       <div class="sb-ms-row level3">
         <div class="topbar-market" id="topbar-market-mobile">
-          <div class="flag" id="topbar-flag-mobile">NG</div>
-          <div class="mname" id="topbar-mname-mobile">Nigeria · Energy</div>
+          <div class="flag" id="topbar-flag-mobile">--</div>
+          <div class="mname" id="topbar-mname-mobile">No market selected</div>
         </div>
       </div>
     </div>
 
     <div class="sidebar-market">
       <div class="sidebar-market-label">Selected Market</div>
-      <div class="sidebar-market-name" id="sb-name">Nigeria</div>
-      <div class="sidebar-market-sector" id="sb-sector">Energy</div>
-      <div class="sidebar-score color-high" id="sb-aci">86</div>
-      <div class="sidebar-score-label color-high" id="sb-aci-cat">▲ HIGH RISK</div>
-      <div style="font-size:9px; color:#4a5878; margin: 2px 0 4px;">10-Factor ACI · Q1 2026</div>
+      <div class="sidebar-market-name" id="sb-name">None</div>
+      <div class="sidebar-market-sector" id="sb-sector">Select a heatmap cell</div>
+      <div class="sidebar-score" id="sb-aci">--</div>
+      <div class="sidebar-score-label" id="sb-aci-cat">ACI pending</div>
+      <div style="font-size:9px; color:#4a5878; margin: 2px 0 4px;">10-Factor ACI · Awaiting selection</div>
       <div class="ers-line">
-        <div class="ers-score-small" id="sb-ers">ERS: 38</div>
-        <div class="ers-label-small" id="sb-ers-cat">· EXIT-DIFFICULT</div>
+        <div class="ers-score-small" id="sb-ers">ERS: --</div>
+        <div class="ers-label-small" id="sb-ers-cat">· Awaiting selection</div>
       </div>
       <div style="font-size:9px; color:#4a5878; margin-top:6px; cursor:pointer; text-decoration:underline;"
         onclick="showPanel('aci')">Go to ACI Breakdown →</div>
@@ -1294,11 +1294,19 @@
 
     <!-- EXIT INTELLIGENCE PANEL -->
     <div class="panel" id="panel-exit">
+      <div class="instruction-banner" id="exit-instruction">
+        ▦ Select a cell in the <strong style="color:#f5c842;">Portfolio Heatmap</strong> to load Exit Intelligence
+        breakdown.
+      </div>
       <div id="exit-content"></div>
     </div>
 
     <!-- STRATEGIC ADVISORY PANEL -->
     <div class="panel" id="panel-advisory">
+      <div class="instruction-banner" id="advisory-instruction">
+        ▦ Select a cell in the <strong style="color:#f5c842;">Portfolio Heatmap</strong> to load Strategic Advisory
+        breakdown.
+      </div>
       <div id="advisory-content"></div>
     </div>
 
@@ -1835,6 +1843,9 @@
     }
 
     function renderExit(market, sector, aci, ers, ersCat) {
+      const exitInstruction = document.getElementById('exit-instruction');
+      if (exitInstruction) exitInstruction.style.display = 'none';
+
       const ersC = ersColor(ers);
       const comp = getERSComponents(market, sector, ers);
 
@@ -2108,6 +2119,9 @@
     // RENDER STRATEGIC ADVISORY
     // ============================================================
     function renderAdvisory(market, sector, aci, aciCat, ers, ersCat) {
+      const advisoryInstruction = document.getElementById('advisory-instruction');
+      if (advisoryInstruction) advisoryInstruction.style.display = 'none';
+
       let html = `
     <div class="advisory-header">
       <div class="tag">→ STRATEGIC ADVISORY · ACI + ERS CONCLUSION</div>
@@ -2430,9 +2444,6 @@
     // ============================================================
     buildHeatmap();
     showPanel('heatmap');
-
-    // Auto-select Nigeria Energy
-    selectCell('Nigeria', 'Energy', 2, 3);
   </script>
 </body>
 
